@@ -116,7 +116,7 @@ public function agrega_detalle_compra(){
 ///GET COMPRAS ESTADO CERO PARA INGRESOS A BODEGA
 public function get_compras_ingresar(){
 $conectar= parent::conexion();         
-$sql= "select*from compras where estado='0';";
+$sql= "select*from compras where estado<2;";
 $sql=$conectar->prepare($sql);
 $sql->execute();
 return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);

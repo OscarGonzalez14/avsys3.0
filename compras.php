@@ -19,7 +19,7 @@
             	<div class="row invoice-info callout callout-info" style="border-bottom: solid 1px black;border-right: solid 1px black;border-top: solid 1px black">
                     <div class="col-sm-2 invoice-col">
                     <label># Compra</label>
-                      <input type="text" class="form-control input-dark" id="n_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;">
+                      <input type="text" class="form-control input-dark" id="n_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly="">
                     </div>
 
                     <div class="col-sm-6 invoice-col">
@@ -148,6 +148,9 @@
             </div>
         </div>
     </section>
+<!--***===SECTION REPORTES DE ULTIMA VENTA===***-->
+  
+<!--***===FIN SECTION REPORTES DE ULTIMA VENTA===***-->
 
 </div><!-- /.content wrapper-->
 <script src='js/compras.js'></script>

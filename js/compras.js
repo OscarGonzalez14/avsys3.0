@@ -231,8 +231,9 @@ function ingresar_compras_inventario()
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
       dom: 'Bfrtip',//Definimos los elementos del control de tabla
-      buttons: ['copyHtml5', {
+      buttons: [{
           extend: 'excelHtml5',
+          download: 'open',
           text: 'Descargar Excel',
           filename: function() {
               var date_edition = 'Compras Pendientes Ingresar '+moment().format("DD-MM-YYYY HH[h]mm")
@@ -241,7 +242,22 @@ function ingresar_compras_inventario()
            },
            sheetName: 'Compras pendientes de ingresar',
            title : null
-       }],
+       },
+            {
+              extend: 'pdfHtml5',
+              download: 'open',
+              text: 'Imprimir',
+              orientation: 'portrait',
+              pageSize: 'letter',
+              filename: function() {
+              var fecha = 'Compras Pendientes '+moment().format("DD-MM-YYYY HH[h]mm")
+              var selected_machine_name = $("#output_select_machine select option:selected").text()
+              return fecha + ' - ' + selected_machine_name
+              
+            },
+            title : 'Compras a Bodega'
+        }   
+       ],
     "ajax":
         {
           url: 'ajax/compras.php?op=compras_ingreso',

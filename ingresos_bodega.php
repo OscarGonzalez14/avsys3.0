@@ -9,8 +9,9 @@
             <th style="text-align:center">ID</th>
             <th style="text-align:center">Fecha</th>
             <th style="text-align:center"># Compra</th>
-            <th style="text-align:center">Proveedor</th>            
-            <th style="text-align:center">Detalles</th>
+            <th style="text-align:center">Proveedor</th>
+            <th style="text-align:center">Estado</th>            
+            <th style="text-align:center">Ingresar</th>
           </tr>
         </thead>
         <tbody style="text-align:center">                                        

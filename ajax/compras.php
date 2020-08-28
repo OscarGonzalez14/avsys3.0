@@ -89,11 +89,26 @@ case 'compras_ingreso':
   $data= Array();
     foreach($datos as $row)
   {
-    $sub_array = array();       
+    $sub_array = array();
+  
+    $est='';
+    if ($row["estado"]==0) {
+      $est = 'Sin Ingresar';
+      $atrib = 'badge-danger';
+    }elseif ($row["estado"]==1) {
+      $est = 'Ingreso Parcial';
+      $atrib = 'badge-warning';
+
+    }elseif ($row["estado"]==2) {
+      $est = 'Ingresado';
+      $atrib = 'badge-success';
+    }
+
     $sub_array[] = $row["id_compra"];
     $sub_array[] = $row["fecha_compra"];
     $sub_array[] = $row["numero_compra"];
     $sub_array[] = $row["nombre_proveedor"];
+    $sub_array[] = '<span class="right badge '.$atrib.'">'.$est.'</span>';
     $sub_array[] = '<a href="distribuir_compra.php?numero_compra='.$row["numero_compra"].'"><button type="button"  class="btn btn-primary btn-md listar_compras_pendientes" id="'.$row["numero_compra"].'" data-toggle="modal" data-target="#modal_ingreso_bodega"><i class="fas fa-cubes"></i> Ingresar a Bodega</button></a>';                                 
     $data[] = $sub_array;
   }

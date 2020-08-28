@@ -1,6 +1,6 @@
 <style>
-    #tamModal_ingreso{
-      max-width: 60% !important;
+    #tamModal_ultima_c_admin{
+      width: 80% !important;
     }
      #head{
         background-color: black;
@@ -16,23 +16,23 @@
     }
 </style>
 
-<div class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal_ingreso_bodega" style="border-radius:0px !important;">
-  <div class="modal-dialog modal-lg" role="document" id="tamModal_ingreso">
+<div class="modal fade bd-example-modal-lg" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal_ultima_compra_admin" style="border-radius:0px !important;">
+  <div class="modal-dialog modal-lg" role="document" id="tamModal_ultima_c_admin">
 
     <div class="modal-content">
      <div class="modal-header" id="head" style="justify-content:space-between">
-       <span><i class="fas fa-plus-square"></i> Igresos a bodega</span>
+       <span><i class="fas fa-plus-square"></i> DETALLES ULTIMA COMPRA ADMINISTRADOR</span>
         <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
      </div>
 
               <div class="card-body p-0" style="margin:7px">
-                <table class="table table-responsive" id="data_productos_ingresos_bodega" width="100%" cellspacing="0">
+                <table class="table display nowrap" id="data_aros" width="100%" cellspacing="0">
                   <thead style="background:#034f84;color:white">
                     <tr>
-                      <th style="text-align:center">ID</th>
-                      <th style="text-align:center"># Compra</th>
-                      <th style="text-align:center">Descripción</th>
-                      <th style="text-align:center">Cantidad disponible</th>
+                      <th style="text-align:center">Marca</th>
+                      <th style="text-align:center">Modelo</th>
+                      <th style="text-align:center">Color</th>
+                      <th style="text-align:center">Medidas</th>
                       <th style="text-align:center">Agregar</th>
                     </tr>
                   </thead>

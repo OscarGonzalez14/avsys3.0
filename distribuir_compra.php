@@ -2,10 +2,14 @@
 require_once('header.php');
 $n_compra =$_GET["numero_compra"];
 require_once('modals/modal_ingreso_bodega.php');
+require_once('modals/modal_categorias.php');
 ?>
 <input type="hidden" name="" id="numero_compra_bod" value="<?php echo $n_compra; ?>">
 <div class="content-wrapper">
 <div style="margin: 5px">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_cats">
+    Crear categoría
+  </button>
     <h5 align="center"><strong>DISTRIBUIR COMPRAS A BODEGA</strong></h5>
     <div class="callout callout-dark">
 	<div class="row" style="margin: 0px;padding: 0px">

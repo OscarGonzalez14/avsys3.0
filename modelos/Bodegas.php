@@ -16,7 +16,7 @@ return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 
 public function get_productos_ingresar_bodega($id_producto,$numero_compra){
 $conectar= parent::conexion();         
-$sql= "select*from detalle_compras where id_producto=? and numero_compra=?;";
+$sql= "select*from detalle_compras where id_producto=? and numero_compra=? and cant_ingreso>0;";
 $sql=$conectar->prepare($sql);
 $sql->bindValue(1,$id_producto);
 $sql->bindValue(2,$numero_compra);
@@ -117,6 +117,26 @@ public function registrar_ingreso_a_bodega(){
       }
   }
   }//cierre del foreach
-}//cierre del la funcion   
 
+ // SELECT `cant_ingreso` from detalle_compras WHERE `cant_ingreso`>0
+  //SELECT SUM(`cant_ingreso`) as suma FROM `detalle_compras` WHERE `numero_compra`='ME-1' HAVING suma<0}//cierre del la funcion
+  ////////////VERIFICAR LA ITEMS DE COMPRA PARA CAMBIAR EL ESTADO DE LACOMPRA
+    $sql7="SELECT cant_ingreso from detalle_compras WHERE cant_ingreso>0  AND numero_compra=?;";
+    $sql7=$conectar->prepare($sql7);
+    $sql7->bindValue(1,$numero_compra);
+    $sql7->execute();
+    $resultado_count = $sql7->fetchAll(PDO::FETCH_ASSOC);
+
+    if(is_array($resultado_count)==true and count($resultado_count)>0) {                     
+      $sql8 = "update compras set estado=1 where numero_compra=?";
+      $sql8 = $conectar->prepare($sql8);
+      $sql8->bindValue(1,$numero_compra);
+      $sql8->execute();
+    }elseif (is_array($resultado_count)==true and count($resultado_count)==0) {
+      $sql9 = "update compras set estado=2 where numero_compra=?";
+      $sql9 = $conectar->prepare($sql9);
+      $sql9->bindValue(1,$numero_compra);
+      $sql9->execute();
+      }   
+}
 }
