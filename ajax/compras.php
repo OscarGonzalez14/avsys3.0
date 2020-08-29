@@ -122,4 +122,35 @@ case 'compras_ingreso':
 
     break;
 /// FN GET COMPRAS ESTADO CERO PARA INGRESOS A BODEGA
+
+////////////////GET REPORTE COMPRA ADMIN
+    case "reporte_compra_administrador":
+    $datos=$compras->get_reporte_compra_admin($_POST["numero_compra"]);
+    //Vamos a declarar un array
+    $data= Array();
+    foreach($datos as $row){
+    $sub_array = array();       
+    $ctc=$row["cantidad"]*$row["precio_compra"];
+    $ctv=$row["cantidad"]*$row["precio_venta"];
+    $ut=$ctv-$ctc;
+    $sub_array[] = $row["fecha_compra"];
+    $sub_array[] = $row["numero_compra"];
+    $sub_array[] = $row["descripcion"];
+    $sub_array[] = $row["cantidad"];
+    $sub_array[] = "$ ".number_format($row["precio_compra"],2,".",",");
+    $sub_array[] = "$ ".number_format($row["precio_venta"],2,".",",");                             
+    $sub_array[] = "$ ".number_format($ctc,2,".",",");
+    $sub_array[] = "$ ".number_format($ctv,2,".",",");
+    $sub_array[] = "$ ".number_format($ut,2,".",",");
+    $data[] = $sub_array;
+  }
+
+        $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+
+    break;
 }//FIN DEL SWITCH 	

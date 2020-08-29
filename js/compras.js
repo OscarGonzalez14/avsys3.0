@@ -1,11 +1,26 @@
 
 var tabla_compras_ingresar;
+var tabla_compras_admin_report;
 function init(){
  clear_c_compra();
  get_numero_recibo();
  ingresar_compras_inventario();
+ //reporte_compras_admin();
 }
 
+$(document).ready(ocultar_btn_post_compra);
+
+  function ocultar_btn_post_compra(){
+  document.getElementById("post_compra").style.display = "none";
+}
+
+  function mostrar_btn_post_compra(){
+  document.getElementById("post_compra").style.display = "flex";
+}
+  function ocultar_btn_de_compra(){
+  document.getElementById("btn_de_compra").style.display = "none";
+  document.getElementById("tabla_det_compras").style.display = "none";
+}
 function clear_c_compra() {
     $("#n_compra").val("");
     $("#tipo_compra").val("");
@@ -72,11 +87,11 @@ function listarDetallesCompras(){
 
     var subtotal = detalles[i].subtotal = detalles[i].cantidad * detalles[i].precio_compra;
 
-        var filas = filas + "<tr id='fila"+i+"'><td style='width:5%'>"+(i+1)+
-        "</td><td style='text-align:center;width:55%'>"+detalles[i].marca+" "+
+        var filas = filas + "<tr id='fila"+i+"'><td>"+(i+1)+
+        "</td><td style='text-align:center;'>"+detalles[i].marca+" "+
         "Mod.: "+detalles[i].modelo+" - Color: "+detalles[i].color+" - Medidas: "+
         detalles[i].medidas+
-        "</td><td style='text-align:center;width:10%'><input style='text-align:right;border-radius:3px' type='number' class='cantidad input-dark' name='precio_compra[]' id='precio_compra[]' onClick='setPrecioCompra(event, this, "+(i)+");' onKeyUp='setPrecioCompra(event, this, "+(i)+");' value='"+  detalles[i].precio_compra+"'><td style='text-align:center;width:10%'><input style='text-align:right' type='number' class='cantidad input-dark' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'><td style='text-align:center;width:10%'><input style='text-align:right' type='number' class='cantidad input-dark' name='cantidad[]' id='cantidad[]' onClick='setPrecioVenta(event, this, "+(i)+");' onKeyUp='setPrecioVenta(event, this, "+(i)+");' value='"+detalles[i].precio_venta+"'><td style='text-align:center;width:10%'><span>$</span><span style='text-align:right' name='subtotal[]' id=subtotal"+i+" ></span><td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarFila("+i+");' style='color:red'></i></td></tr>";
+        "</td><td style='text-align:center'><input style='text-align:right;border-radius:3px' type='number' class='cantidad form-control' name='precio_compra[]' id='precio_compra[]' onClick='setPrecioCompra(event, this, "+(i)+");' onKeyUp='setPrecioCompra(event, this, "+(i)+");' value='"+  detalles[i].precio_compra+"'><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='cantidad[]' onClick='setPrecioVenta(event, this, "+(i)+");' onKeyUp='setPrecioVenta(event, this, "+(i)+");' value='"+detalles[i].precio_venta+"'></td><td style='text-align:center;'><span>$</span><span style='text-align:right' name='subtotal[]' id=subtotal"+i+" ></span><td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarFila("+i+");' style='color:red'></i></td></tr>";
 
     //subtotal = subtotal + importe;
 
@@ -191,7 +206,8 @@ if (cuenta_vacios>0) {
     detalles = [];
     $('#istar_det_compras').html('');
     setTimeout ("Swal.fire('Se ha registrado Exitosamente la compra','','success')", 100);
-    setTimeout ("explode();", 2000);
+    ocultar_btn_de_compra();
+    setTimeout ("mostrar_btn_post_compra()", 2000);
   }else{
     setTimeout ("Swal.fire('El numero de compra ya se ncuentra registrado','','error')", 100);
     return false;
@@ -323,5 +339,208 @@ function ingresar_compras_inventario()
 
   }).DataTable();
 }
+///////////////////////REPORTE DE COMPRAS ADMIN
+////////////////////GET COMPRAS INGRESAR
+function ingresar_compras_inventario()
+{
+  tabla_compras_ingresar=$('#data_ingresos_bodega').dataTable(
+  {
+    "aProcessing": true,//Activamos el procesamiento del datatables
+      "aServerSide": true,//Paginación y filtrado realizados por el servidor
+      dom: 'Bfrtip',//Definimos los elementos del control de tabla
+      buttons: [{
+          extend: 'excelHtml5',
+          download: 'open',
+          text: 'Descargar Excel',
+          filename: function() {
+              var date_edition = 'Compras Pendientes Ingresar '+moment().format("DD-MM-YYYY HH[h]mm")
+              var selected_machine_name = $("#output_select_machine select option:selected").text()
+              return date_edition + ' - ' + selected_machine_name
+           },
+           sheetName: 'Compras pendientes de ingresar',
+           title : null
+       },
+            {
+              extend: 'pdfHtml5',
+              download: 'open',
+              text: 'Imprimir',
+              orientation: 'portrait',
+              pageSize: 'letter',
+              filename: function() {
+              var fecha = 'Compras Pendientes '+moment().format("DD-MM-YYYY HH[h]mm")
+              var selected_machine_name = $("#output_select_machine select option:selected").text()
+              return fecha + ' - ' + selected_machine_name
+              
+            },
+            title : 'Compras a Bodega'
+        }   
+       ],
+    "ajax":
+        {
+          url: 'ajax/compras.php?op=compras_ingreso',
+          type : "get",
+          dataType : "json",
+          error: function(e){
+            console.log(e.responseText);
+          }
+        },
+    "bDestroy": true,
+    "responsive": true,
+    "bInfo":true,
+    "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+      "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
 
+      "language": {
+
+          "sProcessing":     "Procesando...",
+
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+
+          "sZeroRecords":    "No se encontraron resultados",
+
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+
+          "sInfo":           "Mostrando un total de _TOTAL_ registros",
+
+          "sInfoEmpty":      "Mostrando un total de 0 registros",
+
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+
+          "sInfoPostFix":    "",
+
+          "sSearch":         "Buscar:",
+
+          "sUrl":            "",
+
+          "sInfoThousands":  ",",
+
+          "sLoadingRecords": "Cargando...",
+
+          "oPaginate": {
+
+              "sFirst":    "Primero",
+
+              "sLast":     "Último",
+
+              "sNext":     "Siguiente",
+
+              "sPrevious": "Anterior"
+
+          },
+
+          "oAria": {
+
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+
+          }
+
+         }//cerrando language
+
+  }).DataTable();
+}
+///////////////////////REPORTE DE COMPRAS ADMIN
+function reporte_compras_admin()
+{
+  var numero_compra = $("#n_compra").val();
+  //alert(numero_compra);
+  //return false;
+  tabla_compras_admin_report=$('#reporte_compra_admin').dataTable(
+  {
+    "aProcessing": true,//Activamos el procesamiento del datatables
+      "aServerSide": true,//Paginación y filtrado realizados por el servidor
+      dom: 'Bfrtip',//Definimos los elementos del control de tabla
+      buttons: [{
+          extend: 'excelHtml5',
+          download: 'open',
+          text: 'Descargar Excel',
+          filename: function() {
+              var date_edition = 'Compras Pendientes Ingresar '+moment().format("DD-MM-YYYY HH[h]mm")
+              var selected_machine_name = $("#output_select_machine select option:selected").text()
+              return date_edition + ' - ' + selected_machine_name
+           },
+           sheetName: 'Compras',
+           title : null
+       },
+            {
+              extend: 'pdfHtml5',
+              download: 'open',
+              text: 'Imprimir',
+              orientation: 'landscape',
+              pageSize: 'letter',
+              filename: function() {
+              var fecha = 'Compra '+moment().format("DD-MM-YYYY HH[h]mm")
+              var selected_machine_name = $("#output_select_machine select option:selected").text()
+              return fecha + ' - ' + selected_machine_name
+              
+            },
+            title : 'Compra '+"# "+numero_compra+" - "+  fecha
+        }   
+       ],
+    "ajax":
+        {
+          url: 'ajax/compras.php?op=reporte_compra_administrador',
+          type : "post",
+          data:{numero_compra:numero_compra},   
+          error: function(e){
+            console.log(e.responseText);
+          }
+        },
+    "bDestroy": true,
+    "responsive": true,
+    "bInfo":true,
+    "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+      "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+
+      "language": {
+
+          "sProcessing":     "Procesando...",
+
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+
+          "sZeroRecords":    "No se encontraron resultados",
+
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+
+          "sInfo":           "Mostrando un total de _TOTAL_ registros",
+
+          "sInfoEmpty":      "Mostrando un total de 0 registros",
+
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+
+          "sInfoPostFix":    "",
+
+          "sSearch":         "Buscar:",
+
+          "sUrl":            "",
+
+          "sInfoThousands":  ",",
+
+          "sLoadingRecords": "Cargando...",
+
+          "oPaginate": {
+
+              "sFirst":    "Primero",
+
+              "sLast":     "Último",
+
+              "sNext":     "Siguiente",
+
+              "sPrevious": "Anterior"
+
+          },
+
+          "oAria": {
+
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+
+          }
+
+         }//cerrando language
+
+  }).DataTable();
+}
 init();

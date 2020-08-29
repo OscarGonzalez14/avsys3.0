@@ -1,6 +1,7 @@
 <?php require_once('header.php');?>
 <?php require_once('modals/modal_proveedores.php');?>
 <?php require_once('modals/modal_aros.php');?>
+<?php require_once('modals/modal_reporte_ultima_compra_admin.php');?>
 
 <div class="content-wrapper" >
     <section class="content">
@@ -19,7 +20,7 @@
             	<div class="row invoice-info callout callout-info" style="border-bottom: solid 1px black;border-right: solid 1px black;border-top: solid 1px black">
                     <div class="col-sm-2 invoice-col">
                     <label># Compra</label>
-                      <input type="text" class="form-control input-dark" id="n_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly="">
+                      <input type="text" class="form-control input-dark" id="n_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;">
                     </div>
 
                     <div class="col-sm-6 invoice-col">
@@ -115,16 +116,16 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0 table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped" id="tabla_det_compras">
                   <thead style="background:black;color:white">
                     <tr>
-                      <th style="text-align:center">#</th>
-                      <th style="text-align:center">Descripción&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                      <th style="text-align:center">Precio Compra/U</th>
-                      <th style="text-align:center">Cantidad</th>
-                      <th style="text-align:center">Precio Venta/U</th>
-                      <th style="text-align:center">Subtotal</th>
-                      <th style="text-align:center">Eliminar</th>
+                      <th style="text-align:center" width="10%">#</th>
+                      <th style="text-align:center" width="40%">Descripción&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th style="text-align:center" width="10%">P. Compra/U</th>
+                      <th style="text-align:center" width="10%">Cantidad</th>
+                      <th style="text-align:center" width="10%">P. Venta/U</th>
+                      <th style="text-align:center" width="10%">Subtotal</th>
+                      <th style="text-align:center" width="10%">Eliminar</th>
                     </tr>
                   </thead>
                   <tbody id="listar_det_compras" style="width: 100%"></tbody>                    
@@ -139,7 +140,19 @@
                 <?php date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y H:i:s");?>
                 <input type="hidden" id="usuario" value="oscar">
                 <input type="hidden" id="fecha" value="<?php echo $hoy;?>">
-                <button class="btn btn-dark btn-block" style="border-radius:2px" onClick='registrarCompra();' onmouseover="get_numero_recibo();"><i class="fas fa-save"></i> REGISTRAR COMPRA</button>
+                <button class="btn btn-dark btn-block" id="btn_de_compra" style="border-radius:2px" onClick='registrarCompra();' onmouseover="get_numero_recibo();"><i class="fas fa-save"></i> REGISTRAR COMPRA</button>
+              </div>
+              <br>
+              <div class="row post_compra" id="post_compra" style="display: flex;justify-content: space-between !important;">
+                <div class="col-sm-4 post_compra">
+                  <button class="btn btn-primary btn-block" style="border-radius:2px" data-toggle="modal" data-target="#modal_print_admin" data-backdrop="static" data-keyboard="false" onClick="reporte_compras_admin();";><i class="fas fa-print"></i> Descargar/Imprimir compra(Admin)&nbsp;<i class="fas fa-lock"></i></button>
+                </div>
+                <div class="col-sm-4 post_compra">
+                  <button class="btn btn-success btn-block" style="border-radius:2px"><i class="fas fa-print"></i> Descargar/Imprimir compra(Bodega)&nbsp;<i class="fas fa-unlock"></i></button>
+                </div>
+                <div class="col-sm-4 post_compra">
+                  <button class="btn btn-info btn-block" style="border-radius:2px" onClick='explode();'><i class="fas fa-plus"></i> Nueva Compra</button>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>

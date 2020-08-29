@@ -122,4 +122,14 @@ $sql->execute();
 return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+///////////////////////GET REPORTE PROVEEDOR ADMIN
+public function get_reporte_compra_admin($numero_compra){
+    $conectar= parent::conexion();         
+    $sql= "SELECT fecha_compra,numero_compra,descripcion,cantidad,precio_compra,precio_venta,subtotal FROM detalle_compras WHERE numero_compra=?";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$numero_compra);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }//FIN DE LA CLASE
