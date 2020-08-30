@@ -8,16 +8,14 @@
   switch($_GET["op"]){
   	case "get_numero_compra":
     $datos= $compras->get_numero_compras();
-    $suc_rec=$_POST["sucursal_correlativo"];  		
-    $correlativo=substr($suc_rec, 0,2);
-    // si existe el proveedor entonces recorre el array
-	    if(is_array($datos)==true and count($datos)>0){
-		    foreach($datos as $row){
-			  $num_recibo=substr($row["numero_compra"],3,11)+1;					
-			  $output["num_recibo"] = strtoupper($correlativo).'-'.$num_recibo;								
+    //$suc_rec=$_POST["sucursal_correlativo"];  		
+    if(is_array($datos)==true and count($datos)>0){
+		    foreach($datos as $row){			  					
+			  $output["num_recibo"] = "C-".$row["n_compra"];								
 		  }
+    }
 	 echo json_encode($output);
-		}
+
   break;
 
 

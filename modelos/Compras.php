@@ -6,7 +6,7 @@ class Compras extends Conectar{
     
   	public function get_numero_compras(){
     	$conectar= parent::conexion();
-    	$sql= "select numero_compra from compras order by id_compra DESC limit 1;";
+    	$sql= "select max(id_compra)+1 as n_compra from compras;";
     	$sql=$conectar->prepare($sql);
     	//$sql->bindValue(1, $sucursal_correlativo);
     	$sql->execute();
@@ -65,7 +65,7 @@ public function agrega_detalle_compra(){
         $tipo_compra = $_POST["tipo_compra"];
         $tipo_pago = $_POST["tipo_pago"];
         $plazo = $_POST["plazo"];
-        $sucursal = $_POST["sucursal"];
+       // $sucursal = $_POST["sucursal"];
         $tipo_documento = $_POST["tipo_documento"];
         $documento = $_POST["documento"];
         $usuario = $_POST["usuario"];
@@ -92,7 +92,7 @@ public function agrega_detalle_compra(){
     }//cierre del foreach
 
 
-    $sql2="insert into compras values(null,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+    $sql2="insert into compras values(null,?,?,?,?,?,?,?,?,?,?,?,?);";
 
     $sql2=$conectar->prepare($sql2);
     $sql2->bindValue(1,$n_compra);
@@ -102,12 +102,12 @@ public function agrega_detalle_compra(){
     $sql2->bindValue(5,$tipo_pago);
     $sql2->bindValue(6,$plazo);
     $sql2->bindValue(7,$fecha);
-    $sql2->bindValue(8,$sucursal);
-    $sql2->bindValue(9,$tipo_documento);
-    $sql2->bindValue(10,$documento);
-    $sql2->bindValue(11,$usuario);
-    $sql2->bindValue(12,$total_compra);
-    $sql2->bindValue(13,$estado);
+    //$sql2->bindValue(8,$sucursal);
+    $sql2->bindValue(8,$tipo_documento);
+    $sql2->bindValue(9,$documento);
+    $sql2->bindValue(10,$usuario);
+    $sql2->bindValue(11,$total_compra);
+    $sql2->bindValue(12,$estado);
 
     $sql2->execute();
 }

@@ -31,11 +31,11 @@ function clear_c_compra() {
 
 function get_numero_recibo(){
   //var sucursal_correlativo = $("#sucursal").val();
-    var sucursal_correlativo = 'METROCENTRO';
+    //var sucursal_correlativo = 'METROCENTRO';
     $.ajax({
       url:"ajax/compras.php?op=get_numero_compra",
       method:"POST",
-       data:{sucursal_correlativo:sucursal_correlativo},
+      //data:{sucursal_correlativo:sucursal_correlativo},
       cache:false,
       dataType:"json",
       success:function(data)
@@ -91,7 +91,7 @@ function listarDetallesCompras(){
         "</td><td style='text-align:center;'>"+detalles[i].marca+" "+
         "Mod.: "+detalles[i].modelo+" - Color: "+detalles[i].color+" - Medidas: "+
         detalles[i].medidas+
-        "</td><td style='text-align:center'><input style='text-align:right;border-radius:3px' type='number' class='cantidad form-control' name='precio_compra[]' id='precio_compra[]' onClick='setPrecioCompra(event, this, "+(i)+");' onKeyUp='setPrecioCompra(event, this, "+(i)+");' value='"+  detalles[i].precio_compra+"'><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='cantidad[]' onClick='setPrecioVenta(event, this, "+(i)+");' onKeyUp='setPrecioVenta(event, this, "+(i)+");' value='"+detalles[i].precio_venta+"'></td><td style='text-align:center;'><span>$</span><span style='text-align:right' name='subtotal[]' id=subtotal"+i+" ></span><td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarFila("+i+");' style='color:red'></i></td></tr>";
+        "</td><td style='text-align:center'><input style='text-align:right;border-radius:3px' type='number' class='cantidad form-control' name='precio_compra[]' id='precio_compra[]' onClick='setPrecioCompra(event, this, "+(i)+");' onKeyUp='setPrecioCompra(event, this, "+(i)+");' value='"+  detalles[i].precio_compra+"'><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='pv"+(i)+"' onClick='setPrecioVenta(event, this, "+(i)+");' onKeyUp='setPrecioVenta(event, this, "+(i)+");' value='"+detalles[i].precio_venta+"'></td><td style='text-align:center;'><span>$</span><span style='text-align:right' name='subtotal[]' id=subtotal"+i+" >"+detalles[i].subtotal+"</span><td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarFila("+i+");' style='color:red'></i></td></tr>";
 
     //subtotal = subtotal + importe;
 
@@ -155,7 +155,7 @@ function calcularTotales() {
   var  tipo_compra = $("#tipo_compra").val();
   var  tipo_pago= $("#tipo_pago").val();
   var  plazo= $("#plazo").val();
-  var  sucursal= $("#sucursal").val();
+  //var  sucursal= $("#sucursal").val();
   var  tipo_documento= $("#tipo_documento").val();
   var  documento= $('#documento').val();
   var  usuario= $('#usuario').val();
@@ -166,7 +166,12 @@ function calcularTotales() {
   for(var i=0;i<detalles.length;i++){
     var currentPrecioCompra = detalles[i].precio_compra;
     var currentPrecioVenta = detalles[i].precio_venta;
-      //alert(currentNumber);
+    if(currentPrecioVenta<currentPrecioCompra){
+      Swal.fire('El precio de venta debe ser mayor al precio de venta!','','error')
+      var parametro ='pv'+i;
+      document.getElementById(parametro).style.border='solid 1px red';
+      return false;
+    }
     if(currentPrecioCompra == 0){
       compra_precio_empty.push(currentPrecioCompra);
     }
@@ -186,12 +191,17 @@ if (cuenta_vacios>0) {
   return false;
 }
 
-  if(n_compra!="" && proveedor_compra!="" && codigo_proveedor!='' && tipo_compra!='' && tipo_pago!='' && plazo!='' && sucursal!='' && tipo_documento!='' && documento!='' && total_compra!=''){
+if(tipo_compra=='Credito' && plazo=='contado'){
+  Swal.fire('Su compra es un Crédito seleccione el plazo!','','error')
+  return false
+}
+
+  if(n_compra!="" && proveedor_compra!="" && codigo_proveedor!='' && tipo_compra!='' && tipo_pago!='' && plazo!='' && tipo_documento!='' && documento!='' && total_compra!=''){
     console.log('Message Oscar');
     $.ajax({
     url:"ajax/compras.php?op=registrar_compra",
     method:"POST",
-    data:{'arrayCompra':JSON.stringify(detalles),'n_compra':n_compra,'proveedor_compra':proveedor_compra,'codigo_proveedor':codigo_proveedor,'tipo_compra':tipo_compra,'tipo_pago':tipo_pago,'plazo':plazo,'sucursal':sucursal,'tipo_documento':tipo_documento,'documento':documento,'usuario':usuario,'fecha':fecha,'total_compra':total_compra},
+    data:{'arrayCompra':JSON.stringify(detalles),'n_compra':n_compra,'proveedor_compra':proveedor_compra,'codigo_proveedor':codigo_proveedor,'tipo_compra':tipo_compra,'tipo_pago':tipo_pago,'plazo':plazo,'tipo_documento':tipo_documento,'documento':documento,'usuario':usuario,'fecha':fecha,'total_compra':total_compra},
     cache: false,
     dataType:"json",
     error:function(x,y,z){
@@ -353,7 +363,7 @@ function ingresar_compras_inventario()
           download: 'open',
           text: 'Descargar Excel',
           filename: function() {
-              var date_edition = 'Compras Pendientes Ingresar '+moment().format("DD-MM-YYYY HH[h]mm")
+              var date_edition = 'Compras  '+moment().format("DD-MM-YYYY HH[h]mm")
               var selected_machine_name = $("#output_select_machine select option:selected").text()
               return date_edition + ' - ' + selected_machine_name
            },
@@ -467,15 +477,16 @@ function reporte_compras_admin()
               extend: 'pdfHtml5',
               download: 'open',
               text: 'Imprimir',
-              orientation: 'landscape',
+              orientation: 'portrait',
               pageSize: 'letter',
+              customize : function(doc) {doc.pageMargins = [10, 10, 10,10 ]; },
               filename: function() {
               var fecha = 'Compra '+moment().format("DD-MM-YYYY HH[h]mm")
               var selected_machine_name = $("#output_select_machine select option:selected").text()
               return fecha + ' - ' + selected_machine_name
               
             },
-            title : 'Compra '+"# "+numero_compra+" - "+  fecha
+            title : 'Compras'
         }   
        ],
     "ajax":
@@ -542,5 +553,9 @@ function reporte_compras_admin()
          }//cerrando language
 
   }).DataTable();
+}
+
+function cursor_d(){
+  $('div.dataTables_filter input').focus();
 }
 init();

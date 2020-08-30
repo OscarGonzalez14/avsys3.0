@@ -42,7 +42,9 @@
                 </table>
               </div>
               <!-- /.card-body -->
-  
+  <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+      </div>
     </div><!--Fin modal Content-->
 
   </div>

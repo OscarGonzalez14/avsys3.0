@@ -7,7 +7,9 @@ function init(){
  	$('#modal_ingreso_bodega').modal('show');
  	var numero_compra = $("#numero_compra_bod").val();
  	tablas_compras_ingreso_bodegas=$('#data_productos_ingresos_bodega').dataTable(
+
   {
+
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
       dom: 'Bfrtip',//Definimos los elementos del control de tabla
@@ -85,6 +87,7 @@ function init(){
          }//cerrando language
 
   }).DataTable();
+  $('#data_productos_ingresos_bodega').focus();
 }
 
 ///////////////INGRESAR PRODUCTOS A BODEGA
