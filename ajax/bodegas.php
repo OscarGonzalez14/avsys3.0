@@ -41,7 +41,8 @@ case "listar_productos_ingreso_bodegas":
         {
           $output["numero_compra"] = $row["numero_compra"];
           $output["descripcion"] = $row["descripcion"];
-          $output["id_producto"] = $row["id_producto"];                             
+          $output["id_producto"] = $row["id_producto"];
+          $output["cant_ingreso"] = $row["cant_ingreso"];                             
         }      
 
        } 

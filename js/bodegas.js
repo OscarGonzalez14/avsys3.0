@@ -103,6 +103,7 @@ function agregaIngreso(id_producto,numero_compra){
     console.log(data);   
     var obj = {
       id_producto: data.id_producto,
+      cant_ingreso: data.cant_ingreso,
       cantidad : '',
       ubicacion  : '',
       numero_compra   : data.numero_compra,
@@ -128,7 +129,7 @@ function listarDetallesIngresos(){
 
         var filas = filas + "<tr id='fila"+i+"'><td>"+(i+1)+
         "</td>"+"<td style='text-align:center;'>"+detalles[i].numero_compra+
-        "</td>"+"<td style='text-align:center;'><span>"+detalles[i].descripcion+"</span></td>"+"<td>"+"<input type='number'class='form-control' onClick='setCant(event, this, "+(i)+");' onKeyUp='setCant(event, this, "+(i)+");' value='"+detalles[i].cantidad+"' pattern='^[0-9]+'>"+"</td>"+"</tr>";
+        "</td>"+"<td style='text-align:center;'><span>"+detalles[i].descripcion+"</span></td>"+"<td>"+"<select class='form-control' id='categoria_ubicacion' onClick='setUbicacion(event, this, "+(i)+");'><option value=''>Seleccione Categoría/Ubicación</option><option value='Gaveta1'>Gaveta 1</option><option value='Gaveta 2'>Gaveta 2</option><option value='Gaveta 3'>Gaveta 3</option><option value='Gaveta 4'>Gaveta 4</option><option value='Gaveta 5'>Gaveta 5</option></select>"+"</td>"+"<td>"+"<input type='number'class='form-control' onClick='setCant(event, this, "+(i)+");' onKeyUp='setCant(event, this, "+(i)+")' value='"+detalles[i].cantidad+"' pattern='^[0-9]+' id='cant"+(i)+"'>"+"</td>"+"</tr>";
 
     //subtotal = subtotal + importe;
 
@@ -147,9 +148,22 @@ function setUbicacion(event, obj, idx){
 function setCant(event, obj, idx){
   	event.preventDefault();
   	detalles[idx].cantidad = String(obj.value);
-  	//recalcular(idx);
+    setCantidadAjax(event, obj, idx);
 }
 
+function setCantidadAjax(event, obj, idx){
+  event.preventDefault();
+  var cant_act=detalles[idx].cantidad = parseInt(obj.value);  
+  var cant_disponible = detalles[idx].cant_ingreso;
+  if (cant_act>cant_disponible) {
+    setTimeout ("Swal.fire('La cantidad es mayor a cantidad disponible','','error')", 100)
+    var parametro ='cant'+idx;
+    document.getElementById(parametro).style.border='solid 1px #7FFFD4';
+    document.getElementById(parametro).value=0;
+  }else if(cant_act<=cant_disponible){
+    document.getElementById(parametro).style.border='solid 2px #7FFFD4';
+  }
+}
  function registrarIngresoBodega(){
 
   var fecha_ingreso = $("#fecha_ingreso").val();

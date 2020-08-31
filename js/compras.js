@@ -96,10 +96,7 @@ function listarDetallesCompras(){
     //subtotal = subtotal + importe;
 
   }//cierre for
-
-
   $('#listar_det_compras').html(filas);
-
 }
 
 function setCantidad(event, obj, idx){
@@ -155,7 +152,7 @@ function calcularTotales() {
   var  tipo_compra = $("#tipo_compra").val();
   var  tipo_pago= $("#tipo_pago").val();
   var  plazo= $("#plazo").val();
-  //var  sucursal= $("#sucursal").val();
+  var  sucursal= $("#sucursal").val();
   var  tipo_documento= $("#tipo_documento").val();
   var  documento= $('#documento').val();
   var  usuario= $('#usuario').val();
@@ -166,8 +163,8 @@ function calcularTotales() {
   for(var i=0;i<detalles.length;i++){
     var currentPrecioCompra = detalles[i].precio_compra;
     var currentPrecioVenta = detalles[i].precio_venta;
-    if(currentPrecioVenta<currentPrecioCompra){
-      Swal.fire('El precio de venta debe ser mayor al precio de venta!','','error')
+    if(currentPrecioVenta<=currentPrecioCompra){
+      Swal.fire('El precio de venta debe ser mayor al precio de compra!','','error')
       var parametro ='pv'+i;
       document.getElementById(parametro).style.border='solid 1px red';
       return false;
@@ -201,7 +198,7 @@ if(tipo_compra=='Credito' && plazo=='contado'){
     $.ajax({
     url:"ajax/compras.php?op=registrar_compra",
     method:"POST",
-    data:{'arrayCompra':JSON.stringify(detalles),'n_compra':n_compra,'proveedor_compra':proveedor_compra,'codigo_proveedor':codigo_proveedor,'tipo_compra':tipo_compra,'tipo_pago':tipo_pago,'plazo':plazo,'tipo_documento':tipo_documento,'documento':documento,'usuario':usuario,'fecha':fecha,'total_compra':total_compra},
+    data:{'arrayCompra':JSON.stringify(detalles),'n_compra':n_compra,'proveedor_compra':proveedor_compra,'codigo_proveedor':codigo_proveedor,'tipo_compra':tipo_compra,'tipo_pago':tipo_pago,'plazo':plazo,'tipo_documento':tipo_documento,'documento':documento,'usuario':usuario,'fecha':fecha,'total_compra':total_compra,'sucursal':sucursal},
     cache: false,
     dataType:"json",
     error:function(x,y,z){

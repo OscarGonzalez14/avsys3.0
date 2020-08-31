@@ -61,7 +61,7 @@
                 </div><!--/.row invoice-info datos Proveedor-->
 
                 <div class="row row2" style="background:#E0E0E0">
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-2">
                       <label for="">Tipo Compra</label>
                       <select class="form-control input-dark" id="tipo_compra" required="">
                         <option value=''>Seleccionar tipo Venta</option>
@@ -70,7 +70,7 @@
                       </select>
                     </div>  
 
-                  <div class="form-group col-sm-3">
+                  <div class="form-group col-sm-2">
                     <label for="">Tipo Pago</label>
                       <select class="form-control input-dark" id="tipo_pago" required="">
                         <option value=''>Seleccionar tipo Pago</option>
@@ -111,6 +111,15 @@
                   <div class="form-group col-sm-2">
                     <label for="inputPassword4"># CCF/Factura</label>
                     <input type="text" class="form-control input-dark" id="documento" required>
+                  </div>
+                  <div class="form-group col-sm-2">
+                    <label for="">Sucursal</label>
+                      <select class="form-control input-dark" id="sucursal" required="">
+                        <option value=''>Seleccionar sucursal</option>
+                        <option value='Metrocentro'>Metrocentro</option>
+                        <option value='Santa Ana'>Santa Ana</option>
+                        <option value='San Miguel'>Santa Ana</option>
+                      </select>
                   </div>   
 
                 </div><!--/.row2-->
