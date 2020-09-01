@@ -1,7 +1,8 @@
 <?php
 require_once('header.php');
 require_once('modals/nuevo_aro.php');
-require_once('modals/nueva_marca.php')
+require_once('modals/nueva_marca.php');
+require_once('modals/modal_categoria.php');
 ?>
 <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
