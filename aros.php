@@ -1,11 +1,14 @@
 <?php
 require_once('header.php');
 require_once('modals/nuevo_aro.php');
+require_once('modals/nueva_marca.php')
 ?>
 <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
 <div style="margin:5px;">
+ <a class="btn btn-dark" style="color:white;border-radius:2px; background:black;margin:solid black 1px" data-toggle="modal" data-target="#newMarca" data-backdrop="static" data-keyboard="false"><i class="fas fa-plus-square"></i> Crear Marca</a>&nbsp;
  <a class="btn btn-dark" style="color:white;border-radius:2px; background:black;margin:solid black 1px" data-toggle="modal" data-target="#new_aro" data-backdrop="static" data-keyboard="false"><i class="fas fa-plus-square"></i> Crear Aro</a>&nbsp;
+<a class="btn btn-dark" style="color:white;border-radius:2px; background:black;margin:solid black 1px" data-toggle="modal" data-target="#newProveedor" data-backdrop="static" data-keyboard="false"><i class="fas fa-plus-square"></i> Nuevo Proveedor</a>&nbsp;
  <a class="btn btn-dark" style="color:white;border-radius:2px; background:#001a33;margin:solid #000066 1px" data-toggle="modal" data-target="#new_aro" data-backdrop="static" data-keyboard="false"><i class="fas fa-file-import"></i> Ingresar aros a Inventario</a>
 </div>
 
@@ -32,4 +35,4 @@ require_once('modals/nuevo_aro.php');
 
 <script src='js/bootbox.min.js'></script>
 <script src='js/productos.js'></script>
-<
+<script src='js/marca.js'></script>
