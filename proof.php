@@ -1,16 +1,33 @@
-<?php
-require_once("config/conexion.php");
-class Bodegas extends Conectar{
-public function get_productos_ingresar(){
-$conectar=parent::conexion();
-$sql5="SELECT SUM(`cant_ingreso`) FROM `detalle_compras` WHERE `numero_compra`='ME-1;";
-       $sql5=$conectar->prepare($sql5);
-       $sql5->execute();
-       $resultado2 = $sql5->fetchAll(PDO::FETCH_ASSOC);
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<script type="text/javascript">
+   
 
 
-   //echo $resultado2;
- }
-}
-$solicitudes = new Bodegas();
-echo $solicitudes->get_productos_ingresar();
+var array = [
+  { Id: "001", qty: 1 }, 
+  { Id: "002", qty: 2 }, 
+  { Id: "001", qty: 2 }, 
+  { Id: "003", qty: 4 }
+];
+
+var result = [];
+array.reduce(function(res, value) {
+  if (!res[value.Id]) {
+    res[value.Id] = { Id: value.Id, qty: 0 };
+    result.push(res[value.Id])
+  }
+  res[value.Id].qty += value.qty;
+  return res;
+}, {});
+
+console.log(result)
+////////////////
+
+</script>
+</body>
+</html>

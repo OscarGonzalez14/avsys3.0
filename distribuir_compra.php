@@ -37,11 +37,13 @@ require_once('modals/modal_categorias.php');
                 <table style="margin:10px" width="100%">
                   <thead style="background:black;color:white">
                     <tr>
-                      <th style="text-align:center" width="10%">Item</th>
-                      <th style="text-align:center" width="10%">Orden</th>
+                      <th style="text-align:center" width="5%">Item</th>
+                      <th style="text-align:center" width="5%">Orden</th>
+                      <th style="text-align:center" width="5%">Disp.</th>
                       <th style="text-align:center" width="40%">Descripción</th>
                       <th style="text-align:center" width="30%">Ubicación</th>
-                      <th style="text-align:center" width="10%">Cantidad</th>
+                      <th style="text-align:center" width="5%">Cantidad</th>
+                      <th style="text-align:center" width="10%">Eliminar</th>
                     </tr>
                   </thead>
                   <tbody id="listar_productos_de_ingreso" style="width: 100%"></tbody>                    

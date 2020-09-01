@@ -104,6 +104,7 @@ function agregaIngreso(id_producto,numero_compra){
     var obj = {
       id_producto: data.id_producto,
       cant_ingreso: data.cant_ingreso,
+      precio_venta: data.precio_venta,
       cantidad : '',
       ubicacion  : '',
       numero_compra   : data.numero_compra,
@@ -127,9 +128,9 @@ function listarDetallesIngresos(){
 
     //var subtotal = detalles[i].subtotal = detalles[i].cantidad * detalles[i].precio_compra;
 
-        var filas = filas + "<tr id='fila"+i+"'><td>"+(i+1)+
-        "</td>"+"<td style='text-align:center;'>"+detalles[i].numero_compra+
-        "</td>"+"<td style='text-align:center;'><span>"+detalles[i].descripcion+"</span></td>"+"<td>"+"<select class='form-control' id='categoria_ubicacion' onClick='setUbicacion(event, this, "+(i)+");'><option value=''>Seleccione Categoría/Ubicación</option><option value='Gaveta1'>Gaveta 1</option><option value='Gaveta 2'>Gaveta 2</option><option value='Gaveta 3'>Gaveta 3</option><option value='Gaveta 4'>Gaveta 4</option><option value='Gaveta 5'>Gaveta 5</option></select>"+"</td>"+"<td>"+"<input type='number'class='form-control' onClick='setCant(event, this, "+(i)+");' onKeyUp='setCant(event, this, "+(i)+")' value='"+detalles[i].cantidad+"' pattern='^[0-9]+' id='cant"+(i)+"'>"+"</td>"+"</tr>";
+        var filas = filas + "<tr id='fila"+i+"'><td style='text-align:center'>"+(i+1)+
+        "</td>"+"<td style='text-align:center;'>"+detalles[i].numero_compra+"</td>"+"<td style='text-align:center;'>"+detalles[i].cant_ingreso+
+        "</td>"+"<td style='text-align:center;'><span>"+detalles[i].descripcion+"</span></td>"+"<td>"+"<select class='form-control' id='categoria_ubicacion' onClick='setUbicacion(event, this, "+(i)+");'><option value=''>Seleccione Categoría/Ubicación</option><option value='Gaveta1'>Gaveta 1</option><option value='Gaveta 2'>Gaveta 2</option><option value='Gaveta 3'>Gaveta 3</option><option value='Gaveta 4'>Gaveta 4</option><option value='Gaveta 5'>Gaveta 5</option></select>"+"</td>"+"<td>"+"<input type='number'class='form-control cant"+detalles[i].id_producto+"' onClick='setCant(event, this, "+(i)+");' onKeyUp='setCant(event, this, "+(i)+")' value='"+detalles[i].cantidad+"' pattern='^[0-9]+' id='cant"+(i)+"'>"+"</td>"+"<td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarItem("+i+");' style='color:red'></i></td>"+"</tr>";
 
     //subtotal = subtotal + importe;
 
@@ -158,11 +159,23 @@ function setCantidadAjax(event, obj, idx){
   if (cant_act>cant_disponible) {
     setTimeout ("Swal.fire('La cantidad es mayor a cantidad disponible','','error')", 100)
     var parametro ='cant'+idx;
-    document.getElementById(parametro).style.border='solid 1px #7FFFD4';
+    document.getElementById(parametro).style.border='solid 1px red';
     document.getElementById(parametro).value=0;
   }else if(cant_act<=cant_disponible){
     document.getElementById(parametro).style.border='solid 2px #7FFFD4';
   }
+}
+
+function eliminarItem(index) {
+  $("#fila" + index).remove();
+  drop_item(index);
+}
+
+function drop_item(position_element){
+  detalles.splice(position_element, 1);
+  //recalcular(position_element);
+  calcularTotales();
+
 }
  function registrarIngresoBodega(){
 
@@ -183,7 +196,34 @@ function setCantidadAjax(event, obj, idx){
     }
     contador = contador+cant_items;
   }
+///////////////////////////////////////
+var result = [];
+detalles.reduce(function(res, value) {
+  if (!res[value.id_producto]) {
+    res[value.id_producto] = { id_producto: value.id_producto, cantidad: 0 };
+    result.push(res[value.id_producto])
+  }
+  res[value.id_producto].cantidad += value.cantidad;
+  return res;
+}, {});
 
+for(var i=0;i<detalles.length;i++){
+  var stock= detalles[i].cant_ingreso;
+  var suma =result[i].cantidad;
+  if (suma>stock) {
+    
+    Swal.fire('Existen ingresos que exceden el stock disponible','','error')
+    //var y = document.getElementsByTagName(parametro_uno);
+    //var index=5;
+    var parametro_uno ='cant'+detalles[i].id_producto;
+    var y = document.getElementsByClassName(parametro_uno);
+      var i;
+      for (i = 0; i < y.length; i++) {
+        y[i].style.border = "red solid 1px";
+      }
+    //return false;
+  }
+}
 //////////////VALIDAR QUE SE ENVIEN PRODUCTOS A LA BD
 var test_array = detalles.length;
   if (test_array<1) {
