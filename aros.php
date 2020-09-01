@@ -3,6 +3,7 @@ require_once('header.php');
 require_once('modals/nuevo_aro.php');
 require_once('modals/nueva_marca.php');
 require_once('modals/modal_categoria.php');
+require_once('modals/nuevo_proveedor.php');
 ?>
 <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
@@ -37,3 +38,4 @@ require_once('modals/modal_categoria.php');
 <script src='js/bootbox.min.js'></script>
 <script src='js/productos.js'></script>
 <script src='js/marca.js'></script>
+<script src='js/proveedores.js'></script>
