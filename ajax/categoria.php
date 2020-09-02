@@ -7,7 +7,7 @@ $categorias = new Categoria();
 
 switch ($_GET["op"]){
 	case 'guardar_categoria':
-	$categorias->registrar_categoria($_POST["cat_nombre"],$_POST["cat_sucursal"],$_POST["cat_descripcion"]);
+	$categorias->registrar_categoria($_POST["g"]$_POST["cat_nombre"],$_POST["cat_sucursal"],$_POST["cat_descripcion"]);
 		break;
 }
  ?>

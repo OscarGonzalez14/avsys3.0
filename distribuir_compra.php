@@ -3,6 +3,9 @@ require_once('header.php');
 $n_compra =$_GET["numero_compra"];
 require_once('modals/modal_ingreso_bodega.php');
 require_once('modals/modal_categorias.php');
+require_once('modelos/Externos.php');
+$categorias = new Externos();
+$cats=$categorias->get_categorias();
 ?>
 <input type="hidden" name="" id="numero_compra_bod" value="<?php echo $n_compra; ?>">
 <div class="content-wrapper">

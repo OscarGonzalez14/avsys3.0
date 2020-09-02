@@ -48,5 +48,10 @@ $proveedores = new Proveedor();
 
 	    }
 	echo json_encode($output);
-    break;    
+    break;         
+
+    case 'guardarProveedor':
+    	$proveedores->registrarProveedor($_POST["codProveedor"],$_POST["nomProveedor"],$_POST["nitProveedor"],$_POST["telProveedor"],$_POST["empresaProveedor"]);
+    break;     
+
 }

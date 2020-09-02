@@ -84,6 +84,42 @@ function listar_proveedores()
 	}).DataTable();
 }
 
+/// función para guardar nuevos proveedores
+
+function guardarProveedor(){
+
+	$("#newProveedor").modal("hide");
+
+	var codProveedor=$("#codProveedor").val();
+	var nomProveedor = $("#nomProveedor").val();
+	var nitProveedor = $("#nitProveedor").val();
+	var telProveedor = $("#telProveedor").val();
+	var empresaProveedor = $("#empresaProveedor").val();
+	
+
+	///se validan los campos de llenado (modal: nuevo proveedor) 
+	if(codProveedor !="" && nomProveedor !="" && nitProveedor !="" && telProveedor !="" && empresaProveedor != ""){
+	$.ajax({
+		url:"ajax/proveedor.php?op=guardarProveedor",
+		method:"POST",
+		data:{codProveedor:codProveedor,nomProveedor:nomProveedor,nitProveedor:nitProveedor,telProveedor:telProveedor,empresaProveedor:empresaProveedor},
+		cache: false,
+		dataType: "json",
+		error:function(x,y,z){
+			d_pacole.log(x);
+			console.log(y);
+			console.log(z);
+		},
+		success:function(data){
+    console.log(data);
+     alert("¡Los datos han sido guardados exitosamente!");
+    }
+
+	});
+
+}
+}
+
 
 ////LLENADO DE CAMPOS EN COMPRAS DE PROVEEDOR
 $(document).on('click', '.agrega_proveedor', function(){
