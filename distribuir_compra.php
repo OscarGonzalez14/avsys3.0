@@ -32,6 +32,16 @@ $cats=$categorias->get_categorias();
        <button class="btn btn-dark btn-flat" style="color:white;border-radius:3px; background:black" data-backdrop="static" data-keyboard="false" onClick="ingresar_compras_bodega();"><i class="fas fa-cubes"></i> Seleccionar Producto</button>&nbsp;
        <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#modal_cats">CREAR GAVETA</button>
       </div>
+       <div class="col-sm-5">
+       <select class='form-control' id="categoria_ubicacion">
+       <option value="">Seleccione Categoría/Ubicación</option>
+        <?php
+        for ($i=0; $i < sizeof($cats); $i++) { ?>
+          <option value="<?php echo $cats[$i]["id_categoria"]?>"><?php echo $cats[$i]["nombre"]?></option>
+         <?php  } ?>
+
+       </select>
+       </div>
   </div>
 
         <div class="card" style="margin-top:10px">
