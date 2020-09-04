@@ -40,21 +40,27 @@
 
        			<div class="form-group col-md-6">
        				<label>Nombre</label>
-       				<input type="text" class="form-control" name="" placeholder=" Ingrese categoría">  				
+       				<input type="text" class="form-control" name="" placeholder=" Ingrese categoría" id="cat_nombre">  				
        			</div>
        			<div class="form-group col-md-6">
-
        				<label>Seleccionar Sucursal</label>
-       				<select name="Sucursal" class="form-control">
-       					<option>Santa Ana</option>
-       					<option>Metrocentro</option>
-       					<option>San Miguel</option>
-       					
+       				<select name="Sucursal" class="form-control" id="cat_sucursal">
+                <option value="<?php echo $_SESSION["sucursal"];?>"><?php echo $_SESSION["sucursal"];?></option>
        				</select>  				
        			</div>
-       			<div class="form-group col-md-12">
+
+            <div class="form-group col-md-4">
+              <label>Tipo Categoria</label>
+              <select id="tipo_categoria" class="form-control">
+                <option value="">Seleccione...</option>
+                <option value="Gaveta">Gaveta</option>
+                <option value="Exhibición">Exhibición</option>
+                <option value="Maleta">Maleta</option>                 
+              </select>         
+            </div>
+       			<div class="form-group col-md-8">
        				<label>Descripción</label>
-       				<input type="text" class="form-control" name="" placeholder="Descripción de categoría">  				
+       				<input type="text" class="form-control" name="" placeholder="Descripción de categoría" id="cat_descripcion">  				
        			</div>
        			
        		</div>
@@ -62,7 +68,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Guardar categoría</button>
+          <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" onClick="guardarCategoria();">Guardar categoría</button>
         </div>
         
       </div>

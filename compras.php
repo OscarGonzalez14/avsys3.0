@@ -1,15 +1,43 @@
-<?php require_once('header.php');?>
-<?php require_once('modals/modal_proveedores.php');?>
-<?php require_once('modals/modal_aros.php');?>
-<?php require_once('modals/modal_reporte_ultima_compra_admin.php');?>
+<?php
+require_once("config/conexion.php");
 
+if(isset($_SESSION["usuario"])){   
+    
+
+ require_once('header.php');
+ require_once('modals/modal_proveedores.php');
+ require_once('modals/modal_aros.php');
+ require_once('modals/modal_reporte_ultima_compra_admin.php');
+?>
+<style type="text/css">
+  .breadcrumb > li + li:before {
+   color: #CCCCCC;
+   content: "/ ";
+   padding: 0 5px;
+}
+</style>
 <div class="content-wrapper" >
     <section class="content">
         <div class="container-fluid">
-            
-            <div class="row" style="margin-top: 5px">
+          <div class="btn-group bg-light">
+            <button type="button" class="btn btn-dark btn-flat">DISTRIBUIR COMPRA</button>&nbsp;
+            <button type="button" class="btn btn-info btn-flat">MENÚ REPORTE DE COMPRAS</button>
+            <button type="button" class="btn btn-info dropdown-toggle dropdown-icon btn-flat" data-toggle="dropdown">
+              <span class="sr-only">Toggle Dropdown</span>
+              <div class="dropdown-menu" role="menu">
+                <a class="dropdown-item" href="#" style="text-decoration: none;color:black">Reporte diario de Compras</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" style="text-decoration: none;color:black">Reporte mensual de Compras</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" style="text-decoration: none;color:black">Reporte anual compras</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Por Rango de Fechas</a>
+              </div>
+            </button>
+         </div>
+          <div class="row" style="margin-top: 5px">
               <div class="col-12">
-                <div class="callout callout-info" style="border-bottom: solid 1px #008080">
+                <div class="callout callout-info" style="border-bottom: solid 1px #008080;">
                   <h3 style='text-align:center;max-height: 20px'>COMPRAS</h3>
                 </div>
               </div>
@@ -62,7 +90,7 @@
                   <div class="form-group col-sm-2">
                     <label for="">Plazo</label>
                       <select class="form-control input-dark" id="plazo" required="">
-                        <option value=''> Seleccione Plazo Credito</option>
+                        <option value='contado'> Contado</option>
                         <option value='1'>1 meses</option>
                         <option value='2'>2 meses</option>
                         <option value='3'>3 meses</option>
@@ -91,22 +119,20 @@
                     <label for="inputPassword4"># CCF/Factura</label>
                     <input type="text" class="form-control input-dark" id="documento" required>
                   </div>
-
-
                   <div class="form-group col-sm-2">
                     <label for="">Sucursal</label>
                       <select class="form-control input-dark" id="sucursal" required="">
                         <option value=''>Seleccionar sucursal</option>
                         <option value='Metrocentro'>Metrocentro</option>
                         <option value='Santa Ana'>Santa Ana</option>
-                        <option value='Credito'>Tarjeta de Crédito</option>
+                        <option value='San Miguel'>Santa Ana</option>
                       </select>
-                  </div>       
+                  </div>   
 
                 </div><!--/.row2-->
 
                 <div style="margin:20px;">
-                  <a class="btn btn-dark" style="color:white;border-radius:3px; background:black" data-toggle="modal" data-target="#modalAros" data-backdrop="static" data-keyboard="false"><i class="fas fa-glasses"></i> Agregar Aro</a>
+                  <a class="btn btn-dark" style="color:white;border-radius:3px; background:black" data-toggle="modal" data-target="#modalAros" data-backdrop="static" data-keyboard="false" onClick="cursor_d();"><i class="fas fa-glasses"></i> Agregar Aro</a>
                 </div>
 
            <div class="col-md-12">
@@ -117,13 +143,13 @@
               <!-- /.card-header -->
               <div class="card-body p-0 table-responsive">
                 <table class="table table-striped" id="tabla_det_compras">
-                  <thead style="background:black;color:white">
+                  <thead class="bg-info">
                     <tr>
                       <th style="text-align:center" width="10%">#</th>
                       <th style="text-align:center" width="40%">Descripción&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                      <th style="text-align:center" width="10%">P. Compra/U</th>
+                      <th style="text-align:center" width="10%">P. C/U</th>
                       <th style="text-align:center" width="10%">Cantidad</th>
-                      <th style="text-align:center" width="10%">P. Venta/U</th>
+                      <th style="text-align:center" width="10%">P. V/U</th>
                       <th style="text-align:center" width="10%">Subtotal</th>
                       <th style="text-align:center" width="10%">Eliminar</th>
                     </tr>
@@ -169,3 +195,6 @@
 <script src='js/compras.js'></script>
 <script src='js/proveedores.js'></script>
 <script src='js/productos.js'></script>
+<?php } else{
+echo "Acceso denegado";
+  } ?>

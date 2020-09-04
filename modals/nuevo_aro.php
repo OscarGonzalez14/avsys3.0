@@ -1,3 +1,8 @@
+<?php
+require_once('modelos/Externos.php');
+$marca = new Externos();
+$marcas=$marca->get_marca();
+?>
  <style>
     #tamModal{
       width: 75% !important;
@@ -34,12 +39,19 @@
      </div>
      <div id="resultados_ajax"></div>
 <section style="margin:15px">
-  <div class="form-row" autocomplete="on">
+  <div class="form-row" autocomplete="off">
+
     <div class="form-group col-md-4">
       <label for="exampleFormControlSelect2">Marca</label>
-      <input type="text" class="form-control input-dark" id="marca_aros" placeholder="Escriba la marca" required="" onkeyup="mayus(this);" >
-    </div>
+      <select class="form-control input-dark" id="marca_aros">
+       <option value="">Seleccione marca</option>
+      <?php 
+      for ($i=0; $i < sizeof($marcas); $i++) {  ?>
+        <option value="<?php echo($marcas[$i]["marca"]) ?>"><?php echo $marcas[$i]["marca"]?></option>
+        <?php } ?>
 
+     </select>
+      </div>
     <div class="form-group col-md-4">
       <label for="inputPassword4">Modelo</label>
       <input type="text" class="form-control input-dark" id="modelo_aro" placeholder="Escriba el Modelo" required="" onkeyup="mayus(this);" >

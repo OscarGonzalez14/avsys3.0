@@ -1,5 +1,9 @@
-<?php require_once('header.php');?>
-<?php require_once('modals/modal_ingreso_bodega.php');?>
+<?php
+require_once("config/conexion.php");
+if(isset($_SESSION["usuario"])){
+require_once('header.php');
+require_once('modals/modal_ingreso_bodega.php');
+?>
 <div class="content-wrapper">
 <div style="margin: 5px">
     <h5 align="center"><strong>INGRESAR COMPRAS A BODEGA</strong></h5>
@@ -21,3 +25,6 @@
 </div>
 <script src='js/compras.js'></script>
 <script src='js/bodegas.js'></script>
+<?php } else{
+echo "Acceso no permitido";
+  } ?>

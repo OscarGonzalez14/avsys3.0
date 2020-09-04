@@ -1,66 +1,94 @@
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <meta name = "viewport" content = "width = device-width, initial-scale = 1">      
-    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
-    </script> 
-    <script>
-      $(document).ready(function() {
-        $('select').material_select();
-      });
-    </script>
-  </head>
+<?php
+ require_once("config/conexion.php");    
 
-  <body>
- <form method="post" class="login" autocomplete="off">    
-  <div class="form-reg">
-    <div class="login-div">
-      <div class="row img-logo">
-        <div class="logo center"></div>
-      </div>
-      <div class="row center-align"><h5><i class = "material-icons medium">person</i></h5></div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="usuario" type="text" class="validate" name="usuario">
-          <label for="usuario" style="font-size:14px">Usuario</label>
+    if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
+       require_once("modelos/Usuarios.php");
+       $usuario = new Usuarios();
+       $usuario->login();
+    }
+?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AVSYS 3.0</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition register-page" style="background: #383838">
+<div class="register-box">
+<!--************************Validacines******************-->
+  <div class="row">
+    <div class="col-lg-12">        
+      <div class="box-body">            
+
+
+             
         </div>
+<!--************************ Validacines******************-->
+
+  <div class="card" style="border-radius: 5px">
+    <div class="card-body register-card-body" style="border-radius: 7px">
+        <div class="register-logo">
       </div>
-     <div class = "row">
-          <div class="input-field col s12">            
-               <select id='sucursal'>
-                  <option value = "" disabled selected>Seleccione sucursal</option>
-                  <option value = "Metrocentro">Metrocentro</option>
-                  <option value = "Santa Ana">Santa Ana</option>
-               </select>
-               <label for='sucursal' style="font-size:14px">Sucursal</label>              
+        <div class="register-logo">
+    <img src="images/Logo.png" width="160" height="80"  />
+  </div>
+      <form method="post" class="login" autocomplete="off">
+        <div class="input-group mb-3">
+          <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" required="required">          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
             </div>
-      <div>
+          </div>
+        </div>
 
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="pass" type="password" class="validate" name="password">
-          <label for="pass" style="font-size:14px">Contraseña</label>          
+        <div class="input-group mb-3">          
+          <select name="sucursal" id="sucursal" class="form-control">
+            <option value="">Seleccione Sucursal</option>
+            <option value="Metrocentro">Metrocentro</option>
+            <option value="Santa Ana">Santa Ana</option>
+            <option value="San Miguel">San Miguel</option>
+          </select>
+        </div>
+
+        <div class="input-group mb-3">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+      <div class="form-group">
+        <input type="hidden" name="enviar" class="form-control" value="si">       
+      </div>      
+      <div>
+          <button type="submit" name="action" class="btn btn-block" style="background:  #000033;border-radius: 0px;color:white"><i class="fas fa-power-off" aria-hidden="true"></i>  Iniciar Sesión</button>
         </div>
       </div>
-
- 
- 
-
-      <div class="row">
-        <input type="hidden" name="enviar" class="form-control" value="si">
-      </div>
-      <div class="row"></div>
-      <div class="row">
-       
-      <div class="col s12 right-align center"> <button class="btn waves-effect waves-light" type="submit" name="action" style="background: black; color: white">Entrar
-    
-  </button></div>
-      </div>
-    </div>
+      </form>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
 </div>
-</form>
-</html>
+<!-- /.register-box -->
 
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+</body>
+</html>

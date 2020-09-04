@@ -1,4 +1,6 @@
 <?php
+require_once("config/conexion.php");
+if(isset($_SESSION["usuario"])){ 
 require_once('header.php');
 require_once("modelos/Reporteria.php");
   $alerts = new Reporteria();
@@ -101,3 +103,6 @@ require_once("modelos/Reporteria.php");
         <!-- /.row -->
     
 </div>
+<?php } else{
+echo "Acceso no permitido";
+  } ?>

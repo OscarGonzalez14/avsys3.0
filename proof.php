@@ -1,16 +1,38 @@
-<?php
-require_once("config/conexion.php");
-class Bodegas extends Conectar{
-public function get_productos_ingresar(){
-$conectar=parent::conexion();
-$sql5="SELECT SUM(`cant_ingreso`) FROM `detalle_compras` WHERE `numero_compra`='ME-1;";
-       $sql5=$conectar->prepare($sql5);
-       $sql5->execute();
-       $resultado2 = $sql5->fetchAll(PDO::FETCH_ASSOC);
+<?php require_once("header.php");?>
+<div class="content-wrapper">
+    <script type="text/javascript">
+        function cargar_provincias()
+        {
+            var array = ["Cantabria", "Asturias", "Galicia", "Andalucia", "Extremadura"];
+            for(var i in array)
+            { 
+                document.getElementById("provincia").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
 
+            }
+    }
 
-   //echo $resultado2;
- }
+    cargar_provincias();
+
+    function carga_cats(){
+     $.ajax({
+      url:"ajax/categoria.php?op=get_categorias",
+      method:"POST",
+      //data:{numero_venta:numero_venta},
+      cache:false,
+      dataType:"json",
+      success:function(data)
+      {
+        console.log(data);
+        for(var i in data)
+            { 
+                document.getElementById("provincia").innerHTML += "<option value='"+data[i]+"'>"+data[i]+"</option>"; 
+
+            }
+      }
+    });
 }
-$solicitudes = new Bodegas();
-echo $solicitudes->get_productos_ingresar();
+    </script>
+    <button class="btn btn-success btn-block" style="border-radius:2px" onClick='carga_cats();'>Nuevo Ingreso</button>
+    <select name="provincia" id="provincia"></select>
+
+    </div>
