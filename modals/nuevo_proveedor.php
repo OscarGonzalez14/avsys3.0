@@ -11,7 +11,7 @@
   <div class="form-row" >
      <div class="form-group col-md-2">
       <label>Código</label>
-      <input type="text" class="form-control" id="codProveedor" placeholder="código"  required="" onkeyup="mayus(this);" >
+      <input type="text" class="form-control" id="codProveedor" placeholder="Código"  required="" onkeyup="mayus(this);" >
     </div>
     <div class="form-group col-md-10">
       <label>Nombre</label>

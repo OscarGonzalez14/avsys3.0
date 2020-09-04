@@ -4,8 +4,6 @@ require_once("config/conexion.php");
 class Externos extends conectar
 {//inicio de la clase
 
-
-
 	public function get_categorias(){
 	    $conectar= parent::conexion();
 		parent::set_names();

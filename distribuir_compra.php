@@ -34,7 +34,7 @@ $cats=$categorias->get_categorias();
       </div>
        <div class="col-sm-5">
        <select class='form-control' id="categoria_ubicacion">
-       <option value="">Seleccione Categoría/Ubicación</option>
+      <option value="">Seleccione Categoría/Ubicación</option>
         <?php
         for ($i=0; $i < sizeof($cats); $i++) { ?>
           <option value="<?php echo $cats[$i]["id_categoria"]?>"><?php echo $cats[$i]["nombre"]?></option>
