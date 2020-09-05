@@ -126,7 +126,7 @@ function agregaIngreso(id_producto,numero_compra){
     };//Fin objeto
     detalles.push(obj);
     listarDetallesIngresos();
-    carga_cats();
+    //carga_cats();
     console.log(detalles);
     }//fin success
   });//fin de ajax
@@ -521,5 +521,157 @@ function get_numero_ingreso(){
       }
     });
 }
+
+//////////////GET CATEGORIAS EN STOCK
+$(document).ready(function(){
+  var sucursal = $("#sucursal_user").val();
+  $("#tipo_categoria").change(function () {         
+    $("#tipo_categoria option:selected").each(function () {
+      categoria = $(this).val();
+      $.post('ajax/bodegas.php?op=select_categorias', {categoria:categoria,sucursal:sucursal}, function(data){
+        $("#ubicacion_bodega").html(data);
+      });            
+    });
+  })
+});
+
+//////////////////
+$(document).on('click', '#tipo_categoria', function(){ 
+    
+    var sucursal = $("#sucursal_user").val();
+    var categoria = $(this).val();
+    console.log(categoria);
+    console.log(sucursal);
+    $.ajax({
+      url:"ajax/categoria.php?op=get_categorias_sucursal",
+      method:"POST",
+      data:{sucursal:sucursal,categoria:categoria},
+      cache:false,
+      dataType:"json",
+      success:function(data)
+      {
+        console.log(data);
+        for(var i in data)
+            { 
+              //$("#categoria_ubicaciones").val("");
+              document.getElementById("categoria_ubicaciones").innerHTML += "<option value='"+data[i]+"'>"+data[i]+"</option>"; 
+
+            }
+      }
+    });
+
+  });
+//////////////////////////GET INVENTARIO GENERAL
+$(document).on("click","#categoria_ubicaciones", function(){
+  var ubicacion = $(this).val();
+  tabla_existencias= $('#data_inventario_genaral').DataTable({
+      
+  "aProcessing": true,//Activamos el procesamiento del datatables
+         "aServerSide": true,//Paginación y filtrado realizados por el servidor
+        dom: 'Bfrtip',//Definimos los elementos del control de tabla
+          buttons: [{
+          extend: 'excelHtml5',
+          download: 'open',
+          text: 'Descargar Ingreso',
+          filename: function() {
+              var date_edition = 'Ingresos a Bodega '+moment().format("DD-MM-YYYY HH[h]mm")
+              var selected_machine_name = $("#output_select_machine select option:selected").text()
+              return date_edition + ' - ' + selected_machine_name
+           },
+           sheetName: 'Ingresos',
+           title : null
+       },
+            {
+              extend: 'pdfHtml5',
+              download: 'open',
+              text: 'Imprimir',
+              orientation: 'portrait',
+              pageSize: 'letter',
+              customize : function(doc) {doc.pageMargins = [10, 10, 10,10 ]; },
+              filename: function() {
+              var fecha = 'Ingreso '+moment().format("DD-MM-YYYY HH[h]mm")
+              var selected_machine_name = $("#output_select_machine select option:selected").text()
+              return fecha + ' - ' + selected_machine_name
+              
+            },
+            title : 'Ingreso a Bodega'
+        }   
+       ],
+
+           "ajax":{
+            url:"ajax/bodegas.php?op=get_inventario_general",
+            type : "post",
+        //dataType : "json",
+        data:{ubicacion:ubicacion},           
+        error: function(e){
+        console.log(e.responseText);
+        },
+
+            
+            },
+
+              "bDestroy": true,
+        "responsive": true,
+        "bInfo":true,
+        "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+          "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+
+            "language": {
+ 
+          "sProcessing":     "Procesando...",
+       
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+       
+          "sZeroRecords":    "No se encontraron resultados",
+       
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+       
+          "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+       
+          "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+       
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+       
+          "sInfoPostFix":    "",
+       
+          "sSearch":         "Buscar:",
+       
+          "sUrl":            "",
+       
+          "sInfoThousands":  ",",
+       
+          "sLoadingRecords": "Cargando...",
+       
+          "oPaginate": {
+       
+              "sFirst":    "Primero",
+       
+              "sLast":     "Último",
+       
+              "sNext":     "Siguiente",
+       
+              "sPrevious": "Anterior"
+       
+          },
+       
+          "oAria": {
+       
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+       
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+       
+          }
+
+         }, //cerrando language
+
+          //"scrollX": true
+
+
+
+        });
+
+
+
+      });
 
 init();

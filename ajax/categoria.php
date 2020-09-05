@@ -25,5 +25,21 @@ switch ($_GET["op"]){
  
  		echo json_encode($results);
 break;
+
+case "get_categorias_sucursal":
+    $datos= $categorias->get_categorias_suc($_POST["categoria"],$_POST["sucursal"]);	
+    $data= Array();
+
+    foreach($datos as $row)
+	{
+		$sub_array = array();
+		$sub_array[] = $row["nombre"];
+		$data[] = $sub_array;
+
+	}
+		$results=$data;
+ 
+ 		echo json_encode($results);
+break;
 }
  ?>

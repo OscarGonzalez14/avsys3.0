@@ -212,6 +212,7 @@
               </p>
             </a>
           </li>
+
           <li class="nav-item">
             <a href="inventarios.php" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
@@ -219,6 +220,13 @@
                 Inventarios
                 <span class="right badge badge-danger" style="visibility:hidden">New</span>
               </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pacientes.php" class="nav-link">
+              <i class="nav-icon fas fas fa-id-card-alt"></i>
+              <p>Pacientes</p>
             </a>
           </li>          
          

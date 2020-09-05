@@ -94,4 +94,34 @@ case "reporte_ingresos_bodega":
     }
     echo json_encode($output);    
   break;
+
+
+  ////////////////GET INVENTARIO GENERAL
+    case "get_inventario_general":
+    $datos=$bodegas->get_stock_categoria($_POST["ubicacion"]);
+    $data= Array();
+    foreach($datos as $row)
+      {
+        $sub_array = array();
+        $sub_array[] = $row["fecha_ingreso"];
+        $sub_array[] = $row["num_compra"];
+        $sub_array[] = $row["usuario"];
+        $sub_array[] = $row["bodega"];
+        $sub_array[] = $row["categoria_ub"];
+        $sub_array[] = $row["descripcion"];
+        $sub_array[] = $row["diseno"];
+        $sub_array[] = $row["materiales"];
+        $sub_array[] = $row["stock"];
+        $sub_array[] = "$".$row["precio_venta"];
+        $data[] = $sub_array;
+      }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+      echo json_encode($results);
+
+    break;
 }

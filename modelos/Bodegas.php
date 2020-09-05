@@ -187,4 +187,14 @@ public function get_reporte_ingreso_bodega($numero_ingreso){
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
+
+//////////////////inventario general
+public function get_stock_categoria($ubicacion){
+    $conectar= parent::conexion();
+    $sql="select concat(p.marca,' Mod.: ',p.modelo,' ',medidas) as descripcion,p.diseno,p.materiales,e.stock,e.bodega,e.categoria_ub,e.usuario,e.fecha_ingreso,e.num_compra,e.precio_venta from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.categoria_ub=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $ubicacion);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

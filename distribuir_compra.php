@@ -36,9 +36,9 @@ $cats=$categorias->get_categorias();
 	 <div style="margin:2px;" class="row">
       <div class="col-sm-5">
        <button class="btn btn-dark btn-flat" style="color:white;border-radius:3px; background:black" data-backdrop="static" data-keyboard="false" onClick="ingresar_compras_bodega();" id="select_prod"><i class="fas fa-cubes"></i> Seleccionar Producto</button>&nbsp;
-       <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#modal_cats">CREAR CATGORÍA</button>&nbsp;
+       <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#modal_cats">CREAR CATEGORÍA</button>&nbsp;
       </div>
-      <div class="col-sm-5">
+      <div class="col-sm-3">
        <select class='form-control' id="categoria_ubicacion">
        <option value="">Seleccione Categoría/Ubicación</option>
         <?php
@@ -47,6 +47,9 @@ $cats=$categorias->get_categorias();
          <?php  } ?>
 
        </select>
+       </div>
+       <div class="col-sm-3">
+         <a href="stock.php"><button type="button" class="btn btn-info btn-flat"><i class="fas fas fa-clipboard-list"></i> INVENTARIO GENERAL</button></a>
        </div>
   </div>
 
