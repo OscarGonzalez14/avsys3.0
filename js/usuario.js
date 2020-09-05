@@ -1,4 +1,6 @@
 function guardarUsuario(){
+
+	//alert("hola");return false;
 	var nomUsuario=$("#nomUsuario").val();
 	var telUsuario=$("#telUsuario").val();
 	var correoUsuario=$("#correoUsuario").val();
@@ -9,11 +11,12 @@ function guardarUsuario(){
 	var estUsuario=$("#estUsuario").val();
 
 	// Se validan los campos de la modal nuevo usuario
-	if (nomUsuario !="" && telUsuario !="" && correoUsuario !="" && dirUsuario !="" && usuario !="" && passUsuario !="" && catUsuario !="" && estUsuario !=''){
+	if(nomUsuario != ""){
 		$.ajax({
 		url:"ajax/usuario.php?op=guardar_usuario",
   		method:"POST",
-        data:{nomUsuario:nomUsuario, telUsuario:telUsuario, correoUsuario:correoUsuario, dirUsuario:dirUsuario, usuario:usuario, passUsuario:passUsuario, catUsuario:catUsuario, estUsuario:catUsuario},
+        data:{nomUsuario:nomUsuario, telUsuario:telUsuario, correoUsuario:correoUsuario, dirUsuario:dirUsuario, usuario:usuario, passUsuario:passUsuario, catUsuario:catUsuario, estUsuario:estUsuario},
+        //console.log(data),
         cache: false,
         dataType:"json",
         error:function(x,y,z){
@@ -27,5 +30,7 @@ function guardarUsuario(){
    		}
 
 		});
+	}else{
+		alert("hola");
 	}
 }

@@ -24,7 +24,7 @@ class Usuario extends conectar
 		
 		$sql->execute();
 
-		//print_r($_POST);
+		print_r($_POST);
 	}
 
 //FIN class

@@ -52,7 +52,7 @@
             </div>
             <div class="form-group col-md-3">
             <label>Categoría</label>
-            <select name="Categorías" class="form-control" id="catUsuario">
+            <select name="Categorisssssas" class="form-control" id="catUsuario">
                <option>Administrador</option>
                <option>Optometrista</option>
                <option>Asesor</option>
@@ -68,7 +68,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" onClick="guardarUsuario();"><i class="fas fa-save"></i> Guardar</button>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" onClick="guardarUsuario()"><i class="fas fa-save"></i> Guardar</button>
             </div>
          </div>
       </section>
