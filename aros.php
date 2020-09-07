@@ -30,7 +30,7 @@ require_once('modals/nuevo_proveedor.php');
         </thead>
         <tbody style="text-align:center">                                        
         </tbody>
-      </table>   <!-- /.content -->
+    </table>   <!-- /.content -->
 </div>
     
 </div><!-- /.wrapper -->
