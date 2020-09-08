@@ -24,7 +24,7 @@
               <div class="form-group row">
                 <div class="col-sm-2">
                   <label>Cod.</label>
-                  <input type="text" class="form-control" id="codigo_paciente" name="codigo_paciente" value="">
+                  <input type="text" class="form-control" id="codigo_paciente" name="codigo_paciente" value="" >
                 </div>
 
                 <div class="col-sm-7">

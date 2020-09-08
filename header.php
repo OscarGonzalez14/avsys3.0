@@ -36,8 +36,6 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.1/css/buttons.dataTables.min.css">
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-dark navbar-gray-dark">
@@ -109,7 +107,9 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>

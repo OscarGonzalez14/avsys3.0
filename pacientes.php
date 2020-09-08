@@ -3,16 +3,17 @@ require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){ 
 require_once('header.php');
 require_once("modals/nuevo_paciente.php");
+require_once("modals/modal_consultas.php");
 ?>
 <div class="content-wrapper">
 
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2" style="margin: 2px">
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <h5 align="center">MÓDULO PACIENTES</h5>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-4">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Pacientes</li>
@@ -24,15 +25,33 @@ require_once("modals/nuevo_paciente.php");
 
      <div class="invoice p-3 mb-3" style="margin: 3px;border-radius: 5px">
      	<div class="row">
-     	<div class="col-sm-2">
+     	<div class="col-sm-3">
      	<button type="button" class="btn btn-block btn-outline-primary btn-flat" data-toggle="modal" data-target="#newPaciente"><i class="fas fas fa-user-plus"></i> Agregar Paciente</button>
      	</div>
 
-     	<div class="col-sm-2">
-     	<button type="button" class="btn btn-block btn-outline-success btn-flat" ><i class="fas fa-clipboard-list"></i> Ver Consultas</button>
-     	</div>
-
-     	</div>
+     	<div class="col-sm-3">
+     	<button type="button" class="btn btn-block btn-outline-success btn-flat" data-toggle="modal" data-target="#consultasModal"><i class="fas fa-clipboard-list"></i> Ver Consultas</button>
+     	</div> 
+      </div>
+      <div class="dropdown-divider"></div>
+      <table id="data_pacientes" width="100%" style="text-align: center;text-align: center" >
+      <thead style="color:white;min-height:10px;border-radius: 2px;font-style: normal;font-size: 15px" class="bg-info">
+          <tr style="min-height:10px;border-radius: 3px;font-style: normal;font-size: 15px">
+            <th style="text-align:center">Fecha Ingreso</th>
+            <th style="text-align:center">Codigo</th>
+            <th style="text-align:center">Tipo Pac.</th>
+            <th style="text-align:center">Paciente</th>
+            <th style="text-align:center">Telefono</th>
+            <th style="text-align:center">Consulta</th>
+            <th style="text-align:center">Editar</th>
+            <th style="text-align:center">Eliminar</th>
+            <th style="text-align:center">Información</th>
+            <th style="text-align:center">Expediente</th>
+          </tr>
+        </thead>
+        <tbody style="text-align:center">                                        
+        </tbody>
+      </table>  
      </div>     
          
 </div><!-- /.content-wrapper -->
