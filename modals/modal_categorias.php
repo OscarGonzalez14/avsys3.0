@@ -42,12 +42,14 @@
        				<label>Nombre</label>
        				<input type="text" class="form-control" name="" placeholder=" Ingrese categoría" id="cat_nombre">  				
        			</div>
-       			<div class="form-group col-md-6">
-       				<label>Seleccionar Sucursal</label>
-       				<select name="Sucursal" class="form-control" id="cat_sucursal">
-                <option value="<?php echo $_SESSION["sucursal"];?>"><?php echo $_SESSION["sucursal"];?></option>
-       				</select>  				
-       			</div>
+        <div class="form-group col-md-6">
+          <label>Seleccionar Sucursal</label>
+          <select name="Sucursal" class="form-control" id="cat_sucursal">
+            <option value="Santa Ana">Santa Ana</option>
+            <option value="Metrocentro">Metrocentro</option>
+            <option value="San Miguel">San Miguel</option>                
+          </select>         
+        </div>
 
             <div class="form-group col-md-4">
               <label>Tipo Categoria</label>

@@ -30,7 +30,7 @@ require_once("modals/modal_consultas.php");
      	</div>
 
      	<div class="col-sm-3">
-     	<button type="button" class="btn btn-block btn-outline-success btn-flat" data-toggle="modal" data-target="#consultasModal"><i class="fas fa-clipboard-list"></i> Ver Consultas</button>
+     	<a href="consultas.php"><button type="button" class="btn btn-block btn-outline-success btn-flat" data-toggle="modal" data-target="#consultasModal"><i class="fas fa-clipboard-list"></i> Ver Consultas</button></a>
      	</div> 
       </div>
       <div class="dropdown-divider"></div>

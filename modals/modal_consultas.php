@@ -7,6 +7,15 @@
   color: white;
   text-align: center;
 }
+body.modal-open {
+    position: fixed;
+    overflow: hidden;
+    left:0;
+    right:0;
+}
+.modal{
+    -webkit-overflow-scrolling: auto;
+}
 </style>
 <!-- The Modal -->
 <div class="modal fade" id="consultasModal">

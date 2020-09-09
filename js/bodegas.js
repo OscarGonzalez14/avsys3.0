@@ -214,33 +214,8 @@ function drop_item(position_element){
     contador = contador+cant_items;
   }
 ///////////////////////////////////////
-var result = [];
-detalles.reduce(function(res, value) {
-  if (!res[value.id_producto]) {
-    res[value.id_producto] = { id_producto: value.id_producto, cantidad: 0 };
-    result.push(res[value.id_producto])
-  }
-  res[value.id_producto].cantidad += value.cantidad;
-  return res;
-}, {});
-console.log(result);//return false;
-for(var i=0;i<detalles.length;i++){
-  var stock = detalles[i].cant_ingreso;
-  var suma  = result[i].cantidad;
-  if (suma>stock) {
-    
-    Swal.fire('Existen ingresos que exceden el stock disponible','','error')
-    //var y = document.getElementsByTagName(parametro_uno);
-    //var index=5;
-    var parametro_uno ='cant'+detalles[i].id_producto;
-    var y = document.getElementsByClassName(parametro_uno);
-      var i;
-      for (i = 0; i < y.length; i++) {
-        y[i].style.border = "red solid 1px";
-      }
-   return false;
-  }
-}
+
+
 //////////////VALIDAR QUE SE ENVIEN PRODUCTOS A LA BD
 var test_array = detalles.length;
   if (test_array<1) {

@@ -16,6 +16,7 @@ $(document).on('click', '#tipo_paciente', function(){
  //console.log(tipo_paciente);
  if (tipo_paciente=="Desc_planilla" || tipo_paciente=="Cargo_a"){
  	mostrar_btns_creditos();
+ 	$("#empresa").attr('readonly', true);
  }else if(tipo_paciente=="Sucursal"){
  	ocultar_btns_creditos();
  }
