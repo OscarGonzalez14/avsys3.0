@@ -1,5 +1,7 @@
 <?php
-require_once('header_dos.php');
+require_once("config/conexion.php");
+if(isset($_SESSION["usuario"])){
+require_once('header.php');
 require_once('modals/empresa.php'); 
  ?>
 
@@ -11,3 +13,8 @@ require_once('modals/empresa.php');
   </button>
 </div>
 <script src="js/empresas.js"></script>
+<?php } else{
+echo "Acceso denegado";
+header("Location:index.php");
+        exit();
+  } ?>

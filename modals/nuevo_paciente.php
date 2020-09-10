@@ -79,7 +79,7 @@
                     <div class="input-group">
                     <input type="text" class="form-control" id="empresa">
                     <div class="input-group-append">
-                      <span class="input-group-text" data-toggle="modal" data-target="#empresasModal"><i class="fas fa-search"></i></span>
+                      <span class="input-group-text bg-success" data-toggle="modal" data-target="#empresasModal" onClick="listar_en_pacientes();" style="color: white"><i class="fas fa-search"></i></span>
                     </div>
                   </div>
                 </div>
@@ -104,6 +104,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button class="btn btn-primary btn-block" onClick="guardarPaciente();" id="save_paciente"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>Guardar</button>
+              <button class="btn btn-primary btn-block" onClick="EditarPaciente();" id="edit_paci">Editar</button>
             </div>
           </div>
           <!-- /.modal-content -->

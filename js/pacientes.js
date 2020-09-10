@@ -4,11 +4,21 @@ $(document).ready(ocultar_btns_creditos);
   document.getElementById("btns_credito").style.display = "none";
   get_correlativo_paciente();
   listar_pacientes();
-  tabla_pacientes();
+  //tabla_pacientes();
+  ocultar_btn_editar();
 }
 
 function mostrar_btns_creditos(){
   document.getElementById("btns_credito").style.display = "block";  
+}
+function ocultar_btn_editar(){
+  document.getElementById("edit_paci").style.display = "none";
+}
+function hidden_btn_guardar(){
+  document.getElementById("save_paciente").style.display = "none";
+}
+function show_btn_editar(){
+  document.getElementById("edit_paci").style.display = "block";
 }
 
 $(document).on('click', '#tipo_paciente', function(){ 
@@ -281,4 +291,16 @@ function fill_ao(){
 }
 function fill_ap(){
 	document.getElementById("opoi").value = document.getElementById("apod").value;	
+}
+
+///////////////EDITAR PACIENTE
+function editar_paciente(){
+	show_btn_editar();
+	hidden_btn_guardar();
+	$('.modal-title').text("Editar Paciente");
+	var element= document.getElementById("head_pac");
+    element.classList.add("bg-secondary");
+
+    var elements= document.getElementById("edit_paci");
+    elements.classList.add("bg-success");
 }

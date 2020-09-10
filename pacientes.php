@@ -55,7 +55,7 @@ require_once("modals/modal_consultas.php");
      </div>     
          
 </div><!-- /.content-wrapper -->
- <!-- Modal -->
+ <!-- Modal de empresas-->
 <div id="empresasModal" class="modal fade" data-modal-index="2">
         <div class="modal-dialog modal-lg">
           <div class="modal-content bg-info">
@@ -64,10 +64,10 @@ require_once("modals/modal_consultas.php");
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
             </div>
-            <div class="modal-body" style="background: white">
+            <div class="modal-body" style="background: white;color:black">
                     <div class="card-body p-0" style="margin:1px">
-                <table class="table" id="reporte_compra_admin" width="100%">
-                  <thead style="background:#034f84;color:white">
+                <table id="lista_pacientes_data_emp" width="100%">
+                  <thead class="bg-secondary">
                     <tr>
                     <th>Codigo</th>          
                     <th>Nombre</th>
@@ -90,6 +90,7 @@ require_once("modals/modal_consultas.php");
 <input type="text" id="fecha" value="<?php echo $hoy;?>">
 <script type="text/javascript" src="js/cleave.js"></script>
 <script type="text/javascript" src="js/pacientes.js"></script>
+<script type="text/javascript" src="js/empresas.js"></script>
 <script>
 
 function mayus(e) {
