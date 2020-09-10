@@ -105,4 +105,6 @@ require_once("modelos/Reporteria.php");
 </div>
 <?php } else{
 echo "Acceso no permitido";
+header("Location:index.php");
+        exit();
   } ?>

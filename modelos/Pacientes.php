@@ -43,9 +43,19 @@ class Paciente extends Conectar{
 }
 
 //////////////////VALIDAR SI EXISTE PACIENTE
-public function validar_ingreso_paciente($dui){
+public function validar_codigo_paciente($codigo_paciente){
     $conectar= parent::conexion();
-    $sql= "select*from pacientes where $dui=?;";
+    $sql= "select*from pacientes where codigo=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$codigo_paciente);
+   // $sql->bindValue(2,$dui);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+//////////////////////****************
+    public function validar_dui_paciente($dui){
+    $conectar= parent::conexion();
+    $sql= "select*from pacientes where dui=?;";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1,$dui);
    // $sql->bindValue(2,$dui);

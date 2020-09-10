@@ -3,8 +3,7 @@ require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){ 
 require_once('header.php');
 
-require_once("modals/modal_consultas_edit.php");
-?>
+require_once("modals/modal_consultas_edit.php");?>
 <div class="content-wrapper">
 
     <section class="content-header">
@@ -51,4 +50,6 @@ require_once("modals/modal_consultas_edit.php");
 
 <?php } else{
 echo "Acceso denegado";
+header("Location:index.php");
+        exit();
   } ?>

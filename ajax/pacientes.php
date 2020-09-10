@@ -6,8 +6,8 @@
   $pacientes = new Paciente();
     switch($_GET["op"]){
 
-    case "get_numero_paciente":
-    $datos= $pacientes->get_numero_paciente($_POST["sucursal_correlativo"]);
+  case "get_numero_paciente":
+  $datos= $pacientes->get_numero_paciente($_POST["sucursal_correlativo"]);
 	$sucursal = $_POST["sucursal_correlativo"];
 	$prefijo = "";
 	if ($sucursal=="Metrocentro") {
@@ -31,16 +31,23 @@
 
   break;
 
-    case "guardar_paciente":
-       $datos=$pacientes->validar_ingreso_paciente($_POST["dui"]);
+  case "guardar_paciente":
 
-       if(is_array($datos)==true and count($datos)==0){
-		$pacientes->registrar_paciente($_POST["codigo_paciente"],$_POST["nombres"],$_POST["telefono"],$_POST["edad"],$_POST["ocupacion"],$_POST["sucursal"],$_POST["dui"],$_POST["correo"],$_POST["usuario"],$_POST["empresa"],$_POST["nit"],$_POST["tel_oficina"],$_POST["direccion_completa"],$_POST["tipo_paciente"],$_POST["fecha"]);
-		$messages[]="ok";
-		}else{
-			$errors[]="error";
-		}
-		if (isset($messages)){
+    $tipo_paciente=($_POST["tipo_paciente"]);
+    $codigo=$pacientes->validar_codigo_paciente($_POST["codigo_paciente"]);
+    $dui=$pacientes->validar_dui_paciente($_POST["dui"]);
+
+    //echo json_encode($dui);exit();
+
+    
+    if($tipo_paciente=="Desc_planilla" || $tipo_paciente=="Cargo_a") {
+      if(is_array($codigo)==true and count($codigo)==0 and is_array($dui)==true and count($dui)==0){
+      $pacientes->registrar_paciente($_POST["codigo_paciente"],$_POST["nombres"],$_POST["telefono"],$_POST["edad"],$_POST["ocupacion"],$_POST["sucursal"],$_POST["dui"],$_POST["correo"],$_POST["usuario"],$_POST["empresa"],$_POST["nit"],$_POST["tel_oficina"],$_POST["direccion_completa"],$_POST["tipo_paciente"],$_POST["fecha"]);
+    $messages[]="ok";
+    }else{
+      $errors[]="dui";
+    }
+    if (isset($messages)){
      ?>
        <?php
          foreach ($messages as $message) {
@@ -61,7 +68,36 @@
            ?>
    <?php
    }
-//fin mensaje error
+  }elseif ($tipo_paciente=="Sucursal" or $tipo_paciente=="C_personal") {
+    if(is_array($codigo)==true and count($codigo)==0){
+      $pacientes->registrar_paciente($_POST["codigo_paciente"],$_POST["nombres"],$_POST["telefono"],$_POST["edad"],$_POST["ocupacion"],$_POST["sucursal"],$_POST["dui"],$_POST["correo"],$_POST["usuario"],$_POST["empresa"],$_POST["nit"],$_POST["tel_oficina"],$_POST["direccion_completa"],$_POST["tipo_paciente"],$_POST["fecha"]);
+    $messages[]="ok";
+    }else{
+      $errors[]="codigo";
+    }
+    if (isset($messages)){
+     ?>
+       <?php
+         foreach ($messages as $message) {
+             echo json_encode($message);
+           }
+         ?>
+   <?php
+ }
+    //mensaje error
+      if (isset($errors)){
+
+   ?>
+
+         <?php
+           foreach ($errors as $error) {
+               echo json_encode($error);
+             }
+           ?>
+   <?php
+   }
+  }
+ 
     break;
 
 /////////////////////listado general pacintes
@@ -72,7 +108,7 @@
     foreach($datos as $row){
 		$sub_array = array();
 			$sub_array[] = date("d-m-Y",strtotime($row["fecha_reg"]));			
-	        $sub_array[] = $row["codigo"];
+	    $sub_array[] = $row["codigo"];
 			$sub_array[] = $row["tipo_paciente"];
 			$sub_array[] = $row["nombres"];
 			$sub_array[] = $row["telefono"];			            

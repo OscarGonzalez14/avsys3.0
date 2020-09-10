@@ -38,5 +38,7 @@ require_once('modals/nueva_marca.php');
 <script src='js/productos.js'></script>
 <script src='js/marca.js'></script>
 <?php } else{
-echo "Acceso no permitido";
+  echo "Acceso no permitido";
+  header("Location:index.php");
+        exit();
   } ?>

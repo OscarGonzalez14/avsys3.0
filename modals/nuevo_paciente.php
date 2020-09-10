@@ -27,13 +27,24 @@
                   <input type="text" class="form-control" id="codigo_paciente" name="codigo_paciente" value="" >
                 </div>
 
+                <div class="col-sm-3">
+                  <label>Tipo Paciente</label>
+                  <select name="tipo_paciente" class="form-control" id="tipo_paciente">
+                    <option value="">Seleccione...</option>
+                    <option value="Sucursal">Sucursal</option>
+                    <option value="Desc_planilla">Desc. Planilla</option>
+                    <option value="Cargo_a">Cargo A.</option>
+                    <option value="C_personal">Crédito Personal</option>                
+                  </select>         
+                </div>
+
                 <div class="col-sm-7">
-                  <label for="ex1">Nombre</label>
+                  <label for="ex1">Nombre<span style="color:red">*</span></label>
                   <input class="form-control" id="nombres" name="nombres" type="text" placeholder="Escriba el Nombre del paciente"  required onkeyup="mayus(this);">      
                 </div>
                 
                 <div class="col-sm-3">
-                  <label for="ex2">Teléfono</label>
+                  <label for="ex2">Teléfono<span style="visibility: hidden;color: red" id="label_telefono">*</span></label>
                   <input class="form-control" id="telefono" type="text" name="telefono" required pattern='^[0-9]+'>
                 </div>
 
@@ -43,7 +54,7 @@
                 </div>
 
                 <div class="col-sm-3">
-                  <label for="ex3">DUI</label>
+                  <label for="ex3">DUI<span style="visibility: hidden;color: red" id="label_dui">*</span></label>
                   <input class="form-control" id="dui" type="text" name="dui" placeholder="DUI" required pattern='^[0-9]+'>
                 </div>
 
@@ -57,15 +68,6 @@
                   <input class="form-control" id="ocupacion" type="text" name="ocupacion" placeholder="ocupacion del paciente" onkeyup="mayus(this);" required>
                 </div>
 
-                <div class="col-sm-5">
-                  <label>Tipo Paciente</label>
-                  <select name="tipo_paciente" class="form-control" id="tipo_paciente">
-                    <option value="">Seleccione...</option>
-                    <option value="Sucursal">Sucursal</option>
-                    <option value="Desc_planilla">Desc. Planilla</option>
-                    <option value="Cargo_a">Cargo A.</option>                
-                  </select>         
-                </div>
             </div><!--Fin form-group-->
               
               <div class="dropdown-divider"></div>
@@ -73,7 +75,7 @@
                 
                 <div class="form-group row">
                   <div class="col-sm-5">
-                  <label>Empresa</label>
+                  <label>Empresa<span style="visibility: hidden;color: red" id="label_empresa">*</span></label>
                     <div class="input-group">
                     <input type="text" class="form-control" id="empresa">
                     <div class="input-group-append">
@@ -83,17 +85,17 @@
                 </div>
 
                   <div class="col-sm-4">
-                    <label>NIT*</label>
+                    <label>NIT</label>
                     <input class="form-control" id="nit" type="text" name="nit" placeholder="" required pattern='^[0-9]+'>
                   </div>
 
                   <div class="col-sm-3">
-                    <label>Telefono de Oficina</label>
+                    <label>Telefono de Oficina<span style="visibility: hidden;color: red" id="label_tel_of">*</span></label>
                     <input class="form-control" id="tel_oficina" type="text" name="tel_oficina" placeholder="" required pattern='^[0-9]+'>
                   </div>
                   
                   <div class="col-sm-12">
-                    <label>Dirección Completa</label>
+                    <label>Dirección Completa<span style="visibility: hidden;color: red" id="label_direccion">*</span></label>
                     <input class="form-control" id="direccion_completa" type="text" name="direccion_completa" placeholder="" required onkeyup="mayus(this);">
                   </div>
                   <!-- /.input group -->

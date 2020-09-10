@@ -14,11 +14,39 @@ function mostrar_btns_creditos(){
 $(document).on('click', '#tipo_paciente', function(){ 
  var tipo_paciente=$(this).val();
  //console.log(tipo_paciente);
- if (tipo_paciente=="Desc_planilla" || tipo_paciente=="Cargo_a"){
+ if (tipo_paciente=="Desc_planilla"){
  	mostrar_btns_creditos();
  	$("#empresa").attr('readonly', true);
+ 	document.getElementById("label_telefono").style.visibility='visible';
+ 	document.getElementById("label_dui").style.visibility='visible';
+ 	document.getElementById("label_empresa").style.visibility='visible';
+ 	document.getElementById("label_tel_of").style.visibility='visible';
+ 	document.getElementById("label_direccion").style.visibility='visible';
  }else if(tipo_paciente=="Sucursal"){
+ 	document.getElementById("label_telefono").style.visibility='hidden';
+ 	document.getElementById("label_dui").style.visibility='hidden';
+ 	document.getElementById("label_empresa").style.visibility='hidden';
+ 	document.getElementById("label_tel_of").style.visibility='hidden';
+ 	document.getElementById("label_direccion").style.visibility='hidden';
  	ocultar_btns_creditos();
+
+ }else if(tipo_paciente=="Cargo_a") {
+ 	mostrar_btns_creditos();
+ 	$("#empresa").attr('readonly', false);
+ 	document.getElementById("label_telefono").style.visibility='visible';
+ 	document.getElementById("label_dui").style.visibility='visible';
+ 	document.getElementById("label_empresa").style.visibility='hidden';
+ 	document.getElementById("label_tel_of").style.visibility='hidden';
+ 	document.getElementById("label_direccion").style.visibility='visible';
+ }else if(tipo_paciente=="C_personal") {
+ 	mostrar_btns_creditos();
+ 	$("#empresa").attr('readonly', false);
+ 	document.getElementById("label_telefono").style.visibility='hidden';
+ 	document.getElementById("label_dui").style.visibility='hidden';
+ 	document.getElementById("label_empresa").style.visibility='hidden';
+ 	document.getElementById("label_tel_of").style.visibility='hidden';
+ 	document.getElementById("label_direccion").style.visibility='hidden';
+ 	//ocultar_btns_creditos();
  }
 });
 
@@ -38,6 +66,7 @@ function get_correlativo_paciente(){
 
 //////////////////GUARDAR PACIENTE
 function guardarPaciente(){
+
 	var codigo_paciente =$("#codigo_paciente").val();
     var nombres=$("#nombres").val();
     var telefono=$("#telefono").val();
@@ -54,19 +83,41 @@ function guardarPaciente(){
 	var direccion_completa = $("#direccion_completa").val();
 	var tipo_paciente = $("#tipo_paciente").val();
 
-	if (tipo_paciente=="Desc_planilla" || tipo_paciente=="Cargo_a") {
-		if (tel_oficina == "" || nit == "" || empresa == "" || dui == "") {
+	if (tipo_paciente=="Desc_planilla") {
+		if (tel_oficina == "" || empresa == "" || dui == "" || telefono=="" || empresa=="") {
 			setTimeout ("Swal.fire('Hay campos obligatorios vacios','','error')", 100);
+			return false;
 		}else{
 			save_paciente();
 		}
 	}else if(tipo_paciente=="Sucursal"){
+		if(nombres != ""){
  	    save_paciente();
+ 		}else{
+ 			setTimeout ("Swal.fire('Hay campos obligatorios vacios','','error')", 100);
+ 			return false;
+ 		}
+    }
+    else if(tipo_paciente=="Cargo_a"){
+    	if (dui == "" || telefono == "" || nombres=="" || direccion_completa== "") {
+			setTimeout ("Swal.fire('Debbe llenar los campos obligatorios','','error')", 100);
+			return false;
+		}else{
+			save_paciente();
+		}
+    }else if(tipo_paciente=="C_personal"){
+    	if (nombres=="") {
+			setTimeout ("Swal.fire('LLene los campos obligatoros','','error')", 100);
+			return false;
+		}else{
+			save_paciente();
+		}
     }else{
     	setTimeout ("Swal.fire('Elija el tipo de paciente','','error')", 100);
     }
 }
 function save_paciente() {
+
 	var codigo_paciente =$("#codigo_paciente").val();
     var nombres=$("#nombres").val();
     var telefono=$("#telefono").val();
@@ -83,7 +134,6 @@ function save_paciente() {
 	var tipo_paciente = $("#tipo_paciente").val();
 	var fecha = $("#fecha").val();
 
-	if(nombres != "" && telefono != "" && edad != "" && dui != "" && correo != ""){
     $.ajax({
     url:"ajax/pacientes.php?op=guardar_paciente",
     method:"POST",
@@ -98,22 +148,20 @@ function save_paciente() {
       
   success:function(data){
   	console.log(data);
-//return false;
-  	if(data=='ok'){
 
+  if(data=='ok'){
     setTimeout ("Swal.fire('Paciente guardado Existosamente','','success')", 100);
     setTimeout ("explode();", 2000); 
-  }else{
-    setTimeout ("Swal.fire('El DUI de paciente ya se encuentra registrado','','error')", 100);
+  }else if(data=='codigo'){
+    setTimeout ("Swal.fire('Error al guardar el paciente Intente nuevamente','','error')", 100);
     return false;
-  }           
+  }else if(data=='dui'){
+    setTimeout ("Swal.fire('El DUI ya existe en la base de Datos','','error')", 100);
+    return false;           
 }
-
+}
 }); 
-}else{
-    setTimeout ("Swal.fire('Debe llenar el formulario correctamente','','error')", 100);
-    return false;
-} //cierre del condicional de validacion de los campos del paciente
+//cierre del condicional de validacion de los campos del paciente
 }
 
   function explode(){
