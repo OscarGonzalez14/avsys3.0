@@ -20,6 +20,9 @@ function hidden_btn_guardar(){
 function show_btn_editar(){
   document.getElementById("edit_paci").style.display = "block";
 }
+function show_btn_guardar(){
+  document.getElementById("save_paciente").style.display = "block";
+}
 
 $(document).on('click', '#tipo_paciente', function(){ 
  var tipo_paciente=$(this).val();
@@ -126,6 +129,7 @@ function guardarPaciente(){
     	setTimeout ("Swal.fire('Elija el tipo de paciente','','error')", 100);
     }
 }
+
 function save_paciente() {
 
 	var codigo_paciente =$("#codigo_paciente").val();
@@ -168,6 +172,9 @@ function save_paciente() {
   }else if(data=='dui'){
     setTimeout ("Swal.fire('El DUI ya existe en la base de Datos','','error')", 100);
     return false;           
+ }else if(data="editado"){
+	setTimeout ("Swal.fire('Paciente Editado Existosamente','','success')", 100);
+    setTimeout ("explode();", 2000); 
 }
 }
 }); 
@@ -304,3 +311,83 @@ function editar_paciente(){
     var elements= document.getElementById("edit_paci");
     elements.classList.add("bg-success");
 }
+
+function destroy_edits(){
+	explode();
+}
+
+function show_datos_paciente(id_paciente,codigo){
+
+		$.ajax({
+		url:"ajax/pacientes.php?op=show_datos_paciente",
+		method:"POST",
+		data:{id_paciente:id_paciente,codigo:codigo},
+		cache:false,
+		dataType:"json",
+		success:function(data){				
+		$("#id_paciente").val(data.id_paciente);
+		$("#codigo_paciente").val(data.codigo);
+		$("#codigo_paciente").attr('disabled', 'disabled');
+		$("#nombres").val(data.nombres);
+		$("#telefono").val(data.telefono);
+		$("#edad").val(data.edad);
+		$("#ocupacion").val(data.ocupacion);
+		$("#dui").val(data.dui);
+		$("#correo").val(data.correo);
+		$("#empresa").val(data.empresas);
+		$("#nit").val(data.nit);
+		$("#tel_oficina").val(data.telefono_oficina);
+		$("#direccion_completa").val(data.direccion);
+		$("#tipo_paciente").val(data.tipo_paciente);
+        }
+	})
+
+}
+
+////////////////LIMPIAR CAMPOS DE CREAR PACIENTE
+function clear_campos(){	
+    $("#id_paciente").val("");
+    //$("#codigo_paciente").val("");
+    //$('#codigo_paciente').removeAttr("disabled")
+	$('#nombres').val("");
+    $('#telefono').val("");
+    $('#edad').val("");
+    $('#ocupacion').val("");
+    $('#dui').val("");
+	$('#correo').val("");
+	$('#empresa').val("");
+	$('#nit').val("");
+	$('#tel_oficina').val("");
+	$('#direccion_completa').val("");
+	$('#tipo_paciente').val("");
+}
+
+///////////
+function eliminar_paciente(id_paciente){
+	  
+	bootbox.confirm("¿Está Seguro de eliminar el paciente?", function(result){
+    if(result){
+
+	$.ajax({
+		url:"ajax/pacientes.php?op=eliminar_paciente",
+		method:"POST",
+		data:{id_paciente:id_paciente},
+		dataType:"json",
+		success:function(data)
+		{
+			console.log(data);
+			if(data=="ok"){
+				setTimeout ("Swal.fire('Paciente Eliminado Existosamente','','success')", 100);
+			}else if(data=="existe"){
+				setTimeout ("Swal.fire('El paciente posee una consula','','error')", 100);
+			}						//alert(data);
+			$("#data_pacientes").DataTable().ajax.reload();
+		}
+	});
+
+		   }
+
+		 });//bootbox
+
+
+   }

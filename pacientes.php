@@ -26,7 +26,7 @@ require_once("modals/modal_consultas.php");
      <div class="invoice p-3 mb-3" style="margin: 3px;border-radius: 5px">
      	<div class="row">
      	<div class="col-sm-3">
-     	<button type="button" class="btn btn-block btn-outline-primary btn-flat" data-toggle="modal" data-target="#newPaciente"><i class="fas fas fa-user-plus"></i> Agregar Paciente</button>
+     	<button type="button" class="btn btn-block btn-outline-primary btn-flat" data-toggle="modal" data-target="#newPaciente" onClick="clear_campos();"><i class="fas fas fa-user-plus"></i> Agregar Paciente</button>
      	</div>
 
      	<div class="col-sm-3">
@@ -91,6 +91,7 @@ require_once("modals/modal_consultas.php");
 <script type="text/javascript" src="js/cleave.js"></script>
 <script type="text/javascript" src="js/pacientes.js"></script>
 <script type="text/javascript" src="js/empresas.js"></script>
+<script type="text/javascript" src="js/bootbox.min.js"></script>
 <script>
 
 function mayus(e) {

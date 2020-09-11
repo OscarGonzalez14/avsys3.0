@@ -79,8 +79,69 @@ public function get_pacientes($sucursal_paciente){
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1, $id_paciente);
     $sql->execute();
-
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+  }
 
+ public function show_datos_paciente($id_paciente,$codigo){
+    $conectar= parent::conexion();
+    $sql="select*from pacientes where id_paciente=? and codigo=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_paciente);
+    $sql->bindValue(2, $codigo);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+  }
+////////SE VALIDA SI EXISTE PACIENTE PARA LA EDICION
+   public function valida_paciente($codigo){
+    $conectar= parent::conexion();
+    $sql="select*from pacientes where codigo=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $codigo);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function editar_paciente($codigo_paciente,$nombres,$telefono,$edad,$ocupacion,$sucursal,$dui,$correo,$usuario,$empresa,$nit,$tel_oficina,$direccion_completa,$tipo_paciente){
+
+    $conectar= parent::conexion();
+    parent::set_names();
+
+    $sql="update pacientes set 
+        nombres=?,telefono=?,edad=?,ocupacion=?,dui=?,correo=?,empresas=?,telefono_oficina=?,direccion=?,tipo_paciente=?,nit=? where codigo=?";          
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1, $_POST["nombres"]);
+        $sql->bindValue(2, $_POST["telefono"]);
+        $sql->bindValue(3, $_POST["edad"]);
+        $sql->bindValue(4, $_POST["ocupacion"]);
+        $sql->bindValue(5, $_POST["dui"]);
+        $sql->bindValue(6, $_POST["correo"]);
+        $sql->bindValue(7, $_POST["empresa"]);
+        $sql->bindValue(8, $_POST["tel_oficina"]);
+        $sql->bindValue(9, $_POST["direccion_completa"]);
+        $sql->bindValue(10, $_POST["tipo_paciente"]);
+        $sql->bindValue(11, $_POST["nit"]);
+        $sql->bindValue(12, $_POST["codigo_paciente"]);
+        $sql->execute();     
+         
+}
+
+////////////VALIDACION PARA ELIMINAR PACIENTE SI EXISTE CONSULTA
+   public function valida_paciente_consulta($id_paciente){
+    $conectar= parent::conexion();
+    $sql="select*from consulta where id_paciente=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_paciente);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  //////////////FUNCION PARA ELIMINAR PACIENTE
+  public function eliminar_paciente($id_paciente){
+    $conectar=parent::conexion();
+    $sql="delete from pacientes where id_paciente=?";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_paciente);
+    $sql->execute();
+    return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
   }
 }

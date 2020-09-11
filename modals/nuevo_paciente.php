@@ -15,7 +15,7 @@
           <div class="modal-content">
             <div class="modal-header" id="head_pac">
               <h5 class="modal-title">CREAR NUEVO PACIENTE</h5>
-              <button type="button" class="close justify-content-between" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close justify-content-between" data-dismiss="modal" aria-label="Close" onClick="destroy_edits();">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -102,9 +102,10 @@
                 </div>
               </div>
             </div>
+            <input id="id_paciente" type="hidden">
             <div class="modal-footer justify-content-between">
               <button class="btn btn-primary btn-block" onClick="guardarPaciente();" id="save_paciente"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>Guardar</button>
-              <button class="btn btn-primary btn-block" onClick="EditarPaciente();" id="edit_paci">Editar</button>
+              <button class="btn btn-primary btn-block" onClick="guardarPaciente();" id="edit_paci">Editar</button>
             </div>
           </div>
           <!-- /.modal-content -->
