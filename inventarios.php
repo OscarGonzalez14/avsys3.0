@@ -36,7 +36,7 @@ require_once("modelos/Reporteria.php");
               <div class="icon">
                 <i class="icon ion-grid"></i>
               </div>
-              <a href="#" class="small-box-footer">Ir a Accesorios <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="accesorios.php" class="small-box-footer">Ir a Accesorios <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
