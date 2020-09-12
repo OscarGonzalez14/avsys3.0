@@ -120,8 +120,7 @@
 	$data= Array();
     foreach($datos as $row){
 		$sub_array = array();
-			$sub_array[] = date("d-m-Y",strtotime($row["fecha_reg"]));			
-	    $sub_array[] = $row["codigo"];
+
 			$sub_array[] = $row["tipo_paciente"];
 			$sub_array[] = $row["nombres"];
 			$sub_array[] = $row["telefono"];			            
@@ -154,7 +153,8 @@
     	foreach($datos as $row)
     	{
     	$output["id_paciente"] = $row["id_paciente"];
-			$output["nombres"] = $row["nombres"];			
+			$output["nombres"] = $row["nombres"];
+      $output["telefono"] = $row["telefono"];		
     	}
     echo json_encode($output);
 	break;

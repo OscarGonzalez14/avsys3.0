@@ -1,35 +1,44 @@
-
- <?php
- require_once("config/conexion.php");
+<?php 
+require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){ 
-require_once("header_dos.php");
+require_once('header.php');
 require_once("modals/nuevo_paciente.php");
 require_once("modals/modal_consultas.php");
- ?>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+?>
+<div class="content-wrapper">
 
-    <!-- Main content -->
-    <section class="content" style="margin-top: 5px">
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-          <!-- /.card-header -->
-            <div class="card-body"><!--CONTENIDO-->
-              <div class="invoice p-3 mb-3" style="margin: 3px;border-radius: 5px">
-      <div class="row">
-      <div class="col-sm-3">
-      <button type="button" class="btn btn-block btn-outline-primary btn-flat" data-toggle="modal" data-target="#newPaciente" onClick="clear_campos();"><i class="fas fas fa-user-plus"></i> Agregar Paciente</button>
-      </div>
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2" style="margin: 2px">
+          <div class="col-sm-8">
+            <h5 align="center">MÓDULO PACIENTES</h5>
+          </div>
+          <div class="col-sm-4">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Pacientes</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
-      <div class="col-sm-3">
-      <a href="consultas.php"><button type="button" class="btn btn-block btn-outline-success btn-flat" data-toggle="modal" data-target="#consultasModal"><i class="fas fa-clipboard-list"></i> Ver Consultas</button></a>
-      </div> 
+     <div class="invoice p-3 mb-3" style="margin: 3px;border-radius: 5px">
+     	<div class="row">
+     	<div class="col-sm-3">
+     	<button type="button" class="btn btn-block btn-outline-primary btn-flat" data-toggle="modal" data-target="#newPaciente" onClick="clear_campos();"><i class="fas fas fa-user-plus"></i> Agregar Paciente</button>
+     	</div>
+
+     	<div class="col-sm-3">
+     	<a href="consultas.php"><button type="button" class="btn btn-block btn-outline-success btn-flat" data-toggle="modal" data-target="#consultasModal"><i class="fas fa-clipboard-list"></i> Ver Consultas</button></a>
+     	</div> 
       </div>
       <div class="dropdown-divider"></div>
       <table id="data_pacientes" width="100%" style="text-align: center;text-align: center" >
       <thead style="color:white;min-height:10px;border-radius: 2px;font-style: normal;font-size: 15px" class="bg-info">
           <tr style="min-height:10px;border-radius: 3px;font-style: normal;font-size: 15px">
+            <th style="text-align:center">Fecha Ingreso</th>
+            <th style="text-align:center">Codigo</th>
             <th style="text-align:center">Tipo Pac.</th>
             <th style="text-align:center">Paciente</th>
             <th style="text-align:center">Telefono</th>
@@ -75,34 +84,15 @@ require_once("modals/modal_consultas.php");
           <!-- /.modal-content -->
         </div>
 </div>
-
-<?php require_once("footer.php");?>
 <?php date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y H:i:s");?>
 <input type="hidden" name="id_usuario" id="usuario" value="<?php echo $_SESSION["usuario"];?>"/>
 <input type="hidden" name="sucursal" id="sucursal" value="<?php echo $_SESSION["sucursal"];?>"/>
-<input type="hidden" id="fecha" value="<?php echo $hoy;?>">
-<input type="hidden" id="name_pag" value="MODULO PACIENTES & CONSULTAS">
+<input type="text" id="fecha" value="<?php echo $hoy;?>">
 <script type="text/javascript" src="js/cleave.js"></script>
 <script type="text/javascript" src="js/pacientes.js"></script>
 <script type="text/javascript" src="js/empresas.js"></script>
 <script type="text/javascript" src="js/bootbox.min.js"></script>
-  <script type="text/javascript">
-    var title = document.getElementById("name_pag").value;
-    document.getElementById("title_mod").innerHTML=" "+
-    title;
-  </script>
-            </div><!-- FIN CONTENIDO-->
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+
 <script>
 
 function mayus(e) {
@@ -162,6 +152,6 @@ var telefono = new Cleave('#telefono', {
       });
     })
   </script>
-   <?php } else{
+  <?php } else{
 echo "Acceso denegado";
   } ?>

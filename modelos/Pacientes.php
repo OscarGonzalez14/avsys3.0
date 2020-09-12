@@ -75,7 +75,7 @@ public function get_pacientes($sucursal_paciente){
 
  public function get_paciente_por_id($id_paciente){
     $conectar= parent::conexion();
-    $sql="select id_paciente,nombres from pacientes where id_paciente=?";
+    $sql="select id_paciente,nombres,telefono from pacientes where id_paciente=?";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1, $id_paciente);
     $sql->execute();
