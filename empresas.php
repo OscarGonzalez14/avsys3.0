@@ -1,6 +1,9 @@
 <?php
 require_once("config/conexion.php");
+<<<<<<< HEAD
 if(isset($_SESSION["usuario"])){
+=======
+>>>>>>> accesorios
 require_once('header.php');
 require_once('modals/empresa.php'); 
  ?>
@@ -12,9 +15,13 @@ require_once('modals/empresa.php');
   	CREAR NUEVA EMPRESA
   </button>
 </div>
+<<<<<<< HEAD
 <script src="js/empresas.js"></script>
 <?php } else{
 echo "Acceso denegado";
 header("Location:index.php");
         exit();
   } ?>
+=======
+<script src="js/empresas.js"></script>
+>>>>>>> accesorios

@@ -103,7 +103,7 @@
 
           <li class="nav-item">
             <a href="ventas.php" class="nav-link">
-              <i class="nav-icon fas fas fa-id-card-alt"></i>
+              <i class="nav-icon fas fa-chart-line"></i>
               <p>Ventas</p>
             </a>
           </li>           

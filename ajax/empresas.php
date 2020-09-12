@@ -9,6 +9,7 @@ switch ($_GET["op"]){
 	case 'guardar_empresa':
 	$empresas->registrarEmpresa($_POST["nomEmpresa"], $_POST["dirEmpresa"], $_POST["nitEmpresa"], $_POST["telEmpresa"], $_POST["respEmpresa"], $_POST["correoEmpresa"], $_POST["encargado"]);
 	break;
+<<<<<<< HEAD
 
 case 'listar_en_pacientes':
     	     
@@ -52,4 +53,8 @@ case 'listar_en_pacientes':
 }
 
 
+=======
+	}
+?>
+>>>>>>> accesorios
 

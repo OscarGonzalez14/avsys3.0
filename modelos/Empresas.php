@@ -22,6 +22,7 @@ class Empresas extends conectar{//inicio de la clase
 		//print_r($_POST);
 	}
 
+<<<<<<< HEAD
 	public function get_empresas_en_pacientes(){
 
           $conectar=parent::conexion();
@@ -46,3 +47,18 @@ class Empresas extends conectar{//inicio de la clase
 
   }
 }
+=======
+	/*public function get_categorias(){
+	    $conectar= parent::conexion();
+		parent::set_names();
+		 $sql="select id_categoria, nombre from categoria";
+		 $sql=$conectar->prepare($sql);
+    	 $sql->execute();
+    	 return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    	}*/
+
+
+	}/////FIN CLASS
+
+ ?>
+>>>>>>> accesorios

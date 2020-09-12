@@ -6,7 +6,12 @@ function guardarEmpresa(){
 	var respEmpresa=$("#respEmpresa").val();
 	var correoEmpresa=$("#correoEmpresa").val();
 	var encargado=$("#encargado").val();
+<<<<<<< HEAD
 	
+=======
+
+	//Se validan los campos de modal empresa
+>>>>>>> accesorios
 	if(nomEmpresa !="" || dirEmpresa !="" || nitEmpresa !="" || telEmpresa !="" || respEmpresa !="" || correoEmpresa !="" || encargado !=""){
 		$.ajax({
 			url:"ajax/empresas.php?op=guardar_empresa",
@@ -27,6 +32,7 @@ function guardarEmpresa(){
 		});
 	}
 	
+<<<<<<< HEAD
 }
 
 function listar_en_pacientes(){
@@ -120,4 +126,6 @@ $.ajax({
 		$('#empresa').val(data.nombre);	
 	}
 })
+=======
+>>>>>>> accesorios
 }
