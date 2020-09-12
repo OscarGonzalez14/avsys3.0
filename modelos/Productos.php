@@ -49,4 +49,51 @@ public function get_aros(){
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+
+public function registrar_photosensible($describe,$precio,$cat_prod){
+    $conectar= parent::conexion();
+    parent::set_names();
+    $sql="insert into productos values(null,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $precio);
+    $sql->bindValue(2, $cat_prod);
+    $sql->bindValue(3, $describe);
+
+    $sql->execute();
+
+    //print_r($_POST);
+  }   
+
+public function registrar_antireflejante($describe,$precio,$cat_prod){
+    $conectar= parent::conexion();
+    parent::set_names();
+    $sql="insert into productos values(null,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $precio);
+    $sql->bindValue(2, $cat_prod);
+    $sql->bindValue(3, $describe);
+
+
+    $sql->execute();
+
+    //print_r($_POST);
+  } 
+
+public function registrar_lente($describe,$precio,$cat_prod){
+    $conectar= parent::conexion();
+    parent::set_names();
+    $sql="insert into productos values(null,null,null,null,null,null,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $precio);
+    $sql->bindValue(2, $cat_prod);
+    $sql->bindValue(3, $describe);
+
+    $sql->execute();
+
+    //print_r($_POST);
+  }   
+
+
+
 }//////Fin de la clase

@@ -241,4 +241,93 @@ function listar_aros()
   }).DataTable();
 }
 
+////// GUARDAR NUEVO PHOTOSENSIBLE
+function guardarPhotosensible(){
+  //se definen las variables según los campos del modal nuevo photosensible
+
+  var describe=$("#describe").val();
+  var precio=$("#precio").val();
+  var cat_prod=$("#cat_prod").val();
+
+  //se validan los campos del modal nuevo photosensible
+  if (describe !="" || precio !="" || cat_prod !=""){
+    $.ajax({
+    url:"ajax/productos.php?op=guardar_photosensible",
+    method:"POST",
+    data:{describe:describe, precio:precio, cat_prod:cat_prod},
+    cache:false,
+    dataType:"json",
+    error:function(x,y,z){
+    d_pacole.log(x);
+    console.log(y);
+    console.log(z);
+    },
+      success:function(data){
+        console.log(data);
+        alert("¡Los datos han sido guardados exitosamente!");
+      }
+    });
+  
+  } 
+}
+
+////// GUARDAR NUEVO ANTIREFLEJANTE
+function guardarAntireflejante(){
+  //se definen las variables según los campos del modal nuevo antireflejante
+
+  var describe=$("#describe").val();
+  var precio=$("#precio").val();
+  var cat_prod=$("#cat_prod").val();
+
+  //se validan los campos del modal nuevo antireflejante
+  if (describe!="" || precio !="" || cat_prod !=""){
+    $.ajax({
+    url:"ajax/productos.php?op=guardar_antireflejante",
+    method:"POST",
+    data:{describe:describe, precio:precio, cat_prod:cat_prod},
+    cache:false,
+    dataType:"json",
+    error:function(x,y,z){
+    d_pacole.log(x);
+    console.log(y);
+    console.log(z);
+    },
+      success:function(data){
+        console.log(data);
+        alert("¡Los datos han sido guardados exitosamente!");
+      }
+    });
+  
+  } 
+}
+
+////// GUARDAR NUEVO LENTE
+function guardarLente(){
+  //se definen las variables según los campos del modal nuevo lente
+
+  var describe=$("#describe").val();
+  var precio=$("#precio").val();
+  var cat_prod=$("#cat_prod").val();
+
+  //se validan los campos del modal nuevo lente
+    $.ajax({
+    url:"ajax/productos.php?op=guardar_lente",
+    method:"POST",
+    data:{describe:describe, precio:precio, cat_prod:cat_prod},
+    cache:false,
+    dataType:"json",
+    error:function(x,y,z){
+    d_pacole.log(x);
+    console.log(y);
+    console.log(z);
+    },
+      success:function(data){
+        console.log(data);
+        alert("¡Los datos han sido guardados exitosamente!");
+      }
+    });
+  
+  } 
+
+
 init();

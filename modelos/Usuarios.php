@@ -38,6 +38,31 @@ public function login(){
   }//cierre del else
   }//condicion enviar
 }///FIN FUNCION LOGIN
+
+
+
+//INICIO DE FUNCIÓN REGISTRAR USUARIO
+public function registrarUsuario($nom_usuario,$tel_usuario,$correo_usuario,$dir_usuario,$usuario,$pass_usuario,$fecha_ingreso,$cat_usuario,$est_usuario){
+
+    $conectar= parent::conexion();
+    parent::set_names();
+    $sql="insert into usuarios values(null,?,?,?,?,?,?,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $nom_usuario);
+    $sql->bindValue(2, $tel_usuario);
+    $sql->bindValue(3, $correo_usuario);
+    $sql->bindValue(4, $dir_usuario);
+    $sql->bindValue(5, $usuario);
+    $sql->bindValue(6, $pass_usuario);
+    $sql->bindValue(7, $fecha_ingreso);
+    $sql->bindValue(8, $cat_usuario);
+    $sql->bindValue(9, $est_usuario);
     
+    $sql->execute();
+
+    print_r($_POST);
+  }
+
+//FIN FUNCION REGISTRAR USUARIO
 
 }
