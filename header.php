@@ -99,7 +99,14 @@
               <i class="nav-icon fas fas fa-id-card-alt"></i>
               <p>Pacientes & Consultas</p>
             </a>
-          </li>          
+          </li>
+
+          <li class="nav-item">
+            <a href="ventas.php" class="nav-link">
+              <i class="nav-icon fas fas fa-id-card-alt"></i>
+              <p>Ventas</p>
+            </a>
+          </li>           
          
         </ul>
       </nav>
