@@ -96,6 +96,31 @@ break;
 
     break;
 
+///////////////////////////AROS EN EXISTENCIAS
+case "buscar_aros_venta":          
+  $datos=$productos->buscar_aros_ventas($_POST["sucursal"]);
+  $data= Array();
+  foreach($datos as $row){
+    $sub_array = array();         
+      //$sub_array[] = $row["id_producto"];
+      $sub_array[] = $row["desc_producto"];
+      $sub_array[] = $row["stock"];
+      $sub_array[] = $row["fecha_ingreso"];
+      $sub_array[] = $row["num_compra"];      
+      $sub_array[] = "$".number_format($row["precio_venta"],2,".",",");
+      $sub_array[] = $row["categoria_ub"];
+      $sub_array[] = '<button type="button" name="hola" id="'.$row["id_producto"].'" class="btn btn-primary btn-sm btn-flat" onClick="agregarDetalleVenta('.$row["id_producto"].','.$row["id_ingreso"].')"><i class="fa fa-plus"></i> Agregar</button>';
+      
+        $data[] = $sub_array;
+       
+      }
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+     break;
 
    }
    ?>

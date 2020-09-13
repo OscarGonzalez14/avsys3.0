@@ -107,7 +107,7 @@ if(isset($_SESSION["usuario"])){
                   </div>
 
                   <div class="form-group col-sm-2">
-                    <label for="">Tipo Documento</label>
+                    <label for=""># Doc.</label>
                       <select class="form-control input-dark" id="tipo_documento" required="">
                         <option value=''>Seleccionar tipo Documento</option>
                         <option value='Factura'>Factura</option>

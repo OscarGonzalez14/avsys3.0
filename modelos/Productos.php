@@ -21,7 +21,7 @@ public function valida_existencia_aros($marca_aros,$modelo_aro,$color_aro,$medid
 
 public function registrar_aro($marca_aros,$modelo_aro,$color_aro,$medidas_aro,$diseno_aro,$materiales_aro,$cat_venta_aros,$categoria_producto){
 
-    $descripcion=$marca_aros." mod.".$modelo_aro;
+    $descripcion=$marca_aros." mod.".$modelo_aro." ".$medidas_aro." ".$color_aro;
 
     $conectar= parent::conexion();
     parent::set_names();
@@ -48,5 +48,21 @@ public function get_aros(){
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+public function buscar_aros_ventas($sucursal){
+  $conectar= parent::conexion();
+  $suscursal=$_POST["sucursal"];
+
+  $sql="select p.desc_producto,e.precio_venta,e.stock,e.categoria_ub,e.num_compra,e.fecha_ingreso,e.id_ingreso,p.id_producto from
+productos as p inner join existencias as e on p.id_producto=e.id_producto
+where e.bodega=? and e.stock>0";
+
+  $sql = $conectar->prepare($sql);
+  $sql->bindValue(1,$sucursal);
+  $sql->execute();
+  return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+}
 
 }//////Fin de la clase
