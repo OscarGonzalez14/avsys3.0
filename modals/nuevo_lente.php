@@ -28,17 +28,17 @@
       <!-- Modal body -->
       <div class="modal-body">
        <div class="form-row">
-			<div class="form-group col-md-9">
-          		<label>Descripción</label>
-          		<input type="text" class="form-control" name="" placeholder="Descripción del lente" id="describe">
-        	</div>
-        	<div class="form-group col-md-3">
-          		<label>Precio $</label>
-          			<div class="input-group">
-          				<input id="precio" type="number" class="form-control" name="precio" placeholder="">
-        			</div>
-        	</div>
-          <input type="hidden" value="Lente"  id="cat_prod" name="">
+      <div class="form-group col-md-9">
+              <label>Descripción</label>
+              <input type="text" class="form-control" name="" placeholder="Descripción del lente" id="describe">
+          </div>
+          <div class="form-group col-md-3">
+              <label>Precio $</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" name="precio" placeholder="" id="precio" >
+              </div>
+          </div>
+          <input type="hidden" value="Lente" name="" id="cat_prod" >
       </div>
       </div>
 
@@ -50,3 +50,4 @@
     </div>
   </div>
 </div>
+<script src="js/productos.js"></script>

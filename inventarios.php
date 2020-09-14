@@ -65,7 +65,7 @@ require_once("modelos/Reporteria.php");
               <div class="icon">
                 <i class="ion ion-contrast"></i>
               </div>
-              <a href="#" class="small-box-footer"> Ir a Lentes<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="lentes.php" class="small-box-footer"> Ir a Lentes<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

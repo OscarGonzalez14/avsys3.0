@@ -96,34 +96,10 @@ break;
       echo json_encode($results);
 
     break;
-
-    // PHOTOSENSIBLES---------------
-    $photosensible = new Photosensibles();
-
-    switch ($_GET["op"]){
-      case 'guardar_photosensible':
-        $accesorios->registrar_photosensible($_POST["des_photo"],$_POST["precio"],$_POST["photosensible"]);
+    case 'guardar_lente':
+        $productos->registrar_lente($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);
+        
     break;
-
-    //ANTIREJANTES--------
-    $antireflejante = new Antireflejantes();
-
-    switch ($_GET["op"]){
-      case 'guardar_antireflejante':
-        $accesorios->registrar_antireflejante($_POST["des_anti"],$_POST["precio"],$_POST["antireflejante"]);
-    break;
-
-    //LENTES--------------
-    $lente = new Lentes();
-
-    switch ($_GET["op"]){
-      case 'guardar_lente':
-        $accesorios->registrar_lente($_POST["des_lente"],$_POST["precio"],$_POST["lente"]);
-    break;
-
-
-
-
 
    }
    ?>

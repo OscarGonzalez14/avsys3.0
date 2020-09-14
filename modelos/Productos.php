@@ -54,7 +54,7 @@ public function get_aros(){
 public function registrar_photosensible($describe,$precio,$cat_prod){
     $conectar= parent::conexion();
     parent::set_names();
-    $sql="insert into productos values(null,?,?,?);";
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1, $precio);
     $sql->bindValue(2, $cat_prod);
@@ -68,7 +68,7 @@ public function registrar_photosensible($describe,$precio,$cat_prod){
 public function registrar_antireflejante($describe,$precio,$cat_prod){
     $conectar= parent::conexion();
     parent::set_names();
-    $sql="insert into productos values(null,?,?,?);";
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1, $precio);
     $sql->bindValue(2, $cat_prod);
@@ -83,15 +83,29 @@ public function registrar_antireflejante($describe,$precio,$cat_prod){
 public function registrar_lente($describe,$precio,$cat_prod){
     $conectar= parent::conexion();
     parent::set_names();
-    $sql="insert into productos values(null,null,null,null,null,null,?,?,?);";
+    $marca=""; 
+    $modelo=""; 
+    $color="";
+    $medidas = "";
+    $diseno = "";
+    $materiales = "";
+
+
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
     $sql=$conectar->prepare($sql);
-    $sql->bindValue(1, $precio);
-    $sql->bindValue(2, $cat_prod);
-    $sql->bindValue(3, $describe);
+    $sql->bindValue(1, $marca);
+    $sql->bindValue(2, $modelo);
+    $sql->bindValue(3, $color);
+    $sql->bindValue(4, $medidas);
+    $sql->bindValue(5, $diseno);
+    $sql->bindValue(6, $materiales);
+    $sql->bindValue(7, $cat_prod);
+    $sql->bindValue(8, $precio);
+    $sql->bindValue(9, $describe);
 
     $sql->execute();
 
-    //print_r($_POST);
+    print_r($_POST);
   }   
 
 
