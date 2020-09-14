@@ -38,7 +38,7 @@
                   <input type="number" class="form-control" name="precio" placeholder="" id="precio" >
               </div>
           </div>
-          <input type="hidden" value="Photosensible" name="" id="cat_prod">
+          <input type="hidden" value="photosensibles" name="" id="cat_prod">
       </div>
       </div>
 

@@ -94,12 +94,23 @@ break;
       "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
       "aaData"=>$data);
       echo json_encode($results);
+      break;
 
-    break;
-    case 'guardar_lente':
-        $productos->registrar_lente($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);
-        
-    break;
+      case "registrar_photosensible"://registro de antireflejante
+      $productos->guardar_photosensible($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
+      //fin mensaje error
+      break;
+
+      case "registrar_antireflejante"://registro de antireflejante
+      $productos->guardar_antireflejante($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
+      //fin mensaje error
+      break;
+
+
+     case "registrar_lente":// lente
+     $productos->guardar_lente($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
+      //fin mensaje error
+     break;
 
    }
    ?>

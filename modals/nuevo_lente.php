@@ -28,7 +28,7 @@
       <!-- Modal body -->
       <div class="modal-body">
        <div class="form-row">
-      <div class="form-group col-md-9">
+          <div class="form-group col-md-9">
               <label>Descripción</label>
               <input type="text" class="form-control" name="" placeholder="Descripción del lente" id="describe">
           </div>
@@ -38,7 +38,7 @@
                   <input type="number" class="form-control" name="precio" placeholder="" id="precio" >
               </div>
           </div>
-          <input type="hidden" value="Lente" name="" id="cat_prod" >
+          <input type="hidden" name="" id="cat_prod" value="lentes">
       </div>
       </div>
 

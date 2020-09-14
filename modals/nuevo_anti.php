@@ -38,7 +38,7 @@
                   <input type="number" class="form-control" name="precio" placeholder="" id="precio">
               </div>
           </div>
-          <input type="hidden"  value="Antireflejante" name="" id="cat_prod" >
+          <input type="hidden"  value="antireflejantes" name="" id="cat_prod" >
       </div>
       </div>
 

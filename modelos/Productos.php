@@ -50,62 +50,97 @@ public function get_aros(){
     }
 
 
-
-public function registrar_photosensible($describe,$precio,$cat_prod){
+////////////GUARDAR PHOTOSENSIBLE   
+public function guardar_photosensible($describe,$precio,$cat_prod){
     $conectar= parent::conexion();
     parent::set_names();
     $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
-    $sql=$conectar->prepare($sql);
-    $sql->bindValue(1, $precio);
-    $sql->bindValue(2, $cat_prod);
-    $sql->bindValue(3, $describe);
-
-    $sql->execute();
-
-    //print_r($_POST);
-  }   
-
-public function registrar_antireflejante($describe,$precio,$cat_prod){
     $conectar= parent::conexion();
     parent::set_names();
+    $marca_aros= ""; 
+    $modelo_aro= ""; 
+    $color_aro= "";
+    $medidas_aro = "";
+    $diseno_aro = "";
+    $materiales_aro = "";
+
+
     $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
     $sql=$conectar->prepare($sql);
-    $sql->bindValue(1, $precio);
-    $sql->bindValue(2, $cat_prod);
-    $sql->bindValue(3, $describe);
-
+    $sql->bindValue(1, $marca_aros);
+    $sql->bindValue(2, $modelo_aro);
+    $sql->bindValue(3, $color_aro);
+    $sql->bindValue(4, $medidas_aro);
+    $sql->bindValue(5, $diseno_aro);
+    $sql->bindValue(6, $materiales_aro);
+    $sql->bindValue(7, $precio);
+    $sql->bindValue(8, $cat_prod);
+    $sql->bindValue(9, $describe);
 
     $sql->execute();
 
     //print_r($_POST);
   } 
 
-public function registrar_lente($describe,$precio,$cat_prod){
+///////////GUARDAR ANTIREFLEJANTE
+public function guardar_antireflejante($describe,$precio,$cat_prod){
     $conectar= parent::conexion();
     parent::set_names();
-    $marca=""; 
-    $modelo=""; 
-    $color="";
-    $medidas = "";
-    $diseno = "";
-    $materiales = "";
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
+    $conectar= parent::conexion();
+    parent::set_names();
+    $marca_aros= ""; 
+    $modelo_aro= ""; 
+    $color_aro= "";
+    $medidas_aro = "";
+    $diseno_aro = "";
+    $materiales_aro = "";
 
 
     $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
     $sql=$conectar->prepare($sql);
-    $sql->bindValue(1, $marca);
-    $sql->bindValue(2, $modelo);
-    $sql->bindValue(3, $color);
-    $sql->bindValue(4, $medidas);
-    $sql->bindValue(5, $diseno);
-    $sql->bindValue(6, $materiales);
-    $sql->bindValue(7, $cat_prod);
-    $sql->bindValue(8, $precio);
+    $sql->bindValue(1, $marca_aros);
+    $sql->bindValue(2, $modelo_aro);
+    $sql->bindValue(3, $color_aro);
+    $sql->bindValue(4, $medidas_aro);
+    $sql->bindValue(5, $diseno_aro);
+    $sql->bindValue(6, $materiales_aro);
+    $sql->bindValue(7, $precio);
+    $sql->bindValue(8, $cat_prod);
     $sql->bindValue(9, $describe);
 
     $sql->execute();
 
-    print_r($_POST);
+    //print_r($_POST);
+  } 
+
+//////////////////////GUARDAR LENTE
+public function guardar_lente($describe,$precio,$cat_prod){
+    $conectar= parent::conexion();
+    parent::set_names();
+    $marca_aros= ""; 
+    $modelo_aro= ""; 
+    $color_aro= "";
+    $medidas_aro = "";
+    $diseno_aro = "";
+    $materiales_aro = "";
+
+
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $marca_aros);
+    $sql->bindValue(2, $modelo_aro);
+    $sql->bindValue(3, $color_aro);
+    $sql->bindValue(4, $medidas_aro);
+    $sql->bindValue(5, $diseno_aro);
+    $sql->bindValue(6, $materiales_aro);
+    $sql->bindValue(7, $precio);
+    $sql->bindValue(8, $cat_prod);
+    $sql->bindValue(9, $describe);
+
+    $sql->execute();
+
+    //print_r($_POST);
   }   
 
 

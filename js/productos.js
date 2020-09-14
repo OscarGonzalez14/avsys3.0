@@ -244,17 +244,16 @@ function listar_aros()
 ////// GUARDAR NUEVO PHOTOSENSIBLE
 function guardarPhotosensible(){
   //se definen las variables según los campos del modal nuevo photosensible
-
-  var describe=$("#describe").val();
-  var precio=$("#precio").val();
-  var cat_prod=$("#cat_prod").val();
-
-  //se validan los campos del modal nuevo photosensible
-  if (describe !="" || precio !="" || cat_prod !=""){
+  var cat_prod =$("#cat_prod").val();
+  var precio =$("#precio").val();
+  var describe =$("#describe").val();
+ 
+  //se validan los campos del modal nuevo lente
+  if (cat_prod !="" || precio !="" || describe !=""){
     $.ajax({
-    url:"ajax/productos.php?op=guardar_photosensible",
+    url:"ajax/productos.php?op=registrar_photosensible",
     method:"POST",
-    data:{describe:describe, precio:precio, cat_prod:cat_prod},
+    data:{cat_prod:cat_prod,precio:precio,describe:describe},
     cache:false,
     dataType:"json",
     error:function(x,y,z){
@@ -274,18 +273,17 @@ function guardarPhotosensible(){
 ////// GUARDAR NUEVO ANTIREFLEJANTE
 function guardarAntireflejante(){
   //se definen las variables según los campos del modal nuevo antireflejante
-
-  var describe=$("#describe").val();
-
-  var precio=$("#precio").val();
   
-
-  //se validan los campos del modal nuevo antireflejante
-  if (describe!="" || precio !="" || cat_prod !=""){
+  var cat_prod =$("#cat_prod").val();
+  var precio =$("#precio").val();
+  var describe =$("#describe").val();
+ 
+  //se validan los campos del modal nuevo lente
+  if (cat_prod !="" || precio !="" || describe !=""){
     $.ajax({
-    url:"ajax/productos.php?op=guardar_antireflejante",
+    url:"ajax/productos.php?op=registrar_antireflejante",
     method:"POST",
-    data:{describe:describe, precio:precio, cat_prod:cat_prod},
+    data:{cat_prod:cat_prod,precio:precio,describe:describe},
     cache:false,
     dataType:"json",
     error:function(x,y,z){
@@ -306,18 +304,18 @@ function guardarAntireflejante(){
 function guardarLente(){
   //se definen las variables según los campos del modal nuevo lente
 
-  var cat_prod=$("#cat_prod").val();
-  var precio=$("#precio").val();
-  var describe=$("#describe").val();
+  var cat_prod =$("#cat_prod").val();
+  var precio =$("#precio").val();
+  var describe =$("#describe").val();
  
   //se validan los campos del modal nuevo lente
-  if (cat_prod!="" || precio !="" || describe !=""){
+  if (cat_prod !="" || precio !="" || describe !=""){
     $.ajax({
-    url:"ajax/productos.php?op=guardar_lente",
+    url:"ajax/productos.php?op=registrar_lente",
     method:"POST",
-    data:{cat_prod:cat_prod, precio:precio, describe:describe},
+    data:{cat_prod:cat_prod,precio:precio,describe:describe},
     cache:false,
-    dataType:"json",
+    //dataType:"json",
     error:function(x,y,z){
     d_pacole.log(x);
     console.log(y);
