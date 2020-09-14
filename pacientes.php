@@ -162,6 +162,14 @@ var telefono = new Cleave('#telefono', {
       });
     })
   </script>
+<script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+      $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+   })
+</script>
    <?php } else{
 echo "Acceso denegado";
   } ?>

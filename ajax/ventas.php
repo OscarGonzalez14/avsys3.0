@@ -14,7 +14,7 @@ case "agregar_aros_venta":
         foreach($datos as $row)
         {
           $output["desc_producto"] = $row["desc_producto"];
-          $output["precio_venta"] = $row["precio_venta"];
+          $output["precio_venta"] = number_format($row["precio_venta"],2,".",",");
           $output["stock"] = $row["stock"];
           $output["categoria_ub"] = $row["categoria_ub"];
           $output["num_compra"] = $row["num_compra"];

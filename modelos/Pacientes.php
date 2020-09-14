@@ -144,4 +144,16 @@ public function get_pacientes($sucursal_paciente){
     $sql->execute();
     return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
   }
+
+////////LISTAR PACIENTES EN VENTAS CON CONSULTAS
+public function get_pacientes_con_consulta(){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select p.id_paciente,p.nombres,p.codigo,e.id_consulta,e.fecha_consulta,e.p_evaluado from 
+    pacientes as p inner join consulta as e on e.id_paciente=p.id_paciente ORDER BY e.id_consulta DESC;";
+
+  $sql=$conectar->prepare($sql);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
 }

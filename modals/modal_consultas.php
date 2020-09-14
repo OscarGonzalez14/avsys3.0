@@ -17,6 +17,7 @@ body.modal-open {
     -webkit-overflow-scrolling: auto;
 }
 </style>
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- The Modal -->
 <div class="modal fade" id="consultasModal">
   <div class="modal-dialog" id="tamModal_con">
@@ -41,8 +42,8 @@ body.modal-open {
               </div>
 
             <div class="col-sm-3">
-              <label for="ex3">Paciente evaluado</label>
-              <input class="form-control" id="p_evaluado" type="text" name="p_evaluado" onkeyup="mayus(this);">
+              <label for="ex3">Paciente evaluado&nbsp;&nbsp;&nbsp;<input class="quimica" type="checkbox" name="check_box" id="editar_eval" onClick="habilita_edit_eval();"> Editar</label>
+              <input class="form-control" id="p_evaluado" type="text" name="p_evaluado" onkeyup="mayus(this);"readonly>
             </div>
 
             <div class="col-sm-2">
@@ -57,7 +58,7 @@ body.modal-open {
             <?php date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y H:i:s");?>
             <div class="col-sm-2">
               <label for="ex3">Fecha de Consulta</label>
-              <input class="form-control" id="fecha_consulta" type="text" name="fecha_consulta" placeholder="dd/mm/YY" value="<?php echo $hoy;?>">
+              <input class="form-control" id="fecha_consulta" type="text" name="fecha_consulta" placeholder="dd/mm/YY" value="<?php echo $hoy;?>" readonly>
             </div>
 
             <div class="col-sm-12">

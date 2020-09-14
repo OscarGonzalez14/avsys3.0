@@ -276,10 +276,23 @@ $(document).on('click', '.info_pac', function(){
 		$("#nombre_pac").val(data.nombres);
 		$("#codigop").val(data.id_paciente);
 		$("#tel_evaluado").val(data.telefono);
+		$("#p_evaluado").val(data.nombres);
+		//$("#p_evaluado").attr('disabled', 'disabled');
         }
 	})
 
 });
+
+function habilita_edit_eval(){
+	var checkbox = document.getElementById('editar_eval');
+checkbox.addEventListener( 'change', function() {
+    if(this.checked) {
+      $("#p_evaluado").attr("readonly", false); 
+    }else{
+    	 $("#p_evaluado").attr("readonly", true);
+    }
+});
+}
 
 ////////AUTORELLENO CAMPOS DE CONSULTA
 function fill_lenso_oi(){
@@ -380,7 +393,7 @@ function eliminar_paciente(id_paciente){
 			if(data=="ok"){
 				setTimeout ("Swal.fire('Paciente Eliminado Existosamente','','success')", 100);
 			}else if(data=="existe"){
-				setTimeout ("Swal.fire('El paciente posee una consula','','error')", 100);
+				setTimeout ("Swal.fire('El paciente posee una consulta','','error')", 100);
 			}						//alert(data);
 			$("#data_pacientes").DataTable().ajax.reload();
 		}

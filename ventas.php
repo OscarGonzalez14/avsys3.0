@@ -19,31 +19,9 @@ require_once("modals/listar_aros_en_venta.php");
 
 <section class="content">
         <div class="container-fluid">
+
             <div class="invoice p-3 mb-3">
-
-              <div class="row invoice-info callout callout-info" style="border-bottom: solid 1px black;border-right: solid 1px black;border-top: solid 1px black">
-                    <div class="col-sm-2 invoice-col">
-                    <label># Venta</label>
-                      <input type="text" class="form-control input-dark" id="n_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;">
-                    </div>
-
-                    <div class="col-sm-6 invoice-col">
-                    <label>Paciente</label>
-                      <input type="text" class="form-control input-dark" id="proveedor_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly>
-                    </div>
-
-                    <div class="col-sm-2 invoice-col">
-                    <label>Cod. Pac</label>
-                      <input type="text" class="form-control input-dark" id="codigo_proveedor" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly>
-                    </div>
-
-                    <div class="col-sm-2 invoice-col">
-                    <label>Buscar</label>
-                      <button class="btn btn-primary btn-block" style="border-radius:2px" data-toggle="modal" data-target="#modalProveedores">Paciente</button>
-                    </div>
-                </div><!--/.row invoice-info datos Proveedor-->
-
-                <div class="row row2" style="background:#E0E0E0">
+              <div class="row row2" style="background:#E0E0E0;border-radius: 5px">
                     <div class="form-group col-sm-3">
                       <label for="">Tipo Venta</label>
                       <select class="form-control input-dark" id="tipo_compra" required="">
@@ -83,21 +61,49 @@ require_once("modals/listar_aros_en_venta.php");
                   </div>
 
                   <div class="form-group col-sm-3">
-                    <label for="">Tipo Documento</label>
-                      <select class="form-control input-dark" id="tipo_documento" required="">
-                        <option value=''>Seleccionar tipo Documento</option>
-                        <option value='Factura'>Factura</option>
-                        <option value='Credito Fiscal'>Credito Fiscal</option>
+                    <label for="">Existe Consulta?</label>
+                      <select class="form-control input-dark" id="consulta_ex" required="">
+                        <option value=''>Seleccionar...</option>
+                        <option value='Si'>Si</option>
+                        <option value='No'>No</option>
                       </select>
                   </div>
             </div>
-            <div class="row">
-                <div style="margin:20px;" class="col-sm-2">
-                  <a class="btn btn-dark" style="color:white;border-radius:3px; background:black" data-toggle="modal" data-target="#listar_aros_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta"><i class="fas fa-glasses"></i> Agregar Aro</a>
-                </div>
-            </div>
+            <div class="dropdown-divider"></div>
+              <div class="row invoice-info callout callout-info" style="border-bottom: solid 1px black;border-right: solid 1px black;border-top: solid 1px black">
+                    <div class="col-sm-1 invoice-col">
+                    <label># Venta</label>
+                      <input type="text" class="form-control input-dark" id="n_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;">
+                    </div>
+
+                    <div class="col-sm-4 invoice-col">
+                    <label>Encargado de cuenta</label>
+                      <input type="text" class="form-control input-dark" id="proveedor_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly>
+                    </div>
+
+                    <div class="col-sm-3 invoice-col" style="display: none">
+                    <label>Paciente Evaluado</label>
+                      <input type="text" class="form-control input-dark" id="proveedor_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly>
+                    </div>
+
+                    <div class="col-sm-2 invoice-col">
+                    <label>Cod. Pac</label>
+                      <input type="text" class="form-control input-dark" id="codigo_proveedor" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly>
+                    </div>
+
+                    <div class="col-sm-2 invoice-col">
+                    <label>Buscar</label>
+                      <button class="btn btn-primary btn-block" style="border-radius:2px" data-toggle="modal" data-target="#modalProveedores" id="select_paciente_venta">Paciente</button>
+                    </div>
+                </div><!--/.row invoice-info datos Proveedor-->
 
            <div class="col-md-12">
+              <div><!--BOTONES AGREGAR PRODUCTO-->
+
+                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_aros_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta"><i class="fas fa-plus"></i>Aro</a>
+                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta"><i class="fas fa-plus"></i> Lentes</a>
+
+            </div><!-- FIN BOTONES AGREGAR PRODUCTO-->
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title" align="center"><strong>Detalle de Compras</strong></h3>
@@ -111,8 +117,9 @@ require_once("modals/listar_aros_en_venta.php");
                       <th style="text-align:center" width="40%">Descripción&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                       <th style="text-align:center" width="10%">Cantidad</th>
                       <th style="text-align:center" width="10%">P/U</th>
+                       <th style="text-align:center" width="10%">Desc.%</th>
                       <th style="text-align:center" width="10%">Subtotal</th>
-                      <th style="text-align:center" width="10%">Eliminar</th>
+                      <th style="text-align:center" width="10%">Quitar</th>
                     </tr>
                   </thead>
                   <tbody id="listar_det_ventas" style="width: 100%"></tbody>               
@@ -131,14 +138,11 @@ require_once("modals/listar_aros_en_venta.php");
               </div>
               <br>
               <div class="row post_compra" id="post_compra" style="display: flex;justify-content: space-between !important;">
-                <div class="col-sm-4 post_compra">
-                  <button class="btn btn-primary btn-block" style="border-radius:2px" data-toggle="modal" data-target="#modal_print_admin" data-backdrop="static" data-keyboard="false" onClick="reporte_compras_admin();";><i class="fas fa-print"></i> Descargar/Imprimir compra(Admin)&nbsp;<i class="fas fa-lock"></i></button>
+                <div class="col-sm-6 post_compra">
+                  <button class="btn btn-block" style="border-radius:2px;background:#333333;color:white" data-toggle="modal" data-target="#modal_print_admin" data-backdrop="static" data-keyboard="false" onClick="reporte_compras_admin();";><i class="fas fa-print"></i> Imprimir recibo Inicial</button>
                 </div>
-                <div class="col-sm-4 post_compra">
-                  <button class="btn btn-success btn-block" style="border-radius:2px"><i class="fas fa-print"></i> Descargar/Imprimir compra(Bodega)&nbsp;<i class="fas fa-unlock"></i></button>
-                </div>
-                <div class="col-sm-4 post_compra">
-                  <button class="btn btn-info btn-block" style="border-radius:2px" onClick='explode();'><i class="fas fa-plus"></i> Nueva Compra</button>
+                <div class="col-sm-6 post_compra">
+                  <button class="btn btn-success btn-block" style="border-radius:2px" onClick='explode();'><i class="fas fa-plus"></i> Nueva Venta</button>
                 </div>
               </div>
               <!-- /.card-body -->
