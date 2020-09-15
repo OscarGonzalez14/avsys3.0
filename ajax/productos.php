@@ -107,9 +107,13 @@ break;
       break;
 
 
-     case "registrar_lente":// lente
+     case "registrar_lente"://  registro de lente
      $productos->guardar_lente($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
       //fin mensaje error
+     break;
+
+     case "registrar_accesorio":// registro de accesorio
+     $productos->guardar_accesorio($_POST["tipo_accesorio"],$_POST["marca_accesorio"],$_POST["des_accesorio"]);
      break;
 
    }

@@ -9,5 +9,4 @@ require_once('modals/nuevo_accesorio.php');
   	GUARDAR ACCESORIOS
   </button>
 </div>
-
-<script src="js/accesorios.js"></script>
+<script src="js/productos.js"></script

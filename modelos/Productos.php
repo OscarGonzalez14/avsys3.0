@@ -143,6 +143,37 @@ public function guardar_lente($describe,$precio,$cat_prod){
     //print_r($_POST);
   }   
 
+  //////GUARDAR NUEVO ACCESORIO
+public function guardar_accesorio($tipo_accesorio,$marca_accesorio,$des_accesorio){
+    $conectar= parent::conexion();
+    parent::set_names();
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
+    $conectar= parent::conexion();
+    parent::set_names(); 
+    $modelo_aro= ""; 
+    $color_aro= "";
+    $medidas_aro = "";
+    $diseno_aro = "";
+    $materiales_aro = "";
+    $cat_venta_aros = "";
+
+
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $marca_accesorio);
+    $sql->bindValue(2, $modelo_aro);
+    $sql->bindValue(3, $color_aro);
+    $sql->bindValue(4, $medidas_aro);
+    $sql->bindValue(5, $diseno_aro);
+    $sql->bindValue(6, $materiales_aro);
+    $sql->bindValue(7, $cat_venta_aros);
+    $sql->bindValue(8, $tipo_accesorio);
+    $sql->bindValue(9, $des_accesorio);
+
+    $sql->execute();
+
+    //print_r($_POST);
+  } 
 
 
 }//////Fin de la clase

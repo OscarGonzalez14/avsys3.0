@@ -1,4 +1,4 @@
- <style>
+<style>
     #lente{
       max-width: 65% !important;
       margin: auto;
@@ -36,7 +36,7 @@
               <label>Precio $</label>
                 <div class="input-group">
                   <input type="number" class="form-control" name="precio" placeholder="" id="precio" >
-              </div>
+               </div>
           </div>
           <input type="hidden" name="" id="cat_prod" value="lentes">
       </div>
