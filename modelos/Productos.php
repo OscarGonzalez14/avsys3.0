@@ -49,6 +49,15 @@ public function get_aros(){
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+public function get_lentes_ventas(){
+  $conectar= parent::conexion();
+
+  $sql="select id_producto,categoria as precio, categoria_producto, desc_producto from productos where categoria_producto='lentes'";
+  $sql = $conectar->prepare($sql);
+  $sql->execute();
+  return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 public function buscar_aros_ventas($sucursal){
   $conectar= parent::conexion();
@@ -77,9 +86,6 @@ public function guardar_lentes($describe,$precio,$cat_prod){
     $medidas_aro="0";
     $diseno_aro="0";
     $materiales_aro="0";
-    $precio=$_POST["precio"];
-    $cat_prod=$_POST["cat_prod"];
-    $describe=$_POST["describe"];
 
     $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
     $sql=$conectar->prepare($sql);

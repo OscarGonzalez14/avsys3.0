@@ -4,10 +4,10 @@ require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){ 
 require_once("header_dos.php");
 require_once("modals/listar_aros_en_venta.php");
+require_once("modals/modal_lente_en_venta.php");
 require_once("modals/pacientes_con_consulta.php");
 require_once("modals/pacientes_sin_consulta.php");
-
- ?>
+?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
@@ -102,7 +102,7 @@ require_once("modals/pacientes_sin_consulta.php");
            <div class="col-md-12">
               <div><!--BOTONES AGREGAR PRODUCTO-->
                   <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_aros_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta"><i class="fas fa-plus"></i>Aro</a>
-                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta"><i class="fas fa-plus"></i> Lentes</a>
+                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta" onClick='listar_lentes_venta();'><i class="fas fa-plus"></i> Lentes</a>
 
             </div><!-- FIN BOTONES AGREGAR PRODUCTO-->
             <div class="card">

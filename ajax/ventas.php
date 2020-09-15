@@ -31,6 +31,26 @@ case "agregar_aros_venta":
   echo json_encode($output);
 
      break;
+//////////////DATA AGREGAR LENTES EN VENTA
+     case "agregar_lentes_venta":          
+  $datos=$ventas->buscar_lentes_ventas($_POST["id_producto"]);
+  if(is_array($datos)==true and count($datos)>0){
+        foreach($datos as $row)
+        {
+          $output["desc_producto"] = $row["desc_producto"];
+          $output["precio_venta"] = $row["precio_venta"];
+          $output["id_producto"] = $row["id_producto"];
+          $output["categoria_producto"] = $row["categoria_producto"];                   
+        }      
 
+      } else {                 
+                 //si no existe el registro entonces no recorre el array
+      $output["error"]="El producto seleccionado está inactivo, intenta con otro";
+
+      }
+
+  echo json_encode($output);
+
+     break;
    }
    ?>

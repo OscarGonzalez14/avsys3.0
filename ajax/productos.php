@@ -68,6 +68,31 @@ break;
 
     break;
 
+    /////////////DATA TABLE LENTES EN VENTAS
+    case "listar_lentes_venta":////////muestra lentes en modal de ventas
+    $datos=$productos->get_lentes_ventas();
+    //Vamos a declarar un array
+    $data= Array();
+
+    foreach($datos as $row){
+        $sub_array = array();
+
+        $sub_array[] = $row["desc_producto"];
+        $sub_array[] = "$".number_format($row["precio"],2,".",",");
+
+        $sub_array[] = '<button type="button" class="btn btn-dark agrega_aro"  style="border-radius:0px" onClick="agregar_detalles_lente_venta('.$row["id_producto"].')">Seleccionar</button>';
+        $data[] = $sub_array;
+      }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+      echo json_encode($results);
+
+    break;
+
     ////////////////LISTAR AROS CREADOS
     case "listar_aros_creados":
     $datos=$productos->get_aros();

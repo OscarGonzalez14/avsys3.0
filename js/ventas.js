@@ -28,6 +28,43 @@ function agregarDetalleVenta(id_producto,id_ingreso){
   });//fin de ajax
 }
 
+function agregar_detalles_lente_venta(id_producto){
+  var consulta = $("#id_consulta").val();
+  if(consulta !=""){
+  $.ajax({
+  url:"ajax/ventas.php?op=agregar_lentes_venta",
+  method:"POST",
+  data:{id_producto:id_producto},
+  cache: false,
+  dataType:"json",
+  success:function(data){
+    console.log(data);
+     
+    var obj = {
+      cantidad : 1,
+      codProd  : id_producto,
+      id_ingreso   : "",
+      stock    : 0,
+      descripcion    : data.desc_producto,
+      categoria_ub  : "",
+      num_compra : "",
+      precio_venta  : data.precio_venta,
+      subtotal : 0,
+      descuento : 0,
+      categoria_prod : data.categoria_producto
+    };//Fin objeto
+    detalles.push(obj);
+    listarDetallesVentas();
+    $('#listar_lentes_ventas').modal("hide");
+    console.log(detalles);
+    }//fin success
+  });//fin de ajax
+}else{
+  Swal.fire('Error!. El paciente no posee consulta!','','error')
+
+}
+}
+
 /////////////LISTAR DETALLE DE ITEM SELECCIONADOS
 function listarDetallesVentas(){
 
