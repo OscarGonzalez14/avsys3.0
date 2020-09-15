@@ -399,9 +399,33 @@ function eliminar_paciente(id_paciente){
 		}
 	});
 
-		   }
+}
+});//bootbox
 
-		 });//bootbox
+}
 
+////AGREGA DATA DE PACIENTE A INTERFAZ DE VENTAS
 
-   }
+function pacienteConsultaData(id_paciente,id_consulta){  
+
+	//alert("hola");
+	$('#id_paciente').val(id_paciente);
+	$('#id_consulta').val(id_consulta);
+	document.getElementById("paciente_evaluado_c").style.display = "block";
+	$('#modal_pacientes_consulta').modal('hide');
+
+    $.ajax({
+      url:"ajax/pacientes.php?op=buscar_data_pacientes_con_consulta_ventas",
+      method:"POST",
+      data:{id_paciente:id_paciente,id_consulta:id_consulta},
+      dataType:"json",
+      success:function(data){
+      console.log(data);//return false;       
+        $('#modal_pacientes_consulta').modal('hide');
+        $("#titular_cuenta").val(data.nombres);
+        $("#evaluado").val(data.p_evaluado);
+        $("#codigo_paciente").val(data.codigo);
+        
+      }
+    })
+}

@@ -65,4 +65,35 @@ where e.bodega=? and e.stock>0";
 
 }
 
+
+//////////////////GUARDAR LENTE
+public function guardar_lentes($describe,$precio,$cat_prod){    
+
+    $conectar= parent::conexion();
+    parent::set_names();
+    $marca_aros="0";
+    $modelo_aro="0";
+    $color_aro="0";
+    $medidas_aro="0";
+    $diseno_aro="0";
+    $materiales_aro="0";
+    $precio=$_POST["precio"];
+    $cat_prod=$_POST["cat_prod"];
+    $describe=$_POST["describe"];
+
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $marca_aros);
+    $sql->bindValue(2, $modelo_aro);
+    $sql->bindValue(3, $color_aro);
+    $sql->bindValue(4, $medidas_aro);
+    $sql->bindValue(5, $diseno_aro);
+    $sql->bindValue(6, $materiales_aro);
+    $sql->bindValue(7, $precio);
+    $sql->bindValue(8, $cat_prod);
+    $sql->bindValue(9, $describe);
+    $sql->execute();
+
+}
+
 }//////Fin de la clase

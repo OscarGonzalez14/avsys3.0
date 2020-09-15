@@ -221,18 +221,42 @@
 ///////LISTAR PACIENTES CON CONSULTA EN VENTAS
  case "listar_pacientes_consulta":
 
-  $datos=$pacientes->get_pacientes($_POST["sucursal_paciente"]);
+  $datos=$pacientes->get_pacientes_con_consulta($_POST["sucursal"]);
   $data= Array();
   foreach($datos as $row){
     $sub_array = array();
-    $sub_array[] = $row["id_paciente"];
-    $sub_array[] = $row["nombres"];
+    //$sub_array[] = $row["id_paciente"];
     $sub_array[] = $row["codigo"];
-    $sub_array[] = $row["id_consulta"];
+    $sub_array[] = $row["nombres"];    
+    //$sub_array[] = $row["id_consulta"];
     $sub_array[] = $row["fecha_consulta"]; 
     $sub_array[] = $row["p_evaluado"];        
 
-    $sub_array[] = '<button type="button" onClick="select_pacientes_data('.$row["id_paciente"].','.$row["id_consulta"].');" id="'.$row["id_paciente"].'" class="btn btn-md bg-light"><i class="fas fa-search" aria-hidden="true" style="color:blue"></i></button>';            
+    $sub_array[] = '<button type="button" onClick="pacienteConsultaData('.$row["id_paciente"].','.$row["id_consulta"].');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';            
+                                                
+    $data[] = $sub_array;
+  }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+    break;
+
+///////LISTAR PACIENTES CON CONSULTA EN VENTAS
+case "listar_pacientes_sin_consulta":
+
+  $datos=$pacientes->get_pacientes_sin_consulta($_POST["sucursal"]);
+  $data= Array();
+  foreach($datos as $row){
+    $sub_array = array();
+    //$sub_array[] = $row["id_paciente"];
+    $sub_array[] = $row["codigo"];
+    $sub_array[] = $row["nombres"];
+
+    $sub_array[] = '<button type="button" onClick="select_pacientes_data('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';            
                                                 
     $data[] = $sub_array;
   }
@@ -246,5 +270,19 @@
 
 
     break;
+
+    ///GET DATA PACIENTES CON CONSULTAS EN VENTA
+  case "buscar_data_pacientes_con_consulta_ventas":
+
+   $datos= $pacientes->get_data_con_consulta($_POST["id_paciente"],$_POST["id_consulta"]);
+    foreach($datos as $row){
+      $output["codigo"] = $row["codigo"];
+      $output["nombres"] = $row["nombres"];
+      $output["p_evaluado"] = $row["p_evaluado"];       
+    }
+
+      echo json_encode($output);
+
+     break;
 
 }

@@ -1,9 +1,11 @@
 
  <?php
- require_once("config/conexion.php");
+require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){ 
 require_once("header_dos.php");
 require_once("modals/listar_aros_en_venta.php");
+require_once("modals/pacientes_con_consulta.php");
+require_once("modals/pacientes_sin_consulta.php");
 
  ?>
   <!-- Content Wrapper. Contains page content -->
@@ -70,36 +72,35 @@ require_once("modals/listar_aros_en_venta.php");
                   </div>
             </div>
             <div class="dropdown-divider"></div>
-              <div class="row invoice-info callout callout-info" style="border-bottom: solid 1px black;border-right: solid 1px black;border-top: solid 1px black">
-                    <div class="col-sm-1 invoice-col">
+              <div class="row invoice-info callout callout-info form-row" style="border-bottom: solid 1px black;border-right: solid 1px black;border-top: solid 1px black">
+                    <div class="col-sm-2 invoice-col" style="margin:0px">
                     <label># Venta</label>
-                      <input type="text" class="form-control input-dark" id="n_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;">
+                      <input type="text" class="form-control" id="n_compra" readonly="">
                     </div>
 
-                    <div class="col-sm-4 invoice-col">
+                    <div class="col-sm-4 invoice-col" style="margin:0px">
                     <label>Encargado de cuenta</label>
-                      <input type="text" class="form-control input-dark" id="proveedor_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly>
+                      <input type="text" class="form-control" id="titular_cuenta" readonly>
                     </div>
 
-                    <div class="col-sm-3 invoice-col" style="display: none">
+                    <div class="col-sm-3 invoice-col" style="display:none" id="paciente_evaluado_c" style="margin:0px">
                     <label>Paciente Evaluado</label>
-                      <input type="text" class="form-control input-dark" id="proveedor_compra" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly>
+                      <input type="text" class="form-control" id="evaluado" readonly>
                     </div>
 
-                    <div class="col-sm-2 invoice-col">
-                    <label>Cod. Pac</label>
-                      <input type="text" class="form-control input-dark" id="codigo_proveedor" style="margin:2px;background:white;border-radius: 6px;text-align: center;" readonly>
+                    <div class="col-sm-2 invoice-col" style="margin:0px">
+                    <label>#Pac.</label>
+                      <input type="text" class="form-control" id="codigo_paciente" readonly>
                     </div>
 
-                    <div class="col-sm-2 invoice-col">
-                    <label>Buscar</label>
-                      <button class="btn btn-primary btn-block" style="border-radius:2px" data-toggle="modal" data-target="#modalProveedores" id="select_paciente_venta">Paciente</button>
+                    <div class="col-sm-1 invoice-col form-group" style="margin: 0px">
+                    <label>Paciente</label>
+                      <button class="btn btn-primary btn-block" id="select_paciente_venta"><i class="fas fa-plus"></i></button>
                     </div>
                 </div><!--/.row invoice-info datos Proveedor-->
 
            <div class="col-md-12">
               <div><!--BOTONES AGREGAR PRODUCTO-->
-
                   <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_aros_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta"><i class="fas fa-plus"></i>Aro</a>
                   <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta"><i class="fas fa-plus"></i> Lentes</a>
 
@@ -160,8 +161,11 @@ require_once("modals/listar_aros_en_venta.php");
 <input type="hidden" name="sucursal" id="sucursal" value="<?php echo $_SESSION["sucursal"];?>"/>
 <input type="hidden" id="fecha" value="<?php echo $hoy;?>">
 <input type="hidden" id="name_pag" value="MODULO VENTAS">
+<input type="hidden" id="id_consulta">
+<input type="hidden" id="id_paciente">
 <script type="text/javascript" src="js/cleave.js"></script>
 <script type="text/javascript" src="js/productos.js"></script>
+<script type="text/javascript" src="js/pacientes.js"></script>
 <script type="text/javascript" src="js/ventas.js"></script>
 <script type="text/javascript" src="js/bootbox.min.js"></script>
   <script type="text/javascript">

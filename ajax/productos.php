@@ -122,5 +122,9 @@ case "buscar_aros_venta":
     echo json_encode($results);
      break;
 
-   }
+  case "registrar_lentes":
+    $productos->guardar_lentes($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
+//fin mensaje error
+  break;
+}
    ?>

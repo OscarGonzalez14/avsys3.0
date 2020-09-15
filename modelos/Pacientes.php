@@ -146,14 +146,39 @@ public function get_pacientes($sucursal_paciente){
   }
 
 ////////LISTAR PACIENTES EN VENTAS CON CONSULTAS
-public function get_pacientes_con_consulta(){
+public function get_pacientes_con_consulta($sucursal){
   $conectar=parent::conexion();
   parent::set_names();
   $sql="select p.id_paciente,p.nombres,p.codigo,e.id_consulta,e.fecha_consulta,e.p_evaluado from 
-    pacientes as p inner join consulta as e on e.id_paciente=p.id_paciente ORDER BY e.id_consulta DESC;";
+    pacientes as p inner join consulta as e on e.id_paciente=p.id_paciente where p.sucursal=? ORDER BY e.id_consulta DESC;";
 
   $sql=$conectar->prepare($sql);
+  $sql->bindValue(1, $sucursal);
   $sql->execute();
   return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 }
+
+////////LISTAR PACIENTES EN VENTAS SIN CONSULTAS
+public function get_pacientes_sin_consulta($sucursal){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select*from pacientes where sucursal=?;";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1, $sucursal);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/////GET DATA PACIENTES CONSULTAS EN VENTAS
+public function get_data_con_consulta($id_paciente,$id_consulta){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select p.nombres,p.id_paciente,p.codigo,c.id_consulta,c.p_evaluado from consulta as c inner join pacientes as p on p.id_paciente=c.id_paciente where p.id_paciente=? and c.id_consulta=?;";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1, $id_paciente);
+  $sql->bindValue(2, $id_consulta);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+}///////FIN DE LA CLASE

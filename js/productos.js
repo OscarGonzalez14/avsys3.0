@@ -322,5 +322,40 @@ $(document).on("click","#btn_aros_venta", function(){
         });
 });
 
+//////GUARDAR LENTE 
 
+function guardarLentes(){
+  var describe =$("#describe").val();
+  var precio =$("#precio").val();
+  var cat_prod =$("#cat_prod").val();
+  
+    //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
+if( describe != "" && precio != "" && cat_prod != "" ){
+    $.ajax({
+    url:"ajax/productos.php?op=registrar_lentes",
+    method:"POST",
+    data:{describe:describe,precio:precio,cat_prod:cat_prod},
+    cache: false,
+    //dataType:"json",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    },
+    success:function(data){
+
+        setTimeout ("explode();", 2000);
+      
+    }
+});
+}else{
+    //bootbox.alert("Algun campo obligatorio no fue llenado correctamente");
+Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error'
+)
+    return false;
+}
+} //cierre del condicional de validacion de los campos del paciente
+  function explode(){
+    location.reload();
+  }
 init();
