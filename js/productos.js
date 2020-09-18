@@ -1,9 +1,11 @@
 var tabla_aros;
 var tabla_aros_creados;
+var tabla_acc_compras;
 
 function init(){
   listar_aros();
   listar_aros_creados();
+  listar_acc_compras();
 }
     const Toast = Swal.mixin({
       toast: true,
@@ -155,6 +157,48 @@ Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error'
     return false;
 }
 } //cierre del condicional de validacion de los campos del paciente
+////////////GUARDAR ACCESORIOS
+
+function guardar_accesorios(){
+  var tipo_accesorio =$("#tipo_accesorio").val();
+  var marca_accesorio =$("#marca_accesorio").val();
+  var desc_accesorio =$("#des_accesorio").val();
+  var categoria =$("#categoria").val();
+  var codigo =$("#cod_acc").val();
+
+  //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
+if(tipo_accesorio !="" && marca_accesorio!="" && des_accesorio !="" && codigo){
+    $.ajax({
+    url:"ajax/productos.php?op=guardar_accesorios",
+    method:"POST",
+    data:{tipo_accesorio:tipo_accesorio,marca_accesorio:marca_accesorio,desc_accesorio:desc_accesorio,categoria:categoria,codigo:codigo},
+    cache: false,
+    dataType:"json",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    },
+    success:function(data){
+      console.log(data);
+      if(data=='error'){
+        Swal.fire('Accesorio ya Existe!','','error')
+        return false;
+      }else if (data=="ok") {
+        Swal.fire('Se creado un nuevo Accesorio!','','success')
+        setTimeout ("explode();", 2000);
+      }
+    }
+});
+}else{
+    //bootbox.alert("Algun campo obligatorio no fue llenado correctamente");
+Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error')
+    return false;
+}
+} 
+
+
+
   function explode(){
     location.reload();
   }
@@ -240,6 +284,89 @@ function listar_aros()
 
   }).DataTable();
 }
+
+/////////LISTAR ACCESORIOS EN COMPRAS
+function listar_acc_compras()
+{
+  tabla_acc_compras=$('#data_acc_compras').dataTable(
+  {
+    "aProcessing": true,//Activamos el procesamiento del datatables
+      "aServerSide": true,//Paginación y filtrado realizados por el servidor
+      dom: 'Bfrtip',//Definimos los elementos del control de tabla
+      responsive: true,
+      buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdf'
+            ],
+    "ajax":
+        {
+          url: 'ajax/productos.php?op=listar_acc_compras',
+          type : "get",
+          dataType : "json",
+          error: function(e){
+            console.log(e.responseText);
+          }
+        },
+    "bDestroy": true,
+    "responsive": true,
+    "bInfo":true,
+    "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+      "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+
+      "language": {
+
+          "sProcessing":     "Procesando...",
+
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+
+          "sZeroRecords":    "No se encontraron resultados",
+
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+
+          "sInfo":           "Mostrando un total de _TOTAL_ registros",
+
+          "sInfoEmpty":      "Mostrando un total de 0 registros",
+
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+
+          "sInfoPostFix":    "",
+
+          "sSearch":         "Buscar:",
+
+          "sUrl":            "",
+
+          "sInfoThousands":  ",",
+
+          "sLoadingRecords": "Cargando...",
+
+          "oPaginate": {
+
+              "sFirst":    "Primero",
+
+              "sLast":     "Último",
+
+              "sNext":     "Siguiente",
+
+              "sPrevious": "Anterior"
+
+          },
+
+          "oAria": {
+
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+
+          }
+
+         }//cerrando language
+
+  }).DataTable();
+}
+
+
 
 ////////////////LISTAR AROS EN VENTAS
 $(document).on("click","#btn_aros_venta", function(){

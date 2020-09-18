@@ -39,12 +39,57 @@ public function registrar_aro($marca_aros,$modelo_aro,$color_aro,$medidas_aro,$d
     $sql->execute();
 
 }
+//////VALIDAR EXISTEN CIA DE ACCESORIOS
+public function valida_existencia_acc($categoria,$codigo){
+  $conectar= parent::conexion();
+  parent::set_names();
+  $sql="select*from productos where categoria_producto=?  and modelo=?";
+  $sql= $conectar->prepare($sql);
+  $sql->bindValue(1, $categoria);
+  $sql->bindValue(2, $codigo);
+  $sql->execute();
+  return $resultado=$sql->fetchAll();
+}
+
+public function registrar_accesorios($tipo_accesorio,$marca_accesorio,$desc_accesorio,$categoria,$codigo){
+
+    $conectar= parent::conexion();
+    parent::set_names();
+    
+    $color="0";
+    $medidas="0";
+    $diseno="0";
+    $materiales="0";
+
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $marca_accesorio);
+    $sql->bindValue(2, $codigo);
+    $sql->bindValue(3, $color);
+    $sql->bindValue(4, $medidas);
+    $sql->bindValue(5, $diseno);
+    $sql->bindValue(6, $materiales);
+    $sql->bindValue(7, $tipo_accesorio);
+    $sql->bindValue(8, $categoria);
+    $sql->bindValue(9, $desc_accesorio);
+    $sql->execute();
+
+}
 
 public function get_aros(){
     $conectar= parent::conexion();
     $sql= "select*from productos where categoria_producto='aros' order by id_producto DESC;";
     $sql=$conectar->prepare($sql);
     //$sql->bindValue(1, $sucursal_correlativo);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+//////LISTAR AROS EN COMPRAS
+public function get_acc_compras(){
+    $conectar= parent::conexion();
+    $sql= "select*from productos where categoria_producto='accesorios' order by id_producto DESC;";
+    $sql=$conectar->prepare($sql);
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }

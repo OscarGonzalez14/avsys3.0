@@ -14,7 +14,7 @@ $marcas=$marca->get_marca();
 	}
 </style>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelleddy="myLargeModalLabel" id="accesorios_save" style="border-radius:0px !important;">
+<div class="modal fade" role="dialog" aria-labelleddy="myLargeModalLabel" id="accesorios_save" style="border-radius:0px !important;">
 	<div class="modal-dialog modal-lg" role="document" id="tamModal">
 		<div class="modal-content">
 
@@ -27,20 +27,26 @@ $marcas=$marca->get_marca();
 		<!-- cuerpo de la modal guardar accesorio-->
 		<section style="margin:15px">
 			<div class="form-row">
+
+				<div class="form-group col-md-2">
+					<label>Cod. Acc.</label>
+					<input type="text" class="form-control" name="" id="cod_acc" onkeyup="mayus(this)">
+				</div>
 				
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-5">
 					<label>Tipo accesorio</label>
 					<select class="form-control" id="tipo_accesorio">
-						<option>Estuches</option>
-						<option>Franelas</option>
-						<option>Spray de limpieza</option>
-						<option>Lentes de contacto</option>
+						<option value="">Seleccione...</option>
+						<option value="Estuches">Estuches</option>
+						<option value="Franelas">Franelas</option>
+						<option value="Spray de limpieza">Spray de limpieza</option>
+						<option value="Lentes de contacto">Lentes de contacto</option>
 					</select>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-md-5">
 					<label>Marca</label>
 					<select class="form-control" id="marca_accesorio">
-						<option>Seleccione marca</option>
+						<option value="">Seleccione marca</option>
         				<?php 
       						for ($i=0; $i < sizeof($marcas); $i++) {  ?>
        						 <option value="<?php echo($marcas[$i]["marca"]) ?>"><?php echo $marcas[$i]["marca"]?></option>
@@ -50,18 +56,22 @@ $marcas=$marca->get_marca();
 				</div>
 				<div class="form-group col-md-12">
 					<label>Descripción</label>
-					<input type="text" class="form-control" name="" id="des_accesorio">
+					<input type="text" class="form-control" name="" id="des_accesorio" onkeyup="mayus(this)">
 				</div>
 				
 			</div>
-
+			<input type="hidden" name="" id="categoria" value="accesorios">
 			<!-- pie modal guardar accesorios -->
             <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" onClick="guardar_accesorios();"><i class="fas fa-save"></i> Guardar</button>
+            <button type="button" class="btn btn-primary btn-block" onClick="guardar_accesorios();"><i class="fas fa-save"></i> Guardar</button>
             </div>
         </section>
     	</div>
 	</div>
 </div>
 		
-	
+<script type="text/javascript">
+	function mayus(e) {
+    e.value = e.value.toUpperCase();
+}
+</script>

@@ -91,7 +91,41 @@ foreach ($detalles as $k => $v) {
     $sql->bindValue(11,$evaluado);
     $sql->execute();
 
-}
+    ////////////////////ACTUALIZAR STOCK DE BODEGA SI PRODUCTO == aros o accesorios
+    if ($categoria_prod=="aros" or $categoria_prod=="accesorios") {//IF COMRUEBA CATEGORIA
+      $sql3="select * from existencias where id_producto=? and bodega=? and categoria_ub=? and num_compra=? and id_ingreso=?;";           
+      $sql3=$conectar->prepare($sql3);
+      $sql3->bindValue(1,$codProd);
+      $sql3->bindValue(2,$sucursal);
+      $sql3->bindValue(3,$categoria_ub);
+      $sql3->bindValue(4,$num_compra);
+      $sql3->bindValue(5,$id_ingreso);
+      $sql3->execute();
+
+      $resultados = $sql3->fetchAll(PDO::FETCH_ASSOC);
+
+      foreach($resultados as $b=>$row){
+      $re["existencia"] = $row["stock"];
+    }            
+    
+    $cantidad_totales = $row["stock"] - $cantidad;
+
+    if(is_array($resultados)==true and count($resultados)>0) {                    
+
+    $sql12 = "update existencias set stock=? where id_producto=? and bodega=? and id_ingreso=? and categoria_ub=? and num_compra=?";
+      $sql12 = $conectar->prepare($sql12);
+      $sql12->bindValue(1,$cantidad_totales);
+      $sql12->bindValue(2,$codProd);
+      $sql12->bindValue(3,$sucursal);
+      $sql12->bindValue(4,$id_ingreso);
+      $sql12->bindValue(5,$categoria_ub);
+      $sql12->bindValue(6,$num_compra);
+      $sql12->execute();               
+  }
+
+    }//FIN IF COMRUEBA CATEGORIA
+
+}//FIN DEL FOREACH**************
 
   $sql2="insert into ventas values(null,?,?,?,?,?,?,?,?,?,?,?,?);";
     $sql2=$conectar->prepare($sql2);

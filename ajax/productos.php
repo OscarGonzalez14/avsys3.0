@@ -42,6 +42,38 @@
 //fin mensaje error
 break;
 
+case 'guardar_accesorios':
+$datos = $productos->valida_existencia_acc($_POST["categoria"],$_POST["codigo"]);
+    if(is_array($datos)==true and count($datos)==0){
+  $productos->registrar_accesorios($_POST["tipo_accesorio"],$_POST["marca_accesorio"],$_POST["desc_accesorio"],$_POST["categoria"],$_POST["codigo"]);
+  $messages[]="ok";
+}else{
+  $errors[]="error";
+}
+
+if (isset($messages)){
+     ?>
+       <?php
+         foreach ($messages as $message) {
+             echo json_encode($message);
+           }
+         ?>
+   <?php
+ }
+    //mensaje error
+      if (isset($errors)){
+
+   ?>
+
+         <?php
+           foreach ($errors as $error) {
+               echo json_encode($error);
+             }
+           ?>
+   <?php
+   }
+break;
+
     case "listar_aros":
     $datos=$productos->get_aros();
     //Vamos a declarar un array
@@ -151,5 +183,30 @@ case "buscar_aros_venta":
     $productos->guardar_lentes($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
 //fin mensaje error
   break;
+
+/////////////LISTAR ACCESORIOS EN COMPRAS
+  case "listar_acc_compras":
+    $datos=$productos->get_acc_compras();
+    $data= Array();
+    foreach($datos as $row){
+        $sub_array = array();
+        $sub_array[] = $row["marca"];
+        $sub_array[] = $row["modelo"];
+        $sub_array[] = $row["categoria"];
+        $sub_array[] = $row["desc_producto"];
+        $sub_array[] = '<button type="button" class="btn btn-dark agrega_acc"  style="border-radius:0px" onClick="agregar_aro('.$row["id_producto"].')">Seleccionar</button>';
+        $data[] = $sub_array;
+      }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+      echo json_encode($results);
+
+    break;
+
+
 }
    ?>

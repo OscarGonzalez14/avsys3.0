@@ -7,6 +7,7 @@ if(isset($_SESSION["usuario"])){
  require_once('header.php');
  require_once('modals/modal_proveedores.php');
  require_once('modals/modal_aros.php');
+ require_once('modals/modal_accesorios.php');
  require_once('modals/modal_reporte_ultima_compra_admin.php');
 ?>
 <style type="text/css">
@@ -133,6 +134,8 @@ if(isset($_SESSION["usuario"])){
 
                 <div style="margin:20px;">
                   <a class="btn btn-dark" style="color:white;border-radius:3px; background:black" data-toggle="modal" data-target="#modalAros" data-backdrop="static" data-keyboard="false" onClick="cursor_d();"><i class="fas fa-glasses"></i> Agregar Aro</a>
+
+                  <a class="btn btn-dark" style="color:white;border-radius:3px; background:black" data-toggle="modal" data-target="#modalAccesorios" data-backdrop="static" data-keyboard="false"><i class="fas fa-glasses"></i> Agregar Accesorio</a>
                 </div>
 
            <div class="col-md-12">
