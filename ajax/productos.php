@@ -207,6 +207,36 @@ case "buscar_aros_venta":
 
     break;
 
+    ////////////////LISTAR ACCESORIOS CREADOS
+    case "listar_accesorios_creados":
+    $datos=$productos->get_accesorios();
+    //Vamos a declarar un array
+    $data= Array();
+
+    foreach($datos as $row)
+      {
+        $sub_array = array();
+        $sub_array[] = $row["id_producto"];
+        $sub_array[] = $row["marca"];
+        $sub_array[] = $row["modelo"];
+        $sub_array[] = $row["categoria"];
+        $sub_array[] = $row["categoria_producto"];
+        $sub_array[] = $row["desc_producto"];
+        $sub_array[] = '<button type="button" name="hola" id="'.$row["id_producto"].'" class="btn btn-danger btn-sm btn-flat" onClick="eliminarAccesorio()"></i> Eliminar</button>';
+        $data[] = $sub_array;
+      }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+      echo json_encode($results);
+
+    break;
+
+
+
 
 }
    ?>
