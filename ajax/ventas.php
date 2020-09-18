@@ -19,7 +19,8 @@ case "agregar_aros_venta":
           $output["categoria_ub"] = $row["categoria_ub"];
           $output["num_compra"] = $row["num_compra"];
           $output["id_producto"] = $row["id_producto"];
-          $output["id_ingreso"] = $row["id_ingreso"];                   
+          $output["id_ingreso"] = $row["id_ingreso"];
+          $output["categoria_producto"] = $row["categoria_producto"];                   
         }      
 
       } else {                 
@@ -52,5 +53,128 @@ case "agregar_aros_venta":
   echo json_encode($output);
 
      break;
+///////////////////////GET MUMERO VENTA
+  case "get_numero_venta":
+  $datos= $ventas->get_numero_venta($_POST["sucursal_correlativo"]);
+  $sucursal = $_POST["sucursal_correlativo"];
+  $prefijo = "";
+  if ($sucursal=="Metrocentro") {
+    $prefijo="ME";
+  }elseif ($sucursal=="Santa Ana") {
+    $prefijo="SA";
+  }elseif ($sucursal=="San Miguel") {
+    $prefijo="SM";
+  }
+    if(is_array($datos)==true and count($datos)>0){
+    foreach($datos as $row){                  
+      $codigo=$row["numero_venta"];
+      $cod=substr($codigo,5,11)+1;
+      $output["correlativo"]="AV".$prefijo."-".$cod;
+    }             
+  }else{
+      $output["correlativo"] = "AV".$prefijo."-1";
+  }
+
+   echo json_encode($output);
+
+  break;
+////////////////////////COMBOX DINAMICOS PARA VENTAS
+case 'tipo_pago';
+
+  if ($_POST['id_tipo']=='Contado') {
+    $html="
+      <option value='Contado'>Contado</option>
+      <option value='Efectivo'>Efectivo</option>
+      <option value='Tarjeta de Credito'>Tarjeta de Crédito</option>      
+      <option value='Cheque'>Cheque</option>";
+    echo $html;
+
+  }elseif($_POST['id_tipo']=='Credito'){
+  
+  $html= "
+    <option value=''>Selecione</option>
+    <option value='Descuento en Planilla'> Descuento en Planilla</option>
+    <option value='Cargo Automatico'>Cargo Automático</option>
+    <option value='Creditos Personales'>Créditos Personales</option>
+    <option value='Tarjeta de Credito'>Tarjeta de Crédito</option>
+    <option value='Cheque'>Cheque</option>";
+  
+    echo $html;
+    }else{
+
+  $html= "<option value=''>Seleccione</option>
+  ";
+  
+    echo $html;
+    }
+
+    break;
+
+    case "monto_cuotas":
+
+      if($_POST['m_cuotas']=='Descuento en Planilla'){
+
+      $html="
+
+      <option value='0'>Seleccione</>
+      <option value='2'> 2 Meses</>
+      <option value='3'> 3 Meses</>
+      <option value='4'> 4 Meses</>
+      <option value='5'> 5 Meses</>
+      <option value='6'> 6 Meses</>
+      <option value='7'> 7 Meses</>
+      <option value='8'> 8 Meses</>
+      <option value='9'> 9 Meses</>
+      <option value='10'> 10 Meses</>
+      <option value='11'> 11 Meses</>
+      <option value='12'> 12 Meses</>
+      
+      ";
+
+      echo $html;
+
+      }else if($_POST['m_cuotas']=='Cargo Automatico'){
+
+      $html="
+
+      <option value='0'>Seleccione</>
+      <option value='2'> 2 Meses</>
+      <option value='3'> 3 Meses</>
+      <option value='4'> 4 Meses</>
+      <option value='5'> 5 Meses</>
+      <option value='6'> 6 Meses</>
+      <option value='7'> 7 Meses</>
+      <option value='8'> 8 Meses</>
+      <option value='9'> 9 Meses</>
+      <option value='10'> 10 Meses</>
+      <option value='11'> 11 Meses</>
+      <option value='12'> 12 Meses</>
+      
+      ";
+
+      echo $html;
+
+      }else if($_POST['m_cuotas']=='Creditos Personales'){
+
+        $html="
+      <option value=''>Seleccione</>
+      <option value='1'> 1 Meses</>
+      <option value='2'> 2 Meses</>
+      <option value='3'> 3 Meses</>
+      <option value='4'> 4 Meses</>
+      <option value='5'> 5 Meses</>
+      <option value='6'> 6 Meses</>
+      
+      ";
+
+      echo $html;
+      }
+
+    break;
+
+    case 'registrar_venta':
+      $ventas->agrega_detalle_venta();
+    break;
+
    }
    ?>

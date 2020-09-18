@@ -256,7 +256,7 @@ case "listar_pacientes_sin_consulta":
     $sub_array[] = $row["codigo"];
     $sub_array[] = $row["nombres"];
 
-    $sub_array[] = '<button type="button" onClick="select_pacientes_data('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';            
+    $sub_array[] = '<button type="button" onClick="pacienteSinConsultaData('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';            
                                                 
     $data[] = $sub_array;
   }
@@ -278,7 +278,21 @@ case "listar_pacientes_sin_consulta":
     foreach($datos as $row){
       $output["codigo"] = $row["codigo"];
       $output["nombres"] = $row["nombres"];
-      $output["p_evaluado"] = $row["p_evaluado"];       
+      $output["p_evaluado"] = $row["p_evaluado"];
+      $output["id_usuario"] = $row["id_usuario"];      
+    }
+
+      echo json_encode($output);
+
+     break;
+
+   ///GET DATA PACIENTES SINCONSULTAS EN VENTA
+  case "buscar_data_pacientes_sin_consulta_ventas":
+
+   $datos= $pacientes->get_data_sin_consulta($_POST["id_paciente"]);
+    foreach($datos as $row){
+      $output["codigo"] = $row["codigo"];
+      $output["nombres"] = $row["nombres"];             
     }
 
       echo json_encode($output);

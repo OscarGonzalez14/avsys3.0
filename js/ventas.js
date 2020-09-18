@@ -1,3 +1,57 @@
+function init() {
+  get_correlativo_venta();
+}
+
+$(document).ready(ocultar_btn_post_venta);
+
+  function ocultar_btn_post_venta(){
+  document.getElementById("post_venta").style.display = "none";
+}
+  function mostrar_btn_post_venta(){
+  document.getElementById("post_venta").style.display = "flex";
+}
+
+//VALDAR TIPO DE PAGO
+$(document).ready(function(){
+  $("#tipo_venta").change(function () {         
+    $("#tipo_venta option:selected").each(function () {
+      id_tipo = $(this).val();
+      $.post('ajax/ventas.php?op=tipo_pago', { id_tipo: id_tipo }, function(data){
+        $("#tipo_pago").html(data);
+      });            
+    });
+  })
+});
+//VALIDAR CUOTA
+$(document).ready(function(){
+  $("#tipo_pago").change(function () {
+          
+    $("#tipo_pago option:selected").each(function () {
+      m_cuotas = $(this).val();
+      $.post('ajax/ventas.php?op=monto_cuotas', { m_cuotas: m_cuotas }, function(data){
+        $("#plazo").html(data);
+      });            
+    });
+  })
+});
+
+
+
+function get_correlativo_venta(){
+  var sucursal_correlativo = $("#sucursal").val();
+  $.ajax({
+    url:"ajax/ventas.php?op=get_numero_venta",
+    method:"POST",
+    data:{sucursal_correlativo:sucursal_correlativo},
+    cache:false,
+    dataType:"json",
+      success:function(data){
+      console.log(data);        
+      $("#n_venta").val(data.correlativo);             
+      }
+    })
+}
+
 var detalles = [];
 function agregarDetalleVenta(id_producto,id_ingreso){
   $.ajax({
@@ -18,7 +72,8 @@ function agregarDetalleVenta(id_producto,id_ingreso){
       num_compra : data.num_compra,
       precio_venta  : data.precio_venta,
       subtotal : 0,
-      descuento : 0
+      descuento : 0,
+      categoria_prod : data.categoria_producto
     };//Fin objeto
     detalles.push(obj);
     listarDetallesVentas();
@@ -83,12 +138,13 @@ function listarDetallesVentas(){
       "</td><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'>"+
       "<td style='text-align:center'>"+"<span>$</span>"+detalles[i].precio_venta+"</td>"+
       "<td style='text-align:center'><input style='text-align:right' type='number' class='descuento form-control' id='descuento"+(i)+"' onClick='setDescuento(event, this, "+(i)+");' onKeyUp='setDescuento(event, this, "+(i)+");' value='"+detalles[i].descuento+"'>"+
-      "</td><td style='text-align:center;'><span>$</span><span style='text-align:right' name='subtotal[]' id=subtotal"+i+" >"+detalles[i].subtotal.toFixed(2)+"</span><td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarFila("+i+");' style='color:red'></i></td></tr>";
+      "</td><td style='text-align:center;'><span>$</span><span style='text-align:right' name='subtotal[]' id=subtotal"+i+" >"+detalles[i].subtotal.toFixed(2)+"</span><td style='text-align:center'><i class='nav-icon fas fa-times-circle fa-2x' onClick='eliminarFila("+i+");' style='color:red'></i></td></tr>";
 
     //subtotal = subtotal + importe;
 
   }//cierre for
   $('#listar_det_ventas').html(filas);
+  calcularTotales();
 }
 
 function setCantidad(event, obj, idx){
@@ -103,27 +159,36 @@ function recalcular(idx){
     console.log((detalles[idx].cantidad * detalles[idx].precio_venta));
     var subtotal =detalles[idx].subtotal = detalles[idx].cantidad * detalles[idx].precio_venta;
     console.log(subtotal.toFixed(2));
-    subtotal = detalles[idx].subtotal = detalles[idx].subtotal - (detalles[idx].subtotal * detalles[idx].descuento/100);
+    subtotal = detalles[idx].subtotal = (detalles[idx].subtotal - detalles[idx].descuento);
 
     subtotalFinal = subtotal.toFixed(2);
     $('#subtotal'+idx).html(subtotalFinal);
 
-    //calcularTotales();
+  calcularTotales();
   }
 
 function setDescuento(event, obj, idx){
     event.preventDefault();
     var desc = document.getElementById("descuento"+idx).value;
     var desc_n = parseInt(desc);
-     if(desc_n>20){
+     if(desc_n>30){
       Swal.fire('Error!, Ha excedido el limite de descuento autorizado','','error')
       document.getElementById("descuento"+idx).value="";
       document.getElementById("descuento"+idx).style.border='solid 1px red';
-     }else if(desc_n<=20){
+     }else if(desc_n<=30){
     detalles[idx].descuento = parseFloat(obj.value);
     document.getElementById("descuento"+idx).style.border='solid 1px green';
     recalcular(idx);
   }
+}
+
+function calcularTotales() {
+  var total_final=0;
+  for(var i=0;i<detalles.length;i++){
+    total_final=total_final+detalles[i].subtotal;
+  }
+  $('#total_venta').html(total_final.toFixed(2));
+  console.log(total_final);
 }
 
 function eliminarFila(index) {
@@ -134,7 +199,7 @@ function eliminarFila(index) {
 function drop_index(position_element){
   detalles.splice(position_element, 1);
   //recalcular(position_element);
-  //calcularTotales();
+  calcularTotales();
 
 }
 
@@ -321,3 +386,58 @@ function listar_pacientes_sin_consultas_ventas(){
 
         });
 }
+
+function registrarVenta(){
+  //mostrar_btn_post_venta();
+  var fecha_venta = $("#fecha").val();
+  var numero_venta = $("#n_venta").val();
+  var paciente = $("#titular_cuenta").val();
+  var vendedor = $("#usuario").val();
+  var monto_total = $("#total_venta").val();
+  var tipo_pago = $("#tipo_pago").val();
+  var tipo_venta = $("#tipo_venta").val();
+  var id_usuario = $("#usuario").val();
+  var id_paciente = $("#optometra").val();
+  var sucursal = $("#sucursal").val();
+  var evaluado = $("#evaluado").val();
+  var optometra = $("#optometra").val();
+  var plazo = $("#plazo").val();
+
+  if (tipo_venta == "Credito" && plazo =="0") {
+    setTimeout ("Swal.fire('Debe seleccionar el plazo','','error')", 100);
+    return false;
+  }
+
+  var test_array = detalles.length;
+  if (test_array<1) {
+  Swal.fire('Debe Agregar Productos a la Venta!','','error')
+  return false;
+}
+
+if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
+    $.ajax({
+    url:"ajax/ventas.php?op=registrar_venta",
+    method:"POST",
+    data:{'arrayVenta':JSON.stringify(detalles),'fecha_venta':fecha_venta,'numero_venta':numero_venta,'paciente':paciente,'vendedor':vendedor,'monto_total':monto_total,'tipo_pago':tipo_pago,'tipo_venta':tipo_venta,'id_usuario':id_usuario,'id_paciente':id_paciente,'sucursal':sucursal,'evaluado':evaluado,'optometra':optometra,'plazo':plazo},
+    cache: false,
+    dataType:"html",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    },     
+    success:function(data){           
+      detalles = [];
+      $('#tabla_det_ventas').html('');
+      setTimeout ("recibo_uno();", 2000);          
+    }
+
+    });//////FIN AJAX
+}else{
+  Swal.fire('Existen campos obligatorios vacios!','','error')
+}
+
+
+}////////////FIN FUNCION REGISTRAR LA VENTA
+
+init();

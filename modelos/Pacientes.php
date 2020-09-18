@@ -173,10 +173,21 @@ public function get_pacientes_sin_consulta($sucursal){
 public function get_data_con_consulta($id_paciente,$id_consulta){
   $conectar=parent::conexion();
   parent::set_names();
-  $sql="select p.nombres,p.id_paciente,p.codigo,c.id_consulta,c.p_evaluado from consulta as c inner join pacientes as p on p.id_paciente=c.id_paciente where p.id_paciente=? and c.id_consulta=?;";
+  $sql="select p.nombres,p.id_paciente,p.codigo,c.id_consulta,c.p_evaluado,c.id_usuario from consulta as c inner join pacientes as p on p.id_paciente=c.id_paciente where p.id_paciente=? and c.id_consulta=?;";
   $sql=$conectar->prepare($sql);
   $sql->bindValue(1, $id_paciente);
   $sql->bindValue(2, $id_consulta);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/////GET DATA PACIENTES SIN CONSULTAS EN VENTAS
+public function get_data_sin_consulta($id_paciente){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select nombres,codigo from pacientes where id_paciente=?;";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1, $id_paciente);
   $sql->execute();
   return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 }
