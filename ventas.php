@@ -8,6 +8,9 @@ require_once("modals/modal_lente_en_venta.php");
 require_once("modals/modal_accesorios_ventas.php");
 require_once("modals/pacientes_con_consulta.php");
 require_once("modals/pacientes_sin_consulta.php");
+require_once("modals/antireflejante_ventas.php");
+require_once("modals/photosensible_ventas.php");
+
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -106,9 +109,9 @@ require_once("modals/pacientes_sin_consulta.php");
                   
                   <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta" onClick='listar_lentes_venta();'><i class="fas fa-plus"></i> Lentes</a>             
 
-                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta" onClick='listar_lentes_venta();'><i class="fas fa-plus"></i> AR</a>
+                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_ar_ventas" data-backdrop="static" data-keyboard="false" id="btn_ar_venta" onClick="listar_ar_venta();"><i class="fas fa-plus"></i> AR</a>
 
-                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta" onClick='listar_lentes_venta();'><i class="fas fa-plus"></i> Photosensibles</a>
+                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_photo_ventas" data-backdrop="static" data-keyboard="false" id="btn_photo_venta" onClick='listar_photo_venta();'><i class="fas fa-plus"></i> Photosensibles</a>
 
                   <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta" onClick='listar_lentes_venta();'><i class="fas fa-plus"></i> Reparaciones</a>
 
