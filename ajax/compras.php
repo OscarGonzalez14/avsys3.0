@@ -32,7 +32,7 @@
           $output["modelo"] = $row["modelo"];
           $output["marca"] = $row["marca"];
           $output["color"] = $row["color"];
-          $output["categoria"] = $row["categoria"];                   
+          $output["categoria"] = strtoupper(substr($row["categoria_producto"],0,3));                   
         }      
 
       } else {                 
@@ -44,6 +44,27 @@
   echo json_encode($output);
 
 break;
+
+///////////////GET LENTE POR ID PARA AGREGAR EN COMPRA
+    case "buscar_acc_id":
+
+      $datos=$compras->get_lente_acc_id($_POST["id_producto"]);
+
+        if(is_array($datos)==true and count($datos)>0){
+        foreach($datos as $row){
+          $output["id_producto"] = $row["id_producto"];
+          $output["marca"] = $row["marca"];
+          $output["categoria"] = $row["categoria"];
+          $output["modelo"] = $row["modelo"]." ".$row["desc_producto"];        
+                             
+        }      
+
+      }
+
+  echo json_encode($output);
+
+break;
+
 
 case "registrar_compra";
 

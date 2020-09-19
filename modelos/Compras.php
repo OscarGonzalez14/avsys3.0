@@ -13,16 +13,28 @@ class Compras extends Conectar{
     	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function get_lente_por_id($id_producto){
+public function get_lente_por_id($id_producto){
 
-        $conectar= parent::conexion();
+    $conectar= parent::conexion();
 
-        $sql="select*from productos where id_producto=? and categoria_producto='aros';";
-        $sql=$conectar->prepare($sql);
-        $sql->bindValue(1, $id_producto);
-        $sql->execute();
-        return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $sql="select*from productos where id_producto=? and categoria_producto='aros';";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_producto);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+////////////////GET DATOS ACCESORIOS PARA AGREGAR EN COMPRA
+public function get_lente_acc_id($id_producto){
+
+    $conectar= parent::conexion();
+
+    $sql="select*from productos where id_producto=? and categoria_producto='accesorios';";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_producto);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ///////////////VERIFICA SI EXISTE COMPRA***********
 public function valida_existencia_ncompra($n_compra){
   $conectar= parent::conexion();

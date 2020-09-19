@@ -19,6 +19,20 @@ where e.id_producto=? and e.id_ingreso=?";
 
 }
 
+public function buscar_accesorios_ventas($id_producto,$id_ingreso){
+  $conectar= parent::conexion();
+  $sql="select p.categoria,p.desc_producto,p.categoria_producto,e.precio_venta,e.stock,e.categoria_ub,e.num_compra,e.fecha_ingreso,e.id_ingreso,p.id_producto from
+productos as p inner join existencias as e on p.id_producto=e.id_producto
+where e.id_producto=? and e.id_ingreso=? and p.categoria_producto='accesorios';";
+
+  $sql = $conectar->prepare($sql);
+  $sql->bindValue(1,$id_producto);
+  $sql->bindValue(2,$id_ingreso);
+  $sql->execute();
+  return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
 public function buscar_lentes_ventas($id_producto){
   $conectar= parent::conexion();
   $sql="select categoria as precio_venta,categoria_producto,desc_producto,id_producto from productos where id_producto=?";
@@ -92,7 +106,6 @@ foreach ($detalles as $k => $v) {
     $sql->execute();
 
     ////////////////////ACTUALIZAR STOCK DE BODEGA SI PRODUCTO == aros o accesorios
-    if ($categoria_prod=="aros" or $categoria_prod=="accesorios") {//IF COMRUEBA CATEGORIA
       $sql3="select * from existencias where id_producto=? and bodega=? and categoria_ub=? and num_compra=? and id_ingreso=?;";           
       $sql3=$conectar->prepare($sql3);
       $sql3->bindValue(1,$codProd);
@@ -123,7 +136,6 @@ foreach ($detalles as $k => $v) {
       $sql12->execute();               
   }
 
-    }//FIN IF COMRUEBA CATEGORIA
 
 }//FIN DEL FOREACH**************
 

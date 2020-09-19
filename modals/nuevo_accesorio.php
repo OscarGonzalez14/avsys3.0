@@ -37,10 +37,10 @@ $marcas=$marca->get_marca();
 					<label>Tipo accesorio</label>
 					<select class="form-control" id="tipo_accesorio">
 						<option value="">Seleccione...</option>
-						<option value="Estuches">Estuches</option>
-						<option value="Franelas">Franelas</option>
+						<option value="Estuche">Estuche</option>
+						<option value="Franela">Franela</option>
 						<option value="Spray de limpieza">Spray de limpieza</option>
-						<option value="Lentes de contacto">Lentes de contacto</option>
+						<option value="Lente de contacto">Lente de contacto</option>
 					</select>
 				</div>
 				<div class="form-group col-md-5">

@@ -20,6 +20,31 @@ case "agregar_aros_venta":
           $output["num_compra"] = $row["num_compra"];
           $output["id_producto"] = $row["id_producto"];
           $output["id_ingreso"] = $row["id_ingreso"];
+          $output["categoria_producto"] = substr(strtoupper($row["categoria_producto"]),0,3);                   
+        }      
+
+      } else {                 
+                 //si no existe el registro entonces no recorre el array
+      $output["error"]="El producto seleccionado está inactivo, intenta con otro";
+
+      }
+
+  echo json_encode($output);
+
+     break;
+///////////////AGREGAR ACCESORIO A DETALLES DE VENTA(agregar a array detalles)
+  case "agregar_accesorios_venta":          
+  $datos=$ventas->buscar_accesorios_ventas($_POST["id_producto"],$_POST["id_ingreso"]);
+  if(is_array($datos)==true and count($datos)>0){
+        foreach($datos as $row)
+        {
+          $output["desc_producto"] = $row["desc_producto"];
+          $output["precio_venta"] = number_format($row["precio_venta"],2,".",",");
+          $output["stock"] = $row["stock"];
+          $output["categoria_ub"] = $row["categoria_ub"];
+          $output["num_compra"] = $row["num_compra"];
+          $output["id_producto"] = $row["id_producto"];
+          $output["id_ingreso"] = $row["id_ingreso"];
           $output["categoria_producto"] = $row["categoria_producto"];                   
         }      
 
@@ -32,6 +57,7 @@ case "agregar_aros_venta":
   echo json_encode($output);
 
      break;
+
 //////////////DATA AGREGAR LENTES EN VENTA
      case "agregar_lentes_venta":          
   $datos=$ventas->buscar_lentes_ventas($_POST["id_producto"]);
@@ -41,7 +67,7 @@ case "agregar_aros_venta":
           $output["desc_producto"] = $row["desc_producto"];
           $output["precio_venta"] = $row["precio_venta"];
           $output["id_producto"] = $row["id_producto"];
-          $output["categoria_producto"] = $row["categoria_producto"];                   
+          $output["categoria_producto"] = strtoupper($row["categoria_producto"]);                   
         }      
 
       } else {                 

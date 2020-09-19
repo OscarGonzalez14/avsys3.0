@@ -103,14 +103,29 @@ public function get_lentes_ventas(){
   return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
+////////////////////listar aros en MODAL VENTAS
 public function buscar_aros_ventas($sucursal){
   $conectar= parent::conexion();
   $suscursal=$_POST["sucursal"];
 
   $sql="select p.desc_producto,e.precio_venta,e.stock,e.categoria_ub,e.num_compra,e.fecha_ingreso,e.id_ingreso,p.id_producto from
 productos as p inner join existencias as e on p.id_producto=e.id_producto
-where e.bodega=? and e.stock>0";
+where e.bodega=? and e.stock>0 and p.categoria_producto='aros'";
+
+  $sql = $conectar->prepare($sql);
+  $sql->bindValue(1,$sucursal);
+  $sql->execute();
+  return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+}
+//////////////LISTAR ACCESORIOS EN MODAL VENTAS
+public function buscar_accesorios_ventas($sucursal){
+  $conectar= parent::conexion();
+  $suscursal=$_POST["sucursal"];
+
+  $sql="select p.categoria,p.modelo,p.desc_producto,e.precio_venta,e.stock,e.categoria_ub,e.num_compra,e.fecha_ingreso,e.id_ingreso,p.id_producto from
+productos as p inner join existencias as e on p.id_producto=e.id_producto
+where e.bodega=? and e.stock>0 and p.categoria_producto='accesorios'";
 
   $sql = $conectar->prepare($sql);
   $sql->bindValue(1,$sucursal);

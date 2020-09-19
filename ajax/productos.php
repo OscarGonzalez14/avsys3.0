@@ -179,6 +179,32 @@ case "buscar_aros_venta":
     echo json_encode($results);
      break;
 
+  //////////////LISTAR ACCESORIOS EN MODAL DE VENTAS
+  case "buscar_accesorios_venta":          
+  $datos=$productos->buscar_accesorios_ventas($_POST["sucursal"]);
+  $data= Array();
+  foreach($datos as $row){
+    $sub_array = array();         
+      
+      $sub_array[] = $row["categoria"]." ".$row["desc_producto"];
+      $sub_array[] = $row["stock"];
+      $sub_array[] = $row["fecha_ingreso"];
+      $sub_array[] = $row["num_compra"];      
+      $sub_array[] = "$".number_format($row["precio_venta"],2,".",",");
+      $sub_array[] = $row["categoria_ub"];
+      $sub_array[] = '<button type="button" name="hola" id="'.$row["id_producto"].'" class="btn btn-primary btn-sm btn-flat" onClick="agregarAccVenta('.$row["id_producto"].','.$row["id_ingreso"].')"><i class="fa fa-plus"></i> Agregar</button>';
+      
+        $data[] = $sub_array;
+       
+      }
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+     break;
+
   case "registrar_lentes":
     $productos->guardar_lentes($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
 //fin mensaje error
@@ -188,13 +214,14 @@ case "buscar_aros_venta":
   case "listar_acc_compras":
     $datos=$productos->get_acc_compras();
     $data= Array();
+
     foreach($datos as $row){
         $sub_array = array();
         $sub_array[] = $row["marca"];
         $sub_array[] = $row["modelo"];
         $sub_array[] = $row["categoria"];
         $sub_array[] = $row["desc_producto"];
-        $sub_array[] = '<button type="button" class="btn btn-dark agrega_acc"  style="border-radius:0px" onClick="agregar_aro('.$row["id_producto"].')">Seleccionar</button>';
+        $sub_array[] = '<button type="button" class="btn btn-dark"  style="border-radius:0px" onClick="agregar_accesorio('.$row["id_producto"].')">Seleccionar</button>';
         $data[] = $sub_array;
       }
 

@@ -75,6 +75,40 @@ function agregar_aro(id_producto){
   });//fin de ajax
 
 }
+
+////////////AGREGAR ACCESORIOS A COMPRA**
+var detalles = [];
+function agregar_accesorio(id_producto){
+  $.ajax({
+  url:"ajax/compras.php?op=buscar_acc_id",
+  method:"POST",
+  data:{id_producto:id_producto},
+  cache: false,
+  dataType:"json",
+  success:function(data){
+    console.log(data);   
+    var obj = {
+      cantidad : 1,
+      codProd  : id_producto,
+      modelo   : data.modelo,
+      marca    : data.marca,
+      color    : "",
+      medidas  : "",
+      precio_compra : 0,
+      precio_venta  : 0,
+      subtotal : 0,
+      categoria : data.categoria
+    };//Fin objeto
+    detalles.push(obj);
+    listarDetallesCompras();
+    $('#modalAccesorios').modal("hide");
+    console.log(detalles);
+    }//fin success
+  });//fin de ajax
+
+}
+
+/////////fin aggergar acc a compra
 function listarDetallesCompras(){
 
     $('#listar_det_compras').html('');
@@ -88,8 +122,8 @@ function listarDetallesCompras(){
     var subtotal = detalles[i].subtotal = detalles[i].cantidad * detalles[i].precio_compra;
 
         var filas = filas + "<tr id='fila"+i+"'><td>"+(i+1)+
-        "</td><td style='text-align:center;'>"+detalles[i].marca+" "+
-        "Mod.: "+detalles[i].modelo+" - Color: "+detalles[i].color+" - Medidas: "+
+        "</td><td style='text-align:center;'>"+detalles[i].categoria+" "+detalles[i].marca+" "+
+        "Mod.: "+detalles[i].modelo+" "+detalles[i].color+" "+
         detalles[i].medidas+
         "</td><td style='text-align:center'><input style='text-align:right;border-radius:3px' type='number' class='cantidad form-control' name='precio_compra[]' id='precio_compra[]' onClick='setPrecioCompra(event, this, "+(i)+");' onKeyUp='setPrecioCompra(event, this, "+(i)+");' value='"+  detalles[i].precio_compra+"'><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='pv"+(i)+"' onClick='setPrecioVenta(event, this, "+(i)+");' onKeyUp='setPrecioVenta(event, this, "+(i)+");' value='"+detalles[i].precio_venta+"'></td><td style='text-align:center;'><span>$</span><span style='text-align:right' name='subtotal[]' id=subtotal"+i+" >"+detalles[i].subtotal+"</span><td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarFila("+i+");' style='color:red'></i></td></tr>";
 

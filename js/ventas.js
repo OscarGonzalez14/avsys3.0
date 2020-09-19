@@ -61,7 +61,8 @@ function agregarDetalleVenta(id_producto,id_ingreso){
   cache: false,
   dataType:"json",
   success:function(data){
-    console.log(data);   
+    console.log(data);
+
     var obj = {
       cantidad : 1,
       codProd  : id_producto,
@@ -78,6 +79,58 @@ function agregarDetalleVenta(id_producto,id_ingreso){
     detalles.push(obj);
     listarDetallesVentas();
    $('#listar_aros_ventas').modal("hide");
+    console.log(detalles);
+    }//fin success
+  });//fin de ajax
+}
+
+
+///////////AGEREGAR ACCESORIOS A LA VENTA
+var detalles = [];
+function agregarAccVenta(id_producto,id_ingreso){
+  $.ajax({
+  url:"ajax/ventas.php?op=agregar_accesorios_venta",
+  method:"POST",
+  data:{id_producto:id_producto,id_ingreso:id_ingreso},
+  cache: false,
+  dataType:"json",
+  success:function(data){
+   // console.log(data);
+
+ existe_lentes_aros=[];
+  for(var i=0;i<detalles.length;i++){
+    
+    var aro_lente = detalles[i].categoria_prod;
+    
+    if (aro_lente=="ARO" || aro_lente=="LENTES"){
+      existe_lentes_aros.push(aro_lente);
+    }
+  }
+  var long_items = existe_lentes_aros.length;
+  if (long_items>0) {
+    precio_v=0;
+  }else{
+    precio_v=data.precio_venta;
+  }
+
+
+    var obj = {
+      cantidad : 1,
+      codProd  : id_producto,
+      id_ingreso   : id_ingreso,
+      stock    : data.stock,
+      descripcion    : data.desc_producto,
+      categoria : data.categoria,
+      categoria_ub  : data.categoria_ub,
+      num_compra : data.num_compra,
+      precio_venta  : precio_v,
+      subtotal : 0,
+      descuento : 0,
+      categoria_prod : ""
+    };//Fin objeto
+    detalles.push(obj);
+    listarDetallesVentas();
+   $('#listar_accesorios_ventas').modal("hide");
     console.log(detalles);
     }//fin success
   });//fin de ajax
@@ -134,7 +187,7 @@ function listarDetallesVentas(){
       var subtotal = detalles[i].subtotal = detalles[i].cantidad * detalles[i].precio_venta;
 
       var filas = filas + "<tr id='fila"+i+"'><td>"+(i+1)+
-      "</td><td style='text-align:center;'>"+detalles[i].descripcion+
+      "</td><td style='text-align:center;'>"+detalles[i].categoria_prod+" "+detalles[i].descripcion+
       "</td><td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' name='cantidad[]' id='cantidad[]' onClick='setCantidad(event, this, "+(i)+");' onKeyUp='setCantidad(event, this, "+(i)+");' value='"+detalles[i].cantidad+"'>"+
       "<td style='text-align:center'>"+"<span>$</span>"+detalles[i].precio_venta+"</td>"+
       "<td style='text-align:center'><input style='text-align:right' type='number' class='descuento form-control' id='descuento"+(i)+"' onClick='setDescuento(event, this, "+(i)+");' onKeyUp='setDescuento(event, this, "+(i)+");' value='"+detalles[i].descuento+"'>"+
@@ -393,7 +446,7 @@ function registrarVenta(){
   var numero_venta = $("#n_venta").val();
   var paciente = $("#titular_cuenta").val();
   var vendedor = $("#usuario").val();
-  var monto_total = $("#total_venta").val();
+  var monto_total = $("#total_venta").html();
   var tipo_pago = $("#tipo_pago").val();
   var tipo_venta = $("#tipo_venta").val();
   var id_usuario = $("#usuario").val();
