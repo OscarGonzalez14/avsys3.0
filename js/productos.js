@@ -703,13 +703,12 @@ function listar_lentes_venta(){
 
 
 //////GUARDAR LENTE 
-
 function guardarLentes(){
   var describe =$("#describe").val();
   var precio =$("#precio").val();
   var cat_prod =$("#cat_prod").val();
   
-    //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
+    //validamos, si los campos(lente) estan vacios entonces no se envia el formulario
 if( describe != "" && precio != "" && cat_prod != "" ){
     $.ajax({
     url:"ajax/productos.php?op=registrar_lentes",
@@ -725,17 +724,87 @@ if( describe != "" && precio != "" && cat_prod != "" ){
     success:function(data){
 
         setTimeout ("explode();", 2000);
-      
     }
 });
 }else{
     //bootbox.alert("Algun campo obligatorio no fue llenado correctamente");
-Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error'
-)
+Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error')
     return false;
 }
 } //cierre del condicional de validacion de los campos del paciente
   function explode(){
     location.reload();
   }
+
+////// GUARDAR NUEVO ANTIREFLEJANTE
+function guardarAntireflejante(){
+  var describe =$("#describe_dos").val();
+  var precio =$("#precio_dos").val();
+  var cat_prod =$("#cat_prod_dos").val();
+  
+    //validamos, si los campos(lente) estan vacios entonces no se envia el formulario
+if( describe != "" && precio != "" && cat_prod != "" ){
+    $.ajax({
+    url:"ajax/productos.php?op=registrar_antireflejantes",
+    method:"POST",
+    data:{describe:describe,precio:precio,cat_prod:cat_prod},
+    cache: false,
+    //dataType:"json",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    },
+    success:function(data){
+
+        setTimeout ("explode();", 2000);
+    }
+});
+}else{
+    //bootbox.alert("Algun campo obligatorio no fue llenado correctamente");
+Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error')
+    return false;
+}
+} //cierre del condicional de validacion de los campos del paciente
+  function explode(){
+    location.reload();
+  }
+
+////// GUARDAR NUEVO PHOTOSENSIBLE
+function guardarPhotosensible(){
+  var describe =$("#describe_tres").val();
+  var precio =$("#precio_tres").val();
+  var cat_prod =$("#cat_prod_tres").val();
+  
+    //validamos, si los campos(lente) estan vacios entonces no se envia el formulario
+if( describe != "" && precio != "" && cat_prod != "" ){
+    $.ajax({
+    url:"ajax/productos.php?op=registrar_photosensibles",
+    method:"POST",
+    data:{describe:describe,precio:precio,cat_prod:cat_prod},
+    cache: false,
+    //dataType:"json",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    },
+    success:function(data){
+
+        setTimeout ("explode();", 2000);
+    }
+});
+}else{
+    //bootbox.alert("Algun campo obligatorio no fue llenado correctamente");
+Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error')
+    return false;
+}
+} //cierre del condicional de validacion de los campos del paciente
+  function explode(){
+    location.reload();
+  }
+
+
+
+
 init();

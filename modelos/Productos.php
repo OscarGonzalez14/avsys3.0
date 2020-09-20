@@ -4,7 +4,7 @@ require_once("../config/conexion.php");
 
 
 class Productos extends Conectar
-{//////inicio de la clase
+{ //////inicio de la clase
 
 public function valida_existencia_aros($marca_aros,$modelo_aro,$color_aro,$medidas_aro){
   $conectar= parent::conexion();
@@ -170,5 +170,60 @@ public function guardar_lentes($describe,$precio,$cat_prod){
     $sql->execute();
 
 }
+
+
+//////////////////GUARDAR ANTIRREFLEJANTE
+public function guardar_antireflejante($describe,$precio,$cat_prod){    
+
+    $conectar= parent::conexion();
+    parent::set_names();
+    $marca_aros="0";
+    $modelo_aro="0";
+    $color_aro="0";
+    $medidas_aro="0";
+    $diseno_aro="0";
+    $materiales_aro="0";
+
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $marca_aros);
+    $sql->bindValue(2, $modelo_aro);
+    $sql->bindValue(3, $color_aro);
+    $sql->bindValue(4, $medidas_aro);
+    $sql->bindValue(5, $diseno_aro);
+    $sql->bindValue(6, $materiales_aro);
+    $sql->bindValue(7, $precio);
+    $sql->bindValue(8, $cat_prod);
+    $sql->bindValue(9, $describe);
+    $sql->execute();
+}
+
+//////////////////GUARDAR ANTIRREFLEJANTE
+public function guardar_photosensible($describe,$precio,$cat_prod){    
+
+    $conectar= parent::conexion();
+    parent::set_names();
+    $marca_aros="0";
+    $modelo_aro="0";
+    $color_aro="0";
+    $medidas_aro="0";
+    $diseno_aro="0";
+    $materiales_aro="0";
+
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $marca_aros);
+    $sql->bindValue(2, $modelo_aro);
+    $sql->bindValue(3, $color_aro);
+    $sql->bindValue(4, $medidas_aro);
+    $sql->bindValue(5, $diseno_aro);
+    $sql->bindValue(6, $materiales_aro);
+    $sql->bindValue(7, $precio);
+    $sql->bindValue(8, $cat_prod);
+    $sql->bindValue(9, $describe);
+    $sql->execute();
+}
+
+
 
 }//////Fin de la clase

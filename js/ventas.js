@@ -440,7 +440,13 @@ function listar_pacientes_sin_consultas_ventas(){
         });
 }
 
+
 function registrarVenta(){
+  
+}
+
+
+function saveVenta(){
   //mostrar_btn_post_venta();
   var fecha_venta = $("#fecha").val();
   var numero_venta = $("#n_venta").val();

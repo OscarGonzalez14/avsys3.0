@@ -179,7 +179,7 @@ case "buscar_aros_venta":
     echo json_encode($results);
      break;
 
-  //////////////LISTAR ACCESORIOS EN MODAL DE VENTAS
+
   case "buscar_accesorios_venta":          
   $datos=$productos->buscar_accesorios_ventas($_POST["sucursal"]);
   $data= Array();
@@ -205,10 +205,22 @@ case "buscar_aros_venta":
     echo json_encode($results);
      break;
 
-  case "registrar_lentes":
+  case "registrar_lentes"://registro de lente
+
     $productos->guardar_lentes($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
 //fin mensaje error
   break;
+
+  case "registrar_antireflejantes"://registro de antireflejante
+    $productos->guardar_antireflejante($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
+      //fin mensaje error
+  break;
+
+  
+  case "registrar_photosensibles"://registro de antireflejante
+    $productos->guardar_photosensible($_POST["describe"],$_POST["precio"],$_POST["cat_prod"]);    
+      //fin mensaje error
+   break;
 
 /////////////LISTAR ACCESORIOS EN COMPRAS
   case "listar_acc_compras":
