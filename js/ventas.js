@@ -441,12 +441,20 @@ function listar_pacientes_sin_consultas_ventas(){
 }
 
 
-function registrarVenta(){
-  
+function registrarVenta2(){
+  var tipo_pago = $("#tipo_pago").val();
+  var tipo_venta = $("#tipo_venta").val();
+  if (tipo_venta=="Contado") {
+    saveVenta();
+    $('#recibo_inicial').modal('show');
+    setTimeout ("mostrar_recibo_inicial();", 2000);
+  }else if(tipo_venta=="Credito" && tipo_pago=="Descuento en Planilla"){
+    alert("Debo Lanzar formulario de OID")
+  }
 }
 
 
-function saveVenta(){
+function registrarVenta(){
   //mostrar_btn_post_venta();
   var fecha_venta = $("#fecha").val();
   var numero_venta = $("#n_venta").val();
@@ -490,15 +498,23 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
       $('#tabla_det_ventas').html('');
       //setTimeout ("recibo_uno();", 2000);
       Swal.fire('Venta realizada!','','success')
+      if (tipo_venta=="Contado") {       
+        setTimeout ("reciboInicial();", 3000);
+      }else if(tipo_venta=="Credito" && tipo_pago=="Descuento en Planilla"){
+        alert("Debo Lanzar formulario de OID")
+  }
       mostrar_btn_post_venta();          
     }
 
     });//////FIN AJAX
+
 }else{
   Swal.fire('Existen campos obligatorios vacios!','','error')
 }
-
-
 }////////////FIN FUNCION REGISTRAR LA VENTA
+
+function reciboInicial(){
+  $('#recibo_inicial').modal('show');
+}
 
 init();
