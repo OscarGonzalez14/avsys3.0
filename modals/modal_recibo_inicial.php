@@ -21,7 +21,7 @@
 
     <div class="modal-content">
      <div class="modal-header text-center" id="head_rini">
-       <h5 class="text-center" style="text-align: center" align="center"><i class="fas fa-plus-square"></i> RECIBO INICIAL</h5>
+       <h5 class="text-center" style="text-align: center" align="center"><i class="fas fa-plus-square"></i> RECIBO INICIAL&nbsp;&nbsp;#01</h5>
         <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
      </div>
         <div class="form-group row" style="margin:8px"><!--FORM GROUP 1-->
