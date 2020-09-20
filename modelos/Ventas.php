@@ -139,7 +139,23 @@ foreach ($detalles as $k => $v) {
 
 }//FIN DEL FOREACH**************
 
-  $sql2="insert into ventas values(null,?,?,?,?,?,?,?,?,?,?,?,?);";
+    ///////////////////////INSERTAR CREDITOS
+    $sql1="insert into creditos values(null,?,?,?,?,?,?,?,?,?);";
+    $sql1=$conectar->prepare($sql1);          
+    $sql1->bindValue(1,$tipo_venta);
+    $sql1->bindValue(2,$monto_total);
+    $sql1->bindValue(3,$plazo);
+    $sql1->bindValue(4,$monto_total);
+    $sql1->bindValue(5,$tipo_pago);
+    $sql1->bindValue(6,$numero_venta);
+    $sql1->bindValue(7,$id_paciente);
+    $sql1->bindValue(8,$id_usuario);
+    $sql1->bindValue(9,$fecha_venta);
+
+    $sql1->execute();
+
+
+    $sql2="insert into ventas values(null,?,?,?,?,?,?,?,?,?,?,?,?);";
     $sql2=$conectar->prepare($sql2);
           
     $sql2->bindValue(1,$fecha_venta);
@@ -155,6 +171,7 @@ foreach ($detalles as $k => $v) {
     $sql2->bindValue(11,$evaluado);
     $sql2->bindValue(12,$optometra);
     $sql2->execute();
+
 
 
 }//////////FIN FUNCION REGISTRA VENTA

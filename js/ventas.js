@@ -450,7 +450,7 @@ function registrarVenta(){
   var tipo_pago = $("#tipo_pago").val();
   var tipo_venta = $("#tipo_venta").val();
   var id_usuario = $("#usuario").val();
-  var id_paciente = $("#optometra").val();
+  var id_paciente = $("#id_paciente").val();
   var sucursal = $("#sucursal").val();
   var evaluado = $("#evaluado").val();
   var optometra = $("#optometra").val();
@@ -482,7 +482,9 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
     success:function(data){           
       detalles = [];
       $('#tabla_det_ventas').html('');
-      setTimeout ("recibo_uno();", 2000);          
+      //setTimeout ("recibo_uno();", 2000);
+      Swal.fire('Venta realizada!','','success')
+      mostrar_btn_post_venta();          
     }
 
     });//////FIN AJAX

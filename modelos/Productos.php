@@ -76,6 +76,15 @@ public function registrar_accesorios($tipo_accesorio,$marca_accesorio,$desc_acce
 
 }
 
+public function get_accesorios(){
+    $conectar= parent::conexion();
+    $sql= "select*from productos where categoria_producto='accesorios' order by id_producto DESC;";
+    $sql=$conectar->prepare($sql);
+    //$sql->bindValue(1, $sucursal_correlativo);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 public function get_aros(){
     $conectar= parent::conexion();
     $sql= "select*from productos where categoria_producto='aros' order by id_producto DESC;";
