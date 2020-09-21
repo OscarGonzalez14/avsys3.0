@@ -27,7 +27,7 @@
        <div class="form-row">
       <div class="form-group col-md-9">
               <label>Descripción</label>
-              <input type="text" class="form-control" name="" placeholder="Descripción del lente" id="describe">
+              <input type="text" class="form-control" name="" placeholder="Descripción del lente" id="describe" onkeyup="mayus(this);">
           </div>
           <div class="form-group col-md-3">
               <label>Precio $</label>
@@ -45,3 +45,8 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+}
+</script>
