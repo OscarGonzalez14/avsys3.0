@@ -225,4 +225,15 @@ public function get_detalle_aros_rec_ini($id_paciente,$numero_venta){
 }
 
 
+  public function get_ventas_gral(){
+  $conectar= parent::conexion();
+
+  $sql="select numero_venta, vendedor, fecha_venta, monto_total, paciente from ventas;";
+  $sql = $conectar->prepare($sql);
+  $sql->execute();
+  return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
 }//////Fin de la clase
