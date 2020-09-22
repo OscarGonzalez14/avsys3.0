@@ -78,7 +78,14 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">        
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item">
+            <a href="empresas.php" class="nav-link">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>Empresas</p>
+            </a>
+          </li>       
            
           <li class="nav-item">
             <a href="compras.php" class="nav-link">
