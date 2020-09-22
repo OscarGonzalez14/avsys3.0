@@ -94,7 +94,7 @@ case "agregar_aros_venta":
     if(is_array($datos)==true and count($datos)>0){
     foreach($datos as $row){                  
       $codigo=$row["numero_venta"];
-      $cod=(substr($codigo,5,11))+1;
+      $cod=(substr($codigo,5,11))+3;
       $output["correlativo"]="AV".$prefijo."-".$cod;
     }             
   }else{

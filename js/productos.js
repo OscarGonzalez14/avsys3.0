@@ -722,7 +722,7 @@ if( describe != "" && precio != "" && cat_prod != "" ){
       console.log(z);
     },
     success:function(data){
-
+        setTimeout ("Swal.fire('Se ha registrado un nuevo lente','','success')", 100)
         setTimeout ("explode();", 2000);
     }
 });
@@ -756,7 +756,7 @@ if( describe != "" && precio != "" && cat_prod != "" ){
       console.log(z);
     },
     success:function(data){
-
+        setTimeout ("Swal.fire('Se ha registrado un nuevo antireflejante','','success')", 100)
         setTimeout ("explode();", 2000);
     }
 });
@@ -790,7 +790,7 @@ if( describe != "" && precio != "" && cat_prod != "" ){
       console.log(z);
     },
     success:function(data){
-
+        setTimeout ("Swal.fire('Se ha registrado un nuevo photosensible','','success')", 100)
         setTimeout ("explode();", 2000);
     }
 });

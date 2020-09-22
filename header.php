@@ -77,7 +77,7 @@
 
         <li class="nav-item">
             <a href="empresas.php" class="nav-link">
-              <i class="nav-icon fas fa-chart-line"></i>
+              <i class="nav-icon fas fa-building"></i>
               <p>Empresas</p>
             </a>
           </li>           

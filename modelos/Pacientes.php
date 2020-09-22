@@ -192,4 +192,15 @@ public function get_data_sin_consulta($id_paciente){
   return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+////GET DATOS PAIENTE RECIBO INICIAL
+public function get_detalle_paciente_rec_ini($id_paciente){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select telefono,empresas from pacientes where id_paciente=?";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1,$id_paciente);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }///////FIN DE LA CLASE

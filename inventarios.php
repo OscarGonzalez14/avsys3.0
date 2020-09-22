@@ -99,6 +99,20 @@ require_once("modelos/Reporteria.php");
             </div>
           </div>
 
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-dark">
+              <div class="inner">
+                <h3>Usuarios</h3>
+                <p>0</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <a href="Usuarios.php" class="small-box-footer">ir a Usuarios <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
         </div>
         <!-- /.row -->
     

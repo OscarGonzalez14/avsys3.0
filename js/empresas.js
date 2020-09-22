@@ -6,7 +6,7 @@ function guardarEmpresa(){
 	var respEmpresa=$("#respEmpresa").val();
 	var correoEmpresa=$("#correoEmpresa").val();
 	var encargado=$("#encargado").val();
-
+	
 	if(nomEmpresa !="" || dirEmpresa !="" || nitEmpresa !="" || telEmpresa !="" || respEmpresa !="" || correoEmpresa !="" || encargado !=""){
 		$.ajax({
 			url:"ajax/empresas.php?op=guardar_empresa",

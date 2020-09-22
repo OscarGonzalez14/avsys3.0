@@ -522,6 +522,14 @@ function reciboInicial(){
   $('#recibo_inicial').modal('show');
   var numero_venta = $("#n_venta").val();
   var id_paciente = $("#id_paciente").val();
+  var evaluado = $("#evaluado").val();
+  var titular_cuenta = $("#titular_cuenta").val();
+
+  $("#n_venta_recibo_ini").val(numero_venta);
+  $("#id_pac_ini").val(id_paciente);
+  $("#servicio_rec_ini").val(evaluado);
+  $("#recibi_rec_ini").val(titular_cuenta);
+
 
   $.ajax({
   url:"ajax/ventas.php?op=get_datos_lentes_rec_ini",
@@ -575,6 +583,20 @@ function reciboInicial(){
     $("#marca_aro_ini").val(data.marca);
     $("#modelo_aro_ini").val(data.modelo);
     $("#color_aro_ini").val(data.color);
+  }
+  })
+//////////////DATOS PACIENTE
+  $.ajax({
+  url:"ajax/pacientes.php?op=datos_pacientes_rec_ini",
+  method:"POST",
+  data:{id_paciente:id_paciente},
+  cache:false,
+  dataType:"json",
+  success:function(data)
+  { 
+    console.log(data);  
+    $("#telefono_ini").val(data.telefono);
+    $("#empresa_ini").val(data.empresa);
   }
   })
 

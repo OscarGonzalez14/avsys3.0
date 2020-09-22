@@ -299,4 +299,18 @@ case "listar_pacientes_sin_consulta":
 
      break;
 
+  case 'datos_pacientes_rec_ini':
+    $datos= $pacientes->get_detalle_paciente_rec_ini($_POST["id_paciente"]); 
+
+        if(is_array($datos)==true and count($datos)>0){
+          foreach($datos as $row){         
+            $output["telefono"] = $row["telefono"];
+            $output["empresas"] = $row["empresas"];                          
+          }       
+        echo json_encode($output);
+
+        } 
+      break;
+    break;
+
 }
