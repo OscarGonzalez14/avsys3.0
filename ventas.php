@@ -8,7 +8,11 @@ require_once("modals/modal_lente_en_venta.php");
 require_once("modals/modal_accesorios_ventas.php");
 require_once("modals/pacientes_con_consulta.php");
 require_once("modals/pacientes_sin_consulta.php");
+
 require_once("modals/modal_recibo_inicial.php");
+require_once("modals/antireflejante_ventas.php");
+require_once("modals/photosensible_ventas.php");
+
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -107,9 +111,9 @@ require_once("modals/modal_recibo_inicial.php");
                   
                   <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta" onClick='listar_lentes_venta();'><i class="fas fa-plus"></i> Lentes</a>             
 
-                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta" onClick='listar_lentes_venta();'><i class="fas fa-plus"></i> AR</a>
+                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_ar_ventas" data-backdrop="static" data-keyboard="false" id="btn_ar_venta" onClick="listar_ar_venta();"><i class="fas fa-plus"></i> AR</a>
 
-                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta" onClick='listar_lentes_venta();'><i class="fas fa-plus"></i> Photosensibles</a>
+                  <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_photo_ventas" data-backdrop="static" data-keyboard="false" id="btn_photo_venta" onClick='listar_photo_venta();'><i class="fas fa-plus"></i> Photosensibles</a>
 
                   <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_lentes_ventas" data-backdrop="static" data-keyboard="false" id="btn_aros_venta" onClick='listar_lentes_venta();'><i class="fas fa-plus"></i> Reparaciones</a>
 
@@ -121,7 +125,7 @@ require_once("modals/modal_recibo_inicial.php");
                 <h3 class="card-title" align="center"><strong>Detalle de Compras</strong></h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0" onClick="get_correlativo_venta();">
+              <div class="card-body p-0">
                 <table  id="tabla_det_ventas" width="100%">
                   <thead style="background: #00001a;color:white">
                     <tr>
@@ -143,12 +147,12 @@ require_once("modals/modal_recibo_inicial.php");
                     </tr>
                     <tfoot>                      
                 </table>
-                <button class="btn btn-primary btn-block" id="btn_de_compra" style="border-radius:2px" onClick='registrarVenta();' onmouseover="get_correlativo_venta();"><i class="fas fa-save"></i> REGISTRAR VENTA</button>
+                <button class="btn btn-primary btn-block" id="btn_de_compra" style="border-radius:2px" onClick='registrarVenta();'><i class="fas fa-save"></i> REGISTRAR VENTA</button>
               </div>
               <br>
               <div class="row post_venta" id="post_venta" style="display: flex;justify-content: space-between !important;">
                 <div class="col-sm-6 post_compra">
-                  <button class="btn btn-block" style="border-radius:2px;background:#333333;color:white" data-toggle="modal" data-target="#recibo_inicial" data-backdrop="static" data-keyboard="false"><i class="fas fa-print"></i> Imprimir recibo Inicial</button>
+                  <button class="btn btn-block" style="border-radius:2px;background:#333333;color:white" data-toggle="modal" data-target="#recibo_inicial" data-backdrop="static" data-keyboard="false"><i class="fas fa-print" onClick="reciboInicial();"></i> Imprimir recibo Inicial</button>
                 </div>
                 <div class="col-sm-6 post_compra">
                   <button class="btn btn-success btn-block" style="border-radius:2px" onClick='explode();'><i class="fas fa-plus"></i> Nueva Venta</button>
@@ -177,6 +181,7 @@ require_once("modals/modal_recibo_inicial.php");
 <script type="text/javascript" src="js/pacientes.js"></script>
 <script type="text/javascript" src="js/ventas.js"></script>
 <script type="text/javascript" src="js/bootbox.min.js"></script>
+<script type="text/javascript" src="js/recibos.js"></script>
   <script type="text/javascript">
     var title = document.getElementById("name_pag").value;
     document.getElementById("title_mod").innerHTML=" "+

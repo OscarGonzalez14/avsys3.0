@@ -5,7 +5,9 @@ function init() {
 $(document).ready(ocultar_btn_post_venta);
 
   function ocultar_btn_post_venta(){
+  get_correlativo_venta();
   document.getElementById("post_venta").style.display = "none";
+
 }
   function mostrar_btn_post_venta(){
   document.getElementById("post_venta").style.display = "flex";
@@ -164,6 +166,8 @@ function agregar_detalles_lente_venta(id_producto){
     detalles.push(obj);
     listarDetallesVentas();
     $('#listar_lentes_ventas').modal("hide");
+    $('#listar_ar_ventas').modal("hide");
+    $('#listar_photo_ventas').modal("hide");
     console.log(detalles);
     }//fin success
   });//fin de ajax
@@ -495,11 +499,12 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
     },     
     success:function(data){           
       detalles = [];
-      $('#tabla_det_ventas').html('');
+      //$('#tabla_det_ventas').html('');
       //setTimeout ("recibo_uno();", 2000);
       Swal.fire('Venta realizada!','','success')
       if (tipo_venta=="Contado") {       
         setTimeout ("reciboInicial();", 3000);
+        //reciboInicialData();
       }else if(tipo_venta=="Credito" && tipo_pago=="Descuento en Planilla"){
         alert("Debo Lanzar formulario de OID")
   }
@@ -515,6 +520,65 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
 
 function reciboInicial(){
   $('#recibo_inicial').modal('show');
-}
+  var numero_venta = $("#n_venta").val();
+  var id_paciente = $("#id_paciente").val();
+
+  $.ajax({
+  url:"ajax/ventas.php?op=get_datos_lentes_rec_ini",
+  method:"POST",
+  data:{id_paciente:id_paciente,numero_venta:numero_venta},
+  cache:false,
+  dataType:"json",
+  success:function(data)
+  { 
+    console.log(data);  
+    $("#lente_rec_ini").val(data.producto);
+  }
+  })
+  ////////////////photo
+  $.ajax({
+  url:"ajax/ventas.php?op=get_datos_photo_rec_ini",
+  method:"POST",
+  data:{id_paciente:id_paciente,numero_venta:numero_venta},
+  cache:false,
+  dataType:"json",
+  success:function(data)
+  { 
+    console.log(data);  
+    $("#photo_rec_ini").val(data.producto);
+  }
+  })
+
+    ////////////////antireflejante
+  $.ajax({
+  url:"ajax/ventas.php?op=get_datos_ar_rec_ini",
+  method:"POST",
+  data:{id_paciente:id_paciente,numero_venta:numero_venta},
+  cache:false,
+  dataType:"json",
+  success:function(data)
+  { 
+    console.log(data);  
+    $("#ar_rec_ini").val(data.producto);
+  }
+  })
+      ////////////////aros
+  $.ajax({
+  url:"ajax/ventas.php?op=get_datos_aros_rec_ini",
+  method:"POST",
+  data:{id_paciente:id_paciente,numero_venta:numero_venta},
+  cache:false,
+  dataType:"json",
+  success:function(data)
+  { 
+    console.log(data);  
+    $("#marca_aro_ini").val(data.marca);
+    $("#modelo_aro_ini").val(data.modelo);
+    $("#color_aro_ini").val(data.color);
+  }
+  })
+
+  
+}///////////FIN FUNCION RECIBO INICIAL
 
 init();

@@ -94,7 +94,7 @@ case "agregar_aros_venta":
     if(is_array($datos)==true and count($datos)>0){
     foreach($datos as $row){                  
       $codigo=$row["numero_venta"];
-      $cod=substr($codigo,5,11)+1;
+      $cod=(substr($codigo,5,11))+1;
       $output["correlativo"]="AV".$prefijo."-".$cod;
     }             
   }else{
@@ -123,6 +123,7 @@ case 'tipo_pago';
     <option value='Cargo Automatico'>Cargo Automático</option>
     <option value='Creditos Personales'>Créditos Personales</option>
     <option value='Tarjeta de Credito'>Tarjeta de Crédito</option>
+    <option value='Tasa cero'>Tasa cero</option>
     <option value='Cheque'>Cheque</option>";
   
     echo $html;
@@ -138,7 +139,7 @@ case 'tipo_pago';
 
     case "monto_cuotas":
 
-      if($_POST['m_cuotas']=='Descuento en Planilla'){
+      if($_POST['m_cuotas']=='Descuento en Planilla' or $_POST['m_cuotas']=='Tasa cero'){
 
       $html="
 
@@ -201,6 +202,54 @@ case 'tipo_pago';
     case 'registrar_venta':
       $ventas->agrega_detalle_venta();
     break;
+    //////////GET DATA LENTES RECIBO INICIAL 
+    case 'get_datos_lentes_rec_ini':
+      $datos= $ventas->get_detalle_lente_rec_ini($_POST["id_paciente"],$_POST["numero_venta"]); 
+
+        if(is_array($datos)==true and count($datos)>0){
+          foreach($datos as $row){         
+            $output["producto"] = $row["producto"];                
+          }       
+        echo json_encode($output);
+        } 
+      break;
+      //////////GET DATA PHOTOSENSIBLES RECIBO INICIAL 
+      case 'get_datos_photo_rec_ini':
+      $datos= $ventas->get_detalle_photo_rec_ini($_POST["id_paciente"],$_POST["numero_venta"]); 
+
+        if(is_array($datos)==true and count($datos)>0){
+          foreach($datos as $row){         
+            $output["producto"] = $row["producto"];                
+          }       
+        echo json_encode($output);
+        } 
+      break;
+
+            //////////GET DATA ANTIREFLEJANTE RECIBO INICIAL 
+      case 'get_datos_ar_rec_ini':
+      $datos= $ventas->get_detalle_ar_rec_ini($_POST["id_paciente"],$_POST["numero_venta"]); 
+
+        if(is_array($datos)==true and count($datos)>0){
+          foreach($datos as $row){         
+            $output["producto"] = $row["producto"];                
+          }       
+        echo json_encode($output);
+        } 
+      break;
+
+      case 'get_datos_aros_rec_ini':
+      $datos= $ventas->get_detalle_aros_rec_ini($_POST["id_paciente"],$_POST["numero_venta"]); 
+
+        if(is_array($datos)==true and count($datos)>0){
+          foreach($datos as $row){         
+            $output["marca"] = $row["marca"];
+            $output["modelo"] = $row["modelo"];
+            $output["color"] = $row["color"];                
+          }       
+        echo json_encode($output);
+
+        } 
+      break;
 
    }
    ?>

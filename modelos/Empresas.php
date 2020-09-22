@@ -22,7 +22,7 @@ class Empresas extends conectar{//inicio de la clase
 		//print_r($_POST);
 	}
 
-<<<<<<< HEAD
+
 	public function get_empresas_en_pacientes(){
 
           $conectar=parent::conexion();
@@ -47,7 +47,7 @@ class Empresas extends conectar{//inicio de la clase
 
   }
 }
-=======
+
 	/*public function get_categorias(){
 	    $conectar= parent::conexion();
 		parent::set_names();
@@ -58,7 +58,7 @@ class Empresas extends conectar{//inicio de la clase
     	}*/
 
 
-	}/////FIN CLASS
+/////FIN CLASS
 
  ?>
->>>>>>> accesorios
+

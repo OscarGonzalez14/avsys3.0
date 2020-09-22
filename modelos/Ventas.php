@@ -176,4 +176,53 @@ foreach ($detalles as $k => $v) {
 
 }//////////FIN FUNCION REGISTRA VENTA
 
+////////LENADO DE RECIBO INICIAL DE LENTE
+public function get_detalle_lente_rec_ini($id_paciente,$numero_venta){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select p.desc_producto,d.producto from productos as p inner join detalle_ventas as d on p.id_producto=d.id_producto where d.numero_venta=? and d.id_paciente=? and p.categoria_producto='lentes'";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1,$numero_venta);
+  $sql->bindValue(2,$id_paciente);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+////////LENADO DE RECIBO INICIAL PHOTO
+public function get_detalle_photo_rec_ini($id_paciente,$numero_venta){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select p.desc_producto,d.producto from productos as p inner join detalle_ventas as d on p.id_producto=d.id_producto where d.numero_venta=? and d.id_paciente=? and p.categoria_producto='photosensible'";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1,$numero_venta);
+  $sql->bindValue(2,$id_paciente);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+////////LENADO DE RECIBO ANTIREFLEJANTES
+public function get_detalle_ar_rec_ini($id_paciente,$numero_venta){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select p.desc_producto,d.producto from productos as p inner join detalle_ventas as d on p.id_producto=d.id_producto where d.numero_venta=? and d.id_paciente=? and p.categoria_producto='antireflejante'";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1,$numero_venta);
+  $sql->bindValue(2,$id_paciente);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+////////////LENADO DE CAMPOS AROS RECIBO INICIAL
+public function get_detalle_aros_rec_ini($id_paciente,$numero_venta){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select p.marca,p.modelo,p.color,d.producto from productos as p inner join detalle_ventas as d on p.id_producto=d.id_producto where d.numero_venta=? and d.id_paciente=? and p.categoria_producto='aros'";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1,$numero_venta);
+  $sql->bindValue(2,$id_paciente);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 }//////Fin de la clase
