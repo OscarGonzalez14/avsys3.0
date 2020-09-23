@@ -119,6 +119,8 @@ require_once("modals/photosensible_ventas.php");
 
                   <a class="btn btn-dark" style="color:white;border-radius:1px; background:black" data-toggle="modal" data-target="#listar_accesorios_ventas" data-backdrop="static" data-keyboard="false" id="btn_accesorios_venta"><i class="fas fa-plus"></i> Accesorios</a>
 
+                  <a class="btn btn-primary" style="color:white;border-radius:1px;" href="reporte_gral_ventas.php"><i class="fas fa-eye"></i> Ventas</a>
+
             </div><!-- FIN BOTONES AGREGAR PRODUCTO-->
             <div class="card">
               <div class="card-header">
@@ -182,6 +184,7 @@ require_once("modals/photosensible_ventas.php");
 <script type="text/javascript" src="js/ventas.js"></script>
 <script type="text/javascript" src="js/bootbox.min.js"></script>
 <script type="text/javascript" src="js/recibos.js"></script>
+
   <script type="text/javascript">
     var title = document.getElementById("name_pag").value;
     document.getElementById("title_mod").innerHTML=" "+

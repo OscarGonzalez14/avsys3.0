@@ -282,5 +282,33 @@ case 'tipo_pago';
         } 
       break;
 
+  /// INICIO LISTAR TODAS LAS VENTAS
+    case "listar_ventas_gral":
+    $datos=$ventas->get_ventas_gral();
+    //Vamos a declarar un array
+    $data= Array();
+
+    foreach($datos as $row)
+      {
+        $sub_array = array();
+
+        $sub_array[] = $row["numero_venta"];
+        $sub_array[] = $row["vendedor"];
+        $sub_array[] = $row["fecha_venta"];
+        $sub_array[] = $row["monto_total"];
+        $sub_array[] = $row["paciente"];
+        $sub_array[] = '<button type="button" class="btn btn-dark agrega_aro"  style="border-radius:0px" onClick="agregar_aro('.$row["id_producto"].')">Seleccionar</button>';
+        $data[] = $sub_array;
+      }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+      echo json_encode($results);
+
+    break;
+    /// FIN LISTAR TODAS LAS VENTAS
    }
    ?>
