@@ -26,40 +26,71 @@ function registra_abono_inicial(){
   	 Swal.fire('Especifique fecha de proximo abono abono!','','error')
   	}else{
   	//////////////SE ENVIA RECIBO
-  	alert("ok");
+  		save_abono_inicial();
     }
   }else{
   	Swal.fire('Especifique el monto del abono!','','error')
   }//VALIDA MONTO
-
-  
-	
-	/*if(nom_marca !=""){
-	$.ajax({
-		url:"ajax/marca.php?op=guardar_marca",
-		method:"POST",
-		data:{nom_marca:nom_marca},
-		cache: false,
-		dataType: "json",
-		error:function(x,y,z){
-			d_pacole.log(x);
-			console.log(y);
-			console.log(z);
-		},
-		success:function(data){
-         if (data=='ok') {
-	      setTimeout ("Swal.fire('Se ha registrado una nueva marca','','success')", 100)
-	      setTimeout ("explode();", 2000);
-	    }else{
-          setTimeout ("Swal.fire('Esta marca ya se encuetra registrada','','error')", 100);
-          return false;
-  }
-        }
-
-     });
-	}
-*/
   
 }
+
+function save_abono_inicial(){
+    
+    var a_anteriores="";
+    var n_recibo = $("#n_recibo").html();
+    var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();
+    var monto =$("#total_venta").html();
+    var fecha =$("#fecha").val();
+    var sucursal =$("#sucursal").val();
+    var id_paciente =$("#id_paciente").val();
+    var id_usuario =$("#usuario").val();
+    var telefono_ini =$("#telefono_ini").val();
+    var recibi_rec_ini =$("#recibi_rec_ini").val();
+    var empresa_ini =$("#empresa_ini").val();
+    var texto=$("#texto").val();
+    var numero=$("#numero").val();
+    var saldo=$("#saldo").val();
+    var forma_pago=$("#forma_pago").val();
+    var marca_aro_ini=$("#marca_aro_ini").val();
+    var modelo_aro_ini=$("#modelo_aro_ini").val();    
+    var color_aro_ini=$("#color_aro_ini").val();
+    var lente_rec_ini=$("#lente_rec_ini").val();
+    var ar_rec_ini=$("#ar_rec_ini").val();
+    var photo_rec_ini=$("#photo_rec_ini").val();
+    var observaciones_rec_ini=$("#observaciones_rec_ini").val();
+    var pr_abono=$("#pr_abono").val();
+    var servicio_rec_ini=$("#servicio_rec_ini").val();    
+    
+
+    $.ajax({
+    url:"ajax/recibos.php?op=registrar_recibo",
+    method:"POST",
+    data:{a_anteriores:a_anteriores,n_recibo:n_recibo,n_venta_recibo_ini:n_venta_recibo_ini,monto:monto,fecha:fecha,sucursal:sucursal,id_paciente:id_paciente,id_usuario:id_usuario,telefono_ini:telefono_ini,recibi_rec_ini:recibi_rec_ini,empresa_ini:empresa_ini,texto:texto,numero:numero,saldo:saldo,forma_pago:forma_pago,marca_aro_ini:marca_aro_ini,modelo_aro_ini:modelo_aro_ini,color_aro_ini:color_aro_ini,lente_rec_ini:lente_rec_ini,ar_rec_ini:ar_rec_ini,photo_rec_ini:photo_rec_ini,observaciones_rec_ini:observaciones_rec_ini,pr_abono:pr_abono,servicio_rec_ini:servicio_rec_ini},
+    cache: false,
+    dataType:"json",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    }, 
+      
+  	success:function(data){
+      console.log(data);
+      if(data=='error'){
+        Swal.fire('Este correlativo ya fué ingresado!','','error')
+        return false;
+      }else if (data=="ok") {
+        Swal.fire('Recibo registrado exitosamente!','','success')
+        $('#recibo_inicial').modal('hide');
+        //setTimeout ("explode();", 2000);
+      }
+  		
+  	}
+
+  }); 
+
+  
+    
+  }   
 
 init();

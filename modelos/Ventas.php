@@ -52,6 +52,17 @@ public function get_numero_venta($sucursal_correlativo){
   return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+//////////VALIDAR SI EXISTE VENTA
+public function valida_existencia_venta($numero_venta){
+  $conectar= parent::conexion();
+  parent::set_names();
+  $sql="select numero_venta from ventas where numero_venta=?";
+  $sql= $conectar->prepare($sql);
+  $sql->bindValue(1, $numero_venta);
+  //$sql->bindValue(2, $id_paciente);
+  $sql->execute();
+  return $resultado=$sql->fetchAll();
+}
 
 /////////////////////REGISTRAR VENTA
 public function agrega_detalle_venta(){

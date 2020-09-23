@@ -200,7 +200,38 @@ case 'tipo_pago';
     break;
 
     case 'registrar_venta':
+
+    $datos=$ventas->valida_existencia_venta($_POST["numero_venta"]);
+      if(is_array($datos)==true and count($datos)==0){
       $ventas->agrega_detalle_venta();
+      $messages[]="ok";
+      
+    }else{
+      $errors[]="error";
+    }
+
+    if (isset($messages)){
+     ?>
+       <?php
+         foreach ($messages as $message) {
+             echo json_encode($message);
+           }
+         ?>
+   <?php
+ }
+    //mensaje error
+      if (isset($errors)){
+
+   ?>
+
+         <?php
+           foreach ($errors as $error) {
+               echo json_encode($error);
+             }
+           ?>
+   <?php
+   } 
+
     break;
     //////////GET DATA LENTES RECIBO INICIAL 
     case 'get_datos_lentes_rec_ini':

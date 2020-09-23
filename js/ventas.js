@@ -491,7 +491,7 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
     method:"POST",
     data:{'arrayVenta':JSON.stringify(detalles),'fecha_venta':fecha_venta,'numero_venta':numero_venta,'paciente':paciente,'vendedor':vendedor,'monto_total':monto_total,'tipo_pago':tipo_pago,'tipo_venta':tipo_venta,'id_usuario':id_usuario,'id_paciente':id_paciente,'sucursal':sucursal,'evaluado':evaluado,'optometra':optometra,'plazo':plazo},
     cache: false,
-    dataType:"html",
+    dataType:"json",
     error:function(x,y,z){
       d_pacole.log(x);
       console.log(y);
@@ -499,9 +499,12 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
     },     
     success:function(data){           
       detalles = [];
-      //$('#tabla_det_ventas').html('');
-      //setTimeout ("recibo_uno();", 2000);
+      if(data=='error'){
+        Swal.fire('Este correlativo de venta ya fué ingresado!','','error')
+        return false;
+      }else{
       Swal.fire('Venta realizada!','','success')
+      }
       if (tipo_venta=="Contado") {       
         setTimeout ("reciboInicial();", 3000);
         //reciboInicialData();
