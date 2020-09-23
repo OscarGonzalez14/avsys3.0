@@ -524,11 +524,14 @@ function reciboInicial(){
   var id_paciente = $("#id_paciente").val();
   var evaluado = $("#evaluado").val();
   var titular_cuenta = $("#titular_cuenta").val();
+  var monto_total = $("#total_venta").html();
+
 
   $("#n_venta_recibo_ini").val(numero_venta);
   $("#id_pac_ini").val(id_paciente);
   $("#servicio_rec_ini").val(evaluado);
   $("#recibi_rec_ini").val(titular_cuenta);
+  $("#monto_venta_rec_ini").val(monto_total);
 
 
   $.ajax({

@@ -152,7 +152,7 @@ require_once("modals/photosensible_ventas.php");
               <br>
               <div class="row post_venta" id="post_venta" style="display: flex;justify-content: space-between !important;">
                 <div class="col-sm-6 post_compra">
-                  <button class="btn btn-block" style="border-radius:2px;background:#333333;color:white" data-toggle="modal" data-target="#recibo_inicial" data-backdrop="static" data-keyboard="false"><i class="fas fa-print" onClick="reciboInicial();"></i> Imprimir recibo Inicial</button>
+                  <button class="btn btn-block" style="border-radius:2px;background:#333333;color:white" data-toggle="modal" data-target="#recibo_inicial" data-backdrop="static" data-keyboard="false" onClick="reciboInicial();"><i class="fas fa-print"></i> Imprimir recibo Inicial</button>
                 </div>
                 <div class="col-sm-6 post_compra">
                   <button class="btn btn-success btn-block" style="border-radius:2px" onClick='explode();'><i class="fas fa-plus"></i> Nueva Venta</button>

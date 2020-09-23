@@ -1,11 +1,38 @@
-
+function init(){
+	 get_correlativo_recibo();
+}
+function get_correlativo_recibo(){
+  var sucursal_correlativo = $("#sucursal").val();
+  $.ajax({
+    url:"ajax/recibos.php?op=get_numero_recibo",
+    method:"POST",
+    data:{sucursal_correlativo:sucursal_correlativo},
+    cache:false,
+    dataType:"json",
+      success:function(data){
+      console.log(data);        
+      $("#n_recibo").html(data.correlativo);             
+      }
+    })
+}
 
 function registra_abono_inicial(){
   var fecha_rec_ini=$("#fecha_rec_ini").val();
+  var saldo=$("#saldo").val();
+  var monto = $("#numero").val();
 
-  if (fecha_rec_ini=="") {
-  	alert("Especifique la fecha");
-  }
+  if (monto !="") {//VALIDA MONTO
+  	if (saldo !="0.00" && fecha_rec_ini=="") {
+  	 Swal.fire('Especifique fecha de proximo abono abono!','','error')
+  	}else{
+  	//////////////SE ENVIA RECIBO
+  	alert("ok");
+    }
+  }else{
+  	Swal.fire('Especifique el monto del abono!','','error')
+  }//VALIDA MONTO
+
+  
 	
 	/*if(nom_marca !=""){
 	$.ajax({
@@ -34,3 +61,5 @@ function registra_abono_inicial(){
 */
   
 }
+
+init();

@@ -21,7 +21,7 @@
 
     <div class="modal-content">
      <div class="modal-header text-center" id="head_rini">
-       <h5 class="text-center" style="text-align: center" align="center"><i class="fas fa-plus-square"></i> RECIBO INICIAL</h5>
+       <h5 class="text-center" style="text-align: center" align="center"><i class="fas fa-plus-square"></i> RECIBO&nbsp;#<span id="n_recibo"></span></h5>
         <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
      </div>
     
@@ -47,7 +47,7 @@
     </div>
 
     <div class="form-group col-md-12">      
-      <input type="text" class="form-control" id="empresa_ini" readonly="" placeholder="CANTIDAD EN LETRAS">
+      <input type="text" class="form-control" id="texto" readonly="" placeholder="CANTIDAD EN LETRAS">
     </div>
 
     </div><!--FIN aros datos-->
@@ -59,17 +59,31 @@
           <th>Abono Actual</th>
           <th>NuevoSaldo</th> 
           <th>Forma de Pago</th>
-          <th>Proximo Abono</th>
+          <th id="pr_abono_ini">Proximo Abono</th>
 
           </tr>
         </thead>
 
         <tbody>
-          <td align='center'><input class='form-control' type='text' class='monto' name='monto' id="monto" style="text-align: right;" readonly></td>
-          <td align='center'><input class='form-control' type='text' name='numero' id="numero" onkeyup="nuevo_saldo()" style="text-align: right;" required></td>
-          <td align='center'><input class='form-control' type='text' class='saldo' name='saldo' id="saldo" style="text-align: right;" readonly></td>
-          <td align='center'><select class='form-control' id='forma_pago' name='forma_pago'><option value=''>Seleccione</option><option value='Efectivo'>Efectivo</option><option value='Tarjeta de Credito'>Tarjeta de Credito</option><option value='Tarjeta de Debito'>Tarjeta de Debito</option><option value='Cargo Automatico'>Cargo Automatico</option><option value='Cheque'>Cheque</option></select></td>
-          <td><input type='date' class='form-control' id='fecha_rec_ini' name='pr_abono'></td>
+          <td align='center'>
+            <div class="input-group">
+            <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+            <input class='form-control' type='text' class='monto' name='monto' id="monto_venta_rec_ini" style="text-align: right;" readonly>
+            </div>
+          </td>
+          <td align='center'>
+          <div class="input-group">
+            <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+          <input class='form-control' type='text' name='numero' id="numero" onkeyup="nuevo_saldo()" style="text-align: right;" required>
+        </div>  
+        </td>
+        <td align='center'>
+        <div class="input-group">
+            <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+        <input class='form-control' type='text' class='saldo' name='saldo' id="saldo" style="text-align: right;" readonly></div>
+      </td>
+        <td align='center'><select class='form-control' id='forma_pago' name='forma_pago'><option value=''>Seleccione</option><option value='Efectivo'>Efectivo</option><option value='Tarjeta de Credito'>Tarjeta de Credito</option><option value='Tarjeta de Debito'>Tarjeta de Debito</option><option value='Cargo Automatico'>Cargo Automatico</option><option value='Cheque'>Cheque</option></select></td>
+        <td id="datepickers"><input type='date' class='form-control' id='fecha_rec_ini' name='pr_abono'></td>
 
         </tbody>
       </table>
@@ -110,12 +124,11 @@
     </div>
 
     <div class="form-group col-md-12">
-      <label for="inputEmail4">Observaciones</label>
-      <input type="text" class="form-control" id="observaciones_rec_ini" style="background: white" readonly="">
+      <input type="text" class="form-control" id="observaciones_rec_ini" style="background: white" readonly="" placeholder="OBSERVACIONES">
     </div>
 
   </div>
-    <button type="button" onClick="registra_abono_inicial()" class="btn bg-info btn-sm pull-right" id="btn_enviar_ini" style="margin: 20px; border-radius: 0px"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Abono</button>
+    <button type="button" onClick="registra_abono_inicial()" class="btn pull-right" id="btn_enviar_ini" style="margin: 2px; border-radius: 0px;background: #3fb0ac;color:white"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Abono</button>
     </div><!--Fin modal Content-->
 <input type="hidden" id="id_pac_ini">
 <input type="hidden" id="n_venta_recibo_ini">
@@ -124,8 +137,27 @@
 
 <script type="text/javascript">
 
+  function nuevo_saldo(){
+
+  var monto = document.getElementById("monto_venta_rec_ini").value;
+  var abono_ini_rec = document.getElementById("numero").value;
+  //var abono_ini_rec = document.getElementById("numero").toFixed(2);
+  var saldo = monto-abono_ini_rec;
+
+  document.getElementById("saldo").value = saldo.toFixed(2);
+  if(saldo==0){
+    document.getElementById('datepickers').style.display = 'none';
+    document.getElementById('pr_abono_ini').style.display = 'none';
+  }else{
+    document.getElementById('datepickers').style.display = 'block';
+    document.getElementById('pr_abono_ini').style.display = 'block';
+
+  }
+
+}
+
   document.getElementById("numero").addEventListener("keyup",function(e){
-  document.getElementById("texto").value = NumeroALetras(this.value);
+  document.getElementById("texto").value = NumeroALetras(this.value);});
 
   function Unidades(num){
  

@@ -45,7 +45,7 @@ public function buscar_lentes_ventas($id_producto){
 
 public function get_numero_venta($sucursal_correlativo){
   $conectar= parent::conexion();
-  $sql= "select numero_venta from ventas where sucursal=? order by id_paciente DESC limit 1;";
+  $sql= "select numero_venta from ventas where sucursal=? order by id_ventas DESC limit 1;";
   $sql=$conectar->prepare($sql);
   $sql->bindValue(1, $sucursal_correlativo);
   $sql->execute();
