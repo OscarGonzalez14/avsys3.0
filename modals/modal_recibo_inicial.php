@@ -124,11 +124,15 @@
     </div>
 
     <div class="form-group col-md-12">
-      <input type="text" class="form-control" id="observaciones_rec_ini" style="background: white" readonly="" placeholder="OBSERVACIONES">
+      <input type="text" class="form-control" id="observaciones_rec_ini" style="background: white" placeholder="OBSERVACIONES">
     </div>
 
   </div>
+
     <button type="button" onClick="registra_abono_inicial()" class="btn pull-right" id="btn_enviar_ini" style="margin: 2px; border-radius: 0px;background: #3fb0ac;color:white"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Abono</button>
+
+    <a class="btn btn-primary" style="color:white;border-radius:1px;" href="" id="btn_print_recibo"><i class="fas fa-print"></i> Imprimir</a>
+
     </div><!--Fin modal Content-->
 <input type="hidden" id="id_pac_ini">
 <input type="hidden" id="n_venta_recibo_ini">

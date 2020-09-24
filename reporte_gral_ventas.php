@@ -1,4 +1,6 @@
 <?php
+require_once("config/conexion.php");
+if(isset($_SESSION["usuario"])){ 
 require_once('header.php');
 ?>
 
@@ -36,5 +38,8 @@ require_once('header.php');
 
 <script src="js/ventas.js"> </script>
 
+   <?php } else{
+echo "Acceso no permitido";
+  } ?>
 
  

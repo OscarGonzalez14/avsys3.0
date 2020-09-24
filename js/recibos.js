@@ -1,5 +1,5 @@
 function init(){
-	 get_correlativo_recibo();
+   get_correlativo_recibo();
 }
 function get_correlativo_recibo(){
   var sucursal_correlativo = $("#sucursal").val();
@@ -22,14 +22,14 @@ function registra_abono_inicial(){
   var monto = $("#numero").val();
 
   if (monto !="") {//VALIDA MONTO
-  	if (saldo !="0.00" && fecha_rec_ini=="") {
-  	 Swal.fire('Especifique fecha de proximo abono abono!','','error')
-  	}else{
-  	//////////////SE ENVIA RECIBO
-  		save_abono_inicial();
+    if (saldo !="0.00" && fecha_rec_ini=="") {
+     Swal.fire('Especifique fecha de proximo abono abono!','','error')
+    }else{
+    //////////////SE ENVIA RECIBO
+      save_abono_inicial();
     }
   }else{
-  	Swal.fire('Especifique el monto del abono!','','error')
+    Swal.fire('Especifique el monto del abono!','','error')
   }//VALIDA MONTO
   
 }
@@ -74,23 +74,31 @@ function save_abono_inicial(){
       console.log(z);
     }, 
       
-  	success:function(data){
+    success:function(data){
       console.log(data);
       if(data=='error'){
         Swal.fire('Este correlativo ya fué ingresado!','','error')
         return false;
       }else if (data=="ok") {
         Swal.fire('Recibo registrado exitosamente!','','success')
-        $('#recibo_inicial').modal('hide');
+        //$('#recibo_inicial').modal('hide');
         //setTimeout ("explode();", 2000);
       }
-  		
-  	}
+      
+    }
 
   }); 
-
-  
     
-  }   
+  }
+
+$(document).on('click', '#btn_enviar_ini', function(){
+  var n_recibo = $("#n_recibo").html();
+  var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();
+  var id_paciente =$("#id_paciente").val();
+
+  document.getElementById("btn_print_recibo").href='imprimir_recibo_pdf.php?n_recibo='+
+  n_recibo+'&'+'n_venta='+n_venta_recibo_ini+'&'+'id_paciente='+id_paciente;
+    
+}); 
 
 init();

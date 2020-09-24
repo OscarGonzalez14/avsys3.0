@@ -1,8 +1,4 @@
-var tabla_ventas_general;
-
-function init(){
-  listar_reporte_gral_ventas();
-
+function init() {
   get_correlativo_venta();
 }
 
@@ -495,7 +491,7 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
     method:"POST",
     data:{'arrayVenta':JSON.stringify(detalles),'fecha_venta':fecha_venta,'numero_venta':numero_venta,'paciente':paciente,'vendedor':vendedor,'monto_total':monto_total,'tipo_pago':tipo_pago,'tipo_venta':tipo_venta,'id_usuario':id_usuario,'id_paciente':id_paciente,'sucursal':sucursal,'evaluado':evaluado,'optometra':optometra,'plazo':plazo},
     cache: false,
-    dataType:"json",
+    dataType:"html",
     error:function(x,y,z){
       d_pacole.log(x);
       console.log(y);
@@ -503,22 +499,19 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
     },     
     success:function(data){           
       detalles = [];
-      if(data=='error'){
-        Swal.fire('Este correlativo de venta ya fué ingresado!','','error')
-        return false;
-      }else{
-      Swal.fire('Venta realizada!','','success')
-      }
-      if (tipo_venta=="Contado") {       
-        setTimeout ("reciboInicial();", 3000);
-        //reciboInicialData();
-      }else if(tipo_venta=="Credito" && tipo_pago=="Descuento en Planilla"){
-        alert("Debo Lanzar formulario de OID")
-  }
-      mostrar_btn_post_venta();          
+      //$('#tabla_det_ventas').html('');
+      //setTimeout ("recibo_uno();", 2000);     
+        
     }
 
     });//////FIN AJAX
+    Swal.fire('Venta realizada!','','success')
+      if (tipo_venta=="Contado") {       
+        setTimeout ("reciboInicial();", 3000);
+        mostrar_btn_post_venta();
+      }else if(tipo_venta=="Credito" && tipo_pago=="Descuento en Planilla"){
+      alert("Debo Lanzar formulario de OID")
+  }
 
 }else{
   Swal.fire('Existen campos obligatorios vacios!','','error')
@@ -612,87 +605,6 @@ function reciboInicial(){
 
   
 }///////////FIN FUNCION RECIBO INICIAL
-
-//// INICIO DE REPORTE GENERAL DE VENTAS
-function listar_reporte_gral_ventas(){
-  tabla_ventas_general=$('#lista_reporte_ventas_data').dataTable(
-  {
-    "aProcessing": true,//Activamos el procesamiento del datatables
-      "aServerSide": true,//Paginación y filtrado realizados por el servidor
-      dom: 'Bfrtip',//Definimos los elementos del control de tabla
-      responsive: true,
-      buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
-                'pdf'
-            ],
-    "ajax":
-        {
-          url: 'ajax/ventas.php?op=listar_ventas_gral',
-          type : "get",
-          dataType : "json",
-          error: function(e){
-            console.log(e.responseText);
-          }
-        },
-    "bDestroy": true,
-    "responsive": true,
-    "bInfo":true,
-    "iDisplayLength": 10,//Por cada 10 registros hace una paginación
-      "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
-
-      "language": {
-
-          "sProcessing":     "Procesando...",
-
-          "sLengthMenu":     "Mostrar _MENU_ registros",
-
-          "sZeroRecords":    "No se encontraron resultados",
-
-          "sEmptyTable":     "Ningún dato disponible en esta tabla",
-
-          "sInfo":           "Mostrando un total de _TOTAL_ registros",
-
-          "sInfoEmpty":      "Mostrando un total de 0 registros",
-
-          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-
-          "sInfoPostFix":    "",
-
-          "sSearch":         "Buscar:",
-
-          "sUrl":            "",
-
-          "sInfoThousands":  ",",
-
-          "sLoadingRecords": "Cargando...",
-
-          "oPaginate": {
-
-              "sFirst":    "Primero",
-
-              "sLast":     "Último",
-
-              "sNext":     "Siguiente",
-
-              "sPrevious": "Anterior"
-
-          },
-
-          "oAria": {
-
-              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-
-              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-
-          }
-
-         }//cerrando language
-
-  }).DataTable();
-}
-
 
 
 init();

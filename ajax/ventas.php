@@ -199,39 +199,8 @@ case 'tipo_pago';
 
     break;
 
-    case 'registrar_venta':
-
-    $datos=$ventas->valida_existencia_venta($_POST["numero_venta"]);
-      if(is_array($datos)==true and count($datos)==0){
-      $ventas->agrega_detalle_venta();
-      $messages[]="ok";
-      
-    }else{
-      $errors[]="error";
-    }
-
-    if (isset($messages)){
-     ?>
-       <?php
-         foreach ($messages as $message) {
-             echo json_encode($message);
-           }
-         ?>
-   <?php
- }
-    //mensaje error
-      if (isset($errors)){
-
-   ?>
-
-         <?php
-           foreach ($errors as $error) {
-               echo json_encode($error);
-             }
-           ?>
-   <?php
-   } 
-
+    case 'registrar_venta':   
+      $ventas->agrega_detalle_venta();    
     break;
     //////////GET DATA LENTES RECIBO INICIAL 
     case 'get_datos_lentes_rec_ini':
@@ -297,7 +266,7 @@ case 'tipo_pago';
         $sub_array[] = $row["fecha_venta"];
         $sub_array[] = $row["monto_total"];
         $sub_array[] = $row["paciente"];
-        $sub_array[] = '<button type="button" class="btn btn-dark agrega_aro"  style="border-radius:0px" onClick="agregar_aro('.$row["id_producto"].')">Seleccionar</button>';
+        $sub_array[] = '<button type="button" class="btn btn-dark agrega_aro"  style="border-radius:0px">Seleccionar</button>';
         $data[] = $sub_array;
       }
 

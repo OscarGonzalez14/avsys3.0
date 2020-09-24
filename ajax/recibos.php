@@ -6,8 +6,8 @@ require_once("../modelos/Recibos.php");
 $recibos = new Recibos();
 
 switch ($_GET["op"]) {
-	case 'get_detalle_lente_rec_ini':
-	   
+  case 'get_detalle_lente_rec_ini':
+     
   break;
 
 
@@ -42,7 +42,7 @@ switch ($_GET["op"]) {
   $datos=$recibos->valida_existencia_nrecibo($_POST["n_recibo"]);
   if(is_array($datos)==true and count($datos)==0){
 
-  	$recibos->agrega_detalle_abono($_POST['a_anteriores'],$_POST['n_recibo'],$_POST['n_venta_recibo_ini'],$_POST['monto'],$_POST['fecha'],$_POST['sucursal'],$_POST['id_paciente'],$_POST['id_usuario'],$_POST['telefono_ini'],$_POST['recibi_rec_ini'],$_POST['empresa_ini'],$_POST['texto'],$_POST['numero'],$_POST['saldo'],$_POST['forma_pago'],$_POST['marca_aro_ini'],$_POST['modelo_aro_ini'],$_POST['color_aro_ini'],$_POST['lente_rec_ini'],$_POST['ar_rec_ini'],$_POST['photo_rec_ini'],$_POST['observaciones_rec_ini'],$_POST['pr_abono'],$_POST['servicio_rec_ini']);
+    $recibos->agrega_detalle_abono($_POST['a_anteriores'],$_POST['n_recibo'],$_POST['n_venta_recibo_ini'],$_POST['monto'],$_POST['fecha'],$_POST['sucursal'],$_POST['id_paciente'],$_POST['id_usuario'],$_POST['telefono_ini'],$_POST['recibi_rec_ini'],$_POST['empresa_ini'],$_POST['texto'],$_POST['numero'],$_POST['saldo'],$_POST['forma_pago'],$_POST['marca_aro_ini'],$_POST['modelo_aro_ini'],$_POST['color_aro_ini'],$_POST['lente_rec_ini'],$_POST['ar_rec_ini'],$_POST['photo_rec_ini'],$_POST['observaciones_rec_ini'],$_POST['pr_abono'],$_POST['servicio_rec_ini']);
       $messages[]="ok";
       
     }else{
@@ -71,5 +71,5 @@ switch ($_GET["op"]) {
    <?php
    } 
 
-  	break;
+    break;
 }
