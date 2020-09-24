@@ -1,55 +1,14 @@
-var tabla_usuarios_creados;
+///// js
+var tabla_lista_usuarios;
 
 function init(){
-  listar_usuarios();
+	lista_usuarios();
 
 }
 
-function guardarUsuario(){
-	//se definen las varibles segun id de los campos en modal nuevo usuario
-	var nom_user =$("#nom_user").val();
-	var tel_user =$("#tel_user").val();
-	var correo_user	=$("#correo_user").val();
-	var dir_user =$("#dir_user").val();
-	var user =$("#user").val();
-	var pass_user =$("#pass_user").val();
-	var fecha_ingreso =$("#fecha_ingreso").val();
-	var cat_user =$("#cat_user").val();
-	var est_user =$("#est_user").val();
-	var suc_user =$("#suc_user").val();
-
-
-	//Se validan los campos de modal nuevo usuario
-	if (nom_user !="" || tel_user !="" || correo_user !="" || dir_user !="" || user !="" || pass_user !="" || fecha_ingreso !="" || cat_user !="" || est_user !="" || suc_user !=""){
-		$.ajax({
-		url:"ajax/usuarios.php?op=guardar_usuario",
-		method:"POST",
-		data:{nom_user:nom_user,tel_user:tel_user,correo_user:correo_user,dir_user:dir_user,user:user,pass_user:pass_user,fecha_ingreso:fecha_ingreso,cat_user:cat_user,est_user:est_user,suc_user:suc_user},
-		cache: false,
-		dataType: "json",
-		error:function(x,y,z){
-			d_pacole.log(x);
-			console.log(y);
-			console.log(z);
-		},
-		success:function(data){
-			console.log(data);
-			
-			}
-		});
-		setTimeout ("Swal.fire('Se ha registrado un nuevo usuario','','success')", 100)
-        setTimeout ("explode();", 2000);
-	
-	}
-}
-
- function explode(){
-    location.reload();
-  }
-
-  /////////////////LISTAR USUARIOS///////
-function listar_usuarios(){
-  tabla_usuarios_creados=$('#data_lista_usuarios_creados').dataTable(
+/////////////////LISTAR USUARIOS///////
+function lista_usuarios(){
+  tabla_lista_usuarios=$('#listar_usuarios').dataTable(
   {
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -63,7 +22,7 @@ function listar_usuarios(){
             ],
     "ajax":
         {
-          url: 'ajax/usuarios.php?op=listar_usuarios',
+          url: 'ajax/usuarios.php?op=lista_usuarios',
           type : "get",
           dataType : "json",
           error: function(e){
@@ -128,5 +87,43 @@ function listar_usuarios(){
 }
 
 
-init();
+/////////////LISTAR USUARIOS ayax
+	 case "lista_usuarios":
+    $datos=$usuario->get_lista_usuarios();
+    //Vamos a declarar un array
+    $data= Array();
 
+    foreach($datos as $row)
+      {
+        $sub_array = array();
+        $sub_array[] = $row["id_usuario"];
+        $sub_array[] = $row["nombres"];
+        $sub_array[] = $row["usuario"];
+        $sub_array[] = $row["categoria"];
+        $sub_array[] = $row["telefono"];
+        $sub_array[] = $row["correo"];
+        $sub_array[] = $row["direccion"]
+        $sub_array[] = '<button type="button" name="hola" id="'.$row["id_producto"].'" class="btn btn-danger btn-sm btn-flat" onClick="eliminarAccesorio()"></i> Eliminar</button>';
+        $sub_array[] = '<button type="button" name="hola" id="'.$row["id_producto"].'" class="btn btn-danger btn-sm btn-flat" onClick="eliminarAccesorio()"></i> Eliminar</button>';
+        $data[] = $sub_array;
+      }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+      echo json_encode($results);
+
+    break;
+
+
+//modelos
+////// funcion listar usuarios
+public function get_lista_usuarios(){
+  $conectar= parent::conexion();
+  $sql="select id_usuario, nombres, usuario, categoria, telefono, correo, direccion from usuarios;";
+  $sql = $conectar->prepare($sql);
+  $sql->execute();
+  return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+}
