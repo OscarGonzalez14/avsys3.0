@@ -82,7 +82,7 @@
             <div class="input-group-prepend"><span class="input-group-text">$</span></div>
         <input class='form-control' type='text' class='saldo' name='saldo' id="saldo" style="text-align: right;" readonly></div>
       </td>
-        <td align='center'><select class='form-control' id='forma_pago' name='forma_pago'><option value=''>Seleccione</option><option value='Efectivo'>Efectivo</option><option value='Tarjeta de Credito'>Tarjeta de Credito</option><option value='Tarjeta de Debito'>Tarjeta de Debito</option><option value='Cargo Automatico'>Cargo Automatico</option><option value='Cheque'>Cheque</option></select></td>
+        <td align='center'><select class='form-control' id='forma_pago' name='forma_pago'><option value=''>Seleccione...</option><option value='Efectivo'>Efectivo</option><option value='Tarjeta de Credito'>Tarjeta de Credito</option><option value='Tarjeta de Debito'>Tarjeta de Debito</option><option value='Cargo Automatico'>Cargo Automatico</option><option value='Cheque'>Cheque</option></select></td>
         <td id="datepickers"><input type='date' class='form-control' id='pr_abono' name='pr_abono'></td>
 
         </tbody>
@@ -131,7 +131,7 @@
 
     <button type="button" onClick="registra_abono_inicial()" class="btn pull-right" id="btn_enviar_ini" style="margin: 2px; border-radius: 0px;background: #3fb0ac;color:white"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Abono</button>
 
-    <a class="btn btn-primary" style="color:white;border-radius:1px;" href="" id="btn_print_recibo"><i class="fas fa-print"></i> Imprimir</a>
+    <a class="btn btn-primary" style="color:white;border-radius:1px;" href="" id="btn_print_recibo" target="_blank"><i class="fas fa-print"></i> Imprimir</a>
 
     </div><!--Fin modal Content-->
 <input type="hidden" id="id_pac_ini">

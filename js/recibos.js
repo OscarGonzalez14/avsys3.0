@@ -22,14 +22,14 @@ function registra_abono_inicial(){
   var monto = $("#numero").val();
 
   if (monto !="") {//VALIDA MONTO
-    if (saldo !="0.00" && fecha_rec_ini=="") {
+     if (saldo >0 && fecha_rec_ini=="") {
      Swal.fire('Especifique fecha de proximo abono abono!','','error')
     }else{
     //////////////SE ENVIA RECIBO
       save_abono_inicial();
     }
   }else{
-    Swal.fire('Especifique el monto del abono!','','error')
+    Swal.fire('Debe llenar los campos obligatorios correctamente!','','error')
   }//VALIDA MONTO
   
 }
@@ -61,6 +61,7 @@ function save_abono_inicial(){
     var pr_abono=$("#pr_abono").val();
     var servicio_rec_ini=$("#servicio_rec_ini").val();    
     
+    if (forma_pago !="") {
 
     $.ajax({
     url:"ajax/recibos.php?op=registrar_recibo",
@@ -87,7 +88,11 @@ function save_abono_inicial(){
       
     }
 
-  }); 
+  });
+  }else{
+    Swal.fire('Especifique la forma de Pago!','','error')
+    return false;
+  }  
     
   }
 
@@ -99,6 +104,14 @@ $(document).on('click', '#btn_enviar_ini', function(){
   document.getElementById("btn_print_recibo").href='imprimir_recibo_pdf.php?n_recibo='+
   n_recibo+'&'+'n_venta='+n_venta_recibo_ini+'&'+'id_paciente='+id_paciente;
     
-}); 
+});
+/////////////IMPRIME FACTURA DE CONTADO
+$(document).on('click', '#btn_enviar_ini', function(){
+  var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();
+  var id_paciente =$("#id_paciente").val();
+
+  document.getElementById("factura_contado").href='imprimir_factura_pdf.php?n_venta='+n_venta_recibo_ini+'&'+'id_paciente='+id_paciente;
+    
+});
 
 init();

@@ -27,4 +27,49 @@ public function print_recibo_paciente($n_recibo,$n_venta,$id_paciente){
   $sql->execute();
   return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 }
+/////////GET DATOS DESCRIPCION DE PRODUCTOS FACTURA
+public function get_datos_factura($n_venta,$id_paciente){
+	$conectar= parent::conexion();
+	parent::set_names();
+	$sql="select producto from detalle_ventas where numero_venta=? and id_paciente=? order by id_detalle_ventas ASC;";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$n_venta);
+       $sql->bindValue(2,$id_paciente);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+/////////GET DATOS CANTIDAD DE PRODUCTOS FACTURA
+public function get_datos_factura_cantidad($n_venta,$id_paciente){
+	$conectar= parent::conexion();
+	parent::set_names();
+	$sql="select cantidad_venta from detalle_ventas where numero_venta=? and id_paciente=? order by id_detalle_ventas ASC;";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$n_venta);
+    $sql->bindValue(2,$id_paciente);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/////////GET DATOS PRECIO UNITARIO DE PRODUCTOS FACTURA
+public function get_datos_factura_p_unitario($n_venta,$id_paciente){
+	$conectar= parent::conexion();
+	parent::set_names();
+	$sql="select precio_venta from detalle_ventas where numero_venta=? and id_paciente=? order by id_detalle_ventas ASC;";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$n_venta);
+    $sql->bindValue(2,$id_paciente);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+/////////GET DATOS SUBTOTAL DE PRODUCTOS FACTURA
+public function get_datos_factura_subtotal($n_venta,$id_paciente){
+	$conectar= parent::conexion();
+	parent::set_names();
+	$sql="select precio_venta*cantidad_venta as subtotal from detalle_ventas where numero_venta=? and id_paciente=? order by id_detalle_ventas ASC;";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$n_venta);
+    $sql->bindValue(2,$id_paciente);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
 }

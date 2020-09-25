@@ -20,7 +20,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
    <style>
       html{
       	margin-top: 0;
-        margin-left: 28px;
+        margin-left: 18px;
         margin-right:20px; 
         margin-bottom: 0;
     }
@@ -49,7 +49,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
    </style>
   </head>
   <body>
-<table style="width: 100%;margin-top:25px">
+<table style="width: 100%;margin-top:30px">
 <tr>
 <td width="10%"><h1 style="text-align: left; margin-right:2px;"><img src="images/logooficial.jpg" width="150" height="80"  /></h1></td>
 
@@ -57,7 +57,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 <table style="width:95%;">
 
  <tr>
-    <td style="text-align:center; font-size:11px";font-family: Helvetica, Arial, sans-serif;><strong>OPTICA AVPLUS S.A de C.V.</strong></td>
+    <td style="text-align:center; font-size:18px";font-family: Helvetica, Arial, sans-serif;><strong>OPTICA AVPLUS S.A de C.V.</strong></td>
   </tr>
 
   <tr>
@@ -131,7 +131,8 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 <tr style="font-size:10pt" class="even_row">
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["monto"];?></span></td>
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["a_anteriores"];?></span></td>
-    <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["abono_act"];?></span></td>
+
+    <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".number_format($datos_recibo[$i]["abono_act"],2,".",",");?></span></td>
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["saldo"];?></span></td>
     <td style="text-align: center" colspan="24" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["forma_pago"];?></span></td>
 </tr>
@@ -168,6 +169,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 </tr>
 <tr>
     <td  colspan="100" style="border: white 1px solid;padding: 5px"></td>
+    <td  colspan="100" style="border: white 1px solid;padding: 5px"></td>
 
 </tr>
 <tr>
@@ -191,7 +193,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 <table style="width:95%;">
 
  <tr>
-    <td style="text-align:center; font-size:11px";font-family: Helvetica, Arial, sans-serif;><strong>OPTICA AVPLUS S.A de C.V.</strong></td>
+    <td style="text-align:center; font-size:18px";font-family: Helvetica, Arial, sans-serif;><strong>OPTICA AVPLUS S.A de C.V.</strong></td>
   </tr>
 
   <tr>
@@ -301,6 +303,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
     <td  colspan="100" class="stilot3"><span>Nota: Yo&nbsp;<?php echo $datos_recibo[$i]["recibi_de"];?>: Declaro que me fue explicada de forma detallada y explícita las caracteristicas del aro,lentes,accesorios o tratamientos que estoy adquiriendo con el servicio recibido de lo cual firmo conforme. </span></td>
 </tr>
 <tr>
+    <td  colspan="100" style="border: white 1px solid;padding: 5px"></td>
     <td  colspan="100" style="border: white 1px solid;padding: 5px"></td>
 
 </tr>

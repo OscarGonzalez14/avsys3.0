@@ -160,6 +160,8 @@ require_once("modals/photosensible_ventas.php");
                   <button class="btn btn-success btn-block" style="border-radius:2px" onClick='explode();'><i class="fas fa-plus"></i> Nueva Venta</button>
                 </div>
               </div>
+                <a href="" id="factura_contado" target="_blank"> Imprimir factura</a>
+                </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
