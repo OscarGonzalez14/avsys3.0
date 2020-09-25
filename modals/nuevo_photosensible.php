@@ -35,7 +35,7 @@
                   <input type="number" class="form-control" name="precio" placeholder="" id="precio_tres" >
                 </div>
           </div>
-          <input type="hidden" name="" id="cat_prod_tres" value="photosensible">
+          <input type="hidden" name="" id="cat_prod_tres" value="Photosensible">
         </div>
       </div>
       <!-- Modal footer -->
