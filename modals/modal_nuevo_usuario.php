@@ -84,7 +84,7 @@
         </section>
       </div>
   </div>
-</div>
+</div><!-- fin modal-->
 
          
 
