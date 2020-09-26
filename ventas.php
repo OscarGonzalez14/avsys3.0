@@ -81,7 +81,7 @@ require_once("modals/photosensible_ventas.php");
               <div class="row invoice-info callout callout-info form-row" style="border-bottom: solid 1px black;border-right: solid 1px black;border-top: solid 1px black">
                     <div class="col-sm-2 invoice-col" style="margin:0px">
                     <label># Venta</label>
-                      <input type="text" class="form-control" id="n_venta">
+                      <input type="text" class="form-control" id="n_venta" readonly="">
                     </div>
 
                     <div class="col-sm-4 invoice-col" style="margin:0px">
@@ -158,10 +158,13 @@ require_once("modals/photosensible_ventas.php");
                 </div>
                 <div class="col-sm-6 post_compra">
                   <button class="btn btn-success btn-block" style="border-radius:2px" onClick='explode();'><i class="fas fa-plus"></i> Nueva Venta</button>
+                </div>               
+
+              </div>
+              <div class="col-sm-4" id="print_factura">
+                  <a href="" id="factura_contado" target="_blank"><button class="btn btn-warnig btn-block" style="border-radius:2px"><i class="fas fa-print"></i> Imprimir Factura</button></a>
                 </div>
               </div>
-                <a href="" id="factura_contado" target="_blank"> Imprimir factura</a>
-                </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->

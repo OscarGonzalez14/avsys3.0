@@ -1,6 +1,16 @@
 function init(){
    get_correlativo_recibo();
 }
+
+////////OCULTAR BTN DE IMPRIMIR RECIBO AL INICIO
+$(document).ready(ocultar_btn_print_rec_ini);
+
+  function ocultar_btn_print_rec_ini(){
+  get_correlativo_venta();
+  document.getElementById("btn_print_recibo").style.display = "none";
+  document.getElementById("print_factura").style.display = "none";
+}
+
 function get_correlativo_recibo(){
   var sucursal_correlativo = $("#sucursal").val();
   $.ajax({
@@ -109,9 +119,42 @@ $(document).on('click', '#btn_enviar_ini', function(){
 $(document).on('click', '#btn_enviar_ini', function(){
   var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();
   var id_paciente =$("#id_paciente").val();
-
+  comprobarSaldo();  
+  document.getElementById("btn_print_recibo").style.display = "block";
   document.getElementById("factura_contado").href='imprimir_factura_pdf.php?n_venta='+n_venta_recibo_ini+'&'+'id_paciente='+id_paciente;
-    
+  document.getElementById("btn_enviar_ini").style.display = "none"; 
 });
+
+function comprobarSaldo(){
+  var n_venta =$("#n_venta").val();
+  var id_paciente =$("#id_paciente").val();
+
+  $.ajax({
+  url:"ajax/recibos.php?op=consultar_saldo",
+  method:"POST",
+  data:{n_venta:n_venta,id_paciente:id_paciente},
+  cache: false,
+  dataType:"json",
+  error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+  }, 
+      
+    success:function(data){
+      console.log("El saldo es: "+data.saldo);
+      //return false;
+      saldo= data.saldo;
+      if(saldo=='0'){
+      document.getElementById("print_factura").style.display = "block";
+      }else if (saldo>0) {
+       document.getElementById("print_factura").style.display = "none";
+      }
+      
+    }
+
+  });
+
+}
 
 init();

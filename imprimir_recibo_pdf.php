@@ -21,7 +21,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
       html{
       	margin-top: 0;
         margin-left: 18px;
-        margin-right:20px; 
+        margin-right:18px; 
         margin-bottom: 0;
     }
     .stilot1{
@@ -49,19 +49,19 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
    </style>
   </head>
   <body>
-<table style="width: 100%;margin-top:30px">
+<table style="width: 100%;margin-top:20px">
 <tr>
-<td width="10%"><h1 style="text-align: left; margin-right:2px;"><img src="images/logooficial.jpg" width="150" height="80"  /></h1></td>
+<td width="10%"><h1 style="text-align: left; margin-right:2px;"><img src="images/logooficial.jpg" width="180" height="100"  /></h1></td>
 
 <td width="70%">
 <table style="width:95%;">
 
  <tr>
-    <td style="text-align:center; font-size:18px";font-family: Helvetica, Arial, sans-serif;><strong>OPTICA AVPLUS S.A de C.V.</strong></td>
+    <td style="text-align:center; font-size:20px";font-family: Helvetica, Arial, sans-serif;><strong>OPTICA AVPLUS S.A de C.V.</strong></td>
   </tr>
 
   <tr>
-    <td style="text-align:center; font-size:11px;font-family: Helvetica, Arial, sans-serif;"><strong>GIRO: </strong>OTROS SERVICIO RELACIONADOS CON LA SALUD</td>
+    <td style="text-align:center; font-size:14px;font-family: Helvetica, Arial, sans-serif;"><strong>GIRO: </strong>OTROS SERVICIO RELACIONADOS CON LA SALUD</td>
   </tr>
   <tr>
     <td style="text-align:center; font-size:11px;font-family: Helvetica, Arial, sans-serif;">Boulevard de los Heroes. Centro Comercial Metrocentro Local#7 San Salvador&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="date"></span></td>
@@ -80,7 +80,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
     <td style="text-align:right; font-size:12px"><strong>RECIBO</strong></td>
   </tr>
   <tr>
-    <td style="color:red;text-align:right; font-size:12px"><strong >No.&nbsp;<span><?php echo $n_recibo;?></strong></td>
+    <td style="color:red;text-align:right; font-size:14px"><strong >No.&nbsp;<span><?php echo $n_recibo;?></strong></td>
   </tr>
 
 </table><!--fin segunda tabla-->
@@ -88,7 +88,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 </tr>
 </table>
 
-<div style="height:420px;width:100%;margin-top:0px;"><!--Emisor--->
+<div style="height:400px;width:100%;margin-top:0px;"><!--Emisor--->
 	
 <table width="100%" id="table2">
 
@@ -185,19 +185,19 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 </div><!--Fin Emisor--->
 <span style="text-align: center">
 
-<table style="width: 100%;">
+<table style="width: 100%;margin-top:20px">
 <tr>
-<td width="10%"><h1 style="text-align: left; margin-right:2px;"><img src="images/logooficial.jpg" width="150" height="80"  /></h1></td>
+<td width="10%"><h1 style="text-align: left; margin-right:2px;"><img src="images/logooficial.jpg" width="180" height="100"  /></h1></td>
 
 <td width="70%">
 <table style="width:95%;">
 
  <tr>
-    <td style="text-align:center; font-size:18px";font-family: Helvetica, Arial, sans-serif;><strong>OPTICA AVPLUS S.A de C.V.</strong></td>
+    <td style="text-align:center; font-size:20px";font-family: Helvetica, Arial, sans-serif;><strong>OPTICA AVPLUS S.A de C.V.</strong></td>
   </tr>
 
   <tr>
-    <td style="text-align:center; font-size:11px;font-family: Helvetica, Arial, sans-serif;"><strong>GIRO: </strong>OTROS SERVICIO RELACIONADOS CON LA SALUD</td>
+    <td style="text-align:center; font-size:14px;font-family: Helvetica, Arial, sans-serif;"><strong>GIRO: </strong>OTROS SERVICIO RELACIONADOS CON LA SALUD</td>
   </tr>
   <tr>
     <td style="text-align:center; font-size:11px;font-family: Helvetica, Arial, sans-serif;">Boulevard de los Heroes. Centro Comercial Metrocentro Local#7 San Salvador&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="date"></span></td>
@@ -216,7 +216,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
     <td style="text-align:right; font-size:12px"><strong>RECIBO</strong></td>
   </tr>
   <tr>
-    <td style="color:red;text-align:right; font-size:12px"><strong >No.&nbsp;<span><?php echo $n_recibo;?></strong></td>
+    <td style="color:red;text-align:right; font-size:14px"><strong >No.&nbsp;<span><?php echo $n_recibo;?></strong></td>
   </tr>
 
 </table><!--fin segunda tabla-->
@@ -267,7 +267,8 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 <tr style="font-size:10pt" class="even_row">
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["monto"];?></span></td>
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["a_anteriores"];?></span></td>
-    <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["abono_act"];?></span></td>
+
+    <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".number_format($datos_recibo[$i]["abono_act"],2,".",",");?></span></td>
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["saldo"];?></span></td>
     <td style="text-align: center" colspan="24" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["forma_pago"];?></span></td>
 </tr>
@@ -310,14 +311,14 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 <tr>
     <td  colspan="40" class="stilot3">Firma paciente:___________________________</td>
     <td  colspan="30" class="stilot3"><div align="center"><span class=""><?php echo "Asesor:".": ".$datos_recibo[$i]["id_usuario"];?></span></div></td>
-    <td  colspan="30" class="stilot3"><?php echo $datos_recibo[$i]["numero_venta"];?></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:12px"><strong>Duplicado: Cliente</strong></span></td>
+    <td  colspan="30" class="stilot3"><?php echo $datos_recibo[$i]["numero_venta"];?></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:12px"><strong>Original: Emisor</strong></span></td>
 </tr>
 <?php
   }
 ?>
 </table>
   
-</div><!--Fin Duplicado--->
+</div><!--Fin Emisor--->
 </body>
 </html>
 <?php

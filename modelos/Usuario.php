@@ -31,7 +31,7 @@ class Usuarios extends conectar{  // inicio de la clase
 	////// funcion listar usuarios
 	public function get_usuarios(){
  	$conectar= parent::conexion();
-  	$sql="select id_usuario, nombres, usuario, categoria, telefono, correo, direccion from usuarios;";
+  	$sql="select * from usuarios;";
   	$sql = $conectar->prepare($sql);
   	$sql->execute();
   	return $result = $sql->fetchAll(PDO::FETCH_ASSOC);

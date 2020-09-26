@@ -115,7 +115,14 @@
               <i class="nav-icon fas fa-chart-line"></i>
               <p>Ventas</p>
             </a>
-          </li>           
+          </li>
+
+          <li class="nav-item">
+            <a href="creditos.php" class="nav-link">
+              <i class="nav-icon fas fa-cash-register"></i>
+              <p>Creditos & Cobros</p>
+            </a>
+          </li>          
          
         </ul>
       </nav>

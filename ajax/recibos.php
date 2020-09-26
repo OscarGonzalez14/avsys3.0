@@ -72,4 +72,18 @@ switch ($_GET["op"]) {
    } 
 
     break;
+
+  /////////////COMPROBAR SALDOS PARA IMPRIMIR FACTURA CONTADO
+  case "consultar_saldo":
+  $datos= $recibos->saldo_venta($_POST["n_venta"],$_POST["id_paciente"]);
+  
+    if(is_array($datos)==true and count($datos)>0){
+      foreach($datos as $row){                  
+        $output["saldo"]=$row["saldo"];
+      }             
+    }
+
+   echo json_encode($output);
+
+  break;
 }

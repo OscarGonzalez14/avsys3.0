@@ -86,7 +86,7 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
 </tr>
 
 <tr style="height:50px;">
-  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 10px;text-align: center;margin:20px;height: 90px">
+  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 10px;text-align: center;margin:20px;height: 95px">
  <?php 
     for ($i=0; $i < sizeof($datos_factura_cantidad); $i++) {
      echo $datos_factura_cantidad[$i]["cantidad_venta"]?><br>
@@ -216,7 +216,7 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
 </tr>
 
 <tr style="height:55px;">
-  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 11px;text-align: center;height: 90px">
+  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 11px;text-align: center;height: 95px">
  <?php 
     for ($i=0; $i < sizeof($datos_factura_cantidad); $i++) {
      echo $datos_factura_cantidad[$i]["cantidad_venta"]?><br>

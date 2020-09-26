@@ -114,7 +114,18 @@ $conectar=parent::conexion();
     }//Fin del if
 
 }
-
+///////////////VERIFICA SALDO***********
+public function saldo_venta($n_venta,$id_paciente){
+  $conectar= parent::conexion();
+  parent::set_names();
+  $sql="select saldo from creditos where numero_venta=? and id_paciente=?";
+  $sql= $conectar->prepare($sql);
+  $sql->bindValue(1, $n_venta);
+  $sql->bindValue(2, $id_paciente);
+  $sql->execute();
+  //return $resultado=$sql->fetchAll();
+  return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
 
 }
 
