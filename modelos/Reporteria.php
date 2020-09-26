@@ -72,4 +72,29 @@ public function get_datos_factura_subtotal($n_venta,$id_paciente){
 	$sql->execute();
 	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/////////GET DATOS CLIENTE DE PRODUCTOS FACTURA
+public function get_datos_factura_paciente($id_paciente){
+	$conectar= parent::conexion();
+	parent::set_names();
+	$sql="select *from pacientes where id_paciente=?";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$id_paciente);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/////////GET DATOS VENTA FACTURA
+public function get_datos_factura_venta($n_venta,$id_paciente){
+	$conectar= parent::conexion();
+	parent::set_names();
+	$sql="select *from ventas where numero_venta=? and id_paciente=?";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$n_venta);
+    $sql->bindValue(2,$id_paciente);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 }

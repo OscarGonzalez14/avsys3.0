@@ -1,9 +1,31 @@
-<?php
-// Create two new DateTime-objects...
-$date1 = new DateTime('2006-04-12 12:30:00');
-$date2 = new DateTime('2006-04-14 11:30:00');
-// The diff-methods returns a new DateInterval-object...
-$diff = $date2->diff($date1);
 
-// Call the format method on the DateInterval-object
-echo $diff->format('%h hours');
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<style type="text/css">
+	.headt td {
+  min-width: 235px;
+  height: 10px;
+  background-color: #433;
+}
+
+table {
+  color: #4ef;
+}
+</style>
+<table>
+  <tr class="headt">
+    <td>Enero</td>
+    <td>$100</td>
+  </tr>
+  <tr>
+    <td>Febrero</td>
+    <td>$80</td>
+  </tr>
+</table>
+</style>
+</body>
+</html>
