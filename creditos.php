@@ -49,7 +49,7 @@ require_once('header_dos.php');
               <div class="icon">
                 <i class="fas fa-money-check-alt"></i>
               </div>
-              <a href="#" class="small-box-footer">Ir a Cargos Automáticos<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="creditos_cautomaticos.php" class="small-box-footer">Ir a Cargos Automáticos<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
