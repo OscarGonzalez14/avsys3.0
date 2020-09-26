@@ -45,7 +45,7 @@
         </div>
         <div class="form-group col-md-4">
           <label>Contraseña</label>
-          <input type="text" class="form-control" id="pass_user" name="" onkeyup="mayus(this);">
+          <input type="text" class="form-control" id="pass_user" name="">
         </div>
         
         <div class="form-group col-md-4">

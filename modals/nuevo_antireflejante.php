@@ -35,7 +35,7 @@
                   <input type="number" class="form-control" name="precio" placeholder="" id="precio_dos" >
                 </div>
           </div>
-          <input type="hidden" name="" id="cat_prod_dos" value="antireflejante">
+          <input type="hidden" name="" id="cat_prod_dos" value="Antireflejante">
         </div>
       </div>
       <!-- Modal footer -->

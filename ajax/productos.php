@@ -324,6 +324,29 @@ case "buscar_aros_venta":
 
     break;
 
+    /////LENTES + TRATAMIENTOS
+     case "lista_lentes_tratamientos":////////muestra photosensible en modal de ventas
+    $datos=$productos->get_lente_tratamientos();
+    //Vamos a declarar un array
+    $data= Array();
+    foreach($datos as $row){
+        $sub_array = array();
+        $sub_array[] = $row["id_producto"];
+        $sub_array[] = $row["categoria_producto"];
+        $sub_array[] = "$".number_format($row["categoria"],2,".",",");
+        $sub_array[] = $row["desc_producto"];
+        $data[] = $sub_array;
+      }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+      echo json_encode($results);
+
+    break;
+
 
 
 }

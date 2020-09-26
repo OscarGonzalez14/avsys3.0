@@ -242,6 +242,15 @@ public function get_photo_ventas(){
   return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+////FUNCION LISTAR LENTES + TRATAMIENTOS
+public function get_lente_tratamientos(){
+  $conectar= parent::conexion();
+  $sql="select id_producto, categoria, categoria_producto, desc_producto from productos where categoria_producto='lentes' or categoria_producto='antireflejante' or categoria_producto='photosensible';";
+  $sql = $conectar->prepare($sql);
+  $sql->execute();
+  return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 
 }//////Fin de la clase

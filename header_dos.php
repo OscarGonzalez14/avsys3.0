@@ -35,6 +35,9 @@
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.1/css/buttons.dataTables.min.css">
 
+<style type="text/css">
+
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
