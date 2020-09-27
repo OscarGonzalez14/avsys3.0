@@ -7,8 +7,7 @@
 
   switch($_GET["op"]){
   case "listar":
-  $datos=$consultas->get_consultas();
-
+  $datos=$consultas->get_consultas($_POST["sucursal"]);
  	$data= Array();
 
      foreach($datos as $row){

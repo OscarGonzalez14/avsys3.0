@@ -223,7 +223,7 @@ public function guardar_photosensible($describe,$precio,$cat_prod){
     $sql->bindValue(9, $describe);
     $sql->execute();
 }
-
+//////////////////DATOS PARA RECIBOS
 public function get_ar_ventas(){
   $conectar= parent::conexion();
 

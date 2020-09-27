@@ -10,24 +10,23 @@ function init(){
 
 
 //Función Listar
-function listar()
-{
-	tabla=$('#consultas_data').dataTable(
-	{
+function listar(){
+	var sucursal=$("#sucursal").val();
+	tabla=$('#consultas_data').dataTable({
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
 	    buttons: [		          
 		            'copyHtml5',
-		            'excelHtml5',
-		           
+		            'excelHtml5',		           
 		            'pdf'
 		        ],
 		"ajax":
 				{
 					url: 'ajax/consultas.php?op=listar',
-					type : "get",
-					dataType : "json",						
+					type : "post",
+					dataType : "json",
+					data:{sucursal:sucursal},						
 					error: function(e){
 						console.log(e.responseText);	
 					}

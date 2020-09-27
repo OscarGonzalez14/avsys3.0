@@ -3,15 +3,7 @@
 require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){ 
 require_once("header_dos.php");
-require_once("modals/listar_aros_en_venta.php");
-require_once("modals/modal_lente_en_venta.php");
-require_once("modals/modal_accesorios_ventas.php");
-require_once("modals/pacientes_con_consulta.php");
-require_once("modals/pacientes_sin_consulta.php");
-
-require_once("modals/modal_recibo_inicial.php");
-require_once("modals/antireflejante_ventas.php");
-require_once("modals/photosensible_ventas.php");
+require_once("modals/modal_abonos.php");
 
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -31,7 +23,8 @@ require_once("modals/photosensible_ventas.php");
        <tr>
 
         <th style='text-align: center;'>No. Venta</th>
-        <th style='text-align: center;'>Paciente</th>        
+        <th style='text-align: center;'>Titular de cuenta</th>
+        <th style='text-align: center;'>Paciente Evaluado</th>        
         <th style='text-align: center;'>Monto</th>
         <th style='text-align: center;'>Saldo</th>
         <th style='text-align: center;'>Abonar</th>

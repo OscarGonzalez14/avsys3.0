@@ -6,11 +6,12 @@ class Externos extends conectar
 
 
 
-	public function get_categorias(){
+	public function get_categorias($sucursal){
 	    $conectar= parent::conexion();
 		parent::set_names();
 		 $sql="select id_categoria, nombre from categoria";
 		 $sql=$conectar->prepare($sql);
+		 $sql->bindValue(1, $sucursal);
     	 $sql->execute();
     	 return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     	}

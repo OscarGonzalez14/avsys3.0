@@ -106,6 +106,8 @@ function save_abono_inicial(){
     
   }
 
+
+
 $(document).on('click', '#btn_enviar_ini', function(){
   var n_recibo = $("#n_recibo").html();
   var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();

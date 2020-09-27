@@ -9,7 +9,9 @@ require_once('modals/reporte_det_ingreso.php');
 require_once('modals/modal_categorias.php');
 require_once('modelos/Externos.php');
 $categorias = new Externos();
-$cats=$categorias->get_categorias();
+$sucursal=$_SESSION["sucursal"];
+$cats=$categorias->get_categorias($sucursal);
+
 ?>
 <input type="hidden" name="" id="numero_compra_bod" value="<?php echo $n_compra; ?>">
 <div class="content-wrapper">
@@ -28,7 +30,7 @@ $cats=$categorias->get_categorias();
         </div>&nbsp;
        
         <div class="callout callout-info col-sm-3">
-            <span><strong>Sucursal: </strong> </span><span id="sucursal_i">Metrocentro</span>
+            <span><strong>Sucursal: </strong> </span><span id="sucursal_i"><?php echo $_SESSION["sucursal"];?></span>
         </div>
 	</div>
 	</div>

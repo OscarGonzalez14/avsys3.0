@@ -4,11 +4,12 @@
 require_once("../config/conexion.php");
 class Consulta extends Conectar{
 
-    public function get_consultas(){
+    public function get_consultas($sucursal){
 
         $conectar= parent::conexion();       
-        $sql= "select c.fecha_reg,c.id_consulta,p.nombres,c.sugeridos,c.diagnostico,u.usuario,c.p_evaluado from usuarios as u inner join consulta as c on u.id_usuario=c.id_usuario inner join pacientes as p on c.id_paciente=p.id_paciente;";
+        $sql= "select c.fecha_reg,c.id_consulta,p.nombres,c.sugeridos,c.diagnostico,u.usuario,c.p_evaluado from usuarios as u inner join consulta as c on u.id_usuario=c.id_usuario inner join pacientes as p on c.id_paciente=p.id_paciente where p.sucursal=?;";
         $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$sucursal);
         $sql->execute();
         return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);         
     }
