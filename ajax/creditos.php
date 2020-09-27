@@ -13,8 +13,8 @@ switch ($_GET["op"]){
     $sub_array = array();
     $sub_array[] = $row["numero_venta"];
     $sub_array[] = $row["nombres"];    
-    $sub_array[] = $row["monto"]; 
-    $sub_array[] = $row["saldo"];    
+    $sub_array[] = "$".number_format($row["monto"],2,".",","); 
+    $sub_array[] = "$".number_format($row["saldo"],2,".",",");    
 
     $sub_array[] = '<button type="button" onClick="registrarAbonos('.$row["id_paciente"].','.$row["id_credito"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';
      $sub_array[] = '<button type="button" onClick="registrarAbonos('.$row["id_paciente"].','.$row["id_credito"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';

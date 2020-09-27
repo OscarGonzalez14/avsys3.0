@@ -21,7 +21,7 @@ require_once('header_dos.php');
               <div class="icon">
                 <i class="fas fa-coins"></i>
               </div>
-              <a href="aros.php" class="small-box-footer">ir a Contado <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="creditos_contado.php" class="small-box-footer">ir a Contado <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

@@ -16,7 +16,6 @@ require_once("modals/photosensible_ventas.php");
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-
     <!-- Main content -->
     <section class="content" style="margin-top: 5px">
       <div class="row">
