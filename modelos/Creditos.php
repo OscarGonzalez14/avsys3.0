@@ -46,6 +46,17 @@ where c.tipo_credito='Contado' and p.sucursal=? order by c.id_credito DESC;";
 
     }
 
+    //////LISTAR DETALLE DE ABONOS
+     public function get_detalle_abonos($id_paciente,$numero_venta){
+    $conectar= parent::conexion();
+    $sql= "SELECT a.fecha_abono,a.forma_pago,a.n_recibo,a.monto_abono,a.sucursal,u.usuario,c.monto,p.nombres,p.empresas from abonos as a inner join creditos as c on c.numero_venta=a.numero_venta inner join usuarios as u on a.id_usuario=u.id_usuario inner join pacientes as p on p.id_paciente=a.id_paciente where a.id_paciente=? and a.numero_venta=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_paciente);
+    $sql->bindValue(2, $numero_venta);
+    $sql->execute();
+    return $resultado=$sql->fetchAll();
+    }
+
 	}/////FIN CLASS
 
  ?>
