@@ -11,15 +11,35 @@ switch ($_GET["op"]){
   $data= Array();
   foreach($datos as $row){
     $sub_array = array();
+
+    $icon="";
+    $atrib="";
+    $txt="";
+    $evento="";
+    $class="";
+    $href="";
+
+    if($row["saldo"] == 0){
+        $icon="fas fa-print";
+        $atrib = "btn btn-info";
+        $txt = 'CANC.';
+        $href='imprimir_factura_pdf.php?n_venta='.$row['numero_venta'].'&id_paciente='.$row['id_paciente'].'';
+    }elseif ($row["saldo"] > 0) {
+        $icon=" fas fa-hand-holding-usd";
+        $atrib = "btn btn-secondary";
+        $txt = 'PEND.';
+        $href='#';
+    }
+
     $sub_array[] = $row["numero_venta"];
     $sub_array[] = $row["nombres"];
     $sub_array[] = $row["evaluado"];    
     $sub_array[] = "$".number_format($row["monto"],2,".",","); 
     $sub_array[] = "$".number_format($row["saldo"],2,".",",");    
 
-    $sub_array[] = '<button type="button" onClick="realizarAbonos('.$row["id_paciente"].','.$row["id_credito"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';
-     $sub_array[] = '<button type="button" onClick="registrarAbonos('.$row["id_paciente"].','.$row["id_credito"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';
-      $sub_array[] = '<button type="button" onClick="registrarAbonos('.$row["id_paciente"].','.$row["id_credito"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';           
+    $sub_array[] = '<button type="button" onClick="realizarAbonos('.$row["id_paciente"].','.$row["id_credito"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-md bg-warning" data-backdrop="static" data-keyboard="false"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';
+     $sub_array[] = '<button type="button" onClick="registrarAbonos('.$row["id_paciente"].','.$row["id_credito"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-file-invoice-dollar" aria-hidden="true" style="color:white"></i></button>';
+    $sub_array[] = '<a href="'.$href.'" method="POST" target="_blank"><button type="button"  class="btn '.$atrib.' btn-md"><i class="'.$icon.'"></i>'.$txt.'</button></a>';           
                                                 
     $data[] = $sub_array;
   }

@@ -487,6 +487,9 @@ function registrarVenta(){
 }
 
 if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
+  $('#listar_det_ventas').html('');
+   document.getElementById("btn_de_compra").style.display = "none";
+
     $.ajax({
     url:"ajax/ventas.php?op=registrar_venta",
     method:"POST",
@@ -501,7 +504,7 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
     success:function(data){
     console.log(data);
     //return false;       
-    detalles = []; 
+    detalles = [];
     if(data == "error"){
       Swal.fire('La venta no se pudo realizar por que el correlativo ya fue registrado... Intentar actualizar el navegador!','','error')
       setTimeout("$('#recibo_inicial').modal('hide');",3000)
@@ -513,7 +516,7 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
     
     if (tipo_venta=="Contado") {       
         setTimeout ("reciboInicial();", 2500);
-        mostrar_btn_post_venta();
+        mostrar_btn_post_venta();        
       }else {
       Swal.fire('Venta registrada exitosamente!','','success')
     }

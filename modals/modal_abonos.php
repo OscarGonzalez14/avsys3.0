@@ -145,9 +145,9 @@
 
   </div>
 
-    <button type="button" onClick="registra_abonos()" class="btn pull-right"  style="margin: 2px; border-radius: 0px;background: #3fb0ac;color:white"><i class="fa fa-save" aria-hidden="true"></i>  Registrar Abono</button>
+    <button type="button" onClick="registra_abonos()" id="registrar_abono" style="background: #3fb0ac;color:white"><i class="fa fa-save"></i>  Registrar Abono</button>
 
-    <a class="btn btn-primary" style="color:white;border-radius:1px;" href="" id="btn_print_recibo" target="_blank"><i class="fas fa-print"></i> Imprimir</a>
+    <a class="btn btn-primary" style="color:white;border-radius:1px;" href="" id="btn_print_recibos" target="_blank"><i class="fas fa-print"></i> Imprimir</a>
 
 </div><!--Fin modal Content-->
 <input type="hidden" id="id_pac_ini">

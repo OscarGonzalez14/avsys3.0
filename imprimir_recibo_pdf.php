@@ -130,7 +130,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 
 <tr style="font-size:10pt" class="even_row">
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["monto"];?></span></td>
-    <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["a_anteriores"];?></span></td>
+    <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$".number_format($datos_recibo[$i]["a_anteriores"],2,".",",");?></span></td>
 
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".number_format($datos_recibo[$i]["abono_act"],2,".",",");?></span></td>
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["saldo"];?></span></td>
@@ -266,7 +266,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 
 <tr style="font-size:10pt" class="even_row">
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["monto"];?></span></td>
-    <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["a_anteriores"];?></span></td>
+    <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$".number_format($datos_recibo[$i]["a_anteriores"],2,".",",");?></span></td>
 
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".number_format($datos_recibo[$i]["abono_act"],2,".",",");?></span></td>
     <td style="text-align: center" colspan="19" class="stilot1"><span class=""><?php echo "$ ".$datos_recibo[$i]["saldo"];?></span></td>

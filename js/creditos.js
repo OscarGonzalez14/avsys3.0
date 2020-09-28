@@ -1,6 +1,13 @@
 function init(){
 	listar_creditos_sucursal();
 }
+///////////OCULTAR ELEMENTOS AL INICIO
+$(document).ready(ocultar_element_ini);
+
+  function ocultar_element_ini(){
+  document.getElementById("btn_print_recibos").style.display = "none";
+}
+
 function listar_creditos_sucursal(){
   var sucursal= $("#sucursal").val();
   tabla_creditos_sucursal=$('#creditos_de_contado').dataTable(
@@ -104,6 +111,8 @@ function listar_creditos_sucursal(){
 //////////////RECIBOS Y ABONOS
 function realizarAbonos(id_paciente,id_credito,numero_venta){
   $("#modal_recibos_generico").modal("show");
+  $("#numero").val("");
+    document.getElementById("numero").focus();
   ////////ajax datos de paciente
   $.ajax({
   url:"ajax/creditos.php?op=datos_paciente_abono",
@@ -122,6 +131,8 @@ function realizarAbonos(id_paciente,id_credito,numero_venta){
     $("#n_venta_recibo_ini").val(data.numero_venta);
     $("#id_paciente").val(data.id_paciente);
     $("#saldo_credito").val(data.saldo);
+    $("#saldo").val("");   
+    
  }
   })
  //////// FIN ajax datos de paciente
@@ -211,13 +222,14 @@ function registra_abonos(){
     }
   }else{
     Swal.fire('Debe llenar los campos obligatorios correctamente!','','error')
+
   }//VALIDA MONTO
   
 }
 
 function registrar_abono(){
-    
-    var a_anteriores="";
+
+    var a_anteriores=$("#abono_ant").val();
     var n_recibo = $("#n_recibo").html();
     var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();
     var monto =$("#monto_venta_rec_ini").val();
@@ -243,7 +255,7 @@ function registrar_abono(){
     var servicio_rec_ini=$("#servicio_abono").val();    
     
     if (forma_pago !="") {
-
+    $('#creditos_de_contado').DataTable().ajax.reload();
     $.ajax({
     url:"ajax/recibos.php?op=registrar_recibo",
     method:"POST",
@@ -276,4 +288,15 @@ function registrar_abono(){
   }  
     
   }
+  ///////////////////////IMPRIMIR RECIBO DE ABONO
+  $(document).on('click', '#registrar_abono', function(){
+  var n_recibo = $("#n_recibo").html();
+  var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();
+  var id_paciente =$("#id_paciente").val();
+  document.getElementById("btn_print_recibos").style.display = "block";
+
+  document.getElementById("btn_print_recibos").href='imprimir_recibo_pdf.php?n_recibo='+
+  n_recibo+'&'+'n_venta='+n_venta_recibo_ini+'&'+'id_paciente='+id_paciente;
+  
+});
 init();
