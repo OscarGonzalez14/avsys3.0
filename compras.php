@@ -126,7 +126,7 @@ if(isset($_SESSION["usuario"])){
                         <option value=''>Seleccionar sucursal</option>
                         <option value='Metrocentro'>Metrocentro</option>
                         <option value='Santa Ana'>Santa Ana</option>
-                        <option value='San Miguel'>Santa Ana</option>
+                        <option value='San Miguel'>San Miguel</option>
                       </select>
                   </div>   
 
