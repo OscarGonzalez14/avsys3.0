@@ -19,8 +19,15 @@ function guardarCategoria(){
     },
    success:function(data){
     console.log(data);
-     alert("¡Los datos han sido guardados exitosamente!");
-    }
+     if (data=='ok') {
+       setTimeout ("Swal.fire('Categoría ha sido guardada exitosamente ','','success')", 100);
+       setTimeout ("explode();", 2000);
+     }else{
+        setTimeout ("Swal.fire('Esta categoría ya existe','','error')", 100);
+        return false;
+     }
+     }
+    
 
 	});
 	}

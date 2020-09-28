@@ -20,7 +20,7 @@ function guardarMarca(){
 	    }else{
           setTimeout ("Swal.fire('Esta marca ya se encuetra registrada','','error')", 100);
           return false;
-  }
+  		}
         }
 
      });
