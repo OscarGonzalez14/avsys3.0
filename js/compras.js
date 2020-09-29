@@ -245,7 +245,7 @@ if(tipo_compra=='Credito' && plazo=='contado'){
     console.log(data);
     if (data=='ok') {
     detalles = [];
-    $('#istar_det_compras').html('');
+    $('#listar_det_compras').html('');
     setTimeout ("Swal.fire('Se ha registrado Exitosamente la compra','','success')", 100);
     ocultar_btn_de_compra();
     setTimeout ("mostrar_btn_post_compra()", 2000);

@@ -40,11 +40,12 @@
 
        			<div class="form-group col-md-6">
        				<label>Nombre</label>
-       				<input type="text" class="form-control" name="" placeholder=" Ingrese categoría" id="cat_nombre">  				
+       				<input type="text" class="form-control" name="" placeholder=" Ingrese categoría" id="cat_nombre" onkeyup="mayus(this);">  				
        			</div>
         <div class="form-group col-md-6">
           <label>Seleccionar Sucursal</label>
           <select name="Sucursal" class="form-control" id="cat_sucursal">
+            <option value="">Seleccione...</option>
             <option value="Santa Ana">Santa Ana</option>
             <option value="Metrocentro">Metrocentro</option>
             <option value="San Miguel">San Miguel</option>                
@@ -62,7 +63,7 @@
             </div>
        			<div class="form-group col-md-8">
        				<label>Descripción</label>
-       				<input type="text" class="form-control" name="" placeholder="Descripción de categoría" id="cat_descripcion">  				
+       				<input type="text" class="form-control" name="" placeholder="Descripción de categoría" id="cat_descripcion" onkeyup="mayus(this);">  				
        			</div>
        			
        		</div>
@@ -70,9 +71,14 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" onClick="guardarCategoria();">Guardar categoría</button>
+          <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" onClick="guardarCategoria();"><i class="fas fa-save"></i> Guardar</button>
         </div>
         
       </div>
     </div>
   </div>
+<script>
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+}
+</script>
