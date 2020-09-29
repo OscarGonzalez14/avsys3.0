@@ -15,33 +15,9 @@ function listar_creditos_sucursal(){
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
       dom: 'Bfrtip',//Definimos los elementos del control de tabla
-      buttons: [{
-          extend: 'excelHtml5',
-          download: 'open',
-          text: 'Descargar Excel',
-          filename: function() {
-              var date_edition = 'Creditos Sucursal '+moment().format("DD-MM-YYYY HH[h]mm")
-              var selected_machine_name = $("#output_select_machine select option:selected").text()
-              return date_edition + ' - ' + selected_machine_name
-           },
-           sheetName: 'Creditos Sucursal',
-           title : null
-       },
-            {
-              extend: 'pdfHtml5',
-              download: 'open',
-              text: 'Imprimir',
-              orientation: 'portrait',
-              pageSize: 'letter',
-              filename: function() {
-              var fecha = 'Compras Pendientes '+moment().format("DD-MM-YYYY HH[h]mm")
-              var selected_machine_name = $("#output_select_machine select option:selected").text()
-              return fecha + ' - ' + selected_machine_name
-              
-            },
-            title : ''
-        }   
-       ],
+      buttons: [
+                'excelHtml5'
+            ],
     "ajax":
         {
           url: 'ajax/creditos.php?op=listar_creditos_contado',
@@ -302,16 +278,12 @@ function registrar_abono(){
   /////////////////LISTAR DETALLE DE ABONOS
   function verDetAbonos(id_paciente,numero_venta){
   $("#detalle_abonos").modal("show");
-  tabla_det_abono=$('#lista_det_abonos').dataTable(
-  {
+  tabla_det_abono=$('#lista_det_abonos').dataTable({
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
-      dom: 'Bfrtip',//Definimos los elementos del control de tabla
+      dom: 'Brtip',//Definimos los elementos del control de tabla
        buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
-                'pdf'
+                'excelHtml5'
             ],
     "ajax":
         {
@@ -378,5 +350,23 @@ function registrar_abono(){
          }//cerrando language
 
   }).DataTable();
+//////////////////////////////GET DATOS PACENTE CREDITO
+  ////////////////photo
+  $.ajax({
+  url:"ajax/creditos.php?op=get_datos_credito_abono",
+  method:"POST",
+  data:{id_paciente:id_paciente,numero_venta:numero_venta},
+  cache:false,
+  dataType:"json",
+  success:function(data)
+  { 
+    console.log(data);  
+    $("#paciente_det_abono").html(data.nombres);
+    $("#monto_det_abono").html(data.monto);
+    $("#total_abonado").html(data.abonado);
+    $("#saldo_det_abono").html(data.saldo);
+  }
+  })
+
 }
 init();

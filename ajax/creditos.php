@@ -111,5 +111,20 @@ switch ($_GET["op"]){
       echo json_encode($results);
 
     break;
+    /////////////////GET DATOS DE PACIENTE DE MODAL ABONOS
+    case 'get_datos_credito_abono':
+  
+    $datos= $creditos->get_datos_abonos($_POST["id_paciente"],$_POST["numero_venta"]); 
+
+        if(is_array($datos)==true and count($datos)>0){
+          foreach($datos as $row){         
+            $output["monto"] = $row["monto"];
+            $output["abonado"] = $row["abonado"];
+            $output["nombres"] = $row["nombres"];
+            $output["saldo"] = $row["saldo"];                
+          }       
+        echo json_encode($output);
+        } 
+      break;
 }
  ?>

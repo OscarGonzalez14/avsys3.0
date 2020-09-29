@@ -57,6 +57,22 @@ where c.tipo_credito='Contado' and p.sucursal=? order by c.id_credito DESC;";
     return $resultado=$sql->fetchAll();
     }
 
+    //////////////GET DATOS DE PACIENTE DE MODAL ABONOS
+    public function get_datos_abonos($id_paciente,$numero_venta){
+    $conectar=parent::conexion();
+    parent::set_names();
+
+    $sql="select c.monto,sum(a.monto_abono) as abonado,p.nombres,c.monto-(sum(a.monto_abono)) as saldo
+        from creditos as c inner join abonos as a on c.numero_venta=a.numero_venta inner join
+        pacientes as p on c.id_paciente=p.id_paciente where a.id_paciente=? and a.numero_venta=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_paciente);
+    $sql->bindValue(2, $numero_venta);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
 	}/////FIN CLASS
 
  ?>

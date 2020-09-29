@@ -20,12 +20,32 @@
   <div class="modal-dialog modal-lg" role="document" id="tamModal_det_abonos">
 
     <div class="modal-content">
-     <div class="modal-header" id="head_det_abonos" style="justify-content:space-between">
+     <div class="modal-header bg-secondary" id="head_det_abonos" style="justify-content:space-between">
        <span><i class="fas fa-plus-square"></i> DETALLE DE ABONO</span>
         <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
      </div>
 
           <div class="card-body p-0" style="margin:7px">
+
+            <table class="table table-bordered table-sm">
+              <thead style="text-align: center" class="bg-info">
+                <tr>
+                  <th style="text-align:center">PACIENTE</th>
+                  <th style="text-align:center">MONTO DEL CREDITO</th>
+                  <th style="text-align:center">TOTAL ABONADO</th>
+                  <th style="text-align:center">SALDO</th>
+                </tr>
+              </thead>
+              <tbody style="text-align: :center">
+                <tr>
+                  <td style="text-align:center"><span id="paciente_det_abono"></span></td>
+                  <td style="text-align:center">$<span id="monto_det_abono"></span></td>
+                  <td style="text-align:center">$<span id="total_abonado"></span></td>
+                  <td style="text-align:center">$<span id="saldo_det_abono"></span></td>
+                </tr>      
+              </tbody>
+            </table><br>
+
             <table id="lista_det_abonos" width="100%" class ="table-hover">
               <thead style="background:#034f84;color:white;text-align: center;">
                 <tr>
