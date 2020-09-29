@@ -47,7 +47,7 @@ function registra_abono_inicial(){
 
 function save_abono_inicial(){
     
-    var a_anteriores="";
+    var a_anteriores="0";
     var n_recibo = $("#n_recibo").html();
     var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();
     var monto =$("#total_venta").html();

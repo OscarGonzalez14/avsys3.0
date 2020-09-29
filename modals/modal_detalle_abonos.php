@@ -27,7 +27,7 @@
 
           <div class="card-body p-0" style="margin:7px">
             <table id="lista_det_abonos" width="100%" class ="table-hover">
-              <thead style="background:#034f84;color:white;text-align: right;">
+              <thead style="background:#034f84;color:white;text-align: center;">
                 <tr>
                 <th>Fecha Abono</th>
                 <th>Paciente</th>

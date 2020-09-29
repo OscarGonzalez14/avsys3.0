@@ -307,17 +307,12 @@ function registrar_abono(){
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
       dom: 'Bfrtip',//Definimos los elementos del control de tabla
-      buttons: ['copyHtml5', {
-           extend: 'excelHtml5',
-           text: 'Excel Abonos',
-           filename: function() {
-               var date_edition = 'Detalle Abono'+moment().format("DD-MM-YYYY HH[h]mm")
-               var selected_machine_name = $("#output_select_machine select option:selected").text()
-               return date_edition + ' - ' + selected_machine_name
-           },
-           sheetName: 'Abonos',
-           title : null
-       }],
+       buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdf'
+            ],
     "ajax":
         {
           url: 'ajax/creditos.php?op=listar_detalle_abonos',
