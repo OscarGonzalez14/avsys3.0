@@ -76,7 +76,7 @@
           <td align='center'>
             <div class="input-group">
             <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-            <input class='form-control' type='text' class='monto' name='abono_ant' id="abono_ant" style="text-align: right;" readonly>
+            <input class='form-control' type='text' class='monto' name='abono_ant' id="abono_ant" style="text-align: right;" readonly value="0">
             </div>
           </td>
 
