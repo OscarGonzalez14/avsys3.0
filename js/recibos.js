@@ -28,11 +28,11 @@ function get_correlativo_recibo(){
 }
 
 function registra_abono_inicial(){
-  var fecha_rec_ini=$("#fecha_rec_ini").val();
+  var fecha_rec_ini=$("#proxi_abono").val();
   var saldo=$("#saldo").val();
   var monto = $("#numero").val();
 
-  if (monto !="") {//VALIDA MONTO
+  if (monto !="" && saldo>=0) {//VALIDA MONTO
      if (saldo >0 && fecha_rec_ini=="") {
      Swal.fire('Especifique fecha de proximo abono abono!','','error')
     }else{
@@ -125,7 +125,7 @@ $(document).on('click', '#btn_enviar_ini', function(){
   comprobarSaldo();  
   document.getElementById("btn_print_recibo").style.display = "block";
   document.getElementById("factura_contado").href='imprimir_factura_pdf.php?n_venta='+n_venta_recibo_ini+'&'+'id_paciente='+id_paciente;
-  document.getElementById("btn_enviar_ini").style.display = "none"; 
+  
 });
 
 function comprobarSaldo(){

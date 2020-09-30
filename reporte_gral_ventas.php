@@ -11,7 +11,8 @@ require_once('header.php');
         <h2 class="card-title" align="center"><strong> REPORTE GENERAL DE VENTAS </strong></h2>
         <div>
          <ul class="breadcrumb float-sm-right" style="background-color:transparent;padding:0px;">
-         <li class="breadcrumb-item"><a href="ventas.php">Regresar</a></li>
+         <li class="breadcrumb-item"><a href="ventas.php">Nueva Venta</a></li>
+         <li class="breadcrumb-item"><a href="corte_diario.php">Corte Diario</a></li>
          <li class="breadcrumb-item active">Reporte</li>
          </ul>
         </div>

@@ -1,6 +1,7 @@
 function init(){
 	listar_creditos_sucursal();
   listar_creditos_cauto();
+
 }
 ///////////OCULTAR ELEMENTOS AL INICIO
 $(document).ready(ocultar_element_ini);
@@ -162,11 +163,93 @@ function listar_creditos_cauto(){
 
   }).DataTable();
 }
+
+///////////////LISTAR CREDITOS DESCUENTO EN PLANILLA
+function listar_creditos_oid(){
+  var sucursal= $("#sucursal").val();
+  var empresa= $("#empresa").val();
+
+  tabla_creditos_oid=$('#creditos_oid').dataTable(
+  {
+    "aProcessing": true,//Activamos el procesamiento del datatables
+      "aServerSide": true,//Paginación y filtrado realizados por el servidor
+      dom: 'Bfrtip',//Definimos los elementos del control de tabla
+      buttons: [
+                'excelHtml5'
+            ],
+    "ajax":
+        {
+          url: 'ajax/creditos.php?op=listar_creditos_oid',
+          type : "post",
+          dataType : "json",
+          data:{sucursal:sucursal,empresa:empresa},
+          error: function(e){
+            console.log(e.responseText);
+          }
+        },
+    "bDestroy": true,
+    "responsive": true,
+    "bInfo":true,
+    "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+      "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+
+      "language": {
+
+          "sProcessing":     "Procesando...",
+
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+
+          "sZeroRecords":    "No se encontraron resultados",
+
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+
+          "sInfo":           "Mostrando un total de _TOTAL_ registros",
+
+          "sInfoEmpty":      "Mostrando un total de 0 registros",
+
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+
+          "sInfoPostFix":    "",
+
+          "sSearch":         "Buscar:",
+
+          "sUrl":            "",
+
+          "sInfoThousands":  ",",
+
+          "sLoadingRecords": "Cargando...",
+
+          "oPaginate": {
+
+              "sFirst":    "Primero",
+
+              "sLast":     "Último",
+
+              "sNext":     "Siguiente",
+
+              "sPrevious": "Anterior"
+
+          },
+
+          "oAria": {
+
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+
+          }
+
+         }//cerrando language
+
+  }).DataTable();
+}
+
+
 //////////////RECIBOS Y ABONOS
 function realizarAbonos(id_paciente,id_credito,numero_venta){
   $("#modal_recibos_generico").modal("show");
-  $("#numero").val("");
-    document.getElementById("numero").focus();
+  //$("#numero").val("");
+   // document.getElementById("numero").focus();
   ////////ajax datos de paciente
   $.ajax({
   url:"ajax/creditos.php?op=datos_paciente_abono",
@@ -176,7 +259,8 @@ function realizarAbonos(id_paciente,id_credito,numero_venta){
   dataType:"json",
   success:function(data)
   { 
-    console.log(data);  
+    console.log(data);
+    var nuevo_saldo = data.saldo-data.cuotas;  
     $("#recibi_abono").val(data.paciente);
     $("#servicio_abono").val(data.evaluado);
     $("#telefono_abono").val(data.telefono);
@@ -185,7 +269,8 @@ function realizarAbonos(id_paciente,id_credito,numero_venta){
     $("#n_venta_recibo_ini").val(data.numero_venta);
     $("#id_paciente").val(data.id_paciente);
     $("#saldo_credito").val(data.saldo);
-    $("#saldo").val("");   
+    $("#saldo").val(nuevo_saldo);
+    $("#numero").val(data.cuotas); 
     
  }
   })
@@ -263,11 +348,11 @@ function realizarAbonos(id_paciente,id_credito,numero_venta){
 
 ////////////////REGISTRAR ABONO
 function registra_abonos(){
-  var fecha_rec_ini=$("#fecha_rec_ini").val();
+  var fecha_rec_ini=$("#pr_abono").val();
   var saldo=$("#saldo").val();
   var monto = $("#numero").val();
 
-  if (monto !="") {//VALIDA MONTO
+  if (monto !="" && saldo>=0) {//VALIDA MONTO
      if (saldo >0 && fecha_rec_ini=="") {
      Swal.fire('Especifique fecha de proximo abono abono!','','error')
     }else{

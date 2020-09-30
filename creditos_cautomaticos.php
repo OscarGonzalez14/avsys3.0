@@ -17,6 +17,7 @@ require_once("modals/modal_detalle_abonos.php");
  			   <div class="callout callout-info">
         		<h5 align="center"><i class="fas fa-money-check-alt" style="color:green"></i> <strong>CRÉDITOS CARGO AUTOMÁTICO</strong></h5>              
     		   </div>
+           
         <table id="creditos_cauto" class="table-hover" width="100%">
            <thead style="background:#034f84;color:white;text-align: center;">
             <tr>

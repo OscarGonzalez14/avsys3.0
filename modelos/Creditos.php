@@ -25,7 +25,18 @@ where c.tipo_credito='Contado' and p.sucursal=? order by c.id_credito DESC;";
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
-
+//////////////////////LISTAR CREDITOS DE DESCUENTO EN PLANILLA
+    public function get_creditos_oid($sucursal,$empresa){
+    $conectar= parent::conexion();
+    $sql= "select c.numero_venta,p.nombres,p.empresas,c.monto,c.saldo,p.id_paciente,c.id_credito,v.evaluado
+        from creditos as c inner join pacientes as p on c.id_paciente=p.id_paciente inner join ventas as v on c.numero_venta=v.numero_venta
+        where c.forma_pago='Descuento en Planilla' and p.sucursal=? and p.empresas=? order by c.id_credito DESC;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$sucursal);
+    $sql->bindValue(2,$empresa);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
     /////////////GET DATOS DE PACIENTE PARA MODAL GENERICA DE CREDITOS
@@ -33,7 +44,7 @@ where c.tipo_credito='Contado' and p.sucursal=? order by c.id_credito DESC;";
         $conectar=parent::conexion();
         parent::set_names();
 
-        $sql="select c.id_paciente,c.numero_venta,c.id_credito,c.monto,c.saldo,v.paciente,v.evaluado,p.telefono,p.empresas
+        $sql="select c.id_paciente,c.monto/c.plazo as cuotas,c.numero_venta,c.id_credito,c.monto,c.saldo,v.paciente,v.evaluado,p.telefono,p.empresas
         from creditos as c inner join ventas as v on c.numero_venta=v.numero_venta inner join pacientes as p on p.id_paciente=c.id_paciente where c.id_paciente=? and v.numero_venta=?
         and c.numero_venta=? and c.id_paciente=?";
         $sql=$conectar->prepare($sql);

@@ -35,7 +35,7 @@ require_once('header_dos.php');
               <div class="icon">
                 <i class="fas fa-cash-register"></i>
               </div>
-              <a href="accesorios.php" class="small-box-footer">Ir a Descuentos Planilla <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="creditos_oid.php" class="small-box-footer">Ir a Descuentos Planilla <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
