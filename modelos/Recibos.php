@@ -113,6 +113,99 @@ $conectar=parent::conexion();
         $sql12->execute();               
     }//Fin del if
 
+  ///////////RECORD CORTE DIARIO
+
+  //*************Clasificar por numero de abonos si es venta o recuperado si el numeor de abonos es >0
+  $sql15="select count(numero_venta) as cuenta from abonos where numero_venta=? and id_paciente=?;";
+             
+    $sql15=$conectar->prepare($sql15);
+    $sql15->bindValue(1,$n_venta_recibo_ini);
+    $sql15->bindValue(2,$id_paciente);
+    $sql15->execute();
+
+    $suma_res=0;
+    $resultado_num_ventas = $sql15->fetchAll(PDO::FETCH_ASSOC);
+      foreach($resultado_num_ventas as $b=>$row){
+        $suma_res = $suma_res+$row["cuenta"];        
+
+    }
+//****************Seleccionar abono Anterior
+  $sql16="select sum(monto_abono) as monto_abono from abonos where numero_venta=? and id_paciente=?;";
+             
+    $sql16=$conectar->prepare($sql16);
+    $sql16->bindValue(1,$n_venta_recibo_ini);
+    $sql16->bindValue(2,$id_paciente);
+
+    $sql16->execute();
+
+    $suma_abonos_ant='0';
+    $resultado_abonos = $sql16 ->fetchAll(PDO::FETCH_ASSOC);
+      foreach($resultado_abonos as $b=>$row){
+        $suma_abonos_ant = $suma_abonos_ant+$row["monto_abono"];        
+
+    }
+/////////////////////EXTRAER EL TIPO DE PAGO
+    $sql16="select tipo_pago from ventas where numero_venta=? and id_paciente=?;";
+             
+    $sql19=$conectar->prepare($sql19);
+    $sql19->bindValue(1,$n_venta_recibo_ini);
+    $sql19->bindValue(2,$id_paciente);
+    $sql19->execute();
+    
+    $ver_tipo_pago = $sql19 ->fetchAll(PDO::FETCH_ASSOC);
+      foreach($ver_tipo_pago as $b=>$row){
+      $tipo_pago = $row["tipo_pago"];
+    }
+
+if(is_array($resultado_abonos)==true and count($resultado_abonos)>0) { 
+
+  $factura='';           
+  
+  $sql17="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  $sql17=$conectar->prepare($sql17);
+  $sql17->bindValue(1,$fecha);
+  $sql17->bindValue(2,$n_recibo);
+  $sql17->bindValue(3,$n_venta_recibo_ini);
+  $sql17->bindValue(4,$factura);
+  $sql17->bindValue(5,$id_paciente);
+  $sql17->bindValue(6,$id_usuario);
+  $sql17->bindValue(7,$monto);
+  $sql17->bindValue(8,$forma_pago);
+  $sql17->bindValue(9,$numero);
+  $sql17->bindValue(10,$saldo);
+  $sql17->bindValue(11,$forma_venta);
+  $sql17->bindValue(12,$tipo_pago);
+  $sql17->bindValue(13,$id_usuario);
+  $sql17->bindValue(14,$suma_abonos_ant);
+  $sql17->bindValue(15,$suma_res);
+  $sql17->execute();
+
+}else{
+  $factura='';
+  $suma_resultados='0';
+  $suma_abonos_ante='0';           
+  
+  $sql17="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  $sql17=$conectar->prepare($sql17);
+  $sql17->bindValue(1,$fecha);
+  $sql17->bindValue(2,$n_recibo);
+  $sql17->bindValue(3,$n_venta_recibo_ini);
+  $sql17->bindValue(4,$factura);
+  $sql17->bindValue(5,$id_paciente);
+  $sql17->bindValue(6,$id_usuario);
+  $sql17->bindValue(7,$monto);
+  $sql17->bindValue(8,$forma_pago);
+  $sql17->bindValue(9,$numero);
+  $sql17->bindValue(10,$saldo);
+  $sql17->bindValue(11,$forma_venta);
+  $sql17->bindValue(12,$tipo_pago);
+  $sql17->bindValue(13,$id_usuario);
+  $sql17->bindValue(14,$suma_abonos_ante);
+  $sql17->bindValue(15,$suma_resultados);
+  $sql17->execute();
+}//Fin del if    
+//******************FIN RECORD CORTE DE CAJA
+
 }
 ///////////////VERIFICA SALDO***********
 public function saldo_venta($n_venta,$id_paciente){

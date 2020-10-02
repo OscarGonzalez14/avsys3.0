@@ -16,7 +16,6 @@ require_once("modals/photosensible_ventas.php");
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-
     <!-- Main content -->
     <section class="content" style="margin-top: 5px">
       <div class="row">
@@ -25,10 +24,10 @@ require_once("modals/photosensible_ventas.php");
           <!-- /.card-header -->
 <div class="card-body"><!--CONTENIDO-->
 
-<section class="content">
+      <section class="content">            
         <div class="container-fluid">
-
-            <div class="invoice p-3 mb-3">
+          <a href="corte_diario_pdf.php" align="right" style="justify-content: right">Corte Diario</a>
+            <div class="invoice p-3 mb-3">              
               <div class="row row2" style="background:#E0E0E0;border-radius: 5px">
                     <div class="form-group col-sm-3">
                       <label for="">Tipo Venta</label>

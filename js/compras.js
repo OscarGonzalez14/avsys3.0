@@ -292,33 +292,9 @@ function ingresar_compras_inventario()
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
       dom: 'Bfrtip',//Definimos los elementos del control de tabla
-      buttons: [{
-          extend: 'excelHtml5',
-          download: 'open',
-          text: 'Descargar Excel',
-          filename: function() {
-              var date_edition = 'Compras Pendientes Ingresar '+moment().format("DD-MM-YYYY HH[h]mm")
-              var selected_machine_name = $("#output_select_machine select option:selected").text()
-              return date_edition + ' - ' + selected_machine_name
-           },
-           sheetName: 'Compras pendientes de ingresar',
-           title : null
-       },
-            {
-              extend: 'pdfHtml5',
-              download: 'open',
-              text: 'Imprimir',
-              orientation: 'portrait',
-              pageSize: 'letter',
-              filename: function() {
-              var fecha = 'Compras Pendientes '+moment().format("DD-MM-YYYY HH[h]mm")
-              var selected_machine_name = $("#output_select_machine select option:selected").text()
-              return fecha + ' - ' + selected_machine_name
-              
-            },
-            title : 'Compras a Bodega'
-        }   
-       ],
+            buttons: [
+                'excelHtml5'
+            ],
     "ajax":
         {
           url: 'ajax/compras.php?op=compras_ingreso',
@@ -393,33 +369,9 @@ function ingresar_compras_inventario()
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
       dom: 'Bfrtip',//Definimos los elementos del control de tabla
-      buttons: [{
-          extend: 'excelHtml5',
-          download: 'open',
-          text: 'Descargar Excel',
-          filename: function() {
-              var date_edition = 'Compras  '+moment().format("DD-MM-YYYY HH[h]mm")
-              var selected_machine_name = $("#output_select_machine select option:selected").text()
-              return date_edition + ' - ' + selected_machine_name
-           },
-           sheetName: 'Compras pendientes de ingresar',
-           title : null
-       },
-            {
-              extend: 'pdfHtml5',
-              download: 'open',
-              text: 'Imprimir',
-              orientation: 'portrait',
-              pageSize: 'letter',
-              filename: function() {
-              var fecha = 'Compras Pendientes '+moment().format("DD-MM-YYYY HH[h]mm")
-              var selected_machine_name = $("#output_select_machine select option:selected").text()
-              return fecha + ' - ' + selected_machine_name
-              
-            },
-            title : 'Compras a Bodega'
-        }   
-       ],
+             buttons: [
+                'excelHtml5'
+            ],
     "ajax":
         {
           url: 'ajax/compras.php?op=compras_ingreso',
@@ -496,34 +448,9 @@ function reporte_compras_admin()
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
       dom: 'Bfrtip',//Definimos los elementos del control de tabla
-      buttons: [{
-          extend: 'excelHtml5',
-          download: 'open',
-          text: 'Descargar Excel',
-          filename: function() {
-              var date_edition = 'Compras Pendientes Ingresar '+moment().format("DD-MM-YYYY HH[h]mm")
-              var selected_machine_name = $("#output_select_machine select option:selected").text()
-              return date_edition + ' - ' + selected_machine_name
-           },
-           sheetName: 'Compras',
-           title : null
-       },
-            {
-              extend: 'pdfHtml5',
-              download: 'open',
-              text: 'Imprimir',
-              orientation: 'portrait',
-              pageSize: 'letter',
-              customize : function(doc) {doc.pageMargins = [10, 10, 10,10 ]; },
-              filename: function() {
-              var fecha = 'Compra '+moment().format("DD-MM-YYYY HH[h]mm")
-              var selected_machine_name = $("#output_select_machine select option:selected").text()
-              return fecha + ' - ' + selected_machine_name
-              
-            },
-            title : 'Compras'
-        }   
-       ],
+             buttons: [
+                'excelHtml5'
+            ],
     "ajax":
         {
           url: 'ajax/compras.php?op=reporte_compra_administrador',

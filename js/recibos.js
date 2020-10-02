@@ -1,5 +1,6 @@
 function init(){
    get_correlativo_recibo();
+    prueba();
 }
 
 ////////OCULTAR BTN DE IMPRIMIR RECIBO AL INICIO
@@ -10,6 +11,10 @@ $(document).ready(ocultar_btn_print_rec_ini);
   document.getElementById("btn_print_recibo").style.display = "none";
   document.getElementById("print_factura").style.display = "none";
   document.getElementById("btn_print_recibos").style.display = "none";
+}
+
+function prueba(){
+ $("#field_1").html("Holaaaaaaaaa"); 
 }
 
 function get_correlativo_recibo(){

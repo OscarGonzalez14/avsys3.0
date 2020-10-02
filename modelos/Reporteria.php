@@ -96,5 +96,17 @@ public function get_datos_factura_venta($n_venta,$id_paciente){
 	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/////////////////////////////INICIO CORTE DIARIO
+public function get_datos_ventas_cobros_contado($fecha){
+	$conectar= parent::conexion();
+	parent::set_names();
+ 
+	$fecha_corte = $fecha."%";
+	$sql="select c.n_recibo,p.nombres,u.usuario,c.total_factura,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados,c.fecha_ingreso from pacientes as p inner join corte_diario as c on c.paciente=p.id_paciente inner join usuarios as u on c.id_usuario=u.id_usuario where c.abonos_realizados=1 and c.fecha_ingreso like ?;";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$fecha_corte);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
 
 }

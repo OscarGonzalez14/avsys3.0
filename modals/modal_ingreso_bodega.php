@@ -1,8 +1,8 @@
 <style>
     #tamModal_ingreso{
-      max-width: 60% !important;
+      max-width: 80% !important;
     }
-     #head{
+     #head_ingreso{
         background-color: black;
         color: white;
         text-align: center;
@@ -20,13 +20,13 @@
   <div class="modal-dialog modal-lg" role="document" id="tamModal_ingreso">
 
     <div class="modal-content">
-     <div class="modal-header" id="head" style="justify-content:space-between">
+     <div class="modal-header" id="head_ingreso" style="justify-content:space-between">
        <span><i class="fas fa-plus-square"></i> Igresos a bodega</span>
         <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
      </div>
 
-              <div class="card-body p-0" style="margin:7px">
-                <table class="table table-responsive" id="data_productos_ingresos_bodega" width="100%" cellspacing="0">
+    
+                <table class="table" id="data_productos_ingresos_bodega" width="100%">
                   <thead style="background:#034f84;color:white">
                     <tr>
                       <th style="text-align:center">ID</th>
@@ -40,8 +40,7 @@
                                         
                   </tbody>
                 </table>
-              </div>
-              <!-- /.card-body -->
+
   <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
       </div>

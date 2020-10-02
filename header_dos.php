@@ -117,13 +117,14 @@
             </a>
           </li>
 
+          
           <li class="nav-item">
             <a href="ventas.php" class="nav-link">
               <i class="nav-icon fas fa-chart-line"></i>
               <p>Ventas</p>
             </a>
           </li>
-
+ 
           <li class="nav-item">
             <a href="creditos.php" class="nav-link">
               <i class="nav-icon fas fa-cash-register"></i>
