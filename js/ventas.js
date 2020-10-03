@@ -606,7 +606,7 @@ function reciboInicial(){
   { 
     console.log(data);  
     $("#telefono_ini").val(data.telefono);
-    $("#empresa_ini").val(data.empresa);
+    $("#empresa_ini").val(data.empresas);
   }
   })
 

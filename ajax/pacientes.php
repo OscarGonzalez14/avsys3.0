@@ -121,7 +121,7 @@
     foreach($datos as $row){
 		$sub_array = array();
 
-			$sub_array[] = $row["tipo_paciente"];
+			$sub_array[] = $row["id_paciente"];
 			$sub_array[] = $row["nombres"];
 			$sub_array[] = $row["telefono"];			            
             $sub_array[] = '<button type="button" onClick="mostrarc('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-block btn-outline-info btn-sm info_pac" data-toggle="modal" data-target="#consultasModal" data-backdrop="static" data-keyboard="false"> Agregar</button>';

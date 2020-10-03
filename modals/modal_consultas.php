@@ -299,7 +299,7 @@ body.modal-open {
 <input class="form-control" id="codigop" name="codigop" type="hidden" readonly>
 <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
 </div><!--FIN FORM-GROUP-->
-<button type="submit" id="agregar" name="agregar" class="btn btn-blue btn-block" id="addEmpresa"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+<button type="submit" id="agregar" name="agregar" class="btn btn-blue btn-block" id="addCons"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
 Guardar</button>
 </form>  
 </div><!--FIN MODAL BODY-->

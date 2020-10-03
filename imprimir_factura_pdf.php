@@ -187,7 +187,7 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
 </div>
 
 <!--ORIGINAL EMISOR-->
-<div style="margin-top: 40px;max-height:100px" >
+<div style="margin-top: 30px;max-height:100px" >
  <table width="100%">
     <tr>
       <?php

@@ -275,9 +275,12 @@ ishihara_e:ishihara_e,amsler_e:amsler_e,anexos_e:anexos_e,sugeridos_e:sugeridos_
   setTimeout ("explode();", 2000);          
 }
 
-  }); 
-
-    
+  });    
 }
+
+$(document).on('click', '#addCons', function(){    
+   ocument.getElementById("addCons").style.display = "none";
+});
+
 
 init();

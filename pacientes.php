@@ -27,10 +27,10 @@ require_once("modals/modal_consultas.php");
       </div> 
       </div>
       <div class="dropdown-divider"></div>
-      <table id="data_pacientes" width="100%" style="text-align: center;text-align: center" >
+      <table id="data_pacientes" width="100%" style="text-align: center;text-align: center" data-order='[[ 0, "desc" ]]'>
       <thead style="color:white;min-height:10px;border-radius: 2px;font-style: normal;font-size: 15px" class="bg-info">
           <tr style="min-height:10px;border-radius: 3px;font-style: normal;font-size: 15px">
-            <th style="text-align:center">Tipo Pac.</th>
+            <th style="text-align:center">ID</th>
             <th style="text-align:center">Paciente</th>
             <th style="text-align:center">Telefono</th>
             <th style="text-align:center">Consulta</th>

@@ -145,7 +145,7 @@ $conectar=parent::conexion();
 
     }
 /////////////////////EXTRAER EL TIPO DE PAGO
-    $sql16="select tipo_pago from ventas where numero_venta=? and id_paciente=?;";
+    $sql19="select tipo_pago from ventas where numero_venta=? and id_paciente=?;";
              
     $sql19=$conectar->prepare($sql19);
     $sql19->bindValue(1,$n_venta_recibo_ini);

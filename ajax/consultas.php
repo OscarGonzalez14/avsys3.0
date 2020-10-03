@@ -13,10 +13,10 @@
      foreach($datos as $row){
 		
 		  $sub_array = array();
-      //$sub_array[] = $row["id_consulta"];
+      $sub_array[] = $row["id_consulta"];
 			$sub_array[] = date("d-m-Y", strtotime($row["fecha_reg"]));				
 			$sub_array[] = $row["nombres"];
-			//$sub_array[] = $row["p_evaluado"];
+			$sub_array[] = $row["p_evaluado"];
 			$sub_array[] = ucfirst($row["usuario"]);
 			$sub_array[] = '<button type="button" class="btn btn-dark edit_consultas" id="'.$row["id_consulta"].'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></i> Ver y Editar</button>';
 			//$sub_array[] = '<button type="button" class="btn btn-dark delete_consultas" onClick="eliminar_consulta('.$row["id_consulta"].');"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></i> Eliminar</button>';

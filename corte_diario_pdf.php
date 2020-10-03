@@ -5,6 +5,9 @@ use Dompdf\Options;
 require_once 'dompdf/autoload.inc.php';
 
 require_once("modelos/Reporteria.php");
+require_once("config/conexion.php");
+if(isset($_SESSION["usuario"])){
+echo $_SESSION["sucursal"];
 date_default_timezone_set('America/El_Salvador');$fecha = date("d-m-Y");
 $reporteria=new Reporteria();
 //$fecha = "02-10-2020";
@@ -12,6 +15,7 @@ $reporteria=new Reporteria();
 $datos_ventas_contado = $reporteria->get_datos_ventas_cobros_contado($fecha);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -105,3 +109,8 @@ $dompdf->render();
 //$dompdf->stream();
 $dompdf->stream('document', array('Attachment'=>'0'));
 ?>
+
+
+   <?php } else{
+echo "Acceso denegado";
+  } ?>
