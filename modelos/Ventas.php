@@ -236,14 +236,55 @@ public function get_detalle_aros_rec_ini($id_paciente,$numero_venta){
 }
 
 
-  public function get_ventas_gral(){
+  public function get_ventas_gral($sucursal){
   $conectar= parent::conexion();
-  $sql="select numero_venta, vendedor, fecha_venta, monto_total, paciente from ventas;";
+  $sql="select*from ventas where sucursal=? order by id_ventas DESC;";
   $sql = $conectar->prepare($sql);
+  $sql->bindValue(1,$sucursal);
   $sql->execute();
   return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+////////////////DETALLE DE VENTAS
+public function get_detalle_ventas_paciente($numero_venta,$id_paciente){
+
+  $conectar=parent::conexion();
+  parent::set_names();
+  $moneda="$";   
+
+  $sql="select producto,cantidad_venta,precio_venta,descuento,precio_final from detalle_ventas where numero_venta=? and id_paciente=?";
+
+  $sql=$conectar->prepare($sql);            
+
+  $sql->bindValue(1,$numero_venta);
+  $sql->bindValue(2,$id_paciente);
+  $sql->execute();
+  $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+
+  $html= "
+     <thead class='bg-success'>
+      <th style='text-align:center'>Producto</th>
+      <th style='text-align:center'>Cantidad</th>
+      <th style='text-align:center'>P/U</th>
+      <th style='text-align:center'>Descuento $</th>
+      <th style='text-align:center'>Subtotal</th>                                   
+    </thead>";           
+    $subtotal=0;
+    foreach($resultado as $row){         
+    $html.="<tr class='filas'>
+    <td style='text-align:center'>".$row['producto']."</td>
+    <td style='text-align:center'>".$row['cantidad_venta']."</td>
+    <td style='text-align:center'>".$moneda." ".$row['precio_venta']."</td> 
+    <td style='text-align:center'>"."$".$row['descuento']."</td>
+    <td style='text-align:center'>"."$".$row['precio_final']."</td>
+    </tr>";
+ 
+   $subtotal= $subtotal+$row["precio_final"];         
+              
+}
+$html .= "<tfoot style='text-align:center'><td colspan='4'><b>Subtotal</b></td><td>".$moneda." ".$subtotal."</td></tfoot>";                                     
+echo $html;
+}
 
 
 }//////Fin de la clase

@@ -2,6 +2,7 @@
 require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){ 
 require_once('header.php');
+require_once('modals/modal_detalle_ventas.php');
 ?>
 
 <div class="content-wrapper">
@@ -18,15 +19,17 @@ require_once('header.php');
         </div>
     </div><br>
     <div class="card-body p-0" style="margin:7px">
-      <table id="lista_reporte_ventas_data" width="100%" class = "table-hover">
+      <table id="lista_reporte_ventas_data" width="100%" data-order='[[ 0, "desc" ]]'>
         <thead style="background:#034f84;color:white;text-align: center;">
           <tr>
           <th>#Venta</th>
-          <th>Asesor</th>
           <th>Fecha</th>
-          <th>Monto Total</th>
           <th>Paciente</th>
-          <th>Detalle</th>
+          <th>Evaluado</th>
+          <th>Tipo Pago</th>
+          <th>Sucursal</th>
+          <th>Monto</th>
+          <th>Detalles</th>
           </tr>
         </thead>
         <tbody style="text-align:center">                                  
@@ -36,7 +39,7 @@ require_once('header.php');
  
   </div>
 </div>
-
+<input type="hidden" name="sucursal" id="sucursal" value="<?php echo $_SESSION["sucursal"];?>"/>
 <script src="js/ventas.js"> </script>
 
    <?php } else{

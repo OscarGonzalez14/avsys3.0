@@ -19,7 +19,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
     <title></title>
    <style>
       html{
-      	margin-top: 10px;
+        margin-top: 10px;
         margin-left: 30px;
         margin-right:20px; 
         margin-bottom: 0px;
@@ -89,7 +89,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 </table>
 
 <div style="height:420px;width:100%;margin-top:0px;"><!--Cliente--->
-	<table width="100%" class="table2">
+  <table width="100%" class="table2">
 
 <tr>
     <th bgcolor="#0061a9" colspan="30" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:30%"><span class="Estilo11">RECIBI DE</span></th>
@@ -184,7 +184,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 <tr>
     <td  colspan="40" class="stilot3">Firma paciente:___________________________</td>
     <td  colspan="30" class="stilot3"><div align="center"><span class=""><?php echo "Asesor:".": ".$datos_recibo[$i]["id_usuario"];?></span></div></td>
-    <td  colspan="30" class="stilot3"><?php echo $datos_recibo[$i]["numero_venta"];?></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:12px"><strong>Duplicado: Cliente</strong></span></td>
+    <td  colspan="30" class="stilot3"><?php echo $datos_recibo[$i]["numero_venta"];?></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:12px"><strong>Original: Emisor</strong></span></td>
 </tr>
 
 </table>

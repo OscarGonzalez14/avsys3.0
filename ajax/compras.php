@@ -128,7 +128,7 @@ case 'compras_ingreso':
     $sub_array[] = $row["numero_compra"];
     $sub_array[] = $row["nombre_proveedor"];
     $sub_array[] = '<span class="right badge '.$atrib.'">'.$est.'</span>';
-    $sub_array[] = '<a href="distribuir_compra.php?numero_compra='.$row["numero_compra"].'"><button type="button"  class="btn btn-primary btn-md listar_compras_pendientes" id="'.$row["numero_compra"].'" data-toggle="modal" data-target="#modal_ingreso_bodega"><i class="fas fa-cubes"></i> Ingresar a Bodega</button></a>';                                 
+    $sub_array[] = '<a href="distribuir_compra.php?numero_compra='.$row["numero_compra"].'"><button type="button"  class="btn btn-primary btn-md listar_compras_pendientes" id="'.$row["numero_compra"].'" ><i class="fas fa-cubes"></i> Ingresar a Bodega</button></a>';                                 
     $data[] = $sub_array;
   }
 

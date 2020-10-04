@@ -283,7 +283,7 @@ case 'registrar_venta':
 
   /// INICIO LISTAR TODAS LAS VENTAS
     case "listar_ventas_gral":
-    $datos=$ventas->get_ventas_gral();
+    $datos=$ventas->get_ventas_gral($_POST["sucursal"]);
     //Vamos a declarar un array
     $data= Array();
 
@@ -292,11 +292,13 @@ case 'registrar_venta':
         $sub_array = array();
 
         $sub_array[] = $row["numero_venta"];
-        $sub_array[] = $row["vendedor"];
         $sub_array[] = $row["fecha_venta"];
-        $sub_array[] = $row["monto_total"];
         $sub_array[] = $row["paciente"];
-        $sub_array[] = '<button type="button" class="btn btn-dark agrega_aro"  style="border-radius:0px">Seleccionar</button>';
+        $sub_array[] = $row["evaluado"];
+        $sub_array[] = $row["tipo_pago"];
+        $sub_array[] = $row["sucursal"];
+        $sub_array[] = "$".number_format($row["monto_total"],2,".",",");        
+        $sub_array[] = '<button type="button" class="btn btn-primary" style="border-radius:0px" data-toggle="modal" data-target="#detalle_ventas" onClick="detalleVentas(\''.$row["numero_venta"].'\','.$row["id_paciente"].')"><i class="fas fa-eye"></i></button>';
         $data[] = $sub_array;
       }
 
@@ -309,5 +311,9 @@ case 'registrar_venta':
 
     break;
     /// FIN LISTAR TODAS LAS VENTAS
+
+    case "ver_detalle_venta":
+       $datos= $ventas->get_detalle_ventas_paciente($_POST["numero_venta"],$_POST["id_paciente"]);
+     break;
    }
    ?>
