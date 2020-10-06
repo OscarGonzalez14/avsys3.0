@@ -251,6 +251,39 @@ public function get_lente_tratamientos(){
   return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+///FUNCION VER DATOS AROS
+public function show_datos_aros($id_producto){
+    $conectar= parent::conexion();
+    $sql="select*from productos where id_producto=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_producto);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+  }
 
+//////FUNCION EDITAR PRODUCTO
+public function editar_aro($marca_aros,$modelo_aro,$color_aro,$medidas_aro,$diseno_aro,$materiales_aro,$cat_venta_aros,$categoria_producto,$id_producto){
+
+  $descripcion=$marca_aros." mod.".$modelo_aro." ".$medidas_aro." ".$color_aro;
+
+  $conectar= parent::conexion();
+  parent::set_names();
+  $sql="update productos set marca=?,modelo=?,color=?,medidas=?,diseno=?,materiales=?,categoria=?,categoria_producto=?,desc_producto=? where id_producto=?;";
+  $sql=$conectar->prepare($sql);
+  
+  $sql->bindValue(1, $_POST["marca_aros"]);
+  $sql->bindValue(2, $_POST["modelo_aro"]);
+  $sql->bindValue(3, $_POST["color_aro"]);
+  $sql->bindValue(4, $_POST["medidas_aro"]);
+  $sql->bindValue(5, $_POST["diseno_aro"]);
+  $sql->bindValue(6, $_POST["materiales_aro"]);
+  $sql->bindValue(7, $_POST["cat_venta_aros"]);
+  $sql->bindValue(8, $_POST["categoria_producto"]);
+  $sql->bindValue(9, $descripcion);
+  $sql->bindValue(10, $_POST["id_producto"]);
+  $sql->execute();
+  return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+
+}
 
 }//////Fin de la clase

@@ -21,10 +21,14 @@ function guardar_accesorios(){
 		console.log(z);
 		},
 			success:function(data){
-    		console.log(data);
-     		alert("¡Los datos han sido guardados exitosamente!");
+		setTimeout ("Swal.fire('Se ha registrado un nuevo usuario','','success')", 100)
+        setTimeout ("explode();", 2000);
+    		
    		}
 		});
-	
+		
 	}	
 }
+function explode(){
+    location.reload();
+  }

@@ -161,7 +161,7 @@ Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error'
 )
     return false;
 }
-} //cierre del condicional de validacion de los campos del paciente
+} //cierre del condicional de validacion de los campos de producto
 
 ////////////GUARDAR ACCESORIOS/////////////////////////
 function guardar_accesorios(){
@@ -188,8 +188,8 @@ if(tipo_accesorio !="" && marca_accesorio!="" && desc_accesorio !="" && codigo !
     },
     success:function(data){
       console.log(data);
-      if(data=='error'){
-        Swal.fire('Accesorio ya Existe!','','error')
+      if(data=='editado'){
+        Swal.fire('Producto editado exitosamente!','','succces')
         return false;
       }else if (data=="ok") {
         Swal.fire('Se creado un nuevo Accesorio!','','success')
@@ -1048,7 +1048,63 @@ function listar_lentes_tratamientos()
   }).DataTable();
 }
 
+///FUNCION EDITAR ARO
+function editar_aro(){
+  var marca_aros =$("#marca_aros_edit").val();
+  var modelo_aro =$("#modelo_aro_edit").val();
+  var color_aro =$("#color_aro_edit").val();
+  var medidas_aro =$("#medidas_aro_edit").val();
+  var diseno_aro =$("#diseno_aro_edit").val();
+  var materiales_aro =$("#materiales_aro_edit").val();
+  var cat_venta_aros =$("#cat_venta_aros_edit").val();
+  var categoria_producto =$("#categoria_producto_edit").val();
+  var id_producto =$("#id_producto_edit").val();
 
+    //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
+if(marca_aros != "" && modelo_aro != "" && color_aro != "" && medidas_aro != "" && diseno_aro != "" && materiales_aro != ""){
+    $.ajax({
+    url:"ajax/productos.php?op=editar_aros",
+    method:"POST",
+    data:{marca_aros:marca_aros,modelo_aro:modelo_aro,color_aro:color_aro,medidas_aro:medidas_aro,diseno_aro:diseno_aro,materiales_aro:materiales_aro,cat_venta_aros:cat_venta_aros,categoria_producto:categoria_producto,id_producto:id_producto},
+    cache: false,
+    dataType:"json",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    },
+    success:function(data){
+
+    }
+});
+}
+Swal.fire('El producto ha sido editado exitosamente!','','success')
+setTimeout ("explode();", 2000);
+} //cierre del condicional de validacion de los campos de editar producto
+
+
+function show_datos_aro(id_producto){
+  $.ajax({
+    url:"ajax/productos.php?op=show_datos_aro",
+    method:"POST",
+    data:{id_producto:id_producto},
+    cache:false,
+    dataType:"json",
+    success:function(data){
+      console.log(data);
+      $("#id_producto_edit").val(data.id_producto);
+      $("#marca_aros_edit").val(data.marca_aros);
+      $("#modelo_aro_edit").val(data.modelo_aro);
+      $("#color_aro_edit").val(data.color_aro);
+      $("#medidas_aro_edit").val(data.medidas_aro);
+      $("#diseno_aro_edit").val(data.diseno_aro);
+      $("#materiales_aro_edit").val(data.materiales_aro);
+      $("#cat_venta_aros_edit").val(data.cat_venta_aros);
+      $("#categoria_producto").val(data.categoria_producto);
+
+    }
+  });
+}
 
 
 init();
