@@ -225,8 +225,8 @@
   $data= Array();
   foreach($datos as $row){
     $sub_array = array();
-    //$sub_array[] = $row["id_paciente"];
-    $sub_array[] = $row["codigo"];
+    $sub_array[] = $row["id_paciente"];
+    //$sub_array[] = $row["codigo"];
     $sub_array[] = $row["nombres"];    
     //$sub_array[] = $row["id_consulta"];
     $sub_array[] = $row["fecha_consulta"]; 
@@ -252,7 +252,7 @@ case "listar_pacientes_sin_consulta":
   $data= Array();
   foreach($datos as $row){
     $sub_array = array();
-    //$sub_array[] = $row["id_paciente"];
+    $sub_array[] = $row["id_paciente"];
     $sub_array[] = $row["codigo"];
     $sub_array[] = $row["nombres"];
 

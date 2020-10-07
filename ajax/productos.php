@@ -43,10 +43,10 @@
 break;
 
 case 'guardar_accesorios':
-$datos = $productos->valida_existencia_acc($_POST["categoria"],$_POST["codigo"]);
-    if(is_array($datos)==true and count($datos)==0){
+//$datos = $productos->valida_existencia_acc($_POST["categoria"]);
+    //if(is_array($datos)==true and count($datos)==0){
   $productos->registrar_accesorios($_POST["tipo_accesorio"],$_POST["marca_accesorio"],$_POST["desc_accesorio"],$_POST["categoria"],$_POST["codigo"]);
-  $messages[]="ok";
+ /* $messages[]="ok";
 }else{
   $errors[]="error";
 }
@@ -71,7 +71,7 @@ if (isset($messages)){
              }
            ?>
    <?php
-   }
+   }*/
 break;
 
     case "listar_aros":

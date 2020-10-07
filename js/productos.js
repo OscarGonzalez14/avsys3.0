@@ -173,7 +173,7 @@ function guardar_accesorios(){
 
   //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
 
-if(tipo_accesorio !="" && marca_accesorio!="" && desc_accesorio !="" && codigo !=""){
+if(tipo_accesorio !="" && marca_accesorio!="" && desc_accesorio !=""){
 
     $.ajax({
     url:"ajax/productos.php?op=guardar_accesorios",
@@ -187,16 +187,13 @@ if(tipo_accesorio !="" && marca_accesorio!="" && desc_accesorio !="" && codigo !
       console.log(z);
     },
     success:function(data){
-      console.log(data);
-      if(data=='error'){
-        Swal.fire('Accesorio ya Existe!','','error')
-        return false;
-      }else if (data=="ok") {
-        Swal.fire('Se creado un nuevo Accesorio!','','success')
-        setTimeout ("explode();", 2000);
-      }
+            
     }
+
 });
+Swal.fire('Se creado un nuevo Accesorio!','','success')
+setTimeout ("explode();", 2000);
+
 }else{
     //bootbox.alert("Algun campo obligatorio no fue llenado correctamente");
 Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error')

@@ -523,6 +523,7 @@ $(document).on('click', '#tipo_categoria', function(){
       success:function(data)
       {
         console.log(data);
+        $("#categoria_ubicaciones").empty();
         for(var i in data)
             { 
               //$("#categoria_ubicaciones").val("");

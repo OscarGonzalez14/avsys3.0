@@ -95,7 +95,7 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
     <th bgcolor="#0061a9" colspan="30" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:30%"><span class="Estilo11">RECIBI DE</span></th>
     <th bgcolor="#0061a9" colspan="30" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:30%"><span class="Estilo11">SERVICIO PARA</span></th>
     <th bgcolor="#0061a9" colspan="20" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:20%"><span class="Estilo11">EMPRESA</span></th>
-    <th bgcolor="#0061a9" colspan="20" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:20%"><span class="Estilo11">TELÉFONO</span></th>
+    <th bgcolor="#0061a9" colspan="20" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:20%"><span class="Estilo11">FECHA</span></th>
 </tr>
 
 <?php
@@ -108,17 +108,20 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
     <td style="text-align: center;width:30%" colspan="30" class="stilot1"><?php echo $datos_recibo[$i]["recibi_de"];?></td>
     <td style="text-align: center;width:30%" colspan="30" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["servicio_para"];?></span></td>
     <td style="text-align: center;width:20%" colspan="20" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["empresa"];?></span></td>
-    <td style="text-align: center;width:20%" colspan="20" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["telefono"];?></span></td>
+    <td style="text-align: center;width:20%" colspan="20" class="stilot1"><span class=""><span style="text-align:center; font-size:12px"><?php date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y H:i:s"); echo $hoy; ?></span></td>
+    <?php echo $datos_recibo[$i]["telefono"];?></span>
+
 </tr>
 </table>
 <table width="100%" class="table2">
 <tr>
-    <td rowspan="2" class="stilot1" colspan="60" style="width: 60%;text-align: left;"><strong>CANTIDAD EN LETRAS: </strong> <?php echo $datos_recibo[$i]["cant_letras"];?></span></td>
-    <td class="stilot1" colspan="25" bgcolor="#0061a9" style="color: white;font-size:11px;text-align:center;width:20%">FECHA</td>
-    <td class="stilot1" colspan="25" bgcolor="#0061a9" style="color: white;font-size:11px;text-align:center;width:20%">PROX. ABONO</td>    
+    <td class="stilot1" colspan="60" style="width: 60%;text-align: center;color:white" bgcolor="#0061a9"><strong>CANTIDAD EN LETRAS: </strong> </span></td>
+    <td class="stilot1" colspan="25" bgcolor="#0061a9" style="color: white;font-size:12px;text-align:center;width:20%">TELEFONO</td>
+    <td class="stilot1" colspan="25" bgcolor="#0061a9" style="color: white;font-size:12px;text-align:center;width:20%">PROX. ABONO</td>    
   </tr>
   <tr>
-    <td class="stilot1" colspan="25" style="text-align:center"><span style="text-align:center; font-size:11px"><?php date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y H:i:s"); echo $hoy; ?></span></td>
+    <td class="stilot1" colspan="60" style="width: 60%;text-align: center;"><?php echo $datos_recibo[$i]["cant_letras"];?></td>
+    <td class="stilot1" colspan="25" style="text-align:center"><span style="text-align:center; font-size:12px"><?php echo $datos_recibo[$i]["telefono"];?></span></td>
     <td class="stilot1" colspan="25" style="text-align:center"><?php echo $datos_recibo[$i]["prox_abono"];?></td>
   </tr>
 </table>
@@ -237,13 +240,13 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
 </table>
 
 <div style="height:400px;width:100%;margin-top:0px;"><!--Cliente--->
-  <table width="100%" class="table2">
+ <table width="100%" class="table2">
 
 <tr>
     <th bgcolor="#0061a9" colspan="30" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:30%"><span class="Estilo11">RECIBI DE</span></th>
     <th bgcolor="#0061a9" colspan="30" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:30%"><span class="Estilo11">SERVICIO PARA</span></th>
     <th bgcolor="#0061a9" colspan="20" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:20%"><span class="Estilo11">EMPRESA</span></th>
-    <th bgcolor="#0061a9" colspan="20" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:20%"><span class="Estilo11">TELÉFONO</span></th>
+    <th bgcolor="#0061a9" colspan="20" style="color:white;font-size:12px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:20%"><span class="Estilo11">FECHA</span></th>
 </tr>
 
 <?php
@@ -256,17 +259,20 @@ $datos_recibo = $reporteria->print_recibo_paciente($_GET["n_recibo"],$_GET["n_ve
     <td style="text-align: center;width:30%" colspan="30" class="stilot1"><?php echo $datos_recibo[$i]["recibi_de"];?></td>
     <td style="text-align: center;width:30%" colspan="30" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["servicio_para"];?></span></td>
     <td style="text-align: center;width:20%" colspan="20" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["empresa"];?></span></td>
-    <td style="text-align: center;width:20%" colspan="20" class="stilot1"><span class=""><?php echo $datos_recibo[$i]["telefono"];?></span></td>
+    <td style="text-align: center;width:20%" colspan="20" class="stilot1"><span class=""><span style="text-align:center; font-size:12px"><?php date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y H:i:s"); echo $hoy; ?></span></td>
+    <?php echo $datos_recibo[$i]["telefono"];?></span>
+
 </tr>
 </table>
 <table width="100%" class="table2">
 <tr>
-    <td rowspan="2" class="stilot1" colspan="60" style="width: 60%;text-align: left;"><strong>CANTIDAD EN LETRAS: </strong> <?php echo $datos_recibo[$i]["cant_letras"];?></span></td>
-    <td class="stilot1" colspan="25" bgcolor="#0061a9" style="color: white;font-size:11px;text-align:center;width:20%">FECHA</td>
-    <td class="stilot1" colspan="25" bgcolor="#0061a9" style="color: white;font-size:11px;text-align:center;width:20%">PROX. ABONO</td>    
+    <td class="stilot1" colspan="60" style="width: 60%;text-align: center;color:white" bgcolor="#0061a9"><strong>CANTIDAD EN LETRAS: </strong> </span></td>
+    <td class="stilot1" colspan="25" bgcolor="#0061a9" style="color: white;font-size:12px;text-align:center;width:20%">TELEFONO</td>
+    <td class="stilot1" colspan="25" bgcolor="#0061a9" style="color: white;font-size:12px;text-align:center;width:20%">PROX. ABONO</td>    
   </tr>
   <tr>
-    <td class="stilot1" colspan="25" style="text-align:center"><span style="text-align:center; font-size:11px"><?php date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y H:i:s"); echo $hoy; ?></span></td>
+    <td class="stilot1" colspan="60" style="width: 60%;text-align: center;"><?php echo $datos_recibo[$i]["cant_letras"];?></td>
+    <td class="stilot1" colspan="25" style="text-align:center"><span style="text-align:center; font-size:12px"><?php echo $datos_recibo[$i]["telefono"];?></span></td>
     <td class="stilot1" colspan="25" style="text-align:center"><?php echo $datos_recibo[$i]["prox_abono"];?></td>
   </tr>
 </table>

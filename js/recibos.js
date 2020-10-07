@@ -51,7 +51,8 @@ function registra_abono_inicial(){
 }
 
 function save_abono_inicial(){
-    
+    var pr_abono=$("#proxi_abono").val();
+    //alert(pr_abono);return false;
     var a_anteriores="0";
     var n_recibo = $("#n_recibo").html();
     var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();
@@ -74,7 +75,7 @@ function save_abono_inicial(){
     var ar_rec_ini=$("#ar_rec_ini").val();
     var photo_rec_ini=$("#photo_rec_ini").val();
     var observaciones_rec_ini=$("#observaciones_rec_ini").val();
-    var pr_abono=$("#pr_abono").val();
+    
     var servicio_rec_ini=$("#servicio_rec_ini").val();    
     
     if (forma_pago !="") {

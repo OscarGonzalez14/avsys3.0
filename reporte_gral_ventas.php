@@ -19,9 +19,10 @@ require_once('modals/modal_detalle_ventas.php');
         </div>
     </div><br>
     <div class="card-body p-0" style="margin:7px">
-      <table id="lista_reporte_ventas_data" width="100%" data-order='[[ 0, "desc" ]]'>
+      <table id="lista_reporte_ventas_data" width="100%" data-order='[[ 0, "desc" ]]' class="table-hover">
         <thead style="background:#034f84;color:white;text-align: center;">
           <tr>
+          <th>ID</th>
           <th>#Venta</th>
           <th>Fecha</th>
           <th>Paciente</th>

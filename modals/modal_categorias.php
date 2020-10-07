@@ -58,7 +58,8 @@
                 <option value="">Seleccione...</option>
                 <option value="Gaveta">Gaveta</option>
                 <option value="Exhibición">Exhibición</option>
-                <option value="Maleta">Maleta</option>                 
+                <option value="Maleta">Maleta</option>
+                <option value="Accesorios">Accesorios</option>                 
               </select>         
             </div>
        			<div class="form-group col-md-8">

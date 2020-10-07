@@ -290,7 +290,7 @@ case 'registrar_venta':
     foreach($datos as $row)
       {
         $sub_array = array();
-
+        $sub_array[] = $row["id_ventas"];
         $sub_array[] = $row["numero_venta"];
         $sub_array[] = $row["fecha_venta"];
         $sub_array[] = $row["paciente"];

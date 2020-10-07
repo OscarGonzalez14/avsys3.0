@@ -25,9 +25,10 @@
       <div class="modal-body">
 
         <div class="card-body p-0" style="margin:7px">
-          <table class="table-hover" id="data_pacientes_sin_consulta" width="100%">
+          <table class="table-hover" id="data_pacientes_sin_consulta" width="100%" data-order='[[ 0, "desc" ]]'>
             <thead style="background:#034f84;color:white">
               <tr>
+                <th style="text-align:center">ID</th>
                 <th style="text-align:center">Codigo</th>
                 <th style="text-align:center">Paciente</th>
                 <th style="text-align:center">Agregar</th>

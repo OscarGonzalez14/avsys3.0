@@ -15,6 +15,8 @@ require_once('modals/modal_ingreso_bodega.php');
             <option value="">Seleccione</option>
             <option value="Gaveta" class="cats_suscursal">Gaveta</option>
             <option value="Accesorios" class="cats_suscursal">Accesorios</option>
+            <option value="Exhibicion" class="cats_suscursal">Exhibicion</option>
+            <option value="Maleta" class="cats_suscursal">Maleta</option>
           </select>
       </div>
 

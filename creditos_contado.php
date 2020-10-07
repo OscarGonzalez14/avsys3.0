@@ -19,7 +19,7 @@ require_once("modals/modal_detalle_abonos.php");
 
 <section class="content">
   <div class="container-fluid"><!--INICIO DE CONTENIDO-->
-<table id="creditos_de_contado" class="table-hover" width="100%">
+<table id="creditos_de_contado" class="table-hover" width="100%" data-order='[[ 0, "desc" ]]'>
      <thead style="background:#034f84;color:white;text-align: center;">
        <tr>
 

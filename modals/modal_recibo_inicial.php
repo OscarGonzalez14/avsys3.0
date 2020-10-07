@@ -83,7 +83,7 @@
         <input class='form-control' type='text' class='saldo' name='saldo' id="saldo" style="text-align: right;" readonly></div>
       </td>
         <td align='center'><select class='form-control' id='forma_pago' name='forma_pago'><option value=''>Seleccione...</option><option value='Efectivo'>Efectivo</option><option value='Tarjeta de Credito'>Tarjeta de Credito</option><option value='Tarjeta de Debito'>Tarjeta de Debito</option><option value='Cargo Automatico'>Cargo Automatico</option><option value='Cheque'>Cheque</option></select></td>
-        <td id="datepickers"><input type='date' class='form-control' id='proxi_abono' name='proxi_abono'></td>
+        <td><input type='date' class='form-control' id='proxi_abono' name='proxi_abono'></td>
 
         </tbody>
       </table>
@@ -150,10 +150,10 @@
 
   document.getElementById("saldo").value = saldo.toFixed(2);
   if(saldo==0){
-    document.getElementById('datepickers').style.display = 'none';
+    document.getElementById('proxi_abono').style.display = 'none';
     document.getElementById('pr_abono_ini').style.display = 'none';
   }else{
-    document.getElementById('datepickers').style.display = 'block';
+    document.getElementById('proxi_abono').style.display = 'block';
     document.getElementById('pr_abono_ini').style.display = 'block';
 
   }

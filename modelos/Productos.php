@@ -40,7 +40,7 @@ public function registrar_aro($marca_aros,$modelo_aro,$color_aro,$medidas_aro,$d
 
 }
 //////VALIDAR EXISTEN CIA DE ACCESORIOS
-public function valida_existencia_acc($categoria,$codigo){
+/*public function valida_existencia_acc($categoria){
   $conectar= parent::conexion();
   parent::set_names();
   $sql="select*from productos where categoria_producto=?  and modelo=?";
@@ -49,7 +49,7 @@ public function valida_existencia_acc($categoria,$codigo){
   $sql->bindValue(2, $codigo);
   $sql->execute();
   return $resultado=$sql->fetchAll();
-}
+}*/
 
 public function registrar_accesorios($tipo_accesorio,$marca_accesorio,$desc_accesorio,$categoria,$codigo){
 

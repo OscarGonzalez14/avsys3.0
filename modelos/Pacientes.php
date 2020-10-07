@@ -185,7 +185,7 @@ public function get_data_con_consulta($id_paciente,$id_consulta){
 public function get_data_sin_consulta($id_paciente){
   $conectar=parent::conexion();
   parent::set_names();
-  $sql="select nombres,codigo from pacientes where id_paciente=?;";
+  $sql="select nombres,codigo,id_paciente from pacientes where id_paciente=?;";
   $sql=$conectar->prepare($sql);
   $sql->bindValue(1, $id_paciente);
   $sql->execute();

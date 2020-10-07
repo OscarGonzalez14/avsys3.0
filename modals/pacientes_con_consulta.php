@@ -17,7 +17,7 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header bg-primary" id="head" style="justify-content:space-between;text-align: center">
-       <span> PACIENTES CON CONSULTA</span>
+       <span> PACIENTES CON CONSULTAS</span>
         <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
      </div>
 
@@ -25,10 +25,10 @@
       <div class="modal-body">
 
         <div class="card-body p-0" style="margin:7px">
-          <table class="table-hover" id="data_pacientes_consulta" width="100%">
+          <table class="table-hover" id="data_pacientes_consulta" width="100%" data-order='[[ 0, "desc" ]]'>
             <thead style="background:#034f84;color:white">
               <tr>
-                <th style="text-align:center">Codigo</th>
+                <th style="text-align:center">ID</th>
                 <th style="text-align:center">Encargado de Cuenta</th>
                 <th style="text-align:center">Fecha_consulta</th>
                 <th style="text-align:center">Paciente Evaluado</th>
