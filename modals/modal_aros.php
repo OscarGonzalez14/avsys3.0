@@ -26,7 +26,7 @@
      </div>
 
               <div class="card-body p-0" style="margin:7px">
-                <table class="table display nowrap" id="data_aros" width="100%" cellspacing="0">
+                <table class="table display nowrap" id="data_aros" style="cursor:pointer;" width="100%" cellspacing="0">
                   <thead style="background:#034f84;color:white">
                     <tr>
                       <th style="text-align:center">Marca</th>
@@ -47,3 +47,9 @@
 
   </div>
 </div>
+<script type="">
+  $(function() {
+    $("div.dataTables_filter input").focus();
+});
+
+</script>
