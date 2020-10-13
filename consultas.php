@@ -30,6 +30,7 @@ require_once("modals/modal_consultas_edit.php");?>
             <th style="text-align:center">Fecha Consulta</th>
             <th style="text-align:center">Cliente</th>
             <th style="text-align:center">Paciente Evaluado</th>
+            <th style="text-align:center">Edad</th>
             <th style="text-align:center">Optometra</th>
             <th style="text-align:center">Ver y editar</th>
           </tr>

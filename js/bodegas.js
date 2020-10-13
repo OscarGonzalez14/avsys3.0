@@ -116,7 +116,7 @@ function agregaIngreso(id_producto,numero_compra){
       id_producto: data.id_producto,
       cant_ingreso: data.cant_ingreso,
       precio_venta: data.precio_venta,
-      cantidad : '',
+      cantidad : 1,
       ubicacion  : '',
       numero_compra   : data.numero_compra,
       descripcion  : data.descripcion,

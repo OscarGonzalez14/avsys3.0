@@ -114,15 +114,23 @@
     break;
 
 /////////////////////listado general pacintes
-    case "listar_pacientes":
+  case "listar_pacientes":
+  date_default_timezone_set('America/El_Salvador');
 
 	$datos=$pacientes->get_pacientes($_POST["sucursal_paciente"]);
 	$data= Array();
     foreach($datos as $row){
 		$sub_array = array();
 
+    $fecha_nac = date("Y-m-d", strtotime($row["fecha_nac"]));;
+    $hoy = date("Y-m-d");
+    $edad = abs(strtotime($hoy) - strtotime($fecha_nac));
+
+    $years = floor($edad / (365*60*60*24));   
+
 			$sub_array[] = $row["id_paciente"];
 			$sub_array[] = $row["nombres"];
+      $sub_array[] = $years." años";
 			$sub_array[] = $row["telefono"];			            
             $sub_array[] = '<button type="button" onClick="mostrarc('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-block btn-outline-info btn-sm info_pac" data-toggle="modal" data-target="#consultasModal" data-backdrop="static" data-keyboard="false"> Agregar</button>';
 

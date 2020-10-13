@@ -17,11 +17,16 @@ class Paciente extends Conectar{
 
 	public function registrar_paciente($codigo_paciente,$nombres,$telefono,$edad,$ocupacion,$sucursal,$dui,$correo,$usuario,$empresa,$nit,$tel_oficina,$direccion_completa,$tipo_paciente,$fecha){
 
+      date_default_timezone_set('America/El_Salvador');
+     $calc_fecha = strtotime("-$edad year");
+     $fecha_nac = date("d-m-Y", $calc_fecha);
+ 
+echo $nuevafecha; // Se imprime con un año menos 2015-12-29.
       $conectar= parent::conexion();
       parent::set_names();
-      $sql="insert into pacientes values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-          
-        $sql=$conectar->prepare($sql);
+      $sql="insert into pacientes values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        
+      $sql=$conectar->prepare($sql);
 
         $sql->bindValue(1, $_POST["codigo_paciente"]);
         $sql->bindValue(2, $_POST["nombres"]);
@@ -38,6 +43,7 @@ class Paciente extends Conectar{
         $sql->bindValue(13, $_POST["tel_oficina"]);
         $sql->bindValue(14, $_POST["direccion_completa"]);
         $sql->bindValue(15, $_POST["tipo_paciente"]);
+        $sql->bindValue(16, $fecha_nac);
 
         $sql->execute();      
 }

@@ -4,6 +4,7 @@ if(isset($_SESSION["usuario"])){
 require_once('header.php');
 require_once('modals/nuevo_aro.php');
 require_once('modals/nueva_marca.php');
+require_once('modals/editar_aro.php');
 ?>
 <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
@@ -25,6 +26,7 @@ require_once('modals/nueva_marca.php');
             <th style="text-align:center">Diseño</th>
             <th style="text-align:center">Material</th>
             <th style="text-align:center">Categoría</th>
+            <th style="text-align:center">Editar</th>
           </tr>
         </thead>
         <tbody style="text-align:center">                                        

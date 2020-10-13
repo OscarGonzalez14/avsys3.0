@@ -39,9 +39,8 @@
            ?>
    <?php
    }
-//fin mensaje error
-break;
-
+ 
+  
 case 'guardar_accesorios':
 //$datos = $productos->valida_existencia_acc($_POST["categoria"]);
     //if(is_array($datos)==true and count($datos)==0){
@@ -140,7 +139,7 @@ break;
         $sub_array[] = $row["diseno"];
         $sub_array[] = $row["materiales"];
         $sub_array[] = $row["categoria"];
-        //$sub_array[] = '<button type="button" class="btn btn-dark agrega_aro"  style="border-radius:0px" onClick="agregar_aro('.$row["id_producto"].')">Seleccionar</button>';
+        $sub_array[] = '<button type="button" class="btn btn-edit btn-md edita_aro bg-light" style="text-align:center" onClick="show_datos_aro('.$row["id_producto"].');" data-toggle="modal" data-target="#edit_aro" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit" aria-hidden="true" style="color:#006600"></i></button>';
         $data[] = $sub_array;
       }
 
@@ -347,7 +346,32 @@ case "buscar_aros_venta":
 
     break;
 
+    ////EDITAR ARO
+    case "editar_aros":
+    $productos->editar_aro($_POST["marca_aros"],$_POST["modelo_aro"],$_POST["color_aro"],$_POST["medidas_aro"],$_POST["diseno_aro"],$_POST["materiales_aro"],$_POST["cat_venta_aros"],$_POST["categoria_producto"],$_POST["id_producto"]);
 
+//fin mensaje error
+break;
+
+
+    /// VER DATOS DEL PRODUCTO EN MODAL PARA EDITAR
+    case "show_datos_aro":
+      $datos=$productos->show_datos_aros($_POST["id_producto"]);
+      foreach ($datos as $row)
+      {
+        $output["id_producto"] = $row["id_producto"];
+        $output["marca_aros"] = $row["marca"];
+        $output["modelo_aro"] = $row["modelo"];
+        $output["color_aro"] = $row["color"];
+        $output["medidas_aro"] = $row["medidas"];
+        $output["diseno_aro"] = $row["diseno"];
+        $output["materiales_aro"] = $row["materiales"];
+        $output["cat_venta_aros"] = $row["categoria"];
+        $output["categoria_producto"] = $row["categoria_producto"];
+      }
+      echo json_encode($output);
+      break;
+  
 
 }
    ?>

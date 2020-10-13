@@ -32,6 +32,7 @@ require_once("modals/modal_consultas.php");
           <tr style="min-height:10px;border-radius: 3px;font-style: normal;font-size: 15px">
             <th style="text-align:center">ID</th>
             <th style="text-align:center">Paciente</th>
+            <th style="text-align:center">Edad</th>
             <th style="text-align:center">Telefono</th>
             <th style="text-align:center">Consulta</th>
             <th style="text-align:center">Editar</th>

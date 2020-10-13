@@ -113,7 +113,7 @@ function guardarPaciente(){
     }
     else if(tipo_paciente=="Cargo_a"){
     	if (dui == "" || telefono == "" || nombres=="" || direccion_completa== "") {
-			setTimeout ("Swal.fire('Debbe llenar los campos obligatorios','','error')", 100);
+			setTimeout ("Swal.fire('Debe llenar los campos obligatorios','','error')", 100);
 			return false;
 		}else{
 			save_paciente();
@@ -148,6 +148,7 @@ function save_paciente() {
 	var tipo_paciente = $("#tipo_paciente").val();
 	var fecha = $("#fecha").val();
 
+	if(edad !=""){
     $.ajax({
     url:"ajax/pacientes.php?op=guardar_paciente",
     method:"POST",
@@ -173,11 +174,14 @@ function save_paciente() {
     setTimeout ("Swal.fire('El DUI ya existe en la base de Datos','','error')", 100);
     return false;           
  }else if(data="editado"){
-	setTimeout ("Swal.fire('Paciente Editado Existosamente','','success')", 100);
+	setTimeout ("Swal.fire('Guardado Existosamente','','success')", 100);
     setTimeout ("explode();", 2000); 
 }
 }
-}); 
+});
+}else{
+	setTimeout ("Swal.fire('Edad es un campo obligatorio','','error')", 100);
+}
 //cierre del condicional de validacion de los campos del paciente
 }
 
