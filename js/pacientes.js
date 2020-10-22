@@ -462,3 +462,16 @@ function pacienteSinConsultaData(id_paciente){
       }
     })
 }
+
+/////////////////LISTAR PACIENTES REFIEREN
+$(document).on("click","#tipo_paciente", function(){
+  var tipo_pac = $("#tipo_paciente").val();
+  console.log(tipo_pac);
+  if(tipo_pac=="Referido"){
+    document.getElementById("paciente_refiere").style.display = "block";
+    document.getElementById("div_ref").style.display = "block";
+  }else{
+  	document.getElementById("paciente_refiere").style.display = "none";
+    document.getElementById("div_ref").style.display = "none";
+  }
+});

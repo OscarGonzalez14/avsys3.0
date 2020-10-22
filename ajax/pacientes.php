@@ -115,24 +115,19 @@
 
 /////////////////////listado general pacintes
   case "listar_pacientes":
-  date_default_timezone_set('America/El_Salvador');
+
 
 	$datos=$pacientes->get_pacientes($_POST["sucursal_paciente"]);
 	$data= Array();
     foreach($datos as $row){
 		$sub_array = array();
-
-    $fecha_nac = date("Y-m-d", strtotime($row["fecha_nac"]));;
-    $hoy = date("Y-m-d");
-    $edad = abs(strtotime($hoy) - strtotime($fecha_nac));
-
-    $years = floor($edad / (365*60*60*24));   
+  
 
 			$sub_array[] = $row["id_paciente"];
 			$sub_array[] = $row["nombres"];
-      $sub_array[] = $years." años";
+      $sub_array[] = $row["edad"]." años";
 			$sub_array[] = $row["telefono"];			            
-            $sub_array[] = '<button type="button" onClick="mostrarc('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-block btn-outline-info btn-sm info_pac" data-toggle="modal" data-target="#consultasModal" data-backdrop="static" data-keyboard="false"> Agregar</button>';
+            $sub_array[] = '<button type="button" onClick="mostrarc('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-md btn-outline-info btn-sm info_pac" data-toggle="modal" data-target="#consultasModal" data-backdrop="static" data-keyboard="false"><i class="fas fa-file-alt" aria-hidden="true" style="color:blue"></i></button>';
 
             $sub_array[] = '<button type="button"  id="'.$row["id_paciente"].'" class="btn btn-edit btn-md edita_pacc bg-light" style="text-align:center" onClick="show_datos_paciente('.$row["id_paciente"].',\''.$row["codigo"].'\');" data-toggle="modal" data-target="#newPaciente" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit" aria-hidden="true" style="color:#006600"></i></button>';
 
@@ -241,6 +236,29 @@
     $sub_array[] = $row["p_evaluado"];        
 
     $sub_array[] = '<button type="button" onClick="pacienteConsultaData('.$row["id_paciente"].','.$row["id_consulta"].');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';            
+                                                
+    $data[] = $sub_array;
+  }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+    break;
+
+///////LISTAR PACIENTES PARA REFERIR EN EN VENTAS
+ case "listar_pacientes_refiere":
+
+  $datos=$pacientes->get_paciente_refieren();
+  $data= Array();
+  foreach($datos as $row){
+    $sub_array = array();
+    $sub_array[] = $row["id_paciente"];
+    $sub_array[] = $row["nombres"];
+    $sub_array[] = $row["sucursal"];
+    $sub_array[] = '<button type="button" onClick="pacienteRefiereData('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';            
                                                 
     $data[] = $sub_array;
   }

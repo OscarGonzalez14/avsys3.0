@@ -12,24 +12,39 @@ require_once("modals/pacientes_sin_consulta.php");
 require_once("modals/modal_recibo_inicial.php");
 require_once("modals/antireflejante_ventas.php");
 require_once("modals/photosensible_ventas.php");
+require_once("modals/listar_pacientes_refiere.php");
+
 
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+
     <!-- Main content -->
     <section class="content" style="margin-top: 5px">
       <div class="row">
         <div class="col-12">
           <div class="card">
-          <!-- /.card-header -->
+  
 <div class="card-body"><!--CONTENIDO-->
 
-      <section class="content">            
-        <div class="container-fluid">
-          <a href="corte_diario_pdf.php" align="right" style="justify-content: right">Corte Diario</a>
-            <div class="invoice p-3 mb-3">              
+<section class="content">            
+  <div class="container-fluid">
+
+<div class="invoice p-3 mb-3">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+    <ul class="navbar-nav">
+    <li>
+        <input type="text" class="form-control" id="n_venta" readonly="" style="background: white;border: 1px solid white;color: black">
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="corte_diario.php" class="nav-link" style="color: blue">Corte Diario</a>
+      </li>
+
+    </ul>
+  </nav>              
               <div class="row row2" style="background:#E0E0E0;border-radius: 5px">
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-2">
                       <label for="">Tipo Venta</label>
                       <select class="form-control input-dark" id="tipo_venta" required="">
                         <option value=''>Seleccionar tipo Venta</option>
@@ -38,7 +53,7 @@ require_once("modals/photosensible_ventas.php");
                       </select>
                     </div>  
 
-                  <div class="form-group col-sm-3">
+                  <div class="form-group col-sm-2">
                     <label for="">Tipo Pago</label>
                       <select class="form-control input-dark" id="tipo_pago" required="">
                         <option value=''>Seleccionar tipo Pago</option>
@@ -48,7 +63,7 @@ require_once("modals/photosensible_ventas.php");
                       </select>
                   </div>
 
-                  <div class="form-group col-sm-3">
+                  <div class="form-group col-sm-2">
                     <label for="">Plazo</label>
                       <select class="form-control input-dark" id="plazo" required="">
                         <option value='0'> Contado</option>
@@ -75,15 +90,21 @@ require_once("modals/photosensible_ventas.php");
                         <option value='No'>No</option>
                       </select>
                   </div>
+
+                <div class="form-group col-sm-3">
+                    <label for="">Tipo Paciente</label>
+                      <select class="form-control input-dark" id="tipo_paciente" required="">
+                        <option value=''>Seleccionar...</option>
+                        <option value='Normal'>Normal</option>
+                        <option value='Referido'>Referido</option>
+                      </select>
+                  </div>
+
             </div>
             <div class="dropdown-divider"></div>
               <div class="row invoice-info callout callout-info form-row" style="border-bottom: solid 1px black;border-right: solid 1px black;border-top: solid 1px black">
-                    <div class="col-sm-2 invoice-col" style="margin:0px">
-                    <label># Venta</label>
-                      <input type="text" class="form-control" id="n_venta" readonly="">
-                    </div>
 
-                    <div class="col-sm-4 invoice-col" style="margin:0px">
+                    <div class="col-sm-3 invoice-col" style="margin:0px"> 
                     <label>Encargado de cuenta</label>
                       <input type="text" class="form-control" id="titular_cuenta" readonly>
                     </div>
@@ -93,14 +114,24 @@ require_once("modals/photosensible_ventas.php");
                       <input type="text" class="form-control" id="evaluado" readonly>
                     </div>
 
-                    <div class="col-sm-2 invoice-col" style="margin:0px">
-                    <label>#Pac.</label>
+                    <div class="col-sm-1 invoice-col" style="margin:0px">
+                      <label>#Pac.</label>
                       <input type="text" class="form-control" id="codigo_paciente" readonly>
                     </div>
 
                     <div class="col-sm-1 invoice-col form-group" style="margin: 0px">
                     <label>Paciente</label>
                       <button class="btn btn-primary btn-block" id="select_paciente_venta"><i class="fas fa-plus"></i></button>
+                    </div>
+
+                    <div class="col-sm-3 invoice-col" id="paciente_refiere" style="margin:0px;display: none">
+                    <label>Refiere</label>
+                      <input type="text" class="form-control" id="pac_refiere" readonly >
+                    </div>
+
+                    <div class="col-sm-1 invoice-col form-group" style="margin: 0px;display: none" id="div_ref">
+                    <label>Refiere</label>
+                      <button class="btn btn-success btn-block" id="select_paciente_refiere"><i class="fas fa-plus"></i></button>
                     </div>
                 </div><!--/.row invoice-info datos Proveedor-->
 

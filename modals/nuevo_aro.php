@@ -39,11 +39,11 @@ $marcas=$marca->get_marca();
      </div>
      <div id="resultados_ajax"></div>
 <section style="margin:15px">
-  <div class="form-row" autocomplete="off">
+  <div class="form-row" autocomplete="on">
 
     <div class="form-group col-md-4">
       <label for="exampleFormControlSelect2">Marca</label>
-      <select class="form-control input-dark" id="marca_aros">
+      <select class="form-control input-dark gui-input" id="marca_aros">
        <option value="">Seleccione marca</option>
       <?php 
       for ($i=0; $i < sizeof($marcas); $i++) {  ?>
@@ -115,4 +115,12 @@ $marcas=$marca->get_marca();
     blocks: [2,2,3],
     uppercase: true
 });
+
+
+ jQuery(function($) {
+    $('#new_aro').on('shown.bs.modal', function() {
+        $('select[id="marca_aros"]').focus();
+    });
+});
+
 </script>

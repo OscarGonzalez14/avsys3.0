@@ -27,7 +27,9 @@ public function login(){
         $_SESSION["id_usuario"] = $resultado["id_usuario"];           
         $_SESSION["usuario"] = $resultado["usuario"];
         $_SESSION["sucursal"] = $sucursal;
-        header("Location:pacientes.php");
+
+        header("Location:home.php");
+
 
       exit();
     } else {                         

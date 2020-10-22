@@ -39,7 +39,7 @@
            ?>
    <?php
    }
- 
+ break;
   
 case 'guardar_accesorios':
 //$datos = $productos->valida_existencia_acc($_POST["categoria"]);

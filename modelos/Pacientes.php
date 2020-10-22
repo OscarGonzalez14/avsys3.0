@@ -21,7 +21,6 @@ class Paciente extends Conectar{
      $calc_fecha = strtotime("-$edad year");
      $fecha_nac = date("d-m-Y", $calc_fecha);
  
-echo $nuevafecha; // Se imprime con un año menos 2015-12-29.
       $conectar= parent::conexion();
       parent::set_names();
       $sql="insert into pacientes values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -75,6 +74,14 @@ public function get_pacientes($sucursal_paciente){
     $sql= "select*from pacientes where sucursal=? order by id_paciente DESC;";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1,$sucursal_paciente);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+////////////////LISTAR PACIENTES REFIEREN
+public function get_paciente_refieren(){
+    $conectar= parent::conexion();
+    $sql= "select*from pacientes order by id_paciente DESC;";
+    $sql=$conectar->prepare($sql);
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
