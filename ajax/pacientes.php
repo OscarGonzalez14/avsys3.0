@@ -297,6 +297,31 @@ case "listar_pacientes_sin_consulta":
 
     break;
 
+///////LISTAR PACIENTES QUE REFIEREN////////////////
+case "listar_pacientes_refieren":
+
+  $datos=$pacientes->get_pacientes_refieren();
+  $data= Array();
+  foreach($datos as $row){
+    $sub_array = array();
+    $sub_array[] = $row["id_paciente"];
+    $sub_array[] = $row["nombres"];
+    $sub_array[] = $row["telefono"];
+    $sub_array[] = $row["sucursal"];
+    $sub_array[] = '<button type="button" onClick="pacienteRefiere('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';          
+                                                
+    $data[] = $sub_array;
+  }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+
+ break;
+
     ///GET DATA PACIENTES CON CONSULTAS EN VENTA
   case "buscar_data_pacientes_con_consulta_ventas":
 

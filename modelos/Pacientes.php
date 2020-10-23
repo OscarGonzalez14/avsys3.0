@@ -77,7 +77,18 @@ public function get_pacientes($sucursal_paciente){
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
-////////////////LISTAR PACIENTES REFIEREN
+
+/////////////////LISTAR PACIENTES REFIEREN
+
+public function get_pacientes_refieren(){
+    $conectar= parent::conexion();
+    $sql= "select*from pacientes order by id_paciente DESC;";
+    $sql=$conectar->prepare($sql);
+   
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }    
+//////////////// FIN LISTAR PACIENTES REFIEREN
 public function get_paciente_refieren(){
     $conectar= parent::conexion();
     $sql= "select*from pacientes order by id_paciente DESC;";

@@ -470,8 +470,85 @@ $(document).on("click","#tipo_paciente", function(){
   if(tipo_pac=="Referido"){
     document.getElementById("paciente_refiere").style.display = "block";
     document.getElementById("div_ref").style.display = "block";
+
   }else{
   	document.getElementById("paciente_refiere").style.display = "none";
     document.getElementById("div_ref").style.display = "none";
   }
+});
+
+/////////////
+$(document).on("click","#select_paciente_refiere", function(){
+$("#modal_pacientes_refieren").modal("show");
+
+tabla_pacientes_refieren=$('#data_pacientes_refiere').dataTable({
+		"aProcessing": true,//Activamos el procesamiento del datatables
+	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+	    columnDefs: [
+          {"targets": [0],
+        	"visible": false,
+        	"searchable": false
+          },
+        ],
+	    buttons: [
+            'excelHtml5',
+            'pdf'
+		        ],
+		"ajax":{
+			url: 'ajax/pacientes.php?op=listar_pacientes_refieren',
+			type : "get",
+			dataType : "json",
+			//data:{sucursal_paciente:sucursal_paciente},					
+			error: function(e){
+			console.log(e.responseText);	
+		    }
+		},
+		"bDestroy": true,
+		"responsive": true,
+		"bInfo":true,
+		"iDisplayLength": 10,//Por cada 10 registros hace una paginación
+	    //"order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+	    
+	    "language": {
+ 
+			    "sProcessing":     "Procesando...",
+			 
+			    "sLengthMenu":     "Mostrar _MENU_ registros",
+			 
+			    "sZeroRecords":    "No se encontraron resultados",
+			 
+			    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+			 
+			    "sInfo":           "Mostrando un total de _TOTAL_ registros",
+			 
+			    "sInfoEmpty":      "Mostrando un total de 0 registros",
+			 
+			    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+			 
+			    "sInfoPostFix":    "",
+			 
+			    "sSearch":         "Buscar:",
+			 
+			    "sUrl":            "",
+			 
+			    "sInfoThousands":  ",",
+			 
+			    "sLoadingRecords": "Cargando...",
+			 
+			    "oPaginate": {
+			 
+			        "sFirst":    "Primero",
+			 
+			        "sLast":     "Último",
+			 
+			        "sNext":     "Siguiente",
+			 
+			        "sPrevious": "Anterior"
+			 
+			    }
+
+			   }//cerrando language
+	       
+	}).DataTable();
 });
