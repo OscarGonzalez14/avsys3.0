@@ -117,12 +117,26 @@
   case "listar_pacientes":
 
 
+
 	$datos=$pacientes->get_pacientes($_POST["sucursal_paciente"]);
 	$data= Array();
     foreach($datos as $row){
-		$sub_array = array();
-  
+	$sub_array = array();
+  $referido=$pacientes->count_referidos($row["id_paciente"]);
 
+  if ($referido>=0 and $referido<=1) {
+    $badge="light";
+    $icon="fa-clock";
+    $estado="";
+  }elseif($referido>1 and $referido<5){
+    $badge="secondary";
+    $icon="fa-clock";
+    $estado="";
+  }elseif($referido>=5){
+    $badge="green";
+    $icon="fa-trophy";
+    $estado="Ganador";
+  }
 			$sub_array[] = $row["id_paciente"];
 			$sub_array[] = $row["nombres"];
       $sub_array[] = $row["edad"]." años";
@@ -135,7 +149,7 @@
 
             $sub_array[] = '<button type="button" onClick="mostrarc('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn  btn-md bg-light"><i class="fas fa-clipboard-list" aria-hidden="true" style="color:blue"></i></button>';
 
-             $sub_array[] = '<button type="button" onClick="mostrarc('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn btn-md bg-light"><i class="fas fa-search" aria-hidden="true" style="color:blue"></i></button>';            
+             $sub_array[] = '<span class="right badge badge-light"><i class=" fas '.$icon.'" style="color:'.$badge.'"></i> '.$referido.'<span>'.$estado.'</span>';            
                                                 
 		$data[] = $sub_array;
 	}
@@ -366,9 +380,10 @@ case "listar_pacientes_refieren":
 
   case "buscar_data_pacientes_refieren":
 
-   $datos= $pacientes->get_pacientes_refieren($_POST["id_paciente"]);
+   $datos= $pacientes->get_pacientes_refieren_data($_POST["id_paciente"]);
     foreach($datos as $row){
-      $output["id_paciente"] = $row["id_paciente"];      
+      $output["id_paciente"] = $row["id_paciente"];
+      $output["nombres"] = $row["nombres"];   
     }
   echo json_encode($output);
   break;

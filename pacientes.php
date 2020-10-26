@@ -11,10 +11,11 @@ require_once("modals/modal_consultas.php");
 
     <!-- Main content -->
     <section class="content" style="margin-top: 5px">
+
       <div class="row">
         <div class="col-12">
           <div class="card">
-          <!-- /.card-header -->
+<span class="right badge badge-light" style="text-align: right;float: right;"><i class=" fas fa-trophy"></i>Ganadores 1</span>
             <div class="card-body"><!--CONTENIDO-->
               <div class="invoice p-3 mb-3" style="margin: 3px;border-radius: 5px">
       <div class="row">
@@ -24,10 +25,13 @@ require_once("modals/modal_consultas.php");
 
       <div class="col-sm-3">
       <a href="consultas.php"><button type="button" class="btn btn-block btn-outline-success btn-flat" data-toggle="modal" data-target="#consultasModal"><i class="fas fa-clipboard-list"></i> Ver Consultas</button></a>
-      </div> 
+      </div>
+      <div>
+    
+      </div>
       </div>
 
-      <table id="data_pacientes" width="100%" style="text-align: center;text-align:center" data-order='[[ 0, "desc" ]]'>
+      <table id="data_pacientes" width="100%" style="text-align: center;text-align:center" data-order='[[ 0, "desc" ]]' class="table-hover table-bordered">
       <thead style="color:black;min-height:10px;border-radius: 2px;font-style: normal;font-size: 15px" class="bg-info">
           <tr style="min-height:10px;border-radius: 3px;font-style: normal;font-size: 15px">
             <th style="text-align:center">ID</th>
@@ -38,7 +42,7 @@ require_once("modals/modal_consultas.php");
             <th style="text-align:center">Editar</th>
             <th style="text-align:center">Eliminar</th>
             <th style="text-align:center">Información</th>
-            <th style="text-align:center">Expediente</th>
+            <th style="text-align:center">Referidos</th>
           </tr>
         </thead>
         <tbody style="text-align:center;color: black">                                        

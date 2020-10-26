@@ -87,7 +87,15 @@ public function get_pacientes_refieren(){
    
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-    }    
+    }
+public function get_pacientes_refieren_data($id_paciente){
+    $conectar= parent::conexion();
+    $sql= "select*from pacientes where id_paciente=? order by id_paciente DESC;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$id_paciente);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }      
 //////////////// FIN LISTAR PACIENTES REFIEREN
 public function get_paciente_refieren(){
     $conectar= parent::conexion();
@@ -226,5 +234,13 @@ public function get_detalle_paciente_rec_ini($id_paciente){
   $sql->execute();
   return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 }
-
+public function count_referidos($id_paciente){
+    $conectar= parent::conexion();           
+    $sql="select id_paciente_refiere from referidos where id_paciente_refiere=?;";             
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$id_paciente);
+    $sql->execute();
+    $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    return $sql->rowCount();
+}
 }///////FIN DE LA CLASE

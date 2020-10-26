@@ -109,4 +109,13 @@ public function get_datos_ventas_cobros_contado($fecha){
 	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+public function count_referidos(){
+    $conectar= parent::conexion();           
+    $sql="select id_paciente_refiere from referidos where id_paciente_refiere=?;";             
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$id_paciente);
+    $sql->execute();
+    $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    return $sql->rowCount();
+}
 }

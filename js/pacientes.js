@@ -565,7 +565,7 @@ $('#modal_pacientes_refieren').modal('hide');
       success:function(data){
       console.log(data);//return false;       
         $("#id_refererido").val(data.id_paciente);
-        
+        $("#pac_refiere").val(data.nombres);
       }
     })
 }
