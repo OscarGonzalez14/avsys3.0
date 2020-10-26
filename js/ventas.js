@@ -476,6 +476,7 @@ function registrarVenta(){
   var evaluado = $("#evaluado").val();
   var optometra = $("#optometra").val();
   var plazo = $("#plazo").val();
+  var id_ref = $("#id_refererido").val();
 
   if (tipo_venta == "Credito" && plazo =="0") {
     setTimeout ("Swal.fire('Debe seleccionar el plazo','','error')", 100);
@@ -495,7 +496,7 @@ if (paciente !="" && tipo_pago !=""  && tipo_venta !="") {
     $.ajax({
     url:"ajax/ventas.php?op=registrar_venta",
     method:"POST",
-    data:{'arrayVenta':JSON.stringify(detalles),'fecha_venta':fecha_venta,'numero_venta':numero_venta,'paciente':paciente,'vendedor':vendedor,'monto_total':monto_total,'tipo_pago':tipo_pago,'tipo_venta':tipo_venta,'id_usuario':id_usuario,'id_paciente':id_paciente,'sucursal':sucursal,'evaluado':evaluado,'optometra':optometra,'plazo':plazo},
+    data:{'arrayVenta':JSON.stringify(detalles),'fecha_venta':fecha_venta,'numero_venta':numero_venta,'paciente':paciente,'vendedor':vendedor,'monto_total':monto_total,'tipo_pago':tipo_pago,'tipo_venta':tipo_venta,'id_usuario':id_usuario,'id_paciente':id_paciente,'sucursal':sucursal,'evaluado':evaluado,'optometra':optometra,'plazo':plazo,"id_ref":id_ref},
     cache: false,
     dataType:"json",
     error:function(x,y,z){

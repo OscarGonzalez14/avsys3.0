@@ -99,6 +99,7 @@ foreach ($detalles as $k => $v) {
   $evaluado = $_POST["evaluado"];
   $optometra = $_POST["optometra"];
   $plazo = $_POST["plazo"];
+  $id_ref = $_POST["id_ref"];
 
   $sql="insert into detalle_ventas values(null,?,?,?,?,?,?,?,?,?,?,?);";
     $sql=$conectar->prepare($sql);
@@ -182,6 +183,17 @@ foreach ($detalles as $k => $v) {
     $sql2->bindValue(11,$evaluado);
     $sql2->bindValue(12,$optometra);
     $sql2->execute();
+
+    if ($id_ref != "") {
+    $sql2="insert referidos values(null,?,?,?,?);";
+    $sql2=$conectar->prepare($sql2);
+          
+    $sql2->bindValue(1,$id_ref);
+    $sql2->bindValue(2,$id_paciente);
+    $sql2->bindValue(3,$fecha_venta);
+    $sql2->bindValue(4,$sucursal);
+    $sql2->execute();
+    }
 
 
 

@@ -362,6 +362,15 @@ case "listar_pacientes_refieren":
 
         } 
       break;
-    break;
+
+
+  case "buscar_data_pacientes_refieren":
+
+   $datos= $pacientes->get_pacientes_refieren($_POST["id_paciente"]);
+    foreach($datos as $row){
+      $output["id_paciente"] = $row["id_paciente"];      
+    }
+  echo json_encode($output);
+  break;
 
 }

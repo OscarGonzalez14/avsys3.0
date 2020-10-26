@@ -477,7 +477,7 @@ $(document).on("click","#tipo_paciente", function(){
   }
 });
 
-/////////////
+////////////
 $(document).on("click","#select_paciente_refiere", function(){
 $("#modal_pacientes_refieren").modal("show");
 
@@ -552,3 +552,20 @@ tabla_pacientes_refieren=$('#data_pacientes_refiere').dataTable({
 	       
 	}).DataTable();
 });
+
+//////////////AGREGAR PACIENTE REFIERE
+function pacienteRefiere(id_paciente){  
+$('#modal_pacientes_refieren').modal('hide');
+
+    $.ajax({
+      url:"ajax/pacientes.php?op=buscar_data_pacientes_refieren",
+      method:"POST",
+      data:{id_paciente:id_paciente},
+      dataType:"json",
+      success:function(data){
+      console.log(data);//return false;       
+        $("#id_refererido").val(data.id_paciente);
+        
+      }
+    })
+}

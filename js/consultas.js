@@ -279,7 +279,7 @@ ishihara_e:ishihara_e,amsler_e:amsler_e,anexos_e:anexos_e,sugeridos_e:sugeridos_
 }
 
 $(document).on('click', '#addCons', function(){    
-   ocument.getElementById("addCons").style.display = "none";
+   document.getElementById("addCons").style.display = "none";
 });
 
 
