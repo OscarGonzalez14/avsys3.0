@@ -149,7 +149,7 @@
 
             $sub_array[] = '<button type="button" onClick="mostrarc('.$row["id_paciente"].');" id="'.$row["id_paciente"].'" class="btn  btn-md bg-light"><i class="fas fa-clipboard-list" aria-hidden="true" style="color:blue"></i></button>';
 
-             $sub_array[] = '<span class="right badge badge-light"><i class=" fas '.$icon.'" style="color:'.$badge.'"></i> '.$referido.'<span>'.$estado.'</span>';            
+             $sub_array[] = '<span class="right badge badge-light"><i class=" fas '.$icon.'" style="color:'.$badge.'"></i> '.$referido.'<span> '.$estado.'</span>';            
                                                 
 		$data[] = $sub_array;
 	}

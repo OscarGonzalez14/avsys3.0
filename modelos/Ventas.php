@@ -194,7 +194,38 @@ foreach ($detalles as $k => $v) {
     $sql2->bindValue(4,$sucursal);
     $sql2->execute();
     }
+#################  REGISTRAR VENTA EN CORTE DIARIO #####################
 
+    $n_recibo="";
+    $n_factura="";
+    $forma_cobro="";
+    $monto_cobrado="";
+    $abono_anterior="0";
+    $abonos_realizados="0";
+    $sucursal_cobro="";
+
+    $sql2="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+    $sql2=$conectar->prepare($sql2);          
+    $sql2->bindValue(1,$fecha_venta);
+    $sql2->bindValue(2,$n_recibo);
+    $sql2->bindValue(3,$numero_venta);
+    $sql2->bindValue(4,$n_factura);
+    $sql2->bindValue(5,$paciente);
+    $sql2->bindValue(6,$vendedor);
+    $sql2->bindValue(7,$monto_total);
+    $sql2->bindValue(8,$forma_cobro);
+    $sql2->bindValue(9,$monto_cobrado);
+    $sql2->bindValue(10,$monto_total);
+    $sql2->bindValue(11,$tipo_venta);
+    $sql2->bindValue(12,$tipo_pago);
+    $sql2->bindValue(13,$id_usuario);
+    $sql2->bindValue(14,$abono_anterior);
+    $sql2->bindValue(15,$abonos_realizados);
+    $sql2->bindValue(16,$id_paciente);
+    $sql2->bindValue(17,$sucursal);
+    $sql2->bindValue(18,$sucursal_cobro);
+
+    $sql2->execute();
 
 
 }//////////FIN FUNCION REGISTRA VENTA

@@ -1,7 +1,10 @@
 
  <?php
  require_once("config/conexion.php");
-if(isset($_SESSION["usuario"])){ 
+if(isset($_SESSION["usuario"])){
+require_once("modelos/Reporteria.php");
+$alerts = new Reporteria();
+$ganadores=$alerts->count_ganadores();
 require_once("header_dos.php");
 require_once("modals/nuevo_paciente.php");
 require_once("modals/modal_consultas.php");
@@ -15,14 +18,14 @@ require_once("modals/modal_consultas.php");
       <div class="row">
         <div class="col-12">
           <div class="card">
-<span class="right badge badge-light" style="text-align: right;float: right;"><i class=" fas fa-trophy"></i>Ganadores 1</span>
+<span class="right badge badge-light" style="text-align: right;float: right;"><i class=" fas fa-trophy" id="win"></i>Ganadores <span id="count_win"></span></span>
             <div class="card-body"><!--CONTENIDO-->
               <div class="invoice p-3 mb-3" style="margin: 3px;border-radius: 5px">
       <div class="row">
       <div class="col-sm-3">
       <button type="button" class="btn btn-block btn-outline-primary btn-flat" data-toggle="modal" data-target="#newPaciente" onClick="clear_campos();"><i class="fas fas fa-user-plus"></i> Agregar Paciente</button>
       </div>
-
+      <input type="hidden" value="<?php echo $ganadores;?>" id="ganadores">
       <div class="col-sm-3">
       <a href="consultas.php"><button type="button" class="btn btn-block btn-outline-success btn-flat" data-toggle="modal" data-target="#consultasModal"><i class="fas fa-clipboard-list"></i> Ver Consultas</button></a>
       </div>
@@ -87,6 +90,7 @@ require_once("modals/modal_consultas.php");
 <input type="hidden" name="sucursal" id="sucursal" value="<?php echo $_SESSION["sucursal"];?>"/>
 <input type="hidden" id="fecha" value="<?php echo $hoy;?>">
 <input type="hidden" id="name_pag" value="MODULO PACIENTES & CONSULTAS">
+
 <script type="text/javascript" src="js/cleave.js"></script>
 <script type="text/javascript" src="js/pacientes.js"></script>
 <script type="text/javascript" src="js/empresas.js"></script>
@@ -174,6 +178,13 @@ var telefono = new Cleave('#telefono', {
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
    })
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: false,
+    timer: 3000
+  });
 </script>
    <?php } else{
 echo "Acceso denegado";

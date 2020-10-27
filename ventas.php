@@ -125,7 +125,7 @@ require_once("modals/referentes.php");
                     </div>
 
                     <div class="col-sm-3 invoice-col" id="paciente_refiere" style="margin:0px;display: none">
-                    <label>Refiere</label>
+                    <label>Paciente refiere</label>
                       <input type="text" class="form-control" id="pac_refiere" readonly >
                     </div>
 

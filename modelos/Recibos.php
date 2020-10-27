@@ -103,7 +103,7 @@ $conectar=parent::conexion();
     //$abonos_pendientes = $row["abonos"]+1;             
     //si existe el producto entonces actualiza el stock en producto              
       if(is_array($resultados)==true and count($resultados)>0) {                     
-                  //actualiza el stock en la tabla producto
+      //actualiza el stock en la tabla producto
         $sql12 = "update creditos set saldo=? where numero_venta=? and id_paciente=?";
         $sql12 = $conectar->prepare($sql12);
         $sql12->bindValue(1,$saldo_act);

@@ -7,7 +7,7 @@ class Consulta extends Conectar{
     public function get_consultas($sucursal){
 
         $conectar= parent::conexion();       
-        $sql= "select c.fecha_reg,c.id_consulta,p.nombres,p.fecha_nac,c.sugeridos,c.diagnostico,u.usuario,c.p_evaluado from usuarios as u inner join consulta as c on u.id_usuario=c.id_usuario inner join pacientes as p on c.id_paciente=p.id_paciente where p.sucursal=?;";
+        $sql= "select c.fecha_reg,c.id_consulta,p.nombres,p.edad,c.sugeridos,c.diagnostico,u.usuario,c.p_evaluado from usuarios as u inner join consulta as c on u.id_usuario=c.id_usuario inner join pacientes as p on c.id_paciente=p.id_paciente where p.sucursal=?;";
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1,$sucursal);
         $sql->execute();

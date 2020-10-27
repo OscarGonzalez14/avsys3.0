@@ -6,6 +6,7 @@ $(document).ready(ocultar_btns_creditos);
   listar_pacientes();
   //tabla_pacientes();
   ocultar_btn_editar();
+  ganadores();
 }
 
 function mostrar_btns_creditos(){
@@ -224,7 +225,7 @@ function save_paciente() {
 		"bDestroy": true,
 		"responsive": true,
 		"bInfo":true,
-		"iDisplayLength": 10,//Por cada 10 registros hace una paginación
+		"iDisplayLength":25,//Por cada 10 registros hace una paginación
 	    //"order": [[ 0, "desc" ]],//Ordenar (columna,orden)
 	    
 	    "language": {
@@ -568,4 +569,21 @@ $('#modal_pacientes_refieren').modal('hide');
         $("#pac_refiere").val(data.nombres);
       }
     })
+}
+
+////////CUENTA GANADORES
+function ganadores(){
+	ganadores = document.getElementById("ganadores").value;
+	 document.getElementById("count_win").innerHTML=ganadores;
+	if (ganadores>0) {
+		document.getElementById("win").style.color = 'green';
+      Toast.fire({
+        type: 'warning',
+        title: 'Hay promociones que requieren su atención.'
+      })
+
+
+	}else{
+		document.getElementById("win").style.color = 'gray';
+	}
 }

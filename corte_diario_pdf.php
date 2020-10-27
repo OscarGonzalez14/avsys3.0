@@ -38,13 +38,13 @@ $datos_ventas_contado = $reporteria->get_datos_ventas_cobros_contado($fecha);
 
     .stilot2{      
        text-align: center;
-       font-size: 11px;
+       font-size: 10px;
        font-family: Helvetica, Arial, sans-serif;
        color:white;
     }
     .stilot3{
        text-align: center;
-       font-size: 11px;
+       font-size: 10px;
        font-family: Helvetica, Arial, sans-serif;
     }
 
