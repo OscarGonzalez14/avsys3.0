@@ -26,7 +26,7 @@ if(isset($_SESSION["usuario"])){
             <button type="button" class="btn btn-info dropdown-toggle dropdown-icon btn-flat" data-toggle="dropdown">
               <span class="sr-only">Toggle Dropdown</span>
               <div class="dropdown-menu" role="menu">
-                <a class="dropdown-item" href="#" style="text-decoration: none;color:black">Reporte diario de Compras</a>
+                <a class="dropdown-item" href="#" style="text-decoration: none;color:black">Reporte general de Compras</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" style="text-decoration: none;color:black">Reporte mensual de Compras</a>
                 <div class="dropdown-divider"></div>

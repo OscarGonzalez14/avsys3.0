@@ -260,7 +260,9 @@ case "buscar_aros_venta":
         $sub_array[] = $row["categoria"];
         $sub_array[] = $row["categoria_producto"];
         $sub_array[] = $row["desc_producto"];
-        $sub_array[] = '<button type="button" name="hola" id="'.$row["id_producto"].'" class="btn btn-danger btn-sm btn-flat" onClick="eliminarAccesorio()"></i> Eliminar</button>';
+        $sub_array[] = '<button type="button" class="btn btn-edit btn-md edita_acc bg-light" style="text-align:center" onClick="show_datos_acc('.$row["id_producto"].');" data-toggle="modal" data-target="#edit_acc" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit" aria-hidden="true" style="color:#006600"></i></button>';
+        $sub_array[] = '<button type="button"  class="btn btn-md bg-light" onClick="eliminar_accesorio('.$row["id_producto"].')"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></button>';
+
         $data[] = $sub_array;
       }
 
@@ -371,7 +373,44 @@ break;
       }
       echo json_encode($output);
       break;
-  
 
+    ///VER DATOS DE ACCESORIOS
+    case "show_datos_acc":
+      $datos=$productos->show_datos_acc($_POST["id_producto"]);
+      foreach ($datos as $row)
+      {
+        $output["id_producto"] = $row["id_producto"];
+        $output["tipo_accesorio"] = $row["categoria"];
+        $output["marca_accesorio"] = $row["marca"];
+        $output["desc_accesorio"] = $row["desc_producto"];
+        $output["categoria"] = $row["categoria_producto"];
+        $output["codigo"] = $row["modelo"];
+        }
+        echo json_encode($output);
+        break;
+
+
+    // EDITAR ACCESORIOS
+    case "editar_accesorios":
+    $productos->aditar_accesorio($_POST["tipo_accesorio"],$_POST["marca_accesorio"],$_POST["desc_accesorio"],$_POST["categoria"],$_POST["codigo"]);
+    break;
+
+    case "eliminar_accesorio":
+        $productos->eliminar_accesorio($_POST["id_producto"]);
+        $messages[]="ok";
+    if (isset($messages)){
+     ?>
+       <?php
+         foreach ($messages as $message) {
+             echo json_encode($message);
+           }
+         ?>
+   <?php
+ }
+    break;
+
+
+
+    
 }
    ?>

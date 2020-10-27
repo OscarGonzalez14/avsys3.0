@@ -23,7 +23,51 @@ class Marca extends conectar
     $sql->execute();
     return $resultado=$sql->fetchAll();
 }
-//FIN class
+
+public function get_marcas(){
+    $conectar= parent::conexion();
+    $sql= "select*from marca order by id_marca DESC;";
+    $sql=$conectar->prepare($sql);
+    //$sql->bindValue(1, $sucursal_correlativo);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+//////FUNCION EDITAR MARCA
+public function editar_marca($nom_marcas){
+
+    $conectar= parent::conexion();
+    parent::set_names();
+    $sql="update marca set marca=? where id_marca=?;";
+    $sql=$conectar->prepare($sql);
+    
+    $sql="insert into marca values(null,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $nom_marca);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+////FUNCION VER MARCAS
+public function show_datos_marca($id_marca){
+    $conectar= parent::conexion();
+    $sql="select*from marca where id_marca=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_marca);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+  }
+/////FUNCIO EDITAR MARCA
+public function eliminar_marca($id_marca){
+    $conectar=parent::conexion();
+    $sql="delete from marca where id_marca=?";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_marca);
+    $sql->execute();
+    return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
+  }
+
+
 
 }
 

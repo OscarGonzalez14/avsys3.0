@@ -73,7 +73,6 @@ public function registrar_accesorios($tipo_accesorio,$marca_accesorio,$desc_acce
     $sql->bindValue(8, $categoria);
     $sql->bindValue(9, $desc_accesorio);
     $sql->execute();
-
 }
 
 public function get_accesorios(){
@@ -285,5 +284,52 @@ public function editar_aro($marca_aros,$modelo_aro,$color_aro,$medidas_aro,$dise
   return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 
 }
+
+//FUNCION VER DATOS DE ACCESORIO
+public function show_datos_acc($id_producto){
+    $conectar= parent::conexion();
+    $sql="select*from productos where id_producto=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_producto);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+  }
+////FUNCION EDITAR ACCESORIOS
+public function aditar_accesorio($tipo_accesorio,$marca_accesorio,$desc_accesorio,$categoria,$codigo){
+
+    $conectar= parent::conexion();
+    parent::set_names();
+    $sql="update productos set marca=?,codigo=?,categoria=?,categoria_producto=?,desc_producto=? where id_producto=?;";
+    $sql=$conectar->prepare($sql);
+    
+    $color="0";
+    $medidas="0";
+    $diseno="0";
+    $materiales="0";
+
+    $sql="insert into productos values(null,?,?,?,?,?,?,?,?,?);";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $marca_accesorio);
+    $sql->bindValue(2, $codigo);
+    $sql->bindValue(3, $color);
+    $sql->bindValue(4, $medidas);
+    $sql->bindValue(5, $diseno);
+    $sql->bindValue(6, $materiales);
+    $sql->bindValue(7, $tipo_accesorio);
+    $sql->bindValue(8, $categoria);
+    $sql->bindValue(9, $desc_accesorio);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+///FUNCION PARA ELIMINAR ACCESORIO
+public function eliminar_accesorio($id_producto){
+    $conectar=parent::conexion();
+    $sql="delete from productos where id_producto=?";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_producto);
+    $sql->execute();
+    return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
+  }
 
 }//////Fin de la clase

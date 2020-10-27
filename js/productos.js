@@ -1112,5 +1112,81 @@ function show_datos_aro(id_producto){
   });
 }
 
+function editar_accesorio(){
+  var tipo_accesorio =$("#tipo_accesorio_edit").val();
+  var marca_accesorio =$("#marca_edit").val();
+  var desc_accesorio =$("#des_acc_edit").val();
+  var categoria =$("#categoria_edit").val();
+  var codigo =$("#cod_edit").val();
+
+  //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
+
+if(tipo_accesorio !="" && marca_accesorio!="" && desc_accesorio !=""){
+
+    $.ajax({
+    url:"ajax/productos.php?op=editar_accesorios",
+    method:"POST",
+    data:{tipo_accesorio:tipo_accesorio,marca_accesorio:marca_accesorio,desc_accesorio:desc_accesorio,categoria:categoria,codigo:codigo},
+    cache: false,
+    dataType:"json",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    },
+    success:function(data){         
+
+    }
+});
+}
+Swal.fire('El accesorio ha sido editado exitosamente!','','success')
+setTimeout ("explode();", 2000);
+} //cierre editar accesorio
+
+function show_datos_acc(id_producto){
+  $.ajax({
+    url:"ajax/productos.php?op=show_datos_acc",
+    method:"POST",
+    data:{id_producto:id_producto},
+    cache:false,
+    dataType:"json",
+    success:function(data){
+      console.log(data);
+      $("#tipo_accesorio_edit").val(data.tipo_accesorio);
+      $("#marca_edit").val(data.marca_accesorio);
+      $("#des_acc_edit").val(data.desc_accesorio);
+      $("#categoria_edit").val(data.categoria);
+      $("#cod_edit").val(data.codigo);
+    }
+  });
+}
+
+///FUNCION ELIMINAR ACCESORIO
+function eliminar_accesorio(id_producto){
+    
+  bootbox.confirm("¿Está seguro de eliminar accesorio?", function(result){
+    if(result){
+
+  $.ajax({
+    url:"ajax/productos.php?op=eliminar_accesorio",
+    method:"POST",
+    data:{id_producto:id_producto},
+    dataType:"json",
+    success:function(data)
+    {
+      console.log(data);
+      if(data=="ok"){
+        setTimeout ("Swal.fire('Accesorio Eliminado Existosamente','','success')",);
+        setTimeout ("explode();", 2000);
+      }        //alert(data);
+      $("#data_lista_accesorios_creados").DataTable().ajax.reload();
+    }
+  });
+
+}
+});//bootbox
+
+}
+
 
 init();

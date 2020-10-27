@@ -3,14 +3,18 @@
 if(isset($_SESSION["usuario"])){ 
 require_once('header.php');
 require_once('modals/nuevo_accesorio.php'); 
+require_once('modals/nueva_marca.php');
+require_once('modals/editar_accesorio.php');
 ?>
 
 <div class="content-wrapper" > <!-- Inicio content wraper-->
   <!-- Button to Open the Modal -->
   <div style="margin:5px;">
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#accesorios_save" data-backdrop="static" data-keyboard="false" style="margin:8px;background: black;border-radius:0px;border: 0px;"><i class="fas fa-plus"></i>
-  	CREAR ACCESORIOS
+   <a class="btn btn-dark" style="color:white;border-radius:2px; background:black;margin:solid black 1px" data-toggle="modal" data-target="#newMarca" data-backdrop="static" data-keyboard="false"><i class="fas fa-plus-square"></i> Crear Marca</a>&nbsp;
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#accesorios_save" data-backdrop="static" data-keyboard="false" style="margin:8px;background: black;border-radius:0px;border: 0px;"><i class="fas fa-plus-square"></i>
+  	Crear Accesorio
   </button>
+
   </div>
 
   <div style="margin: 1px">
@@ -26,6 +30,7 @@ require_once('modals/nuevo_accesorio.php');
             <th style="text-align:center">Categoría</th>
             <th style="text-align:center">Categoría_producto</th>
             <th style="text-align:center">Descripción</th>
+            <th style="text-align:center">Editar</th>
             <th style="text-align:center">Eliminar</th>
 
           </tr>
@@ -38,6 +43,11 @@ require_once('modals/nuevo_accesorio.php');
 </div>     <!-- fin content wraper-->
 
 <script src="js/productos.js"></script>
+<script src="js/marca.js"></script>
+<script src='js/bootbox.min.js'></script>
+
+
+
    <?php } else{
 echo "Acceso denegado";
   } ?>
