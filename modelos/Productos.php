@@ -269,8 +269,8 @@ public function editar_aro($marca_aros,$modelo_aro,$color_aro,$medidas_aro,$dise
   $conectar= parent::conexion();
   parent::set_names();
   $sql="update productos set marca=?,modelo=?,color=?,medidas=?,diseno=?,materiales=?,categoria=?,categoria_producto=?,desc_producto=? where id_producto=?;";
+ 
   $sql=$conectar->prepare($sql);
-  
   $sql->bindValue(1, $_POST["marca_aros"]);
   $sql->bindValue(2, $_POST["modelo_aro"]);
   $sql->bindValue(3, $_POST["color_aro"]);
@@ -285,5 +285,51 @@ public function editar_aro($marca_aros,$modelo_aro,$color_aro,$medidas_aro,$dise
   return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 
 }
+
+//FUNCION VER DATOS DE ACCESORIO
+public function show_datos_acc($id_producto){
+    $conectar= parent::conexion();
+    $sql="select*from productos where id_producto=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_producto);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+  }
+////FUNCION EDITAR ACCESORIOS
+public function editar_accesorio($tipo_accesorio,$marca_accesorio,$desc_accesorio,$categoria,$codigo,$id_producto){
+
+    $conectar= parent::conexion();
+    parent::set_names();
+    $sql="update productos set marca=?,modelo=?,categoria=?,categoria_producto=?,desc_producto=? where id_producto=?;";
+
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $_POST["marca_accesorio"]);
+    $sql->bindValue(2, $_POST["codigo"]);
+    $sql->bindValue(3, $_POST["tipo_accesorio"]);
+    $sql->bindValue(4, $_POST["categoria"]);
+    $sql->bindValue(5, $_POST["desc_accesorio"]);
+    $sql->bindValue(6, $_POST["id_producto"]);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+///FUNCION PARA ELIMINAR ACCESORIO
+public function eliminar_accesorio($id_producto){
+    $conectar=parent::conexion();
+    $sql="delete from productos where id_producto=?";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_producto);
+    $sql->execute();
+    return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
+  }
+/////////////////get producto para traslados
+public function get_productos_traslado($sucursal){
+    $conectar= parent::conexion();
+    $sql= "select p.desc_producto,e.e.id_producto,bodega,e.categoria_ub from productos as p inner join existencias as e on p.id_producto=e.id_producto where bodega=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$sucursal);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }//////Fin de la clase

@@ -30,7 +30,7 @@
 
 </style>
 
-!-- The Modal -->
+<!-- The Modal -->
   <div id="modal_ingreso_bodega" class="modal fullscreen-modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">

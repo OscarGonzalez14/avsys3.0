@@ -113,7 +113,25 @@ require_once("modelos/Reporteria.php");
             </div>
           </div>
 
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>Traslados</h3>
+
+                <p>0</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-exchange-alt"></i>
+              </div>
+              <a href="traslados.php" class="small-box-footer"> Ir a Traslados<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
         </div>
+
+
+
         <!-- /.row -->
     
 </div>

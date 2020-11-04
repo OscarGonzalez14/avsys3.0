@@ -260,7 +260,10 @@ case "buscar_aros_venta":
         $sub_array[] = $row["categoria"];
         $sub_array[] = $row["categoria_producto"];
         $sub_array[] = $row["desc_producto"];
-        $sub_array[] = '<button type="button" name="hola" id="'.$row["id_producto"].'" class="btn btn-danger btn-sm btn-flat" onClick="eliminarAccesorio()"></i> Eliminar</button>';
+        $sub_array[] = '<button type="button" class="btn btn-edit btn-md edita_acc bg-light" style="text-align:center" onClick="show_datos_acc('.$row["id_producto"].');" data-toggle="modal" data-target="#edit_acc" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit" aria-hidden="true" style="color:#006600"></i></button>';
+        $sub_array[] = '<button type="button"  class="btn btn-md bg-light" onClick="eliminar_accesorio('.$row["id_producto"].')"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></button>';
+
+
         $data[] = $sub_array;
       }
 
@@ -350,8 +353,8 @@ case "buscar_aros_venta":
     case "editar_aros":
     $productos->editar_aro($_POST["marca_aros"],$_POST["modelo_aro"],$_POST["color_aro"],$_POST["medidas_aro"],$_POST["diseno_aro"],$_POST["materiales_aro"],$_POST["cat_venta_aros"],$_POST["categoria_producto"],$_POST["id_producto"]);
 
-//fin mensaje error
-break;
+    //fin mensaje error
+    break;
 
 
     /// VER DATOS DEL PRODUCTO EN MODAL PARA EDITAR
@@ -371,7 +374,68 @@ break;
       }
       echo json_encode($output);
       break;
-  
 
+
+    // EDITAR ACCESORIOS
+    case "editar_accesorios":
+    $productos->editar_accesorio($_POST["tipo_accesorio"],$_POST["marca_accesorio"],$_POST["desc_accesorio"],$_POST["categoria"],$_POST["codigo"],$_POST["id_producto"]);
+    break;
+
+
+      ///VER DATOS DE ACCESORIOS
+    case "show_datos_acc":
+      $datos=$productos->show_datos_acc($_POST["id_producto"]);
+      foreach ($datos as $row)
+      {
+        $output["id_producto"] = $row["id_producto"];
+        $output["tipo_accesorio"] = $row["categoria"];
+        $output["marca_accesorio"] = $row["marca"];
+        $output["desc_accesorio"] = $row["desc_producto"];
+        $output["categoria"] = $row["categoria_producto"];
+        $output["codigo"] = $row["modelo"];
+        }
+    echo json_encode($output);
+    break;
+
+
+    ////ELIMINAR ACCESORIOS
+    case "eliminar_accesorio":
+        $productos->eliminar_accesorio($_POST["id_producto"]);
+        $messages[]="ok";
+    if (isset($messages)){
+     ?>
+       <?php
+         foreach ($messages as $message) {
+             echo json_encode($message);
+           }
+         ?>
+   <?php
+ }
+    break;
+
+    ////////////////LISTAR PRODUCTOS EN TRASLADOS
+    case "listar_productos_traslado ":
+    $datos=$productos->get_productos_traslado($_POST["sucursal"]);
+    //Vamos a declarar un array
+    $data= Array();
+
+    foreach($datos as $row){
+        $sub_array = array();
+        $sub_array[] = $row["desc_producto"];
+        $sub_array[] = $row["categoria_ub"];
+        $sub_array[] = $row["bodega"];  
+        $sub_array[] = '<button type="button" class="btn btn-md bg-light" onClick="agregar_item_traslado('.$row["id_producto"].',\''.$row["categoria_ub"].'\')"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></button>';
+        $data[] = $sub_array;
+      }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+      echo json_encode($results);
+
+    break;
+  
 }
    ?>

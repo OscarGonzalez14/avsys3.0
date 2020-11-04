@@ -11,6 +11,7 @@ function init(){
   listar_acc_compras();
   listar_accesorios_creados();
   listar_lentes_tratamientos();
+  listar_prod_traslados();
 }
     const Toast = Swal.mixin({
       toast: true,
@@ -1110,6 +1111,163 @@ function show_datos_aro(id_producto){
 
     }
   });
+}
+
+function editar_accesorio(){
+  var tipo_accesorio =$("#tipo_accesorio_edit").val();
+  var marca_accesorio =$("#marca_accesorio_edit").val();
+  var desc_accesorio =$("#des_accesorio_edit").val();
+  var categoria =$("#categoria_edit").val();
+  var codigo =$("#cod_acc_edit").val();
+  var id_producto =$("#id_producto_edit").val();
+
+  //validamos los campos de editar accesorio
+
+if(tipo_accesorio !="" && marca_accesorio!="" && desc_accesorio !=""){
+
+    $.ajax({
+    url:"ajax/productos.php?op=editar_accesorios",
+    method:"POST",
+    data:{tipo_accesorio:tipo_accesorio,marca_accesorio:marca_accesorio,desc_accesorio:desc_accesorio,categoria:categoria,codigo:codigo,id_producto:id_producto},
+    cache: false,
+    dataType:"json",
+    error:function(x,y,z){
+      d_pacole.log(x);
+      console.log(y);
+      console.log(z);
+    },
+    success:function(data){         
+
+    }
+});
+}
+Swal.fire('El accesorio ha sido editado exitosamente!','','success')
+setTimeout ("explode();", 2000);
+} //cierre editar accesorio
+
+
+///VER INFORMACION DE ACCESORIO A EDITAR
+function show_datos_acc(id_producto){
+  $.ajax({
+    url:"ajax/productos.php?op=show_datos_acc",
+    method:"POST",
+    data:{id_producto:id_producto},
+    cache:false,
+    dataType:"json",
+    success:function(data){
+      console.log(data);
+      $("#id_producto_edit").val(data.id_producto);
+      $("#tipo_accesorio_edit").val(data.tipo_accesorio);
+      $("#marca_accesorio_edit").val(data.marca_accesorio);
+      $("#des_accesorio_edit").val(data.desc_accesorio);
+      $("#categoria_edit").val(data.categoria);
+      $("#cod_accesorio_edit").val(data.codigo);
+    }
+  });
+}
+
+///FUNCION ELIMINAR ACCESORIO
+function eliminar_accesorio(id_producto){
+
+  bootbox.confirm("¿Está seguro de eliminar accesorio?", function(result){
+    if(result){
+
+  $.ajax({
+    url:"ajax/productos.php?op=eliminar_accesorio",
+    method:"POST",
+    data:{id_producto:id_producto},
+    dataType:"json",
+    success:function(data)
+    {
+      console.log(data);
+      if(data=="ok"){
+        setTimeout ("Swal.fire('Accesorio Eliminado Existosamente','','success')",);
+        setTimeout ("explode();", 2000);
+      }        //alert(data);
+      $("#data_lista_accesorios_creados").DataTable().ajax.reload();
+    }
+  });
+
+}
+});//bootbox
+
+}
+
+
+  ////productos en traslados /////
+  function listar_prod_traslados()
+{
+   var sucursal =$("#sucursal").val();
+  tabla_prod_traslados=$('#data_items_traslados').dataTable(
+  {
+    "aProcessing": true,//Activamos el procesamiento del datatables
+      "aServerSide": true,//Paginación y filtrado realizados por el servidor
+      dom: 'Bfrtip',//Definimos los elementos del control de tabla
+    "ajax":
+        {
+          url: 'ajax/productos.php?op=listar_productos_traslado',
+          type : "post",
+          data:{sucursal:sucursal},
+          dataType : "json",
+          error: function(e){
+            console.log(e.responseText);
+          }
+        },
+    "bDestroy": true,
+    "responsive": true,
+    "bInfo":true,
+    "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+      "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+
+      "language": {
+
+          "sProcessing":     "Procesando...",
+
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+
+          "sZeroRecords":    "No se encontraron resultados",
+
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+
+          "sInfo":           "Mostrando un total de _TOTAL_ registros",
+
+          "sInfoEmpty":      "Mostrando un total de 0 registros",
+
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+
+          "sInfoPostFix":    "",
+
+          "sSearch":         "Buscar:",
+
+          "sUrl":            "",
+
+          "sInfoThousands":  ",",
+
+          "sLoadingRecords": "Cargando...",
+
+          "oPaginate": {
+
+              "sFirst":    "Primero",
+
+              "sLast":     "Último",
+
+              "sNext":     "Siguiente",
+
+              "sPrevious": "Anterior"
+
+          },
+
+          "oAria": {
+
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+
+          }
+
+         }//cerrando language
+
+  }).DataTable();
 }
 
 

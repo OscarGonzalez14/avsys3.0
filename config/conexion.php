@@ -5,7 +5,10 @@ class Conectar {
  	protected $dbh;
  	protected function conexion(){
  		try {
- 			$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=avsystem","root","");
+
+
+	$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=avplu3","root","");
+
 		     return $conectar;
  		    } catch (Exception $e) {
  			print "¡Error!: " . $e->getMessage() . "<br/>";
