@@ -49,7 +49,6 @@ $marcas=$marca->get_marca();
       for ($i=0; $i < sizeof($marcas); $i++) {  ?>
         <option value="<?php echo($marcas[$i]["marca"]) ?>"><?php echo $marcas[$i]["marca"]?></option>
         <?php } ?>
-
      </select>
       </div>
     <div class="form-group col-md-4">

@@ -161,7 +161,6 @@
  			"aaData"=>$data);
  		echo json_encode($results);
 
-
     break;
 
      ///////////////BUSCAR PACIENTE POR ID PARA MOSTRAR EN LA VENTANA DE CONSULTAS

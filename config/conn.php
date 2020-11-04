@@ -3,7 +3,7 @@
 	class Conexion{
 		
 		private $host = "localhost";
-		private $dbname = "avplu3";
+		private $dbname = "avsystem";
 		private $user = "root";
 		private $password = "";
 		private $conexion = null;
