@@ -647,4 +647,52 @@ $(document).on("click","#categoria_ubicaciones", function(){
 
       });
 
+///////////////////////////TRASLADOS
+var detalles_traslado = [];
+function realizar_traslado(id_producto,categoria_ub){
+
+  $.ajax({
+  url:"ajax/bodegas.php?op=get_productos_traslados",
+  method:"POST",
+  data:{id_producto:id_producto,categoria_ub:categoria_ub},
+  cache: false,
+  dataType:"json",
+  success:function(data){
+    console.log(data);   
+    var obj = {
+      cantidad : 1,
+      codProd  : id_producto,
+      descripcion   : data.desc_producto,
+      origen    : data.categoria_ub,
+      destino  : ""
+    };//Fin objeto
+    detalles_traslado.push(obj);
+    $('#modalTraslados').modal("hide");
+    listarDetallesTraslado();
+    console.log(detalles_traslado);
+    }//fin success
+  });//fin de ajax
+
+}
+/////////////////////////LISTAR DETALLES DE TRASLADO
+/////////fin aggergar acc a compra
+function listarDetallesTraslado(){
+
+    $('#listar_det_traslados').html('');
+
+    var filas = "";
+    for(var i=0; i<detalles_traslado.length; i++){
+        var filas = filas + "<tr id='fila"+i+"'><td>"+(i+1)+
+        "</td><td style='text-align:center;'>"+detalles_traslado[i].descripcion+
+        "<td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' onClick='setCantidad_traslado(event, this, "+(i)+");' onKeyUp='setCantidad_traslado(event, this, "+(i)+");' value='"+detalles_traslado[i].cantidad+"'><td style='text-align:center'><input style='text-align:right' type='text' class='cantidad form-control'  value='"+detalles_traslado[i].origen+"'></td><td style='text-align:center'><select class='form-control categorias_traslado' id='cat_traslados"+(i)+"'></select></td><td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarFila("+i+");' style='color:red'></i></td></tr>";
+
+       
+
+
+    //subtotal = subtotal + importe;
+
+  }//cierre for
+  $('#listar_det_traslados').html(filas);
+}
+
 init();

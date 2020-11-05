@@ -323,13 +323,16 @@ public function eliminar_accesorio($id_producto){
     return $resultado=$sql->fetch(PDO::FETCH_ASSOC);
   }
 /////////////////get producto para traslados
-public function get_productos_traslado($sucursal){
-    $conectar= parent::conexion();
-    $sql= "select p.desc_producto,e.e.id_producto,bodega,e.categoria_ub from productos as p inner join existencias as e on p.id_producto=e.id_producto where bodega=?;";
-    $sql=$conectar->prepare($sql);
-    $sql->bindValue(1,$sucursal);
-    $sql->execute();
-    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-    }
+public function get_productos_traslados($sucursal){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select p.desc_producto,e.id_producto,e.bodega,e.categoria_ub from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.bodega=?;
+";
+
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1, $sucursal);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+}
 
 }//////Fin de la clase

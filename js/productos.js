@@ -3,7 +3,7 @@ var tabla_aros_creados;
 var tabla_acc_compras;
 var tabla_accesorios_creados;
 var tabla_lentes_tratamientos;
-
+var tabla_traslados;
 
 function init(){
   listar_aros();
@@ -11,7 +11,7 @@ function init(){
   listar_acc_compras();
   listar_accesorios_creados();
   listar_lentes_tratamientos();
-  listar_prod_traslados();
+  //listar_prod_traslados();
 }
     const Toast = Swal.mixin({
       toast: true,
@@ -23,14 +23,13 @@ function init(){
 //////////////////////LISTADO DE AROS CREAODOS///////////////
 
 /////////LISTAR AROS
-function listar_aros_creados()
-{
+function listar_aros_creados(){
   tabla_aros_creados=$('#data_lista_aros_creados').dataTable(
   {
     "aProcessing": true,//Activamos el procesamiento del datatables
-      "aServerSide": true,//Paginación y filtrado realizados por el servidor
-      dom: 'Bfrtip',//Definimos los elementos del control de tabla
-buttons: ['copyHtml5', {
+    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+    buttons: ['copyHtml5', {
            extend: 'excelHtml5',
            text: 'Descargar Excel',
            filename: function() {
@@ -1193,82 +1192,79 @@ function eliminar_accesorio(id_producto){
 
 }
 
+$(document).on("click","#items_traslados", function(){
+$("#modalTraslados").modal("show");
+    var sucursal = $('#sucursal').val();
 
-  ////productos en traslados /////
-  function listar_prod_traslados()
-{
-   var sucursal =$("#sucursal").val();
-  tabla_prod_traslados=$('#data_items_traslados').dataTable(
-  {
+    tabla_pacientes_traslados=$('#data_items_traslados').dataTable({
     "aProcessing": true,//Activamos el procesamiento del datatables
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
       dom: 'Bfrtip',//Definimos los elementos del control de tabla
-    "ajax":
-        {
-          url: 'ajax/productos.php?op=listar_productos_traslado',
-          type : "post",
-          data:{sucursal:sucursal},
-          dataType : "json",
-          error: function(e){
-            console.log(e.responseText);
-          }
-        },
+      columnDefs: [
+          {"targets": [0],
+          "visible": false,
+          "searchable": false
+          },
+        ],
+      buttons: [
+            'excelHtml5',
+            'pdf'
+            ],
+    "ajax":{
+      url: 'ajax/productos.php?op=listar_productos_traslado',
+      type : "post",
+      dataType : "json",
+      data:{sucursal:sucursal},         
+      error: function(e){
+      console.log(e.responseText);  
+        }
+    },
     "bDestroy": true,
     "responsive": true,
     "bInfo":true,
     "iDisplayLength": 10,//Por cada 10 registros hace una paginación
-      "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
-
+      //"order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+      
       "language": {
-
+ 
           "sProcessing":     "Procesando...",
-
+       
           "sLengthMenu":     "Mostrar _MENU_ registros",
-
+       
           "sZeroRecords":    "No se encontraron resultados",
-
+       
           "sEmptyTable":     "Ningún dato disponible en esta tabla",
-
+       
           "sInfo":           "Mostrando un total de _TOTAL_ registros",
-
+       
           "sInfoEmpty":      "Mostrando un total de 0 registros",
-
+       
           "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-
+       
           "sInfoPostFix":    "",
-
+       
           "sSearch":         "Buscar:",
-
+       
           "sUrl":            "",
-
+       
           "sInfoThousands":  ",",
-
+       
           "sLoadingRecords": "Cargando...",
-
+       
           "oPaginate": {
-
+       
               "sFirst":    "Primero",
-
+       
               "sLast":     "Último",
-
+       
               "sNext":     "Siguiente",
-
+       
               "sPrevious": "Anterior"
-
-          },
-
-          "oAria": {
-
-              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-
-              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-
+       
           }
 
          }//cerrando language
-
+         
   }).DataTable();
-}
-
-
+});
 init();

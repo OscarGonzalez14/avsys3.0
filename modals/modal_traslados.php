@@ -1,6 +1,6 @@
 <style>
     #tamModal_traslados{
-      width: 50% !important;
+      width: 60% !important;
     }
      #head_traslados{
         background-color: black;
@@ -26,18 +26,16 @@
      </div>
 
               <div class="card-body p-0" style="margin:7px">
-                <table class="table display nowrap" id="data_items_traslados" width="100%">
-                  <thead style="background:#034f84;color:white">
+                <table class="table-hover table-bordered" id="data_items_traslados" width="100%">
+                  <thead style="text-align: center;" class="bg-primary">
                     <tr>
-                      <th style="text-align:center">Descripción</th>
-                      <th style="text-align:center">Ubicación</th>
-                      <th style="text-align:center">Sucursal</th>
-                      <th style="text-align:center">Agregar</th>
+                      <th>Ubicacion</th>
+                      <th>Descripcion</th>
+                      <th>Ubicación</th>
+                      <th>Agregar</th>
                     </tr>
                   </thead>
-                  <tbody style="text-align:center">
-                                        
-                  </tbody>
+                  <tbody style="text-align:center"></tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -46,9 +44,3 @@
 
   </div>
 </div>
-<script type="">
-  $(function() {
-    $("div.dataTables_filter input").focus();
-});
-
-</script>

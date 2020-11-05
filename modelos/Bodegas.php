@@ -197,4 +197,15 @@ public function get_stock_categoria($ubicacion){
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function get_productos_traslados($id_producto,$categoria_ub){
+    $conectar= parent::conexion();         
+    $sql= "select p.desc_producto,e.categoria_ub from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.id_producto=? and categoria_ub=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$id_producto);
+    $sql->bindValue(2,$categoria_ub);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+  }
+
 }

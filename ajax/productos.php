@@ -412,30 +412,29 @@ case "buscar_aros_venta":
    <?php
  }
     break;
+case "listar_productos_traslado":
 
-    ////////////////LISTAR PRODUCTOS EN TRASLADOS
-    case "listar_productos_traslado ":
-    $datos=$productos->get_productos_traslado($_POST["sucursal"]);
-    //Vamos a declarar un array
-    $data= Array();
-
-    foreach($datos as $row){
-        $sub_array = array();
-        $sub_array[] = $row["desc_producto"];
-        $sub_array[] = $row["categoria_ub"];
-        $sub_array[] = $row["bodega"];  
-        $sub_array[] = '<button type="button" class="btn btn-md bg-light" onClick="agregar_item_traslado('.$row["id_producto"].',\''.$row["categoria_ub"].'\')"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></button>';
-        $data[] = $sub_array;
-      }
+  $datos=$productos->get_productos_traslados($_POST["sucursal"]);
+  $data= Array();
+  foreach($datos as $row){
+    $sub_array = array();
+    $sub_array[] = $row["bodega"];
+    $sub_array[] = $row["desc_producto"];
+    $sub_array[] = $row["categoria_ub"];
+    $sub_array[] = '<button type="button" onClick="realizar_traslado('.$row["id_producto"].',\''.$row["categoria_ub"].'\');" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';          
+                                                
+    $data[] = $sub_array;
+  }
 
       $results = array(
       "sEcho"=>1, //Información para el datatables
       "iTotalRecords"=>count($data), //enviamos el total registros al datatable
       "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
       "aaData"=>$data);
-      echo json_encode($results);
+    echo json_encode($results);
 
-    break;
+ break;
+
   
 }
    ?>
