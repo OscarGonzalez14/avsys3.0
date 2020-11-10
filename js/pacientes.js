@@ -576,12 +576,11 @@ function ganadores(){
 	ganadores = document.getElementById("ganadores").value;
 	 document.getElementById("count_win").innerHTML=ganadores;
 	if (ganadores>0) {
-		document.getElementById("win").style.color = 'green';
+	document.getElementById("win").style.color = 'green';
       Toast.fire({
         type: 'warning',
         title: 'Hay promociones que requieren su atención.'
       })
-
 
 	}else{
 		document.getElementById("win").style.color = 'gray';

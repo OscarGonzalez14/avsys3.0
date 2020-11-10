@@ -233,6 +233,8 @@ switch ($_GET["op"]){
 
     if ($_POST["categoria"]=="cat_b") {
       $datos = $creditos->get_creditos_cat_b();
+    }else{
+      $datos = $creditos->get_creditos_cat_c();
     }
     //Vamos a declarar un array
   $data= Array();
@@ -243,11 +245,12 @@ switch ($_GET["op"]){
     $sub_array[] = $row["numero_venta"];
     $sub_array[] = "$".number_format($row["monto"],2,".",",");
     $sub_array[] = "$".number_format($row["saldo"],2,".",",");
+    $sub_array[] = "$".number_format($row["abonado"],2,".",",");
     $sub_array[] = $row["fecha_abono"];
     $sub_array[] = $row["prox_abono"];
-    $sub_array[] = $row["dif_days"];
-    $sub_array[] = '<button type="button" onClick="verDetAbonos('.$row["id_paciente"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-file-invoice-dollar" aria-hidden="true" style="color:white"></i></button>';
-    $sub_array[] = '<button type="button"  class="btn btn-ligth btn-md"><i class="fas fa-eye" style="color:green"></i></button>';                                 
+    $sub_array[] = $row["dif_days"]." dias";
+    $sub_array[] = '<button type="button" onClick="verDetAbonos('.$row["id_paciente"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-sm btn-flat bg-success"><i class="fas fa-file-invoice-dollar" aria-hidden="true" style="color:white"></i></button>';
+    $sub_array[] = '<i class="fas fa-eye" style="color:green"></i>';                                 
     $data[] = $sub_array;
   }
 

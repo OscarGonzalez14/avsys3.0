@@ -21,7 +21,7 @@
 
     <div class="modal-content">
      <div class="modal-header bg-secondary" id="head_det_abonos" style="justify-content:space-between">
-       <span><i class="fas fa-plus-square"></i> DETALLE DE ABONO</span>
+       <span><i class="fas fa-plus-square"></i> DETALLE DE ABONOS</span>
         <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
      </div>
 

@@ -3,6 +3,7 @@ require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){   
 require_once("header_dos.php");
  ?>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <div class="content-wrapper" style="background-color:white;">
@@ -21,6 +22,21 @@ require_once("header_dos.php");
 <?php 
 require_once("footer.php");
  ?>
+ <script type="text/javascript">
+
+$(document).ready(indicaciones);
+
+	const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: false,
+    timer: 5000
+});
+
+  function indicaciones(){
+  	Swal.fire('Asegurese que el sistema se encuentra en modo incognito para un mejor funcionamiento','','info')
+}
+</script>
 </div>
 
 

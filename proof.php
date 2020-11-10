@@ -16,15 +16,10 @@ table {
   color: #4ef;
 }
 </style>
-<table>
-  <tr class="headt">
-    <td>Enero</td>
-    <td>$100</td>
-  </tr>
-  <tr>
-    <td>Febrero</td>
-    <td>$80</td>
-  </tr>
+<form>
+  <label for="email">E-mail</label>
+  <input type="" name="" id="email">
+</form>
 </table>
 </style>
 </body>

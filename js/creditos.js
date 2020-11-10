@@ -260,6 +260,7 @@ function realizarAbonos(id_paciente,id_credito,numero_venta){
   success:function(data)
   { 
     console.log(data);
+
     var nuevo_saldo = data.saldo-data.cuotas;  
     $("#recibi_abono").val(data.paciente);
     $("#servicio_abono").val(data.evaluado);
@@ -269,7 +270,7 @@ function realizarAbonos(id_paciente,id_credito,numero_venta){
     $("#n_venta_recibo_ini").val(data.numero_venta);
     $("#id_paciente").val(data.id_paciente);
     $("#saldo_credito").val(data.saldo);
-    $("#saldo").val(nuevo_saldo);
+    $("#saldo").val(nuevo_saldo.toFixed(2));
     $("#numero").val(data.cuotas); 
     
  }
@@ -343,7 +344,6 @@ function realizarAbonos(id_paciente,id_credito,numero_venta){
     $("#abono_ant").val(data.monto_abono);
   }
   })
-
 }
 
 ////////////////REGISTRAR ABONO
@@ -537,7 +537,11 @@ function registrar_abono(){
 ////////////////GET CREDITOS POR CATEGORÍA
 $(document).on('click', '.cat_creditos', function(){
   var categoria = $(this).attr("name");
-  console.log(categoria);
+  if (categoria == "cat_b") {
+    $("#name_cat").html("CATEGORIA B");
+  }else if(categoria == "cat_c"){
+    $("#name_cat").html("CATEGORIA C");
+  }
 
   tabla_cats_creditos=$('#cats_creditos').dataTable(
   {
@@ -545,7 +549,7 @@ $(document).on('click', '.cat_creditos', function(){
       "aServerSide": true,//Paginación y filtrado realizados por el servidor
       dom: 'Bfrtip',//Definimos los elementos del control de tabla
             buttons: [
-                'excelHtml5'
+                { extend: 'excelHtml5', footer: true }
             ],
     "ajax":
         {
@@ -557,6 +561,15 @@ $(document).on('click', '.cat_creditos', function(){
             console.log(e.responseText);
           }
         },
+         drawCallback: function () {
+        var monto_saldo = $('#cats_creditos').DataTable().column(3).data().sum();
+        $('#montos_c').html('$'+monto_saldo.toFixed(2));
+        var creditos = $('#cats_creditos').DataTable().column(4).data().sum();
+        $('#saldo_pend').html('$'+creditos.toFixed(2));
+        var abonado = $('#cats_creditos').DataTable().column(5).data().sum();
+        $('#abonado').html('$'+abonado.toFixed(2));
+
+      },
     "bDestroy": true,
     "responsive": true,
     "bInfo":true,
