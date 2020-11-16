@@ -9,7 +9,7 @@ $(document).ready(ocultar_btn_print_rec_ini);
   function ocultar_btn_print_rec_ini(){
   get_correlativo_venta();
   document.getElementById("btn_print_recibo").style.display = "none";
-  document.getElementById("print_factura").style.display = "none";
+ // document.getElementById("print_factura").style.display = "none";
   document.getElementById("btn_print_recibos").style.display = "none";
 }
 

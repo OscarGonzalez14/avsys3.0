@@ -3,7 +3,7 @@ require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){
 require_once('header_dos.php');
 require_once("modals/modal_detalle_abonos.php");
-
+require_once("modals/info_pacientes_modal.php");
  ?>
 
  <div class="content-wrapper">
@@ -26,6 +26,7 @@ require_once("modals/modal_detalle_abonos.php");
         <th style="text-align:center">Paciente</th>
         <th style="text-align:center">Empresa</th>
         <th style="text-align:center">#Venta</th>
+        <th style="text-align:center">Categoría</th>
         <th style="text-align:center">Monto Crédito</th>
         <th style="text-align:center">Saldo</th>
         <th style="text-align:center">Abonado</th>
@@ -42,6 +43,7 @@ require_once("modals/modal_detalle_abonos.php");
         <th style="text-align:center"></th>
         <th style="text-align:center"></th>
         <th style="text-align:center"></th>
+         <th style="text-align:center"></th>
         <th style="text-align:center" id="montos_c"></th>
         <th style="text-align:center" id="saldo_pend"></th>
         <th style="text-align:center" id="abonado"></th>

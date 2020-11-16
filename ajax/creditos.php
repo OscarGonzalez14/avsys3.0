@@ -233,7 +233,7 @@ switch ($_GET["op"]){
 
     if ($_POST["categoria"]=="cat_b") {
       $datos = $creditos->get_creditos_cat_b();
-    }else{
+    }elseif ($_POST["categoria"]=="cat_c") {
       $datos = $creditos->get_creditos_cat_c();
     }
     //Vamos a declarar un array
@@ -243,18 +243,19 @@ switch ($_GET["op"]){
     $sub_array[] = $row["nombres"];
     $sub_array[] = $row["empresas"];
     $sub_array[] = $row["numero_venta"];
+    $sub_array[] = $row["forma_pago"];
     $sub_array[] = "$".number_format($row["monto"],2,".",",");
     $sub_array[] = "$".number_format($row["saldo"],2,".",",");
     $sub_array[] = "$".number_format($row["abonado"],2,".",",");
-    $sub_array[] = $row["fecha_abono"];
-    $sub_array[] = $row["prox_abono"];
+    $sub_array[] = date("d-m-Y",strtotime($row["fecha_abono"]));
+    $sub_array[] = date("d-m-Y",strtotime($row["prox_abono"]));
     $sub_array[] = $row["dif_days"]." dias";
     $sub_array[] = '<button type="button" onClick="verDetAbonos('.$row["id_paciente"].',\''.$row["numero_venta"].'\');" id="'.$row["id_paciente"].'" class="btn btn-sm btn-flat bg-success"><i class="fas fa-file-invoice-dollar" aria-hidden="true" style="color:white"></i></button>';
-    $sub_array[] = '<i class="fas fa-eye" style="color:green"></i>';                                 
+    $sub_array[] = '<button class="btn btn-sm btn-flat bg-light" onClick="info_pacientes_mora('.$row["id_paciente"].',\''.$row["numero_venta"].'\')" data-toggle="modal" data-target="#info_pac_mora"><i class="fas fa-eye" style="color:green"></i></button>';                                 
     $data[] = $sub_array;
   }
 
-        $results = array(
+      $results = array(
       "sEcho"=>1, //Información para el datatables
       "iTotalRecords"=>count($data), //enviamos el total registros al datatable
       "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
@@ -263,6 +264,44 @@ switch ($_GET["op"]){
 
     break;
 
+/////////////////////GET DATOS PACIENTES ATRASADOS
+    case 'get_datos_creditos_mora':
+  
+    $datos= $creditos->get_datos_creditos_mora($_POST["id_paciente"]); 
 
-}
+        if(is_array($datos)==true and count($datos)>0){
+          foreach($datos as $row){         
+            $output["nombres"] = ucfirst($row["nombres"]);
+            $output["telefono"] = ucfirst($row["telefono"]);
+            $output["direccion"] = ucfirst($row["direccion"]);
+            $output["empresas"] = ucfirst($row["empresas"]);                
+          }       
+        echo json_encode($output);
+        } 
+      break;
+
+      ///////////////
+
+  case 'get_datos_venta_mora':  
+  require_once("../modelos/Ventas.php");
+  //llamo al modelo Ventas
+  $ventas = new Ventas();
+  $datos=$ventas->get_ventas_mora($_POST["id_paciente"],$_POST["numero_venta"]);
+
+    if(is_array($datos)==true and count($datos)>0){
+      foreach($datos as $row){         
+        $output["numero_venta"] = ucfirst($row["numero_venta"]);
+        $output["paciente"] = ucfirst($row["paciente"]);
+        $output["evaluado"] = ucfirst($row["evaluado"]);
+        $output["fecha_venta"] = ucfirst($row["fecha_venta"]);
+        $output["tipo_venta"] = ucfirst($row["tipo_venta"]);
+        $output["tipo_pago"] = ucfirst($row["tipo_pago"]);
+        $output["usuario"] = ucfirst($row["usuario"]);                
+      }       
+    echo json_encode($output);
+    } 
+  break;
+
+
+    }//70814834
  ?>

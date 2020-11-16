@@ -50,6 +50,32 @@ case 'listar_en_pacientes':
 
     break;
 
+//////////////////GET DATA CONTRIBUYENTES////////////////////////
+
+ case "listar_contribuyentes":
+
+  $datos=$empresas->get_contribuyentes();
+  $data= Array();
+  foreach($datos as $row){
+    $sub_array = array();
+    $sub_array[] = $row["nombres"];
+    $sub_array[] = $row["empresa"];    
+    //$sub_array[] = $row["ubicacion"]; 
+    $sub_array[] = $row["nit"];        
+
+    $sub_array[] = '<button type="button" onClick="contribuyenteData('.$row["id_paciente"].',\''.$row["empresa"].'\');" id="'.$row["id_paciente"].'" class="btn btn-md bg-success"><i class="fas fa-plus" aria-hidden="true" style="color:white"></i></button>';            
+                                                
+    $data[] = $sub_array;
+  }
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+    break;
+
 }
 
 

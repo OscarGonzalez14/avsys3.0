@@ -562,11 +562,11 @@ $(document).on('click', '.cat_creditos', function(){
           }
         },
          drawCallback: function () {
-        var monto_saldo = $('#cats_creditos').DataTable().column(3).data().sum();
+        var monto_saldo = $('#cats_creditos').DataTable().column(4).data().sum();
         $('#montos_c').html('$'+monto_saldo.toFixed(2));
-        var creditos = $('#cats_creditos').DataTable().column(4).data().sum();
+        var creditos = $('#cats_creditos').DataTable().column(5).data().sum();
         $('#saldo_pend').html('$'+creditos.toFixed(2));
-        var abonado = $('#cats_creditos').DataTable().column(5).data().sum();
+        var abonado = $('#cats_creditos').DataTable().column(6).data().sum();
         $('#abonado').html('$'+abonado.toFixed(2));
 
       },
@@ -627,5 +627,44 @@ $(document).on('click', '.cat_creditos', function(){
   }).DataTable();
   
 });
+////////////////GET DATOS PACIENTE CREDITOS ATRASADOS/////////////
+function info_pacientes_mora(id_paciente,numero_venta){
+
+  $.ajax({
+  url:"ajax/creditos.php?op=get_datos_creditos_mora",
+  method:"POST",
+  data:{id_paciente:id_paciente},
+  cache:false,
+  dataType:"json",
+  success:function(data)
+  { 
+    console.log(data);  
+    $("#paciente_credito_mora").html(data.nombres);
+    $("#tel_credito_mora").html(data.telefono);
+    $("#empresa_credito_mora").html(data.empresas);
+    $("#dir_credito_mora").html(data.direccion);
+
+  }
+  })
+////////////////////GET DATOS VENTA CREDITO EN MORA
+  $.ajax({
+  url:"ajax/creditos.php?op=get_datos_venta_mora",
+  method:"POST",
+  data:{id_paciente:id_paciente,numero_venta:numero_venta},
+  cache:false,
+  dataType:"json",
+  success:function(data){ 
+    console.log(data);  
+    $("#evaluado_credito_mora").html(data.evaluado);
+    $("#fecha_credito_mora").html(data.fecha_venta);
+    $("#asesor_credito_mora").html(data.usuario);
+    $("#tipo_venta_mora").html(data.tipo_venta);
+    $("#tipo_pago_mora").html(data.tipo_pago);
+
+  }
+  })
+
+
+}
 
 init();

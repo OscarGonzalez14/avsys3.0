@@ -265,8 +265,10 @@ function drop_index(position_element){
 
 $(document).on("click","#select_paciente_venta", function(){
   var consulta = $("#consulta_ex").val();
-
-  if(consulta==''){
+  var tipo_venta = $("#tipo_venta").val();
+  
+  if(tipo_venta != "Credito Fiscal"){
+    if(consulta==''){
     setTimeout ("Swal.fire('Hay campos sin seleccionar','','error')", 100);
     document.getElementById("consulta_ex").style.border='solid 1px red';
   }else if(consulta=='Si'){
@@ -276,6 +278,11 @@ $(document).on("click","#select_paciente_venta", function(){
     $("#pacientes_sin_consulta").modal("show");
     listar_pacientes_sin_consultas_ventas();
   }
+
+}else{
+
+  show_pacientes_empresas();
+}
 
 });
 
@@ -447,6 +454,91 @@ function listar_pacientes_sin_consultas_ventas(){
         });
 }
 
+///////////////////SHOW CONTRIBUYENTES 
+function show_pacientes_empresas(){
+  $("#contribuyente_credito_fiscal").modal("show");
+    tabla_contribuyentes= $('#data_contribuyentes_fisc').DataTable({      
+    "aProcessing": true,//Activamos el procesamiento del datatables
+    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+    buttons: [              
+      'copyHtml5',
+      'excelHtml5',
+      'csvHtml5',
+      'pdf'
+    ],
+
+    "ajax":{
+      url:"ajax/empresas.php?op=listar_contribuyentes",
+      type : "get",
+      dataType : "json",
+      //data:{sucursal:sucursal},           
+      error: function(e){
+      console.log(e.responseText);
+    },           
+    },
+
+        "bDestroy": true,
+        "responsive": true,
+        "bInfo":true,
+        "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+          "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+
+            "language": {
+ 
+          "sProcessing":     "Procesando...",
+       
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+       
+          "sZeroRecords":    "No se encontraron resultados",
+       
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+       
+          "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+       
+          "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+       
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+       
+          "sInfoPostFix":    "",
+       
+          "sSearch":         "Buscar:",
+       
+          "sUrl":            "",
+       
+          "sInfoThousands":  ",",
+       
+          "sLoadingRecords": "Cargando...",
+       
+          "oPaginate": {
+       
+              "sFirst":    "Primero",
+       
+              "sLast":     "Último",
+       
+              "sNext":     "Siguiente",
+       
+              "sPrevious": "Anterior"
+       
+          },
+       
+          "oAria": {
+       
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+       
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+       
+          }
+
+         }, //cerrando language
+
+          //"scrollX": true
+
+        });
+
+}
+
+
 
 function registrarVenta2(){
   var tipo_pago = $("#tipo_pago").val();
@@ -551,7 +643,8 @@ function reciboInicial(){
   cache:false,
   dataType:"json",
   success:function(data)
-  { 
+  {
+
     console.log(data);  
     $("#lente_rec_ini").val(data.producto);
   }
@@ -693,6 +786,7 @@ function reporte_ventas_gral(){
   }).DataTable();
 }
 
+
 function detalleVentas(numero_venta,id_paciente){
 //console.log(numero_venta+id_paciente);
     $.ajax({
@@ -708,25 +802,32 @@ function detalleVentas(numero_venta,id_paciente){
       }
     })
 
-  /////////////////DETALLES DEL PACIENTE
-/*$.ajax({
-      url:"ajax/ventas.php?op=ver_detalle_paciente_venta",
-      method:"POST",
-      data:{numero_venta:numero_venta,id_paciente:id_paciente},
-      cache:false,
-      dataType:"json",
-      success:function(data){       
-
-        $("#nombres").html(data.nombres);
-        $("#numero_venta").html(data.numero_venta);
-        $("#telefono").html(data.telefono);
-        $("#fecha_venta").html(data.fecha_venta);
-        $("#vendedor").html(data.usuario);
-        $("#sucursal").html(data.sucursal);
-        $("#opto").html(data.optometra);
-      }
-    */
 }
 
+
+/////////////////AGREGA DATA CONTRIBUYENTES
+function contribuyenteData(id_paciente,empresa){  
+
+  $('#contribuyente_credito_fiscal').modal('hide');
+  $('#id_paciente').val(id_paciente);
+  $('#id_consulta').val("");
+  $('#empresa_fisc').val(empresa);
+  document.getElementById("paciente_evaluado_c").style.display = "none";  
+
+    $.ajax({
+      url:"buscar_data_pacientes_sin_consulta_ventas",
+      method:"POST",
+      data:{id_paciente:id_paciente},
+      dataType:"json",
+      success:function(data){
+      console.log(data);//return false;       
+        
+        $("#titular_cuenta").val(data.nombres);
+        $("#evaluado").val("");
+        $("#codigo_paciente").val(data.codigo);
+        
+      }
+    })
+}
 
 init();

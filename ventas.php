@@ -13,6 +13,7 @@ require_once("modals/modal_recibo_inicial.php");
 require_once("modals/antireflejante_ventas.php");
 require_once("modals/photosensible_ventas.php");
 require_once("modals/referentes.php");
+require_once("modals/empresas_credito_fiscal.php");
 
 
 ?>
@@ -50,6 +51,7 @@ require_once("modals/referentes.php");
                         <option value=''>Seleccionar tipo Venta</option>
                         <option value='Contado'>Contado</option>
                         <option value='Credito'>Credito</option>
+                        <option value='Credito Fiscal'>Credito Fiscal</option>
                       </select>
                     </div>  
 
@@ -191,8 +193,14 @@ require_once("modals/referentes.php");
                 </div>               
 
               </div>
+              <br>
+              <div class="row">
               <div class="col-sm-4" id="print_factura">
-                  <a href="" id="factura_contado" target="_blank"><button class="btn btn-warnig btn-block" style="border-radius:2px"><i class="fas fa-print"></i> Imprimir Factura</button></a>
+                  <a href="" id="factura_contado" target="_blank"><button class="btn btn-info btn-block" style="border-radius:2px"><i class="fas fa-print"></i> Imprimir Factura</button></a>
+                </div>
+
+                <div class="col-sm-4" id="print_credito_fiscal">
+                  <a href="" id="factura_contado" target="_blank"><button class="btn btn-secondary btn-block" style="border-radius:2px"><i class="fas fa-print"></i> Imprimir Credito Fiscal</button></a>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -214,6 +222,7 @@ require_once("modals/referentes.php");
 <input type="hidden" id="id_paciente">
 <input type="hidden" id="id_refererido">
 <input type="hidden" id="optometra" value="">
+<input type="hidden" id="empresa_fisc" value="">
 <script type="text/javascript" src="js/cleave.js"></script>
 <script type="text/javascript" src="js/productos.js"></script>
 <script type="text/javascript" src="js/pacientes.js"></script>

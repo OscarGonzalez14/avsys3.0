@@ -288,6 +288,16 @@ public function get_detalle_aros_rec_ini($id_paciente,$numero_venta){
   return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+  public function get_ventas_mora($id_paciente,$numero_venta){
+  $conectar= parent::conexion();
+  $sql="select p.nombres,v.id_paciente,v.numero_venta,v.paciente,v.evaluado,v.tipo_venta,v.tipo_pago,v.fecha_venta,u.usuario from pacientes as p inner join ventas as v on p.id_paciente=v.id_paciente inner join usuarios as u on u.id_usuario=v.id_usuario where v.id_paciente=? and v.numero_venta=?;";
+  $sql = $conectar->prepare($sql);
+  $sql->bindValue(1,$id_paciente);
+  $sql->bindValue(2,$numero_venta);
+  $sql->execute();
+  return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ////////////////DETALLE DE VENTAS
 public function get_detalle_ventas_paciente($numero_venta,$id_paciente){
 

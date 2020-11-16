@@ -46,19 +46,17 @@ class Empresas extends conectar{//inicio de la clase
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 
   }
+///////////////////////GET DATA VENTA CREDITO FISCAL
+  public function get_contribuyentes(){
+  $conectar=parent::conexion();
+  parent::set_names();
+  $sql="select p.nombres,p.id_paciente,e.nombre as empresa,e.ubicacion,e.nit from pacientes as p join empresas as e where p.empresas=e.nombre ORDER BY p.id_paciente;";
+  $sql=$conectar->prepare($sql);
+  $sql->execute();
+  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
-	/*public function get_categorias(){
-	    $conectar= parent::conexion();
-		parent::set_names();
-		 $sql="select id_categoria, nombre from categoria";
-		 $sql=$conectar->prepare($sql);
-    	 $sql->execute();
-    	 return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
-    	}*/
-
-
-/////FIN CLASS
+}/////FIN CLASS
 
  ?>
 

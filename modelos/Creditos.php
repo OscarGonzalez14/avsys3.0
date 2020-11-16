@@ -109,7 +109,7 @@ where c.tipo_credito='Contado' and p.sucursal=? order by c.id_credito DESC;";
     /////////////////GET PACIENTES CATEGORIA C
     public function get_creditos_cat_b(){
     $conectar= parent::conexion();
-    $sql= "select p.nombres, p.empresas,r.numero_venta,r.id_paciente,max(r.prox_abono) as prox_abono,r.abono_act, datediff(now(),max(r.prox_abono)) as dif_days,r.monto,max(r.fecha) as fecha_abono,r.saldo,c.saldo,sum(r.abono_act) as abonado  from
+    $sql= "select p.nombres, p.empresas,r.numero_venta,r.id_paciente,max(r.prox_abono) as prox_abono,r.abono_act, datediff(now(),max(r.prox_abono)) as dif_days,r.monto,max(r.fecha) as fecha_abono,r.saldo,c.saldo,sum(r.abono_act) as abonado,c.forma_pago  from
 pacientes as p inner join recibos as r on r.id_paciente=p.id_paciente join creditos as c where c.numero_venta COLLATE utf8mb4_general_ci =r.numero_venta group by r.numero_venta having dif_days>30 and dif_days<90 and max(r.fecha) order by r.id_recibo DESC;
 ";
     $sql=$conectar->prepare($sql);
@@ -121,14 +121,29 @@ pacientes as p inner join recibos as r on r.id_paciente=p.id_paciente join credi
     /////////////////GET PACIENTES CATEGORIA C
     public function get_creditos_cat_c(){
     $conectar= parent::conexion();
-    $sql= "select p.nombres, p.empresas,r.numero_venta,r.id_paciente,max(r.prox_abono) as prox_abono,r.abono_act, datediff(now(),max(r.prox_abono)) as dif_days,r.monto,max(r.fecha) as fecha_abono,r.saldo,c.saldo,sum(r.abono_act) as abonado  from
-pacientes as p inner join recibos as r on r.id_paciente=p.id_paciente join creditos as c where c.numero_venta COLLATE utf8mb4_general_ci =r.numero_venta group by r.numero_venta having dif_days>=90 and max(r.fecha) order by r.id_recibo DESC;
+    $sql= "select p.nombres, p.empresas,r.numero_venta,r.id_paciente,max(r.prox_abono) as prox_abono,r.abono_act, datediff(now(),max(r.prox_abono)) as dif_days,r.monto,max(r.fecha) as fecha_abono,r.saldo,c.saldo,sum(r.abono_act) as abonado,c.forma_pago from
+pacientes as p inner join recibos as r on r.id_paciente=p.id_paciente join creditos as c where c.numero_venta COLLATE utf8mb4_general_ci =r.numero_venta group by r.numero_venta having dif_days>90 order by r.id_recibo DESC;
 ";
     $sql=$conectar->prepare($sql);
    // $sql->bindValue(1,$sucursal);
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
-	}/////FIN CLASS
+
+    //////////////GET DATOS DE PACIENTE CREDITOS EN MORA
+    public function get_datos_creditos_mora($id_paciente){
+    $conectar=parent::conexion();
+    parent::set_names();
+
+    $sql="select*from pacientes where id_paciente=?;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1, $id_paciente);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+}/////FIN CLASS
+
 
  ?>
