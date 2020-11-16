@@ -107,7 +107,7 @@ case "agregar_aros_venta":
 ////////////////////////COMBOX DINAMICOS PARA VENTAS
 case 'tipo_pago';
 
-  if ($_POST['id_tipo']=='Contado') {
+  if ($_POST['id_tipo']=='Contado' or $_POST['id_tipo']=='Credito Fiscal') {
     $html="
       <option value='Contado'>Contado</option>
       <option value='Efectivo'>Efectivo</option>

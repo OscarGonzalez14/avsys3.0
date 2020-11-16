@@ -554,7 +554,8 @@ function registrarVenta2(){
 
 
 function registrarVenta(){
-  //mostrar_btn_post_venta();
+
+
   var fecha_venta = $("#fecha").val();
   var numero_venta = $("#n_venta").val();
   var paciente = $("#titular_cuenta").val();
@@ -569,6 +570,8 @@ function registrarVenta(){
   var optometra = $("#optometra").val();
   var plazo = $("#plazo").val();
   var id_ref = $("#id_refererido").val();
+
+  //if (tipo_venta=="Credito Fiscal") {}
 
   if (tipo_venta == "Credito" && plazo =="0") {
     setTimeout ("Swal.fire('Debe seleccionar el plazo','','error')", 100);
@@ -815,7 +818,7 @@ function contribuyenteData(id_paciente,empresa){
   document.getElementById("paciente_evaluado_c").style.display = "none";  
 
     $.ajax({
-      url:"buscar_data_pacientes_sin_consulta_ventas",
+      url:"ajax/pacientes.php?op=buscar_data_pacientes_sin_consulta_ventas",
       method:"POST",
       data:{id_paciente:id_paciente},
       dataType:"json",
@@ -830,4 +833,17 @@ function contribuyenteData(id_paciente,empresa){
     })
 }
 
+
+/////////////COMPROBAR EL TIPO DE VENTA
+$(document).on('click', '.enviar_venta', function(){
+  var n_venta =$("#n_venta").val();
+  var id_paciente =$("#id_paciente").val();
+  var empresa_fisc = $("#empresa_fisc").val();
+  var tipo_venta = $("#tipo_venta").val();
+console.log(tipo_venta);
+if (tipo_venta=="Credito Fiscal"){
+  document.getElementById("credito_fiscal_print").href='imprimir_credito_fiscal_pdf.php?empresa='+empresa_fisc+'&'+'id_paciente='+id_paciente+'&'+'n_venta='+n_venta;
+}
+ 
+});
 init();

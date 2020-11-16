@@ -8,6 +8,7 @@ require_once("modelos/Reporteria.php");
 $reporteria=new Reporteria();
 $id_paciente =$_GET["id_paciente"];
 $n_venta =$_GET["n_venta"];
+$empresa = $_GET["empresa"];
 
 $datos_factura_cantidad = $reporteria->get_datos_factura_cantidad($_GET["n_venta"],$_GET["id_paciente"]);
 $datos_factura_producto = $reporteria->get_datos_factura($_GET["n_venta"],$_GET["id_paciente"]);
@@ -15,7 +16,6 @@ $datos_factura_precio_u = $reporteria->get_datos_factura_p_unitario($_GET["n_ven
 $datos_factura_subtotal = $reporteria->get_datos_factura_subtotal($_GET["n_venta"],$_GET["id_paciente"]);
 $datos_factura_paciente = $reporteria->get_datos_factura_paciente($_GET["id_paciente"]);
 $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],$_GET["id_paciente"]);
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -25,10 +25,11 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
    <style>
       html{
       	margin-top: 0;
-        margin-left: 28px;
-        margin-right:20px; 
+        margin-left: 10px;
+        margin-right:10px; 
         margin-bottom: 0;
     }
+
     .stilot1{
        border: 1px solid black;
        padding: 5px;
@@ -57,7 +58,7 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
   </head>
   <body>
 
-<div style="margin-top: 130px;height:500px" >
+<div style="margin-top: 130px;height:490px" >
   <table width="100%">
     <tr>
       <?php
@@ -65,14 +66,17 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
   for($i=0;$i<sizeof($datos_factura_paciente);$i++){
 
 ?>
-  <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_factura_paciente[$i]["nombres"];?></td>
-
-    <td colspan="40" style="color:black;font-size:11px;border: 1px solidwhite;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_factura_paciente[$i]["direccion"];?></td>
-
-    <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>TELEFONO:</strong> <?php echo $datos_factura_paciente[$i]["telefono"];?></td>
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_factura_paciente[$i]["nombres"];?></td>
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_factura_paciente[$i]["direccion"];?></td>    
+    <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>FECHA:</strong> <?php echo "";?></td>
     <?php
   }
 ?>
+</tr>
+<tr>
+  <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>REGISTRO No:</strong> <?php echo "";?></td>
+  <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>GIRO:</strong> <?php echo "";?></td>
+  <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>NIT:</strong> <?php echo "";?></td>
 </tr>
 </table>
 <table id="table2" width="100%">
@@ -186,23 +190,28 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
 ?>
 </div>
 
-<!--ORIGINAL EMISOR-->
-<div style="margin-top: 30px;max-height:100px" >
- <table width="100%">
+<!-- PARTE 2-->
+
+
+<div style="margin-top: 25px;height: 350" >
+  <table width="100%">
     <tr>
       <?php
 
   for($i=0;$i<sizeof($datos_factura_paciente);$i++){
 
 ?>
-  <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_factura_paciente[$i]["nombres"];?></td>
-
-    <td colspan="40" style="color:black;font-size:11px;border: 1px solidwhite;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_factura_paciente[$i]["direccion"];?></td>
-
-    <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>TELEFONO:</strong> <?php echo $datos_factura_paciente[$i]["telefono"];?></td>
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_factura_paciente[$i]["nombres"];?></td>
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_factura_paciente[$i]["direccion"];?></td>    
+    <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>FECHA:</strong> <?php echo "";?></td>
     <?php
   }
 ?>
+</tr>
+<tr>
+  <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>REGISTRO No:</strong> <?php echo "";?></td>
+  <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>GIRO:</strong> <?php echo "";?></td>
+  <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>NIT:</strong> <?php echo "";?></td>
 </tr>
 </table>
 <table id="table2" width="100%">
@@ -210,27 +219,27 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
     <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 10%"><span class="Estilo11">CANT.</span></th>
     <th bgcolor="#0061a9" colspan="50" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 50%"><span class="Estilo11">DESCRIPCIÓN</span></th>
     <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 10%"><span class="Estilo11">P/UNITARIO</span></th>
-    <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 10%"><span class="Estilo11">VENTAS NO SUJETAS</span></th>
+    <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:7px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 10%"><span class="Estilo11">VENTAS NO SUJETAS</span></th>
     <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:10% "><span class="Estilo11">VENTAS EXENTAS</span></th>
     <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 10%"><span class="Estilo11">VENTAS AFECTAS</span></th>
 </tr>
 
-<tr style="height:55px;">
-  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 11px;text-align: center;height: 95px">
+<tr style="height:50px;">
+  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 10px;text-align: center;margin:20px;height: 95px">
  <?php 
     for ($i=0; $i < sizeof($datos_factura_cantidad); $i++) {
      echo $datos_factura_cantidad[$i]["cantidad_venta"]?><br>
      <?php } ?>     
   </td>
  
-  <td colspan="50" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 11px;text-align: center">
+  <td colspan="50" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 10px;text-align: center;margin:20px">
      <?php 
     for ($i=0; $i < sizeof($datos_factura_producto); $i++) {
      echo $datos_factura_producto[$i]["producto"]?><br>
      <?php } ?>    
   </td>
  
-  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size:11px;text-align: center">
+  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size:10px;text-align: center;margin:20px">
 
     <?php 
     for ($i=0; $i < sizeof($datos_factura_precio_u); $i++) {
@@ -244,13 +253,13 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
   <td colspan="10" style="border: 1px solid black">
       
   </td>
-  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size:11px;text-align: center">
+  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size:10px;text-align: center;margin:20px">
 
     <?php 
     $subtotal=0;
     for ($i=0; $i < sizeof($datos_factura_subtotal); $i++) {
       $subtotal=$subtotal+$datos_factura_subtotal[$i]["subtotal"];
-      echo "$".number_format(($datos_factura_subtotal[$i]["subtotal"]),2,".",",");?><br>
+     echo "$".number_format(($datos_factura_subtotal[$i]["subtotal"]),2,".",",");?><br>
 
      <?php } ?>
    
@@ -259,13 +268,13 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
 
 <tr>
   <td colspan="60" rowspan="2" class="stilot1" style="width: 60%;text-align: left">Son: </td>
-  <td colspan="10" class="stilot1" style="font-size:11px">SUMAS</td>
+  <td colspan="10" class="stilot1" style="font-size:8px">SUMAS</td>
   <td colspan="10" class="stilot1"></td>
   <td colspan="10" class="stilot1"></td>
-  <td colspan="10" class="stilot1" style="font-size:11px"><?php echo "$".number_format($subtotal,2,".",","); ?></td>
+  <td colspan="10" class="stilot1" style="font-size:8px"><?php echo "$".number_format($subtotal,2,".",","); ?></td>
 </tr>
 <tr>
-  <td colspan="20" class="stilot1" style="font-size:11px">VENTA EXENTA</td>
+  <td colspan="20" class="stilot1" style="font-size:8px">VENTA EXENTA</td>
   <td colspan="10" class="stilot1"></td>
   <td colspan="10" class="stilot1"></td>
 </tr>
@@ -288,9 +297,9 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
   DUI:<br>
   Firma:<br>
   </td>
-  <td colspan="20" class="stilot1" style="font-size:10px">SUBTOTAL</td>
-  <td colspan="10" class="stilot1"></td>
-  <td colspan="10" class="stilot1"></td>
+  <td colspan="20" class="stilot1" style="font-size:8px; height:8px">SUBTOTAL</td>
+  <td colspan="10" class="stilot1" style="height:8px"></td>
+  <td colspan="10" class="stilot1" style="height:8px"></td>
 </tr>
 <tr>
   <td colspan="20" class="stilot1" style="font-size:8px">(-)IVA RETENIDO</td>
@@ -303,20 +312,139 @@ $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],
   <td colspan="10" class="stilot1"></td>
 </tr>
 <tr>
-  <td colspan="20" class="stilot1" style="font-size:10px"><strong>TOTAL</strong></td>
+  <td colspan="20" class="stilot1" style="font-size:8px"><strong>TOTAL</strong></td>
   <td colspan="20" class="stilot1"><strong><?php echo "$".number_format($subtotal,2,".",",");?></strong></td>
 </tr>
 </table>
-<?php
-  for($i=0;$i<sizeof($datos_factura_venta);$i++){
- ?>
-<p style="font-size: 10px;text-align: right;">No.Venta:<?php echo $datos_factura_venta[$i]["numero_venta"];?>&nbsp;&nbsp;user:&nbsp;<?php echo $datos_factura_venta[$i]["id_usuario"];?>&nbsp;&nbsp;opto:&nbsp;<?php echo $datos_factura_venta[$i]["optometra"];?>&nbsp;&nbsp;-&nbsp;&nbsp;<?php echo $datos_factura_venta[$i]["fecha_venta"];?>&nbsp;&nbsp;<?php echo $datos_factura_venta[$i]["sucursal"];?></p>
+
+</div>
+
+<!--PARTE 3-->
+<div style="margin-top: 110px;" >
+  <table width="100%">
+    <tr>
+      <?php
+
+  for($i=0;$i<sizeof($datos_factura_paciente);$i++){
+
+?>
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_factura_paciente[$i]["nombres"];?></td>
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_factura_paciente[$i]["direccion"];?></td>    
+    <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>FECHA:</strong> <?php echo "";?></td>
     <?php
   }
 ?>
+</tr>
+<tr>
+  <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>REGISTRO No:</strong> <?php echo "";?></td>
+  <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>GIRO:</strong> <?php echo "";?></td>
+  <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>NIT:</strong> <?php echo "";?></td>
+</tr>
+</table>
+<table id="table2" width="100%">
+<tr>
+    <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 10%"><span class="Estilo11">CANT.</span></th>
+    <th bgcolor="#0061a9" colspan="50" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 50%"><span class="Estilo11">DESCRIPCIÓN</span></th>
+    <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 10%"><span class="Estilo11">P/UNITARIO</span></th>
+    <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:7px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 10%"><span class="Estilo11">VENTAS NO SUJETAS</span></th>
+    <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width:10% "><span class="Estilo11">VENTAS EXENTAS</span></th>
+    <th bgcolor="#0061a9" colspan="10" style="color:white;font-size:8px;border: 1px solid #034f84;font-family: Helvetica, Arial, sans-serif;width: 10%"><span class="Estilo11">VENTAS AFECTAS</span></th>
+</tr>
+
+<tr style="height:50px;">
+  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 10px;text-align: center;margin:20px;height: 95px">
+ <?php 
+    for ($i=0; $i < sizeof($datos_factura_cantidad); $i++) {
+     echo $datos_factura_cantidad[$i]["cantidad_venta"]?><br>
+     <?php } ?>     
+  </td>
+ 
+  <td colspan="50" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size: 10px;text-align: center;margin:20px">
+     <?php 
+    for ($i=0; $i < sizeof($datos_factura_producto); $i++) {
+     echo $datos_factura_producto[$i]["producto"]?><br>
+     <?php } ?>    
+  </td>
+ 
+  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size:10px;text-align: center;margin:20px">
+
+    <?php 
+    for ($i=0; $i < sizeof($datos_factura_precio_u); $i++) {
+     echo "$".number_format(($datos_factura_precio_u[$i]["precio_venta"]),2,".",",");?><br>
+     <?php } ?> 
+    
+  </td>
+  <td colspan="10" style="border: 1px solid black">
+      
+  </td>
+  <td colspan="10" style="border: 1px solid black">
+      
+  </td>
+  <td colspan="10" style="border: 1px solid black;font-family: Helvetica, Arial, sans-serif;font-size:10px;text-align: center;margin:20px">
+
+    <?php 
+    $subtotal=0;
+    for ($i=0; $i < sizeof($datos_factura_subtotal); $i++) {
+      $subtotal=$subtotal+$datos_factura_subtotal[$i]["subtotal"];
+     echo "$".number_format(($datos_factura_subtotal[$i]["subtotal"]),2,".",",");?><br>
+
+     <?php } ?>
+   
+  </td>
+</tr>
+
+<tr>
+  <td colspan="60" rowspan="2" class="stilot1" style="width: 60%;text-align: left">Son: </td>
+  <td colspan="10" class="stilot1" style="font-size:8px">SUMAS</td>
+  <td colspan="10" class="stilot1"></td>
+  <td colspan="10" class="stilot1"></td>
+  <td colspan="10" class="stilot1" style="font-size:8px"><?php echo "$".number_format($subtotal,2,".",","); ?></td>
+</tr>
+<tr>
+  <td colspan="20" class="stilot1" style="font-size:8px">VENTA EXENTA</td>
+  <td colspan="10" class="stilot1"></td>
+  <td colspan="10" class="stilot1"></td>
+</tr>
+<tr>
+  <td colspan="60" class="stilot1" style="font-size:8px">LLENAR SI LA OPERACIÓN IGUAL O MAYOR A $200.00</td>
+  <td colspan="20" class="stilot1"></td>
+  <td colspan="20" class="stilot1"></td>
+</tr>
+
+<tr>
+  <td colspan="30" rowspan="4" class="stilot1" style="width: 60%;text-align: left;font-size: 9px">
+  Entregado por:<br>
+  Nombre:<br>
+  DUI:<br>
+  Firma:<br>
+  </td>
+  <td colspan="30" rowspan="4" class="stilot1" style="width: 60%;text-align: left;font-size: 9px">
+  Entregado por:<br>
+  Nombre:<br>
+  DUI:<br>
+  Firma:<br>
+  </td>
+  <td colspan="20" class="stilot1" style="font-size:8px; height:8px">SUBTOTAL</td>
+  <td colspan="10" class="stilot1" style="height:8px"></td>
+  <td colspan="10" class="stilot1" style="height:8px"></td>
+</tr>
+<tr>
+  <td colspan="20" class="stilot1" style="font-size:8px">(-)IVA RETENIDO</td>
+  <td colspan="10" class="stilot1"></td>
+  <td colspan="10" class="stilot1"></td>
+</tr>
+<tr>
+  <td colspan="20" class="stilot1" style="font-size:8px">VENTA NO SUJETA</td>
+  <td colspan="10" class="stilot1"></td>
+  <td colspan="10" class="stilot1"></td>
+</tr>
+<tr>
+  <td colspan="20" class="stilot1" style="font-size:8px"><strong>TOTAL</strong></td>
+  <td colspan="20" class="stilot1"><strong><?php echo "$".number_format($subtotal,2,".",",");?></strong></td>
+</tr>
+</table>
+
 </div>
-
-
 </body>
 </html>
 <?php
@@ -329,7 +457,8 @@ $dompdf = new Dompdf();
 $dompdf->loadHtml($salida_html);
 
 // (Optional) Setup the paper size and orientation
-$dompdf->setPaper('A4', 'portrait');
+$dompdf->setPaper('tabloid', 'portrait');
+// 
 
 // Render the HTML as PDF
 $dompdf->render();

@@ -181,7 +181,7 @@ require_once("modals/empresas_credito_fiscal.php");
                     </tr>
                     <tfoot>                      
                 </table>
-                <button class="btn btn-primary btn-block" id="btn_de_compra" style="border-radius:2px" onClick='registrarVenta();'><i class="fas fa-save"></i> REGISTRAR VENTA</button>
+                <button class="btn btn-primary btn-block enviar_venta" id="btn_de_compra" style="border-radius:2px" onClick='registrarVenta();'><i class="fas fa-save"></i> REGISTRAR VENTA</button>
               </div>
               <br>
               <div class="row post_venta" id="post_venta" style="display: flex;justify-content: space-between !important;">
@@ -200,7 +200,7 @@ require_once("modals/empresas_credito_fiscal.php");
                 </div>
 
                 <div class="col-sm-4" id="print_credito_fiscal">
-                  <a href="" id="factura_contado" target="_blank"><button class="btn btn-secondary btn-block" style="border-radius:2px"><i class="fas fa-print"></i> Imprimir Credito Fiscal</button></a>
+                  <a href="" id="credito_fiscal_print" target="_blank"><button class="btn btn-secondary btn-block" style="border-radius:2px"><i class="fas fa-print"></i> Imprimir Credito Fiscal</button></a>
                 </div>
               </div>
               <!-- /.card-body -->

@@ -128,11 +128,21 @@ $(document).on('click', '#btn_enviar_ini', function(){
 $(document).on('click', '#btn_enviar_ini', function(){
   var n_venta_recibo_ini =$("#n_venta_recibo_ini").val();
   var id_paciente =$("#id_paciente").val();
+  var empresa_fisc = $("#empresa_fisc").val();
+  var tipo_venta = $("#tipo_venta").val();
+console.log(tipo_venta);
+if (tipo_venta=="Credito Fiscal"){
+  document.getElementById("credito_fiscal_print").href='imprimir_c_fiscal_pdf.php?n_venta='+empresa_fisc+'&'+'id_paciente='+id_paciente;
+}
   comprobarSaldo();  
   document.getElementById("btn_print_recibo").style.display = "block";
-  document.getElementById("factura_contado").href='imprimir_factura_pdf.php?n_venta='+n_venta_recibo_ini+'&'+'id_paciente='+id_paciente;
-  
+  document.getElementById("factura_contado").href='imprimir_factura_pdf.php?n_venta='+n_venta_recibo_ini+'&'+'id_paciente='+id_paciente;  
+
+
+
 });
+
+
 
 function comprobarSaldo(){
   var n_venta =$("#n_venta").val();
