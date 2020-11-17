@@ -173,7 +173,6 @@ function guardar_accesorios(){
 
   //validamos, si los campos(paciente) estan vacios entonces no se envia el formulario
 
-if(tipo_accesorio !="" && marca_accesorio!="" && desc_accesorio !=""){
 
     $.ajax({
     url:"ajax/productos.php?op=guardar_accesorios",
@@ -203,11 +202,7 @@ if(tipo_accesorio !="" && marca_accesorio!="" && desc_accesorio !=""){
 Swal.fire('Se creado un nuevo Accesorio!','','success')
 setTimeout ("explode();", 2000);
 
-}else{
-    //bootbox.alert("Algun campo obligatorio no fue llenado correctamente");
-Swal.fire('Hay Campos que no han sido completados o Seleccionados!','','error')
-    return false;
-}
+
 } 
 
 

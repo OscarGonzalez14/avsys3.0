@@ -3,11 +3,11 @@ require_once("../config/conexion.php");
 
 class Empresas extends conectar{//inicio de la clase
 
-	public function registrarEmpresa($nomEmpresa,$dirEmpresa,$nitEmpresa,$telEmpresa,$respEmpresa,$correoEmpresa,$encargado){
+	public function registrarEmpresa($nomEmpresa,$dirEmpresa,$nitEmpresa,$telEmpresa,$respEmpresa,$correoEmpresa,$encargado,$registro,$giro){
 
 		$conectar= parent::conexion();
 		parent::set_names();
-		$sql="insert into empresas values(null,?,?,?,?,?,?,?);";
+		$sql="insert into empresas values(null,?,?,?,?,?,?,?,?,?);";
 		$sql=$conectar->prepare($sql);
 		$sql->bindValue(1, $nomEmpresa);
 		$sql->bindValue(2, $dirEmpresa);
@@ -16,6 +16,8 @@ class Empresas extends conectar{//inicio de la clase
 		$sql->bindValue(5, $respEmpresa);
 		$sql->bindValue(6, $correoEmpresa);
 		$sql->bindValue(7, $encargado);
+    $sql->bindValue(8, $registro);
+    $sql->bindValue(9, $giro);
 
 		$sql->execute();
 

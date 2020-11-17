@@ -32,13 +32,24 @@
               <input type="text"  class="form-control" name="" placeholder="Nombre de la empresa" required="" id="nomEmpresa" onkeyup="mayus(this);">
             </div>
             <div class="form-group col-md-4">
-            <label>Ubicación</label>
+            <label>Dirección</label>
               <input type="text"  class="form-control" name="" placeholder="Dirección" required="" id="dirEmpresa" onkeyup="mayus(this);">
             </div>
             <div class="form-group col-md-4">
             <label>NIT</label>
               <input type="text"  class="form-control" name="" placeholder="NIT de la empresa" required="" id="nitEmpresa">
             </div>
+
+            <div class="form-group col-md-4">
+              <label># Registro</label>
+              <input type="text"  class="form-control" name="" required="" id="registroEmpresa">
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Giro</label>
+              <input type="text"  class="form-control" name=""  required="" id="giroEmpresa">
+            </div>
+
             <div class="form-group col-md-4">
             <label>Teléfono</label>
               <input type="text"  class="form-control" name="" placeholder="Teléfono de la empresa" required="" id="telEmpresa" >
@@ -52,7 +63,7 @@
               <input type="text"  class="form-control" name="" placeholder="Correo" required="" id="correoEmpresa" >
             </div>
             <div class="form-group col-md-12">
-            <label>Encargado_optica</label>
+            <label>Encargado Optica</label>
               <input type="text"  class="form-control" name="" placeholder="Encargado" required="" id="encargado" onkeyup="mayus(this);" >
             </div>
           </div>

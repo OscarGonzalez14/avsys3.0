@@ -6,12 +6,14 @@ function guardarEmpresa(){
 	var respEmpresa=$("#respEmpresa").val();
 	var correoEmpresa=$("#correoEmpresa").val();
 	var encargado=$("#encargado").val();
+	var giro=$("#giroEmpresa").val();
+	var registro=$("#registroEmpresa").val();
 	
 	if(nomEmpresa !="" || dirEmpresa !="" || nitEmpresa !="" || telEmpresa !="" || respEmpresa !="" || correoEmpresa !="" || encargado !=""){
 		$.ajax({
 			url:"ajax/empresas.php?op=guardar_empresa",
 			method:"POST",
-			data:{nomEmpresa:nomEmpresa, dirEmpresa:dirEmpresa, nitEmpresa:nitEmpresa, telEmpresa:telEmpresa, respEmpresa:respEmpresa, correoEmpresa:correoEmpresa, encargado:encargado},
+			data:{nomEmpresa:nomEmpresa, dirEmpresa:dirEmpresa, nitEmpresa:nitEmpresa, telEmpresa:telEmpresa, respEmpresa:respEmpresa, correoEmpresa:correoEmpresa, encargado:encargado,giro:giro,registro:registro},
 			cache: false,
 			dataType: "json",
 			error:function(x,y,z){

@@ -7,8 +7,6 @@ function guardar_accesorios(){
 	
 
 
-	//se validan los campos del modal guardar accesorios
-	if (marca_accesorio !="" || des_accesorio !="" || tipo_accesorio !=""){
 		$.ajax({
 		url:"ajax/accesorios.php?op=guardar_accesorios",
 		method:"POST",
@@ -28,7 +26,7 @@ function guardar_accesorios(){
 		});
 		
 	}	
-}
+
 function explode(){
     location.reload();
   }

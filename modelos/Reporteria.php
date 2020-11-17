@@ -133,4 +133,16 @@ public function count_ganadores(){
     return $sql->rowCount();
 }
 
+/////////GET DATOS VENTA EMPRESA
+public function get_datos_empresa($empresa){
+	$conectar= parent::conexion();
+	parent::set_names();
+	$sql="select *from empresas where nombre=?";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$empresa);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 }
