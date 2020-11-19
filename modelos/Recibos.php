@@ -157,6 +157,7 @@ $conectar=parent::conexion();
       foreach($ver_tipo_pago as $b=>$row){
       $tipo_pago = $row["tipo_pago"];
       $tipo_venta = $row["tipo_venta"];
+      $fecha_venta = substr($row["fecha_venta"],0,10);
     }
   ///////////////verificar abonos realizados de venta en corte
     $sql21="select * from corte_diario where n_venta=? and id_paciente=?;";
@@ -175,11 +176,28 @@ $conectar=parent::conexion();
 
   $fecha_ing = substr($fecha_ing, 0,10);
   date_default_timezone_set('America/El_Salvador');$hoy = date("d-m-Y");
-  if($suma_res >1) { 
 
-  $factura='';           
+  if ($fecha_ing==$fecha_venta and $suma_res==1) {
+    $tipo_ingreso = "Venta";
+    $factura='';
+    $sql6="update corte_diario set forma_cobro=?,monto_cobrado=?,n_recibo=?,sucursal_cobro=?,saldo_credito=?,tipo_ingreso=? where id_paciente=? and n_venta=?;";
+    $sql6=$conectar->prepare($sql6);
+    $sql6->bindValue(1,$forma_pago);
+    $sql6->bindValue(2,$numero);
+    $sql6->bindValue(3,$n_recibo);
+    $sql6->bindValue(4,$sucursal);
+    $sql6->bindValue(5,$saldo);
+    $sql6->bindValue(6,$tipo_ingreso);
+    $sql6->bindValue(7,$id_paciente);
+    $sql6->bindValue(8,$n_venta_recibo_ini);
+    $sql6->execute();           
   
-  $sql17="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  }elseif(($fecha_ing==$fecha_venta and $suma_res>1) or ($fecha_ing!=$fecha_venta)){
+  
+  $tipo_ingreso = "Recuperado";
+  $factura = "";
+
+  $sql17="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
   $sql17=$conectar->prepare($sql17);
   $sql17->bindValue(1,$fecha_ing);
   $sql17->bindValue(2,$n_recibo);
@@ -199,21 +217,10 @@ $conectar=parent::conexion();
   $sql17->bindValue(16,$id_paciente);
   $sql17->bindValue(17,$sucursal);
   $sql17->bindValue(18,$sucursal);
+  $sql17->bindValue(19,$tipo_ingreso);
 
   $sql17->execute();
-
-}elseif($suma_res<=1 and $fecha_ing==$hoy){
-    $sql6="update corte_diario set forma_cobro=?,monto_cobrado=?,n_recibo=?,sucursal_cobro=? where id_paciente=? and n_venta=?;";
-    $sql6=$conectar->prepare($sql6);
-    $sql6->bindValue(1,$forma_pago);
-    $sql6->bindValue(2,$numero);
-    $sql6->bindValue(3,$n_recibo);
-    $sql6->bindValue(4,$sucursal);
-    $sql6->bindValue(5,$id_paciente);
-    $sql6->bindValue(6,$n_venta_recibo_ini);
-    $sql6->execute();
-}
-/************FIN RECORD CORTE DE CAJA*/
+  }
 
 }
 ///////////////VERIFICA SALDO***********

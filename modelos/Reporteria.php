@@ -105,24 +105,42 @@ public function get_datos_ventas_cobros_contado($fecha){
  
 	$fecha_corte = $fecha."%";
 	$sql="select  c.fecha_ingreso,c.n_recibo,c.paciente,u.usuario,c.total_factura,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados from
-corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario where c.fecha_ingreso like ? and c.abonos_realizados='0';";
+corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario where c.fecha_ingreso like ? and c.abonos_realizados='0' and c.tipo_venta='Contado';";
 	$sql=$conectar->prepare($sql);
 	$sql->bindValue(1,$fecha_corte);
 	$sql->execute();
 	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
-##################GET VENTAS CARGO AUTOMATICO########
-public function get_datos_ventas_cobros_cargo($fecha){
+
+############GET VENTAS EMPRESARIAL##############
+public function get_datos_ventas_empresarial($fecha){
 	$conectar= parent::conexion();
 	parent::set_names();
  
 	$fecha_corte = $fecha."%";
-	$sql="select c.n_recibo,p.nombres,u.usuario,c.total_factura,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados,c.fecha_ingreso from pacientes as p inner join corte_diario as c on c.paciente=p.id_paciente inner join usuarios as u on c.id_usuario=u.id_usuario where c.abonos_realizados=1 and c.fecha_ingreso like ?;";
+	$sql="select c.fecha_ingreso, c.n_recibo,p.nombres,p.empresas,u.usuario,c.forma_cobro,c.monto_cobrado,c.total_factura,c.saldo_credito,c.abonos_realizados from corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario inner join pacientes as p on p.id_paciente=c.id_paciente where c.fecha_ingreso like ? and c.abonos_realizados='0' and c.tipo_pago='Descuento en Planilla';";
 	$sql=$conectar->prepare($sql);
 	$sql->bindValue(1,$fecha_corte);
 	$sql->execute();
 	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
+
+##################GET VENTAS CARGO AUTOMATICO########
+public function get_datos_ventas_cargo($fecha){
+	$conectar= parent::conexion();
+	parent::set_names();
+ 
+	$fecha_corte = $fecha."%";
+	$sql="select  c.fecha_ingreso,c.n_recibo,c.paciente,u.usuario,c.total_factura,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados from corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario where c.fecha_ingreso like ? and c.abonos_realizados='0' and c.tipo_pago='Cargo Automatico';";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$fecha_corte);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+##################RECUPERADO CONTADO ########
+
+
 
 ////////////NOTIFICACION DE GANADORES POR REFERIDOS
 public function count_ganadores(){

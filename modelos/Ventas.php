@@ -203,8 +203,9 @@ foreach ($detalles as $k => $v) {
     $abono_anterior="0";
     $abonos_realizados="0";
     $sucursal_cobro="";
+    $tipo_ingreso = "Venta";
 
-    $sql2="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+    $sql2="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
     $sql2=$conectar->prepare($sql2);          
     $sql2->bindValue(1,$fecha_venta);
     $sql2->bindValue(2,$n_recibo);
@@ -224,6 +225,7 @@ foreach ($detalles as $k => $v) {
     $sql2->bindValue(16,$id_paciente);
     $sql2->bindValue(17,$sucursal);
     $sql2->bindValue(18,$sucursal_cobro);
+    $sql2->bindValue(19,$tipo_ingreso);
 
     $sql2->execute();
 

@@ -3,20 +3,17 @@ require_once("config/conexion.php");
 if(isset($_SESSION["usuario"])){ 
 require_once('header.php');
 require_once('modals/modal_detalle_ventas.php');
+date_default_timezone_set('America/El_Salvador'); $hoy = date("Y-m-d");;
 ?>
-<script type="text/javascript">
-  function get_data_corte() {
-    // body...
-  }
-</script>
+
 <div class="content-wrapper">
             <div class="row" style="margin-top: 5px">
               <div class="col-12">
                 <div class="callout callout-info" style="border-bottom: solid 1px #008080;">
                   <div class="row">
                     <div class="col-sm-2">
-                      <form action="corte_diario_pdf.php" method="POST">
-                        <input type="date" id="fecha_corte" name="fecha_corte" class="form-control">
+                      <form action="corte_diario_pdf.php" method="POST" target="_blank">
+                        <input type="date" id="fecha_corte" name="fecha_corte" class="form-control" value="<?php echo $hoy?>">
                       
                     </div>
                     <div class="col-sm-2">
@@ -63,6 +60,14 @@ require_once('modals/modal_detalle_ventas.php');
 </div>
 <input type="hidden" name="sucursal" id="sucursal" value="<?php echo $_SESSION["sucursal"];?>"/>
 <script src="js/ventas.js"> </script>
+<script type="text/javascript">
+  function get_date_corte() {
+    let fecha_corte = document.getElementById("date_corte").value;
+    console.log(fecha_corte);
+    document.getElementById("fecha_corte").value = ;
+  }
+  get_date_corte();
+</script>
 
    <?php } else{
 echo "Acceso no permitido";

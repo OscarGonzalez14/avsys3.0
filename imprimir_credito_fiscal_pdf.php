@@ -17,7 +17,7 @@ $datos_factura_subtotal = $reporteria->get_datos_factura_subtotal($_GET["n_venta
 $datos_factura_paciente = $reporteria->get_datos_factura_paciente($_GET["id_paciente"]);
 $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],$_GET["id_paciente"]);
 $datos_empresa = $reporteria->get_datos_empresa($_GET["empresa"]);
-date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y");;
+date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y");
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
