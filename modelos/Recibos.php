@@ -196,7 +196,7 @@ $conectar=parent::conexion();
   
   $tipo_ingreso = "Recuperado";
   $factura = "";
-
+  
   $sql17="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
   $sql17=$conectar->prepare($sql17);
   $sql17->bindValue(1,$fecha_ing);

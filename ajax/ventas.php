@@ -298,7 +298,7 @@ case 'registrar_venta':
         $sub_array[] = $row["tipo_pago"];
         $sub_array[] = $row["sucursal"];
         $sub_array[] = "$".number_format($row["monto_total"],2,".",",");        
-        $sub_array[] = '<button type="button" class="btn btn-primary" style="border-radius:0px" data-toggle="modal" data-target="#detalle_ventas" onClick="detalleVentas(\''.$row["numero_venta"].'\','.$row["id_paciente"].')"><i class="fas fa-eye"></i></button>';
+        $sub_array[] = '<i class="fas fa-eye fa-2x" style="border-radius:0px;color:blue" data-toggle="modal" data-target="#detalle_ventas" onClick="detalleVentas(\''.$row["numero_venta"].'\','.$row["id_paciente"].')"></i>';
         $data[] = $sub_array;
       }
 

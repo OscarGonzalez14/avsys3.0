@@ -37,8 +37,8 @@ date_default_timezone_set('America/El_Salvador'); $hoy = date("Y-m-d");;
         </div>
     </div><br>
     <div class="card-body p-0" style="margin:7px">
-      <table id="lista_reporte_ventas_data" width="100%" data-order='[[ 0, "desc" ]]' class="table-hover">
-        <thead style="background:#034f84;color:white;text-align: center;">
+      <table id="lista_reporte_ventas_data" width="100%" data-order='[[ 0, "desc" ]]' class="table-hover table-bordered">
+        <thead style="background:#034f84;color:white;font-family: Helvetica, Arial, sans-serif;font-size: 11px;text-align: center">
           <tr>
           <th>ID</th>
           <th>#Venta</th>
@@ -51,7 +51,7 @@ date_default_timezone_set('America/El_Salvador'); $hoy = date("Y-m-d");;
           <th>Detalles</th>
           </tr>
         </thead>
-        <tbody style="text-align:center">                                  
+        <tbody style="font-family: Helvetica, Arial, sans-serif;font-size: 11px;text-align: center;">                                  
         </tbody>
       </table>
     </div>

@@ -105,7 +105,7 @@ public function get_datos_ventas_cobros_contado($fecha){
  
 	$fecha_corte = $fecha."%";
 	$sql="select  c.fecha_ingreso,c.n_recibo,c.paciente,u.usuario,c.total_factura,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados from
-corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario where c.fecha_ingreso like ? and c.abonos_realizados='0' and c.tipo_venta='Contado';";
+corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario where c.fecha_ingreso like ? and c.abonos_realizados='0' and c.tipo_venta='Contado' AND tipo_ingreso='Venta';";
 	$sql=$conectar->prepare($sql);
 	$sql->bindValue(1,$fecha_corte);
 	$sql->execute();
@@ -139,6 +139,59 @@ public function get_datos_ventas_cargo($fecha){
 }
 
 ##################RECUPERADO CONTADO ########
+public function get_datos_recuperado_contado($fecha){
+	$conectar= parent::conexion();
+	parent::set_names();
+ 
+	$fecha_corte = $fecha."%";
+	$sql="select  c.fecha_ingreso,c.n_recibo,c.paciente,u.usuario,c.total_factura,c.abono_anterior,c.saldo_credito+c.monto_cobrado as saldo_anterior,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados from
+corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario where c.fecha_ingreso like ? and c.tipo_ingreso='Recuperado' and c.tipo_venta='Contado';";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$fecha_corte);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+##################RECUPERADO EMPRESARIAL ########
+public function get_datos_recuperado_empresarial($fecha){
+	$conectar= parent::conexion();
+	parent::set_names();
+ 
+	$fecha_corte = $fecha."%";
+	$sql="select  c.fecha_ingreso,c.n_recibo,c.paciente,u.usuario,c.total_factura,c.abono_anterior,c.saldo_credito+c.monto_cobrado as saldo_anterior,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados from
+corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario where c.fecha_ingreso like ? and c.tipo_ingreso='Recuperado' and c.tipo_pago='Descuento en Planilla';";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$fecha_corte);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+##################RECUPERADO EMPRESARIAL ########
+public function get_datos_recuperado_cargo($fecha){
+	$conectar= parent::conexion();
+	parent::set_names();
+ 
+	$fecha_corte = $fecha."%";
+	$sql="select  c.fecha_ingreso,c.n_recibo,c.paciente,u.usuario,c.total_factura,c.abono_anterior,c.saldo_credito+c.monto_cobrado as saldo_anterior,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados from
+corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario where c.fecha_ingreso like ? and c.tipo_ingreso='Recuperado' and c.tipo_pago='Cargo Automatico';";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$fecha_corte);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+#############GET RESUMEN VENTAS Y COBROS
+public function get_resumen_ventas_cobros($fecha){
+	$conectar= parent::conexion();
+	parent::set_names();
+ 
+	$fecha_corte = $fecha."%";
+	$sql="select * from corte_diario where fecha_ingreso like ?;";
+	$sql=$conectar->prepare($sql);
+	$sql->bindValue(1,$fecha_corte);
+	$sql->execute();
+	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
 
 
 
@@ -162,6 +215,9 @@ public function get_datos_empresa($empresa){
 	$sql->execute();
 	return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
 }
+
+#############GET RESUMEN VENTAS Y COBROS
+
 
 
 }

@@ -107,6 +107,7 @@
           <option value='Cheque'>Cheque</option>
           <option value='Serfinsa'>Serfinsa</option>
           <option value='Credomatic'>Credomatic</option>
+          <option value='Cuscatlan'>Cuscatlan</option>
           <option value='Agricola'>Agricola</option>
         </select></td>
         <td id="datepickers"><input type='date' class='form-control' id='pr_abono' name='pr_abono'></td>
