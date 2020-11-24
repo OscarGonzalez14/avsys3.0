@@ -12,6 +12,8 @@ date_default_timezone_set('America/El_Salvador');$fecha = date("d-m-Y");
 $reporteria=new Reporteria();
 //$fecha = "02-10-2020";
 
+$fecha =  date("d-m-Y",strtotime($_POST["fecha_corte"]));
+echo $fecha;
 $datos_ventas_contado = $reporteria->get_datos_ventas_cobros_contado($fecha);
 
 ?>
@@ -55,16 +57,19 @@ $datos_ventas_contado = $reporteria->get_datos_ventas_cobros_contado($fecha);
   </head>
   <body>
 <table width="100%" class="table2" style="margin-top: 25px">
+      <tr>
+      <th style="text-align: center;font-size: 12px" colspan="105">VENTAS DE CONTADO</th>
+    </tr>
   <thead>
   <tr>
-    <th bgcolor="#001a57" colspan="5" class="stilot2"><span class="Estilo11">FACTURA</span></th>
-    <th bgcolor="#001a57" colspan="5" class="stilot2"><span class="Estilo11">RECIBO</span></th>
-    <th bgcolor="#001a57" colspan="50" class="stilot2"><span class="Estilo11">NOMBRE CLIENTE</span></th>
-    <th bgcolor="#001a57" colspan="5" class="stilot2"><span class="Estilo11">VENDEDOR</span></th>
-    <th bgcolor="#001a57" colspan="10" class="stilot2"><span class="Estilo11">TOTAL FACTURA</span></th>
-    <th bgcolor="#001a57" colspan="20" class="stilot2"><span class="Estilo11">FORMA DE COBRO</span></th>
-    <th bgcolor="#001a57" colspan="5" class="stilot2"><span class="Estilo11">TOTAL COBRADO</span></th>
-    <th bgcolor="#001a57" colspan="5" class="stilot2"><span class="Estilo11">SALDO</span></th>
+    <th bgcolor="#004e00" colspan="5" class="stilot2"><span class="Estilo11">FACTURA</span></th>
+    <th bgcolor="#004e00" colspan="5" class="stilot2"><span class="Estilo11">RECIBO</span></th>
+    <th bgcolor="#004e00" colspan="50" class="stilot2"><span class="Estilo11">NOMBRE CLIENTE</span></th>
+    <th bgcolor="#004e00" colspan="5" class="stilot2"><span class="Estilo11">VENDEDOR</span></th>
+    <th bgcolor="#004e00" colspan="10" class="stilot2"><span class="Estilo11">TOTAL FACTURA</span></th>
+    <th bgcolor="#004e00" colspan="20" class="stilot2"><span class="Estilo11">FORMA DE COBRO</span></th>
+    <th bgcolor="#004e00" colspan="5" class="stilot2"><span class="Estilo11">TOTAL COBRADO</span></th>
+    <th bgcolor="#004e00" colspan="5" class="stilot2"><span class="Estilo11">SALDO</span></th>
   </tr>
 </thead>
 <tbody>
@@ -73,7 +78,7 @@ $datos_ventas_contado = $reporteria->get_datos_ventas_cobros_contado($fecha);
 	<tr>
 <td colspan="5" class="stilot1"><?php echo "";?></td>
 <td colspan="5" class="stilot1"><?php echo $datos_ventas_contado[$j]["n_recibo"];?></td>
-<td colspan="50" class="stilot1"><?php echo $datos_ventas_contado[$j]["nombres"];?></td>
+<td colspan="50" class="stilot1"><?php echo $datos_ventas_contado[$j]["paciente"];?></td>
 <td colspan="5" class="stilot1"><?php echo $datos_ventas_contado[$j]["usuario"];?></td>
 <td colspan="10" class="stilot1"><?php echo "$".number_format($datos_ventas_contado[$j]["total_factura"],2,".",",");?></td>
 <td colspan="20" class="stilot1"><?php echo $datos_ventas_contado[$j]["forma_cobro"];?></td>

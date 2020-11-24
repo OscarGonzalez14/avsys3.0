@@ -104,7 +104,8 @@ public function get_datos_ventas_cobros_contado($fecha){
 	parent::set_names();
  
 	$fecha_corte = $fecha."%";
-	$sql="select c.n_recibo,p.nombres,u.usuario,c.total_factura,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados,c.fecha_ingreso from pacientes as p inner join corte_diario as c on c.paciente=p.id_paciente inner join usuarios as u on c.id_usuario=u.id_usuario where c.abonos_realizados=1 and c.fecha_ingreso like ?;";
+	$sql="select  c.fecha_ingreso,c.n_recibo,c.paciente,u.usuario,c.total_factura,c.forma_cobro,c.monto_cobrado,c.saldo_credito,c.abonos_realizados from
+corte_diario as c inner join usuarios as u on u.id_usuario=c.id_usuario where c.fecha_ingreso like ? and c.abonos_realizados='0';";
 	$sql=$conectar->prepare($sql);
 	$sql->bindValue(1,$fecha_corte);
 	$sql->execute();

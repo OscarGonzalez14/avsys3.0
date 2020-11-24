@@ -125,7 +125,7 @@ $conectar=parent::conexion();
     $suma_res=0;
     $resultado_num_ventas = $sql15->fetchAll(PDO::FETCH_ASSOC);
       foreach($resultado_num_ventas as $b=>$row){
-        $suma_res = $suma_res+$row["cuenta"];        
+      $suma_res = $suma_res+$row["cuenta"];        
 
     }
 
@@ -159,7 +159,7 @@ $conectar=parent::conexion();
       $tipo_venta = $row["tipo_venta"];
     }
   ///////////////verificar abonos realizados de venta en corte
-    $sql21="select * from corte_diario where numero_venta=? and id_paciente=?;";
+    $sql21="select * from corte_diario where n_venta=? and id_paciente=?;";
              
     $sql21=$conectar->prepare($sql21);
     $sql21->bindValue(1,$n_venta_recibo_ini);
@@ -167,19 +167,21 @@ $conectar=parent::conexion();
     $sql21->execute();
     
     $abonos_realizados = $sql21 ->fetchAll(PDO::FETCH_ASSOC);
-      foreach($ver_tipo_pago as $b=>$row){
+      foreach($abonos_realizados as $b=>$row){
       $total_abonos = $row["abonos_realizados"];
+      $fecha_ing = $row["fecha_ingreso"];
       
     }
 
- print_r($total_abonos);
-  if($suma_res>1) { 
+  $fecha_ing = substr($fecha_ing, 0,10);
+  date_default_timezone_set('America/El_Salvador');$hoy = date("d-m-Y");
+  if($suma_res >1) { 
 
   $factura='';           
   
   $sql17="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
   $sql17=$conectar->prepare($sql17);
-  $sql17->bindValue(1,$fecha);
+  $sql17->bindValue(1,$fecha_ing);
   $sql17->bindValue(2,$n_recibo);
   $sql17->bindValue(3,$n_venta_recibo_ini);
   $sql17->bindValue(4,$factura);
@@ -192,7 +194,7 @@ $conectar=parent::conexion();
   $sql17->bindValue(11,$tipo_venta);
   $sql17->bindValue(12,$tipo_pago);
   $sql17->bindValue(13,$id_usuario);
-  $sql17->bindValue(14,$suma_abonos_ant);
+  $sql17->bindValue(14,$suma_abonos_ant-$numero);
   $sql17->bindValue(15,$suma_res);
   $sql17->bindValue(16,$id_paciente);
   $sql17->bindValue(17,$sucursal);
@@ -200,8 +202,18 @@ $conectar=parent::conexion();
 
   $sql17->execute();
 
-}//Fin del if    
-//******************FIN RECORD CORTE DE CAJA
+}elseif($suma_res<=1 and $fecha_ing==$hoy){
+    $sql6="update corte_diario set forma_cobro=?,monto_cobrado=?,n_recibo=?,sucursal_cobro=? where id_paciente=? and n_venta=?;";
+    $sql6=$conectar->prepare($sql6);
+    $sql6->bindValue(1,$forma_pago);
+    $sql6->bindValue(2,$numero);
+    $sql6->bindValue(3,$n_recibo);
+    $sql6->bindValue(4,$sucursal);
+    $sql6->bindValue(5,$id_paciente);
+    $sql6->bindValue(6,$n_venta_recibo_ini);
+    $sql6->execute();
+}
+/************FIN RECORD CORTE DE CAJA*/
 
 }
 ///////////////VERIFICA SALDO***********

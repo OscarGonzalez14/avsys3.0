@@ -39,7 +39,7 @@ require_once("modals/empresas_credito_fiscal.php");
         <input type="text" class="form-control" id="n_venta" readonly="" style="background: white;border: 1px solid white;color: black">
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="corte_diario.php" class="nav-link" style="color: blue">Corte Diario</a>
+        <a href="corte_diario_pdf.php" class="nav-link" style="color: blue">Corte Diario</a>
       </li>
 
     </ul>

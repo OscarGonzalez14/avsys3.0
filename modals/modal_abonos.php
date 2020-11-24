@@ -169,9 +169,7 @@
 <script type="text/javascript">
 
   function nuevo_saldo(){
-  //NumeroALetras(8);
-  //var hola = NumeroALetras(this.value);
-  console.log(hola);
+
   var monto = document.getElementById("saldo_credito").value;
   var abono_ini_rec = document.getElementById("numero").value;
   //var abono_ini_rec = document.getElementById("numero").toFixed(2);

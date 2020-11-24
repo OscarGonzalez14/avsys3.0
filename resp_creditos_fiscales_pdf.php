@@ -17,7 +17,7 @@ $datos_factura_subtotal = $reporteria->get_datos_factura_subtotal($_GET["n_venta
 $datos_factura_paciente = $reporteria->get_datos_factura_paciente($_GET["id_paciente"]);
 $datos_factura_venta    = $reporteria->get_datos_factura_venta($_GET["n_venta"],$_GET["id_paciente"]);
 $datos_empresa = $reporteria->get_datos_empresa($_GET["empresa"]);
-date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y");;
+date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y");
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -60,21 +60,25 @@ date_default_timezone_set('America/El_Salvador'); $hoy = date("d-m-Y");;
   </head>
   <body>
 
-<div style="margin-top: 70px;height:525px" >
+<div style="margin-top: 105px;height:495px" >
   <table width="100%">
     <tr>
       <?php
 
-  for($i=0;$i<sizeof($datos_empresa);$i++){
+  for($i=0;$i<sizeof($datos_factura_paciente);$i++){
 
 ?>
-    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_empresa[$i]["nombre"];?></td>
-    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_empresa[$i]["ubicacion"];?></td>    
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_factura_paciente[$i]["nombres"];?></td>
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_factura_paciente[$i]["direccion"];?></td>    
     <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>FECHA:</strong> <?php echo $hoy;?></td>
-
+    <?php
+  }
 ?>
 </tr>
+ <?php
 
+  for($i=0;$i<sizeof($datos_empresa);$i++){
+    ?>
 <tr>
   <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>REGISTRO No:</strong> <?php echo $datos_empresa[$i]["registro"];?></td>
   <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>GIRO:</strong> <?php echo $datos_empresa[$i]["giro"];?></td>
@@ -197,20 +201,25 @@ $total = ($subtotal+$iva)-$retenido;
 
 <!-- PARTE 2-->
 
-<div style="margin-top: 25px;height:445px" >
+<div style="margin-top: 25px;height:460px" >
   <table width="100%">
     <tr>
       <?php
 
-  for($i=0;$i<sizeof($datos_empresa);$i++){
+  for($i=0;$i<sizeof($datos_factura_paciente);$i++){
 
 ?>
-    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_empresa[$i]["nombre"];?></td>
-    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_empresa[$i]["ubicacion"];?></td>    
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_factura_paciente[$i]["nombres"];?></td>
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_factura_paciente[$i]["direccion"];?></td>    
     <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>FECHA:</strong> <?php echo $hoy;?></td>
-
+    <?php
+  }
+?>
 </tr>
+ <?php
 
+  for($i=0;$i<sizeof($datos_empresa);$i++){
+    ?>
 <tr>
   <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>REGISTRO No:</strong> <?php echo $datos_empresa[$i]["registro"];?></td>
   <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>GIRO:</strong> <?php echo $datos_empresa[$i]["giro"];?></td>
@@ -287,7 +296,7 @@ $total = ($subtotal+$iva)-$retenido;
 <?php
 $iva = $subtotal*0.13;
 $retenido = $subtotal*0.01;
-$total = ($subtotal+$iva) - $retenido;
+$total = ($subtotal+$iva)-$retenido;
 ?>
 <tr>
   <td colspan="60" class="stilot1" style="font-size:8px">LLENAR SI LA OPERACIÓN IGUAL O MAYOR A $11,428.58</td>
@@ -339,15 +348,20 @@ $total = ($subtotal+$iva) - $retenido;
     <tr>
       <?php
 
-  for($i=0;$i<sizeof($datos_empresa);$i++){
+  for($i=0;$i<sizeof($datos_factura_paciente);$i++){
 
 ?>
-    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_empresa[$i]["nombre"];?></td>
-    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_empresa[$i]["ubicacion"];?></td>    
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>CLIENTE:</strong> <?php echo $datos_factura_paciente[$i]["nombres"];?></td>
+    <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>DIRECCION:</strong> <?php echo $datos_factura_paciente[$i]["direccion"];?></td>    
     <td colspan="20" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>FECHA:</strong> <?php echo $hoy;?></td>
-
+    <?php
+  }
+?>
 </tr>
+ <?php
 
+  for($i=0;$i<sizeof($datos_empresa);$i++){
+    ?>
 <tr>
   <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>REGISTRO No:</strong> <?php echo $datos_empresa[$i]["registro"];?></td>
   <td colspan="40" style="color:black;font-size:11px;border: 1px solid white;font-family: Helvetica, Arial, sans-serif;width: 40%"><strong>GIRO:</strong> <?php echo $datos_empresa[$i]["giro"];?></td>

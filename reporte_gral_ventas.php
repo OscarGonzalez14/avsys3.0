@@ -4,12 +4,33 @@ if(isset($_SESSION["usuario"])){
 require_once('header.php');
 require_once('modals/modal_detalle_ventas.php');
 ?>
-
+<script type="text/javascript">
+  function get_data_corte() {
+    // body...
+  }
+</script>
 <div class="content-wrapper">
+            <div class="row" style="margin-top: 5px">
+              <div class="col-12">
+                <div class="callout callout-info" style="border-bottom: solid 1px #008080;">
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <form action="corte_diario_pdf.php" method="POST">
+                        <input type="date" id="fecha_corte" name="fecha_corte" class="form-control">
+                      
+                    </div>
+                    <div class="col-sm-2">
+                      <button type="submit" class="btn btn-primary"><i class="fas fa-print"></i>CORTE DIARIO</button>
+                    </div>
+                </form>
+                </div>
+                </div>
+              </div>
+            </div>
   <div class="content" id="listar_reporte_ventas">
 
     <div class="header" style="padding:7px;">
-        <h2 class="card-title" align="center"><strong> REPORTE GENERAL DE VENTAS </strong></h2>
+        <h2 class="card-title" align="center" style="text-align: center;"><strong> REPORTE GENERAL DE VENTAS </strong></h2>
         <div>
          <ul class="breadcrumb float-sm-right" style="background-color:transparent;padding:0px;">
          <li class="breadcrumb-item"><a href="ventas.php">Nueva Venta</a></li>
