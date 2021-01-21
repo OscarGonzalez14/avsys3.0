@@ -85,6 +85,7 @@ $marcas=$marca->get_marca();
         <option value="Metal/Acetato">Metal/Acetato</option>
         <option value="Fibra de Carbono">Fibra de Carbono</option>
         <option value="Titanio">Titanio</option>
+        <option value="TR90">TR90</option>
       </select>
     </div>
 

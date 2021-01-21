@@ -16,6 +16,7 @@ $(document).ready(ocultar_btns_post_ingreso);
 var tablas_compras_ingreso_bodegas;
 function init(){
   get_numero_ingreso();
+   get_correlativo_traslado();
 }
  function ingresar_compras_bodega() {
  	$('#modal_ingreso_bodega').modal('show');
@@ -664,7 +665,10 @@ function realizar_traslado(id_producto,categoria_ub){
       codProd  : id_producto,
       descripcion   : data.desc_producto,
       origen    : data.categoria_ub,
-      destino  : ""
+      destino  : "",
+      num_compra : data.num_compra,
+      id_ingreso : data.id_ingreso,
+      precio_venta:data.precio_venta
     };//Fin objeto
     detalles_traslado.push(obj);
     $('#modalTraslados').modal("hide");
@@ -682,9 +686,9 @@ function listarDetallesTraslado(){
 
     var filas = "";
     for(var i=0; i<detalles_traslado.length; i++){
-        var filas = filas + "<tr id='fila"+i+"'><td>"+(i+1)+
+        var filas = filas + "<tr id='fila_t"+i+"'><td>"+(i+1)+
         "</td><td style='text-align:center;'>"+detalles_traslado[i].descripcion+
-        "<td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' onClick='setCantidad_traslado(event, this, "+(i)+");' onKeyUp='setCantidad_traslado(event, this, "+(i)+");' value='"+detalles_traslado[i].cantidad+"'><td style='text-align:center'><input style='text-align:right' type='text' class='cantidad form-control'  value='"+detalles_traslado[i].origen+"'></td><td style='text-align:center'><select class='form-control categorias_traslado' id='cat_traslados"+(i)+"'></select></td><td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarFila("+i+");' style='color:red'></i></td></tr>";
+        "<td style='text-align:center'><input style='text-align:right' type='number' class='cantidad form-control' onClick='setCantidad_traslado(event, this, "+(i)+");' onKeyUp='setCantidad_traslado(event, this, "+(i)+");' value='"+detalles_traslado[i].cantidad+"'><td style='text-align:center'><input style='text-align:right' type='text' class='cantidad form-control'  value='"+detalles_traslado[i].origen+"' readonly ></td><td style='text-align:center'><input style='text-align:right' type='text' class='cantidad form-control'  value='"+detalles_traslado[i].destino+"' onClick='buscar_categorias("+(i)+")' id='item_traslado"+(i)+"'></td><td style='text-align:center'><i class='nav-icon fas fa-trash-alt fa-2x' onClick='eliminarItemTraslado("+i+");' style='color:red'></i></td></tr>";
 
        
 
@@ -693,6 +697,177 @@ function listarDetallesTraslado(){
 
   }//cierre for
   $('#listar_det_traslados').html(filas);
+}
+
+function buscar_categorias(index_cat){
+  var indice = index_cat;
+  var sucursal =$("#sucursal").val();
+  $("#modal_cat_traslados").modal("show");
+  $("#indice_categoria").val(indice);
+    tabla_prod_traslados=$('#data_cats_traslados').dataTable({
+    "aProcessing": true,//Activamos el procesamiento del datatables
+      "aServerSide": true,//Paginación y filtrado realizados por el servidor
+      dom: 'Bfrtip',//Definimos los elementos del control de tabla
+      columnDefs: [
+          {"targets": [0],
+          "visible": false,
+          "searchable": false
+          },
+        ],
+      buttons: [
+            'excelHtml5',
+            'pdf'
+            ],
+    "ajax":{
+      url: 'ajax/categoria.php?op=get_categorias_traslados',
+      type : "post",
+      dataType : "json",
+      data:{sucursal:sucursal},         
+      error: function(e){
+      console.log(e.responseText);  
+        }
+    },
+    "bDestroy": true,
+    "responsive": true,
+    "bInfo":true,
+    "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+      //"order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+      
+      "language": {
+ 
+          "sProcessing":     "Procesando...",
+       
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+       
+          "sZeroRecords":    "No se encontraron resultados",
+       
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+       
+          "sInfo":           "Mostrando un total de _TOTAL_ registros",
+       
+          "sInfoEmpty":      "Mostrando un total de 0 registros",
+       
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+       
+          "sInfoPostFix":    "",
+       
+          "sSearch":         "Buscar:",
+       
+          "sUrl":            "",
+       
+          "sInfoThousands":  ",",
+       
+          "sLoadingRecords": "Cargando...",
+       
+          "oPaginate": {
+       
+              "sFirst":    "Primero",
+       
+              "sLast":     "Último",
+       
+              "sNext":     "Siguiente",
+       
+              "sPrevious": "Anterior"
+       
+          }
+
+         }//cerrando language
+         
+  }).DataTable();
+}
+
+function agregar_item_traslado(categoria){
+  var indice = $("#indice_categoria").val();
+  console.log(indice);
+  console.log(categoria);
+  $("#modal_cat_traslados").modal("hide");
+  detalles_traslado[indice].destino = categoria;
+  $("#item_traslado"+indice).val(categoria);
+}
+
+function eliminarItemTraslado(index) {
+  $("#fila_t" + index).remove();
+  drop_item_t(index);
+}
+
+function drop_item_t(position_element){
+  detalles_traslado.splice(position_element, 1);
+}
+
+/////////////////////REGISTRAR TRASLADO//////////////
+
+function registrar_traslado(){
+  var  sucursal= $("#sucursal").val();
+  var  usuario= $('#usuario').val();
+  var  fecha= $('#fecha').val();
+  var  tipo_traslado= $('#tipo_traslado').val();
+  var  num_traslado = $("#num_traslado").html();
+  ubicaciones_vacias=[];
+  for(var i=0;i<detalles_traslado.length;i++){
+      var dest = detalles_traslado[i].destino;
+      if(dest == ""){
+      ubicaciones_vacias.push(dest);
+    }
+  }
+
+
+var cuenta_vacios = ubicaciones_vacias.length;
+if (cuenta_vacios>0) {
+  Swal.fire('Debe especificar la nueva ubicacion de cada producto!','','error')
+  return false;
+}
+////////VALIDAR QUE LA RUTA DE DESTINO SEA DIFERENTE A ORIGEN
+for(var i=0;i<detalles_traslado.length;i++){
+      var desti = detalles_traslado[i].destino;
+      var origen =detalles_traslado[i].origen;
+      if(desti == origen){
+      Swal.fire('Existen ubicaciones mal seleccionadas!','','error')
+  return false;
+    }
+  }
+
+var test_array = detalles_traslado.length;
+  if (test_array<1) {
+  Swal.fire('Debe Agregar Productos al traslado!','','error')
+  return false;
+}
+
+   $.ajax({
+    url:"ajax/bodegas.php?op=registrar_traslado",
+    method:"POST",
+    data:{'arrayTraslado':JSON.stringify(detalles_traslado),'sucursal':sucursal,'usuario':usuario,'fecha':fecha,'tipo_traslado':tipo_traslado,'num_traslado':num_traslado},
+    cache: false,
+    dataType:"json",
+    error:function(x,y,z){
+      console.log(x);
+      console.log(y);
+      console.log(z);
+    },
+
+    success:function(data){
+    console.log(data);
+  }
+
+  });
+    $('#listar_det_traslados').html('');
+    setTimeout ("Swal.fire('Se ha registrado Exitosamente el traslado','','success')", 100);
+
+}
+
+////////////////GET CORRELATIVO TRASLADO
+function get_correlativo_traslado(){
+  var sucursal = $("#sucursal").val();
+  $.ajax({
+    url:"ajax/bodegas.php?op=get_numero_traslado",
+    method:"POST",
+    data:{sucursal:sucursal},
+    cache:false,
+    dataType:"json",
+      success:function(data){
+      console.log(data);        
+      $("#num_traslado").html(data.correlativo);             
+      }
+    })
 }
 
 init();

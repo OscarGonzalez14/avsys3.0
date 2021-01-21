@@ -52,6 +52,15 @@ class Categoria extends conectar
     	 $sql->execute();
     	 return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     	}
-	}/////FIN CLASS
+		public function get_categorias_traslados($sucursal){
+	    $conectar= parent::conexion();
+		parent::set_names();
+		 $sql="select nombre,sucursal from categoria where sucursal=?";
+		 $sql=$conectar->prepare($sql);
+		 $sql->bindValue(1, $sucursal);
+    	 $sql->execute();
+    	 return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    	}
+	}
 
  ?>

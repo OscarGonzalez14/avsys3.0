@@ -66,7 +66,22 @@ require_once('header_dos.php');
               </div>
               <a href="lentes.php" class="small-box-footer"> Ir a Créditos Personales<i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>         
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h4><b>Creditos en Mora</b></h4>
+
+                <p>0</p>
+              </div>
+              <div class="icon">
+                <i class="far fa-thumbs-down"></i>
+              </div>
+              <a href="creditos_mora.php" class="small-box-footer"> Ir a Créditos en Mora<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>        
  </div>
  <?php require_once("footer.php"); ?>
  <?php } else{

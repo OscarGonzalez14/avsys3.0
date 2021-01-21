@@ -326,7 +326,7 @@ public function eliminar_accesorio($id_producto){
 public function get_productos_traslados($sucursal){
   $conectar=parent::conexion();
   parent::set_names();
-  $sql="select p.desc_producto,e.id_producto,e.bodega,e.categoria_ub from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.bodega=?;
+  $sql="select p.desc_producto,e.id_producto,e.bodega,e.categoria_ub from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.bodega=? and e.stock>0;
 ";
 
   $sql=$conectar->prepare($sql);

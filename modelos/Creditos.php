@@ -106,6 +106,18 @@ where c.tipo_credito='Contado' and p.sucursal=? order by c.id_credito DESC;";
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /////////////////GET PACIENTES CATEGORIA C
+    public function get_creditos_cat_b(){
+    $conectar= parent::conexion();
+    $sql= "select p.nombres, p.empresas,r.numero_venta,r.id_paciente,max(r.prox_abono) as prox_abono,r.abono_act, datediff(now(),max(r.prox_abono)) as dif_days,r.monto,max(r.fecha) as fecha_abono,r.saldo,c.saldo  from
+pacientes as p inner join recibos as r on r.id_paciente=p.id_paciente join creditos as c where c.numero_venta COLLATE utf8mb4_general_ci =r.numero_venta group by r.numero_venta having dif_days>30 and dif_days<90 and max(r.fecha) order by r.id_recibo DESC;
+";
+    $sql=$conectar->prepare($sql);
+   // $sql->bindValue(1,$sucursal);
+    $sql->execute();
+    return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
 	}/////FIN CLASS
 

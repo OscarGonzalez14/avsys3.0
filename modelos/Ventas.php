@@ -102,7 +102,7 @@ foreach ($detalles as $k => $v) {
   $id_ref = $_POST["id_ref"];
 
   $sql="insert into detalle_ventas values(null,?,?,?,?,?,?,?,?,?,?,?);";
-    $sql=$conectar->prepare($sql);
+  $sql=$conectar->prepare($sql);
 
     $sql->bindValue(1,$numero_venta);
     $sql->bindValue(2,$codProd);

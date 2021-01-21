@@ -157,14 +157,14 @@ $conectar=parent::conexion();
       $tipo_pago = $row["tipo_pago"];
     }
 
-if(is_array($resultado_abonos)==true and count($resultado_abonos)>0) { 
+    if(is_array($resultado_abonos)==true and count($resultado_abonos)>0) { 
 
-  $factura='';           
+    $factura='';           
   
-  $sql17="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-  $sql17=$conectar->prepare($sql17);
-  $sql17->bindValue(1,$fecha);
-  $sql17->bindValue(2,$n_recibo);
+    $sql17="insert into corte_diario values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql17=$conectar->prepare($sql17);
+    $sql17->bindValue(1,$fecha);
+    $sql17->bindValue(2,$n_recibo);
   $sql17->bindValue(3,$n_venta_recibo_ini);
   $sql17->bindValue(4,$factura);
   $sql17->bindValue(5,$id_paciente);

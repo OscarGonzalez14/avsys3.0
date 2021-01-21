@@ -191,7 +191,7 @@ public function get_reporte_ingreso_bodega($numero_ingreso){
 //////////////////inventario general
 public function get_stock_categoria($ubicacion){
     $conectar= parent::conexion();
-    $sql="select concat(p.marca,' Mod.: ',p.modelo,' ',medidas) as descripcion,p.diseno,p.materiales,e.stock,e.bodega,e.categoria_ub,e.usuario,e.fecha_ingreso,e.num_compra,e.precio_venta from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.categoria_ub=?;";
+    $sql="select p.desc_producto as descripcion,p.diseno,p.materiales,e.stock,e.bodega,e.categoria_ub,e.usuario,e.fecha_ingreso,e.num_compra,e.precio_venta from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.categoria_ub=?;";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1, $ubicacion);
     $sql->execute();
@@ -200,12 +200,117 @@ public function get_stock_categoria($ubicacion){
 
     public function get_productos_traslados($id_producto,$categoria_ub){
     $conectar= parent::conexion();         
-    $sql= "select p.desc_producto,e.categoria_ub from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.id_producto=? and categoria_ub=?;";
+    $sql= "select p.desc_producto,e.categoria_ub,e.id_ingreso,e.num_compra,e.precio_venta from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.id_producto=? and categoria_ub=?;";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1,$id_producto);
     $sql->bindValue(2,$categoria_ub);
     $sql->execute();
     return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  //////////////AGREGA DETALLE TRASLADO
+  public function agrega_detalle_traslado(){
+
+    $str = '';
+    $detalles_traslado = array();
+    $detalles_traslado = json_decode($_POST['arrayTraslado']);
+
+    $conectar=parent::conexion();
+
+    $sucursal = $_POST["sucursal"];
+    $usuario = $_POST["usuario"];
+    $fecha = $_POST["fecha"];
+    $tipo_traslado = $_POST["tipo_traslado"];
+    $num_traslado = $_POST["num_traslado"];
+
+
+    foreach ($detalles_traslado as $k => $v) {
+       $cantidad= $v->cantidad;
+       $codProd= $v->codProd;
+       $descripcion= $v->descripcion;
+       $destino= $v->destino;
+       $origen= $v->origen;
+       $num_compra = $v->num_compra;
+       $id_ingreso = $v->id_ingreso;
+       $precio_venta =$v->precio_venta;
+
+    $sql="insert into detalle_traslados values(null,?,?,?,?,?,?,?);";
+    $sql=$conectar->prepare($sql);
+
+    $sql->bindValue(1,$codProd);
+    $sql->bindValue(2,$usuario);
+    $sql->bindValue(3,$cantidad);
+    $sql->bindValue(4,$origen);
+    $sql->bindValue(5,$destino);
+    $sql->bindValue(6,$num_traslado);
+    $sql->bindValue(7,$fecha);
+    $sql->execute();
+
+        ////////////////////ACTUALIZAR STOCK DE existencia
+      $sql3="select * from existencias where id_producto=? and bodega=? and categoria_ub=? and num_compra=? and id_ingreso=?;";           
+      $sql3=$conectar->prepare($sql3);
+      $sql3->bindValue(1,$codProd);
+      $sql3->bindValue(2,$sucursal);
+      $sql3->bindValue(3,$origen);
+      $sql3->bindValue(4,$num_compra);
+      $sql3->bindValue(5,$id_ingreso);
+      $sql3->execute();
+
+      $resultados = $sql3->fetchAll(PDO::FETCH_ASSOC);
+
+      foreach($resultados as $b=>$row){
+      $re["existencia"] = $row["stock"];
+    }     
+    $sustrae_destino = $row["stock"] - $cantidad;
+    //$agrega_origen = $row["stock"] + $cantidad;
+    if(is_array($resultados)==true and count($resultados)>0) {                    
+
+    $sql12 = "update existencias set stock=? where id_producto=? and bodega=? and id_ingreso=? and categoria_ub=? and num_compra=?";
+      $sql12 = $conectar->prepare($sql12);
+      $sql12->bindValue(1,$sustrae_destino);
+      $sql12->bindValue(2,$codProd);
+      $sql12->bindValue(3,$sucursal);
+      $sql12->bindValue(4,$id_ingreso);
+      $sql12->bindValue(5,$origen);
+      $sql12->bindValue(6,$num_compra);
+      $sql12->execute();
+             
+  }
+  ////////////////////agrega item a nueva ubicacion
+
+     $sql="insert into existencias values (null,?,?,?,?,?,?,?,?);";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$codProd);
+        $sql->bindValue(2,$cantidad);
+        $sql->bindValue(3,$sucursal);
+        $sql->bindValue(4,$destino);
+        $sql->bindValue(5,$fecha);
+        $sql->bindValue(6,$usuario);
+        $sql->bindValue(7,$num_compra);
+        $sql->bindValue(8,$precio_venta);
+        $sql->execute();
+
+
+    }//////////////////FIN FORACH INGRESO DETALLES
+    
+    $sql2="insert into traslados values(null,?,?,?,?,?);";
+
+    $sql2=$conectar->prepare($sql2);
+    $sql2->bindValue(1,$num_traslado);
+    $sql2->bindValue(2,$fecha);
+    $sql2->bindValue(3,$tipo_traslado);
+    $sql2->bindValue(4,$sucursal);
+    $sql2->bindValue(5,$usuario);
+    $sql2->execute();
+}/////////////fin detalle traslado
+//////////////////////////////GT NUMERO TRASLADO
+public function get_numero_traslado($sucursal){
+  $conectar= parent::conexion();
+  $sql= "select num_traslado from traslados where sucursal=? order by id_traslado DESC limit 1;";
+  $sql=$conectar->prepare($sql);
+  $sql->bindValue(1, $sucursal);
+  $sql->execute();
+  return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+}
 
 }

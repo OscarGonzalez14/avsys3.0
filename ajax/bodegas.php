@@ -19,7 +19,7 @@ case "listar_productos_ingreso_bodegas":
 		$sub_array[] = $row["numero_compra"];
 		$sub_array[] = $row["descripcion"];
     $sub_array[] = $row["cant_ingreso"];
-        $sub_array[] = '<button type="button"  class="btn btn-infos btn-md asigna_datos_orden" onClick="agregaIngreso('.$row["id_producto"].',\''.$row["numero_compra"].'\');"><i class="fas fa-plus"></i> Ingresar</button>';                                 
+    $sub_array[] = '<button type="button"  class="btn btn-infos btn-md asigna_datos_orden" onClick="agregaIngreso('.$row["id_producto"].',\''.$row["numero_compra"].'\');"><i class="fas fa-plus"></i> Ingresar</button>';                                 
 		$data[] = $sub_array;
 	}
         $results = array(
@@ -135,10 +135,43 @@ case "reporte_ingresos_bodega":
         {
           $output["categoria_ub"] = $row["categoria_ub"];
           $output["desc_producto"] = $row["desc_producto"];
+          $output["id_ingreso"] = $row["id_ingreso"];
+          $output["num_compra"] = $row["num_compra"];
+          $output["precio_venta"] = $row["precio_venta"];
                        
         }      
 
        } 
   echo json_encode($output);
 break;
+
+case "get_numero_traslado":
+  $datos= $bodegas->get_numero_traslado($_POST["sucursal"]);
+  $sucursal = $_POST["sucursal"];
+  $prefijo = "";
+  if ($sucursal=="Metrocentro") {
+    $prefijo="ME";
+  }elseif ($sucursal=="Santa Ana") {
+    $prefijo="SA";
+  }elseif ($sucursal=="San Miguel") {
+    $prefijo="SM";
+  }
+    if(is_array($datos)==true and count($datos)>0){
+    foreach($datos as $row){                  
+      $correlativo=$row["num_traslado"];
+      $cod=(substr($correlativo,4,11))+1;
+      $output["correlativo"]="T".$prefijo."-".$cod;
+    }             
+  }else{
+      $output["correlativo"] = "T".$prefijo."-1";
+  }
+
+   echo json_encode($output);
+
+  break;
+
+case "registrar_traslado";
+$bodegas->agrega_detalle_traslado();
+break;
+
 }

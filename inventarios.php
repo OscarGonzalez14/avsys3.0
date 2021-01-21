@@ -118,11 +118,9 @@ require_once("modelos/Reporteria.php");
             <div class="small-box bg-primary">
               <div class="inner">
                 <h3>Traslados</h3>
-
-                <p>0</p>
-              </div>
               <div class="icon">
-                <i class="fas fa-exchange-alt"></i>
+                 <a href="traslados.php" style="color:white"><span>Traslados Internos</span><br></a>
+                <a href="#" style="text-decoration: none;color:white"><span>Traslados Externos</span></a>
               </div>
               <a href="traslados.php" class="small-box-footer"> Ir a Traslados<i class="fas fa-arrow-circle-right"></i></a>
             </div>
